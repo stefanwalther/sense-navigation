@@ -1,4 +1,8 @@
-/*global define,require,window,console,_ */
+/*global    define,
+            require,
+            window,
+            console,_
+*/
 /*jslint    devel:true,
             white: true
  */
@@ -6,6 +10,7 @@ define([
         'jquery',
         'underscore',
         'qlik',
+        'angular',
         './sheetnavigation-properties',
         './sheetnavigation-initialproperties',
         'text!./lib/css/style.css',
@@ -14,7 +19,7 @@ define([
         'client.utils/state',
         'client.models/sheet'
 ],
-function ($, _, qlik, props, initProps, cssContent, ngTemplate, Routing, State,SheetModel) {
+function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing, State,SheetModel) {
     'use strict';
 
     $("<style>").html(cssContent).appendTo("head");
@@ -87,6 +92,11 @@ function ($, _, qlik, props, initProps, cssContent, ngTemplate, Routing, State,S
                             app.bookmark.apply($scope.layout.bookmark1);
                         }
                         break;
+                    case "setVariable":
+                        if ( !_.isEmpty( $scope.layout.variable1) ) {
+                            $scope.setVariableContent( $scope.layout.variable1, $scope.layout.value1 );
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -131,6 +141,16 @@ function ($, _, qlik, props, initProps, cssContent, ngTemplate, Routing, State,S
             };
             $scope.gotoSheet = function ( sheetId ) {
                 Routing.goToSheet( sheetId, Object.keys( State.States )[State.state] );
+            };
+
+            $scope.setVariableContent = function ( variableName, variableValue ) {
+                var app = qlik.currApp();
+                app.variable.setContent( variableName, variableValue )
+                    .then( function ( reply ) {
+                        console.log( 'variable.setContent', reply );
+                        angular.noop();
+
+                    } );
             };
 
         }]

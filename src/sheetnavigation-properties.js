@@ -164,6 +164,10 @@ define([
             {
                 value: "selectField",
                 label: "Select in Field"
+            },
+            {
+                value: "setVariable",
+                label: "Set Variable Value"
             }
             //,
             //{
@@ -180,8 +184,9 @@ define([
         type: "string",
         ref: "field1",
         label: "Field",
+        expression: "optional",
         show: function ( data ) {
-            return field1Enabler.indexOf(data.actionBefore1) > -1;
+            return field1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
@@ -190,17 +195,29 @@ define([
         type: "string",
         ref: "bookmark1",
         label: "Bookmark Id",
+        expression: "optional",
         show: function ( data ) {
-            return bookmark1Enabler.indexOf(data.actionBefore1) > -1;
+            return bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
+    var variable1Enabler = ['setVariable'];
+    var variable1 = {
+        type: "string",
+        ref: "variable1",
+        label: "Variable Name",
+        expression: "optional",
+        show: function ( data ) {
+            return variable1Enabler.indexOf( data.actionBefore1 ) > -1
+        }
+    };
 
-    var value1Enabler = ['selectField'];
+    var value1Enabler = ['selectField', 'setVariable'];
     var value1 = {
         type: "string",
         ref: "value1",
         label: "Value",
+        expression: "optional",
         show: function ( data ) {
             return value1Enabler.indexOf(data.actionBefore1) > -1;
         }
@@ -237,6 +254,7 @@ define([
                     actions: actionBefore,
                     bookmarks: bookmarks,
                     field1: field1,
+                    variable1: variable1,
                     value1: value1,
                     bookmark1: bookmark1
 
