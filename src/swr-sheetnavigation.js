@@ -19,7 +19,7 @@ define([
         'client.utils/state',
         'client.models/sheet'
 ],
-function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing, State,SheetModel) {
+function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing, State, SheetModel) {
     'use strict';
 
     $("<style>").html(cssContent).appendTo("head");
@@ -43,8 +43,8 @@ function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing
             }
             getSheets($scope);
 
+            /*
             $scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
-
             $scope.doNavigate = function() {
                 switch ( $scope.layout.action ) {
                     case "nextSheet":
@@ -102,7 +102,6 @@ function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing
                 }
 
             };
-
             $scope.go = function (  ) {
 
                 $scope.doAction();
@@ -142,7 +141,6 @@ function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing
             $scope.gotoSheet = function ( sheetId ) {
                 Routing.goToSheet( sheetId, Object.keys( State.States )[State.state] );
             };
-
             $scope.setVariableContent = function ( variableName, variableValue ) {
                 var app = qlik.currApp();
                 app.variable.setContent( variableName, variableValue )
@@ -152,6 +150,7 @@ function ($, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing
 
                     } );
             };
+            */
 
         }]
     };

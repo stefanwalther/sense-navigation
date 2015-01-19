@@ -1,12 +1,19 @@
 /*global define*/
 define([
-    'underscore',
     'jquery',
+    'underscore',
     'qlik'
 ], function ($, _, qlik) {
 
     var bookmarks = undefined;
-    var app = qlik.currApp();
+
+
+    //var app = qlik.currApp();
+    //console.log('qlik', qlik );
+    ////console.log('qlik.global', qlik.getGlobal() );
+    //console.log('app', qlik.currApp() );
+    //console.log('app(this)', qlik.currApp(this) );
+
     // ****************************************************************************************
     // Layout
     // ****************************************************************************************
@@ -49,6 +56,24 @@ define([
 
     };
 
+    var buttonWidth =  {
+        type: "string",
+        component: "dropdown",
+        ref: "buttonWidth",
+        label: "Width",
+        defaultValue: "default",
+        options: [
+            {
+                value: "default",
+                label: "Default (Dynamic)"
+            },
+            {
+                value: "fullwidth",
+                label: "Full Width"
+            }
+        ]
+    };
+
     var align = {
         ref: "align",
         label: "Alignment",
@@ -76,7 +101,9 @@ define([
         label: "Label",
         type: "string",
         expression: "optional",
-        show: true,
+        show: function ( ) {
+            return true;
+        },
         defaultValue: "Your Label"
     };
 
@@ -85,7 +112,7 @@ define([
         label: "Sheet ID:",
         type: "string",
         show: function ( data ) {
-            return data.action === 'gotoSheet';
+            return true;//data.action === 'gotoSheet';
         }
     };
 
@@ -142,7 +169,7 @@ define([
         ref: "actionBefore1",
         defaultValue: "none",
         show: function ( data ) {
-            return data.isActionsBefore;
+            return true;//data.isActionsBefore;
         },
         options: [
             {
@@ -186,7 +213,7 @@ define([
         label: "Field",
         expression: "optional",
         show: function ( data ) {
-            return field1Enabler.indexOf( data.actionBefore1 ) > -1;
+            return true;//field1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
@@ -197,7 +224,7 @@ define([
         label: "Bookmark Id",
         expression: "optional",
         show: function ( data ) {
-            return bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
+            return true; //bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
@@ -208,7 +235,7 @@ define([
         label: "Variable Name",
         expression: "optional",
         show: function ( data ) {
-            return variable1Enabler.indexOf( data.actionBefore1 ) > -1
+            return true;//variable1Enabler.indexOf( data.actionBefore1 ) > -1
         }
     };
 
@@ -219,7 +246,7 @@ define([
         label: "Value",
         expression: "optional",
         show: function ( data ) {
-            return value1Enabler.indexOf(data.actionBefore1) > -1;
+            return true;//value1Enabler.indexOf(data.actionBefore1) > -1;
         }
     };
 
@@ -237,30 +264,29 @@ define([
                     style: style,
                     align: align
                 }
-            },
-            behavior: {
-                type: "items",
-                label: "Behavior",
-                items: {
-                    action: action,
-                    sheetId: sheetId
-                }
-            },
-            actionsBefore: {
-                type: "items",
-                label: "Actions",
-                items: {
-                    isActionsBefore: isActionsBefore,
-                    actions: actionBefore,
-                    bookmarks: bookmarks,
-                    field1: field1,
-                    variable1: variable1,
-                    value1: value1,
-                    bookmark1: bookmark1
-
-
-                }
             }
+            //,
+            //behavior: {
+            //    type: "items",
+            //    label: "Behavior",
+            //    items: {
+            //        action: action,
+            //        sheetId: sheetId
+            //    }
+            //},
+            //actionsBefore: {
+            //    type: "items",
+            //    label: "Actions",
+            //    items: {
+            //        isActionsBefore: isActionsBefore,
+            //        actions: actionBefore,
+            //        bookmarks: bookmarks,
+            //        field1: field1,
+            //        variable1: variable1,
+            //        value1: value1,
+            //        bookmark1: bookmark1
+            //    }
+            //}
         }
     };
 

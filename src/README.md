@@ -4,6 +4,11 @@ Version: 0.1.0 (2014-10-21)
 
 ## Change Log
 
+### 0.3.0
+Date: 2015-01-19
+
+* Added property width
+
 ### 0.2.0
 Date: 2014-10-24
 
