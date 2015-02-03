@@ -1,5 +1,5 @@
 /*global module*/
-module.exports = function (grunt) {
+module.exports = function ( grunt) {
     'use strict';
 
     grunt.loadNpmTasks('grunt-contrib-clean');

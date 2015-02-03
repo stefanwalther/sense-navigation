@@ -8,13 +8,15 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     return {
 
+		// Changed to hardcoded
         options: {
-            mangle: ('<%= projectConfig.release.uglify.mangle%>' === 'true'),
-            beautify: ('<%= projectConfig.release.uglify.beautify%>' === 'true'),
-            preserveComments: ('<%= projectConfig.release.uglify.preserveComments%>' === 'true'),
+            mangle: true,
+			beautify: false,
+			preserveComments: 'some',
             compress: {
-                drop_console: ('<%= projectConfig.release.uglify.drop_console%>' === 'true')
-            }
+                drop_console: true
+            },
+			maxLineLen: 800
         },
         release: {
             files: [

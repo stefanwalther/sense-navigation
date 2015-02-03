@@ -16,7 +16,7 @@ general:
 
   # Version of the extension, will be re-used in several areas,
   # e.g the generated .zip-file in the 'release' Grunt-task
-  Version:              '0.2.0'
+  Version:              '0.3.0'
 
 # -------------------------------------------------------------------
 # Settings for the 'dev' Grunt task
@@ -30,9 +30,10 @@ dev:
   uglify: # Documentation: https://github.com/gruntjs/grunt-contrib-uglify
     mangle: false
     drop_console: false
-    beautify: true
+    beautify: false
     preserveCommments: true
     compress: false
+    maxLinLen: 0
 
 # -------------------------------------------------------------------
 # Settings for the 'release' Grunt task
@@ -46,6 +47,7 @@ release:
   uglify: # Documentation: https://github.com/gruntjs/grunt-contrib-uglify
     mangle: true
     drop_console: true
-    beautify: false
+    beautify: true
     preserveCommments: false
     compress: true
+    maxLineLen: 800
