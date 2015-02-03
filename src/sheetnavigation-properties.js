@@ -1,18 +1,56 @@
-/*global define*/
+/*global define,console*/
 define([
     'jquery',
     'underscore',
-    'qlik'
-], function ($, _, qlik) {
+    'qlik',
+    'ng!$q'
+], function ($, _, qlik, $q) {
 
-    var bookmarks = undefined;
+    var app = qlik.currApp();
 
+	// ****************************************************************************************
+	// Helper Promises
+	// ****************************************************************************************
+	var getBookmarkList = function (  ) {
+		var deferred = $q.defer();
 
-    //var app = qlik.currApp();
-    //console.log('qlik', qlik );
-    ////console.log('qlik.global', qlik.getGlobal() );
-    //console.log('app', qlik.currApp() );
-    //console.log('app(this)', qlik.currApp(this) );
+		app.getList( 'BookmarkList', function ( items ) {
+			console.log(' Bookmarklist - callback', items);
+			deferred.resolve( items.qBookmarkList.qItems.map( function ( item ) {
+					return {
+						value: item.qInfo.qId,
+						label: item.qData.title
+					}
+				})
+			);
+		});
+
+		return deferred.promise;
+	};
+
+	var getSheetList = function () {
+
+		var deferred = $q.defer();
+
+		app.getAppObjectList( function ( data ) {
+			console.log('sheetList', data );
+			var sheets = [];
+			var sortedData = _.sortBy( data.qAppObjectList.qItems, function ( item ) {
+				return item.qData.rank;
+			});
+			_.each( sortedData, function ( element ) {
+				//console.log('sheet elem:', element);
+				sheets.push( {
+					value: element.qInfo.qId,
+					label: element.qMeta.title
+				} );
+			} );
+			return deferred.resolve( sheets );
+		} );
+
+		return deferred.promise;
+
+	};
 
     // ****************************************************************************************
     // Layout
@@ -56,23 +94,23 @@ define([
 
     };
 
-    var buttonWidth =  {
-        type: "string",
-        component: "dropdown",
-        ref: "buttonWidth",
-        label: "Width",
-        defaultValue: "default",
-        options: [
-            {
-                value: "default",
-                label: "Default (Dynamic)"
-            },
-            {
-                value: "fullwidth",
-                label: "Full Width"
-            }
-        ]
-    };
+	var buttonWidth = {
+		type: "boolean",
+		component: "switch",
+		label: "Full Width",
+		ref: "fullWidth",
+		options: [
+			{
+				value: true,
+				label: "On"
+			},
+			{
+				value: false,
+				label: "Off"
+			}
+		],
+		defaultValue: false
+	};
 
     var align = {
         ref: "align",
@@ -93,7 +131,10 @@ define([
                 value: "right",
                 label: "Right"
             }
-        ]
+        ],
+		show: function ( data ) {
+			return data.fullWidth === false;
+		}
     };
 
     var label = {
@@ -107,14 +148,7 @@ define([
         defaultValue: "Your Label"
     };
 
-    var sheetId = {
-        ref: "sheetId",
-        label: "Sheet ID:",
-        type: "string",
-        show: function ( data ) {
-            return true;//data.action === 'gotoSheet';
-        }
-    };
+
 
     // ****************************************************************************************
     // Behavior
@@ -126,6 +160,10 @@ define([
         component: "dropdown",
         default: "nextSheet",
         options: [
+			{
+				value: "none",
+				label: "None"
+			},
             {
                 value: "nextSheet",
                 label: "Go to next sheet"
@@ -136,10 +174,41 @@ define([
             },
             {
                 value: "gotoSheet",
-                label: "Go to a specific sheet ..."
-            }
+                label: "Go to a specific sheet"
+            },
+			{
+				value: "gotoSheetById",
+				label: "Go to a sheet (defined by Sheet Id)"
+			}
         ]
     };
+
+	var sheetId = {
+		ref: "sheetId",
+		label: "Sheet ID:",
+		type: "string",
+		expression: "optional",
+		show: function ( data ) {
+			return data.action === 'gotoSheetById';
+		}
+	};
+
+	var sheetList = {
+		type: "string",
+		component: "dropdown",
+		label: "Select Sheet",
+		ref: "selectedSheet",
+		options: function () {
+			return getSheetList().then( function ( items ) {
+				return items;
+			});
+		},
+		show: function ( data ) {
+			return data.action === 'gotoSheet';
+		}
+	};
+
+
 
     // ****************************************************************************************
     // Actions
@@ -162,14 +231,14 @@ define([
         ]
     };
 
-    var actionBefore = {
+    var actionBefore1 = {
         type: "string",
         component: "dropdown",
         label: "First Action",
         ref: "actionBefore1",
         defaultValue: "none",
         show: function ( data ) {
-            return true;//data.isActionsBefore;
+            return data.isActionsBefore;
         },
         options: [
             {
@@ -195,12 +264,11 @@ define([
             {
                 value: "setVariable",
                 label: "Set Variable Value"
+            },
+            {
+                value: "applyBookmark",
+                label: "Apply Bookmark"
             }
-            //,
-            //{
-            //    value: "applyBookmark",
-            //    label: "Apply Bookmark"
-            //}
 
         ]
     };
@@ -213,7 +281,7 @@ define([
         label: "Field",
         expression: "optional",
         show: function ( data ) {
-            return true;//field1Enabler.indexOf( data.actionBefore1 ) > -1;
+            return field1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
@@ -224,7 +292,7 @@ define([
         label: "Bookmark Id",
         expression: "optional",
         show: function ( data ) {
-            return true; //bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
+            return bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
         }
     };
 
@@ -235,7 +303,7 @@ define([
         label: "Variable Name",
         expression: "optional",
         show: function ( data ) {
-            return true;//variable1Enabler.indexOf( data.actionBefore1 ) > -1
+            return variable1Enabler.indexOf( data.actionBefore1 ) > -1
         }
     };
 
@@ -246,9 +314,63 @@ define([
         label: "Value",
         expression: "optional",
         show: function ( data ) {
-            return true;//value1Enabler.indexOf(data.actionBefore1) > -1;
+            return value1Enabler.indexOf(data.actionBefore1) > -1;
         }
     };
+
+    //var bookmarkDropdown = {
+    //    type: "string",
+    //    component: "dropdown",
+    //    label: "Bookmark",
+    //    ref: "gotoBookmark",
+    //    options: function () {
+    //        return app.getList( 'BookmarkList' ).then( function ( items ) {
+    //            //console.log('bookmarklist-items', items);
+    //            //var bookmarkList = items.layout.qBookmarkList;
+    //            return items.layout.qBookmarkList.qItems.map( function ( item ) {
+    //                return {
+    //                    value: item.qInfo.qId,
+    //                    label: item.qData.title
+    //                };
+    //            } );
+    //        } );
+    //    }
+    //};
+
+    //var bookmarkDropdown = {
+    //    type: "string",
+    //    component: "dropdown",
+    //    label: "Bookmark",
+    //    ref: "gotoBookmark",
+    //    options: function () {
+    //        return app.getList( 'BookmarkList' , function ( items ) {
+    //            return items.qBookmarkList.qItems.map( function ( item ) {
+    //                return {
+    //                    value: item.qInfo.qId,
+    //                    label: item.qData.title
+    //                };
+    //            } );
+    //        } );
+    //    }
+    //};
+
+    var bookmark1Enabler = ['applyBookmark'];
+    var bookmark1 = {
+        type: "string",
+        component: "dropdown",
+        label: "Select Bookmark",
+        ref: "bookmark1",
+        options: function () {
+            return getBookmarkList().then( function ( items ) {
+                return items;
+            });
+        },
+        show: function ( data ) {
+            return bookmark1Enabler.indexOf(data.actionBefore1) > -1;
+        }
+    };
+
+
 
     // ****************************************************************************************
     // Setup
@@ -262,31 +384,31 @@ define([
                 items: {
                     label: label,
                     style: style,
+                    buttonWidth: buttonWidth,
                     align: align
                 }
+            },
+            behavior: {
+                type: "items",
+                label: "Behavior",
+                items: {
+                    action: action,
+                    sheetId: sheetId,
+					sheetList: sheetList
+                }
+            },
+            actionsBefore: {
+                type: "items",
+                label: "Actions",
+                items: {
+                    isActionsBefore: isActionsBefore,
+                    actions: actionBefore1,
+                    field1: field1,
+                    variable1: variable1,
+                    value1: value1,
+                    bookmark1: bookmark1
+                }
             }
-            //,
-            //behavior: {
-            //    type: "items",
-            //    label: "Behavior",
-            //    items: {
-            //        action: action,
-            //        sheetId: sheetId
-            //    }
-            //},
-            //actionsBefore: {
-            //    type: "items",
-            //    label: "Actions",
-            //    items: {
-            //        isActionsBefore: isActionsBefore,
-            //        actions: actionBefore,
-            //        bookmarks: bookmarks,
-            //        field1: field1,
-            //        variable1: variable1,
-            //        value1: value1,
-            //        bookmark1: bookmark1
-            //    }
-            //}
         }
     };
 
