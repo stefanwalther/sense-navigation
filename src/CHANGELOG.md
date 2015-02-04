@@ -1,11 +1,16 @@
 # Sheet Navigation Extension for Qlik Sense
 
-Version: 0.3.0 (2015-02-03)
+Version: 0.3.1 (2015-02-04)
 
 ## Change Log
 
+### 0.3.1
+Date: 2014-02-04
+
+* Improvement how to define the button width in the property panel (button group instead of switch)
+
 ### 0.3.0
-Date: 2015-01-19
+Date: 2015-02-03
 
 * Added property to define the width of each button (either auto-width or full width)
 * Added the possibility either select one of the existing sheets or to define a sheet Id

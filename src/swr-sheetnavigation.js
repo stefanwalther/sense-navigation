@@ -28,7 +28,7 @@ define( [
 
 			definition: props,
 			initialProperties: initProps,
-			snapshot: {canTakeSnapshot: true},
+			snapshot: { canTakeSnapshot: false },
 			template: ngTemplate,
 			controller: ['$scope', function ( $scope ) {
 

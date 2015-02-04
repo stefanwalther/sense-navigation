@@ -96,17 +96,19 @@ define([
 
 	var buttonWidth = {
 		type: "boolean",
-		component: "switch",
-		label: "Full Width",
+		component: "buttongroup",
+		label: "Button Width",
 		ref: "fullWidth",
 		options: [
 			{
 				value: true,
-				label: "On"
+				label: "Full Width",
+				tooltip: "Button has the same width as the element."
 			},
 			{
 				value: false,
-				label: "Off"
+				label: "Auto Width",
+				tooltip: "Auto width depending on the label defined."
 			}
 		],
 		defaultValue: false
