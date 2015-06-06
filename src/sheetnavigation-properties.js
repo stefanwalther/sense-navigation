@@ -1,3 +1,7 @@
+/**
+ * @todo: Refactor the make it easier to understand immediately the difference between actions and navigation-behavior + dependencies
+ */
+
 define([
     'jquery',
     'underscore',
@@ -154,7 +158,7 @@ define([
     // ****************************************************************************************
     var action = {
         ref: "action",
-        label: "Action",
+        label: "Navigation Action",
         type: "string",
         component: "dropdown",
         default: "nextSheet",
@@ -404,7 +408,7 @@ define([
             },
             behavior: {
                 type: "items",
-                label: "Behavior",
+                label: "Navigation Behavior",
                 items: {
                     action: action,
                     sheetId: sheetId,

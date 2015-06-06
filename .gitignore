@@ -4,6 +4,7 @@ Tests/
 web.*.config
 dist/
 /**/node_modules/
+todos.md
 
 
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
