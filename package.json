@@ -7,6 +7,7 @@
     "verb": "^0.8.7"
   },
   "devDependencies": {
+    "sense-go": "^0.3.3",
     "verb": "git://github.com/verbose/verb"
   },
   "scripts": {
