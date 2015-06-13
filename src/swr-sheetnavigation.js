@@ -1,10 +1,11 @@
+/*global define*/
 define( [
 		'jquery',
 		'underscore',
 		'qlik',
 		'angular',
-		'./sheetnavigation-properties',
-		'./sheetnavigation-initialproperties',
+		'./properties',
+		'./initialproperties',
 		'text!./lib/css/style.css',
 		'text!./template.ng.html',
 		'client.utils/routing',
