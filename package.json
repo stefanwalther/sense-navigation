@@ -1,0 +1,35 @@
+{
+  "name": "sense-sheet-navigation",
+  "version": "1.0.0",
+  "description": "Sheet navigation + actions for Qlik Sense.",
+  "main": "index.js",
+  "dependencies": {
+    "verb": "^0.8.7"
+  },
+  "devDependencies": {
+    "verb": "git://github.com/verbose/verb"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stefanwalther/sense-sheet-navigation"
+  },
+  "keywords": [
+    "Qlik",
+    "Sense",
+    "Sense",
+    "Qlik",
+    "navigation",
+    "sheets",
+    "actions",
+    "button"
+  ],
+  "author": "Stefan Walther",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stefanwalther/sense-sheet-navigation/issues"
+  },
+  "homepage": "https://github.com/stefanwalther/sense-sheet-navigation"
+}

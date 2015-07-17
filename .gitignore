@@ -3,8 +3,7 @@ Resources/
 Tests/
 web.*.config
 dist/
-node_modules/
-grunt/node_modules/
+/**/node_modules/
 
 
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore

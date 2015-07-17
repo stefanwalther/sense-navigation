@@ -1,11 +1,3 @@
-/*global    define,
- require,
- window,
- console,_
- */
-/*jslint    devel:true,
- white: true
- */
 define( [
 		'jquery',
 		'underscore',
@@ -14,7 +6,7 @@ define( [
 		'./sheetnavigation-properties',
 		'./sheetnavigation-initialproperties',
 		'text!./lib/css/style.css',
-		'text!./lib/partials/sheetnavigation.ng.html',
+		'text!./template.ng.html',
 		'client.utils/routing',
 		'client.utils/state',
 		'client.models/sheet'
@@ -28,7 +20,7 @@ define( [
 
 			definition: props,
 			initialProperties: initProps,
-			snapshot: { canTakeSnapshot: false },
+			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
 			controller: ['$scope', function ( $scope ) {
 
@@ -109,7 +101,7 @@ define( [
 				};
 				$scope.go = function () {
 
-					console.log('go', $scope );
+					console.log( 'go', $scope );
 					if ( !$scope.$parent.editmode ) {
 						$scope.doAction();
 						$scope.doNavigate();

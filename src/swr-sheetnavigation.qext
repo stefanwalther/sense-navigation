@@ -1,9 +1,11 @@
 {
 	"name" : "Sheet Navigation",
-	"description" : "Simple Buttons to navigate within your app.",
+	"description" : "Sheet navigation + actions for Qlik Sense.",
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "0.3.0",
 	"preview" : "sheetnavigation.png",
 	"author": "Stefan Walther"
+	"license": "MIT",
+	"homepage": "http://github.com/stefanwalther/sense-sheet-navigation"
 }

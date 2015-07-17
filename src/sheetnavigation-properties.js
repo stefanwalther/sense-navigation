@@ -1,4 +1,3 @@
-/*global define,console*/
 define([
     'jquery',
     'underscore',
@@ -24,7 +23,6 @@ define([
 				})
 			);
 		});
-
 		return deferred.promise;
 	};
 
@@ -49,7 +47,6 @@ define([
 		} );
 
 		return deferred.promise;
-
 	};
 
     // ****************************************************************************************
