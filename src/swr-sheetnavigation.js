@@ -55,6 +55,11 @@ define( [
 								$scope.gotoSheet( $scope.layout.sheetId );
 							}
 							break;
+						case "openWebsite":
+							if (!_.isEmpty( $scope.layout.websiteUrl )) {
+								console.log('openWebsite: ', $scope.layout.websiteUrl);
+							}
+							break;
 						default:
 							break;
 					}

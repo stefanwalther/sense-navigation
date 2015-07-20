@@ -178,6 +178,10 @@ define([
 			{
 				value: "gotoSheetById",
 				label: "Go to a sheet (defined by Sheet Id)"
+			},
+			{
+				value: "openWebsite",
+				label: "Open Website"
 			}
         ]
     };
@@ -205,6 +209,17 @@ define([
 		show: function ( data ) {
 			return data.action === 'gotoSheet';
 		}
+	};
+
+	var websiteUrl = {
+		ref: "websiteUrl",
+		label: "Website Url:",
+		type: "string",
+		expression: "optional",
+		show: function ( data ) {
+			return data.action === 'openWebsite';
+		}
+
 	};
 
 
@@ -393,7 +408,8 @@ define([
                 items: {
                     action: action,
                     sheetId: sheetId,
-					sheetList: sheetList
+					sheetList: sheetList,
+					websiteUrl: websiteUrl
                 }
             },
             actionsBefore: {
