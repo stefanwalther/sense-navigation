@@ -1,0 +1,18 @@
+version: 0.3.1
+  date: "2014-02-04"
+  enhancements:
+    - "Improvement how to define the button width in the property panel (button group instead of switch)"
+version: 0.3.0
+  date: "2015-02-03"
+  enhancements:
+  - "Added property to define the width of each button (either auto-width or full width)"
+  - "Added the possibility either select one of the existing sheets or to define a sheet Id"
+  - "Added action to apply a bookmark before the navigation action"
+version: 0.2.0
+  date: "2014-10-24"
+  - "Added action to set the value of a variable"
+  - "Variables and fields can be defined by using an expression"
+version: 0.1.0
+  date: "2014-10-21"
+  new:
+  - "Initial Version"
