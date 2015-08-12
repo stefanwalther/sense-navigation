@@ -1,9 +1,9 @@
 {
 	"name" : "Sheet Navigation",
-	"description" : "Sheet navigation + actions for Qlik Sense.",
+	"description" : "@@pkg.description",
 	"icon" : "extension",
 	"type" : "visualization",
-	"version": "0.3.0",
+	"version": "@@pkg.version",
 	"preview" : "swr-sheetnavigation.png",
 	"author": "Stefan Walther"
 	"license": "MIT",

@@ -1,4 +1,4 @@
-# sense-sheet-navigation
+# Sheet Navigation Extension for Qlik Sense
 
 > Sheet Navigation + Actions for Qlik Sense.
 
