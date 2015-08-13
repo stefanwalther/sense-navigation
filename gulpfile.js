@@ -7,5 +7,12 @@ var userConfig = {
 };
 
 senseGo.init( gulp, userConfig,  function (  ) {
-
+	gulp.task('all', gulp.series(
+		'bump:patch',
+		'build',
+		'release',
+		'git:add',
+		'git:commit',
+		'git:push'
+	));
 });

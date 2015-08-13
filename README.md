@@ -1,3 +1,5 @@
+# Development work not finished, yet, stay tuned
+
 # Sheet Navigation Extension for Qlik Sense
 
 > Sheet Navigation + Actions for Qlik Sense.

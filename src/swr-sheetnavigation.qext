@@ -5,7 +5,7 @@
 	"type" : "visualization",
 	"version": "@@pkg.version",
 	"preview" : "swr-sheetnavigation.png",
-	"author": "Stefan Walther"
-	"license": "MIT",
+	"author": "@@pkg.author",
+	"license": "@@pkg.license",
 	"homepage": "http://github.com/stefanwalther/sense-sheet-navigation"
 }

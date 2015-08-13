@@ -6,13 +6,10 @@ define( [
 		'angular',
 		'./properties',
 		'./initialproperties',
-		'text!./lib/css/style.css',
-		'text!./template.ng.html',
-		'client.utils/routing',
-		'client.utils/state',
-		'client.models/sheet'
+		'text!./lib/css/main.css',
+		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, props, initProps, cssContent, ngTemplate, Routing, State, SheetModel ) {
+	function ( $, _, qlik, angular, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
 		$( "<style>" ).html( cssContent ).appendTo( "head" );
@@ -24,18 +21,6 @@ define( [
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
 			controller: ['$scope', function ( $scope ) {
-
-				$scope.sheets;
-
-				function getSheets ( $scope ) {
-					SheetModel.getList().then( function ( list ) {
-						list.getLayout().then( function ( layout ) {
-							$scope.sheets = layout;
-						} );
-					} );
-				}
-
-				getSheets( $scope );
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
@@ -105,6 +90,8 @@ define( [
 					}
 
 				};
+
+				//Todo: Check the result
 				$scope.go = function () {
 
 					console.log( 'go', $scope );
@@ -114,38 +101,26 @@ define( [
 					}
 
 				};
+
+				//Todo: Check the result
 				$scope.nextSheet = function () {
-					var curSheetId = State.getModel().id;
-					_.each( $scope.sheets, function ( elem, index, list ) {
-						if ( elem.qInfo.qId === curSheetId ) {
-
-							// Jump either to the next sheet or to the first one if the current sheet is the last one
-							if ( index < list.length - 1 ) {
-								return Routing.goToSheet( list[index + 1].qInfo.qId, Object.keys( State.States )[State.state] );
-							} else {
-								return Routing.goToSheet( list[0].qInfo.qId, Object.keys( State.States )[State.state] );
-							}
-						}
-
-					} );
+					if (qlik.navigation) {
+						qlik.navigation.nextSheet();
+					}
 				};
+
+				//Todo: Check the result
 				$scope.prevSheet = function () {
-					var curSheetId = State.getModel().id;
-					_.each( $scope.sheets, function ( elem, index, list ) {
-						if ( elem.qInfo.qId === curSheetId ) {
-
-							// Jump either to the next sheet or to the first one if the current sheet is the last one
-							if ( index !== 0 ) {
-								return Routing.goToSheet( list[index - 1].qInfo.qId, Object.keys( State.States )[State.state] );
-							} else {
-								return Routing.goToSheet( list[list.length - 1].qInfo.qId, Object.keys( State.States )[State.state] );
-							}
-						}
-
-					} );
+					if (qlik.navigation) {
+						qlik.navigation.prevSheet();
+					}
 				};
+
+				//Todo: Check the result
 				$scope.gotoSheet = function ( sheetId ) {
-					Routing.goToSheet( sheetId, Object.keys( State.States )[State.state] );
+					if (qlik.navigation) {
+						qlik.navigation.gotoSheet(sheetId);
+					}
 				};
 				$scope.setVariableContent = function ( variableName, variableValue ) {
 					var app = qlik.currApp();

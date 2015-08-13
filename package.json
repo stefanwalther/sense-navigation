@@ -1,6 +1,6 @@
 {
   "name": "sense-sheet-navigation",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sheet Navigation + Actions for Qlik Sense.",
   "main": "index.js",
   "dependencies": {},
