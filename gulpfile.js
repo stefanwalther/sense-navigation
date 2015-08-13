@@ -14,5 +14,6 @@ senseGo.init( gulp, userConfig,  function (  ) {
 		'git:add',
 		'git:commit',
 		'git:push'
+		//'npm:publish'
 	));
 });

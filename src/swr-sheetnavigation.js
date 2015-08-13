@@ -41,9 +41,14 @@ define( [
 								$scope.gotoSheet( $scope.layout.sheetId );
 							}
 							break;
+						case "gotoStory":
+							if ( !_.isEmpty( $scope.layout.selectedStory ) ) {
+								$scope.gotoStory( $scope.layout.selectedStory );
+							}
+							break;
 						case "openWebsite":
-							if (!_.isEmpty( $scope.layout.websiteUrl )) {
-								console.log('openWebsite: ', $scope.layout.websiteUrl);
+							if ( !_.isEmpty( $scope.layout.websiteUrl ) ) {
+								console.log( 'openWebsite: ', $scope.layout.websiteUrl );
 							}
 							break;
 						default:
@@ -104,24 +109,31 @@ define( [
 
 				//Todo: Check the result
 				$scope.nextSheet = function () {
-					if (qlik.navigation) {
+					if ( qlik.navigation ) {
 						qlik.navigation.nextSheet();
 					}
 				};
 
 				//Todo: Check the result
 				$scope.prevSheet = function () {
-					if (qlik.navigation) {
+					if ( qlik.navigation ) {
 						qlik.navigation.prevSheet();
 					}
 				};
 
 				//Todo: Check the result
 				$scope.gotoSheet = function ( sheetId ) {
-					if (qlik.navigation) {
-						qlik.navigation.gotoSheet(sheetId);
+					if ( qlik.navigation ) {
+						qlik.navigation.gotoSheet( sheetId );
 					}
 				};
+
+				$scope.gotoStory = function ( storyId ) {
+					if ( qlik.navigation ) {
+						qlik.navigation.gotoStory( storyId );
+					}
+				};
+
 				$scope.setVariableContent = function ( variableName, variableValue ) {
 					var app = qlik.currApp();
 					app.variable.setContent( variableName, variableValue )

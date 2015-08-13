@@ -15,12 +15,10 @@ define( [
 	// Helper Promises
 	// ****************************************************************************************
 	var getBookmarkList = function () {
-		var deferred = $q.defer();
+		var defer = $q.defer();
 
 		app.getList( 'BookmarkList', function ( items ) {
-			console.log( ' Bookmarklist - callback', items );
-			deferred.resolve( items.qBookmarkList.qItems.map( function ( item ) {
-					console.log('bookmark', item);
+			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
 					return {
 						value: item.qInfo.qId,
 						label: item.qData.title
@@ -28,30 +26,52 @@ define( [
 				} )
 			);
 		} );
-		return deferred.promise;
+		return defer.promise;
 	};
 
 	var getSheetList = function () {
 
-		var deferred = $q.defer();
+		var defer = $q.defer();
 
 		app.getAppObjectList( function ( data ) {
-			console.log( 'sheetList', data );
 			var sheets = [];
 			var sortedData = _.sortBy( data.qAppObjectList.qItems, function ( item ) {
 				return item.qData.rank;
 			} );
-			_.each( sortedData, function ( element ) {
-				//console.log('sheet elem:', element);
+			_.each( sortedData, function ( item ) {
 				sheets.push( {
-					value: element.qInfo.qId,
-					label: element.qMeta.title
+					value: item.qInfo.qId,
+					label: item.qMeta.title
 				} );
 			} );
-			return deferred.resolve( sheets );
+			return defer.resolve( sheets );
 		} );
 
-		return deferred.promise;
+		return defer.promise;
+	};
+
+	var getStoryList = function () {
+
+		var defer = $q.defer();
+
+		app.getList( 'story', function ( data ) {
+			var stories = [];
+			if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
+				data.qAppObjectList.qItems.forEach( function ( item ) {
+					stories.push({
+						value: item.qInfo.qId,
+						label: item.qMeta.title
+					});
+				})
+			}
+			return defer.resolve( _.sortBy(stories, function ( item ) {
+				return item.label;
+			} ));
+
+		} );
+
+		return defer.promise;
+
 	};
 
 	// ****************************************************************************************
@@ -183,6 +203,10 @@ define( [
 				label: "Go to a sheet (defined by Sheet Id)"
 			},
 			{
+				value: "gotoStory",
+				label: "Go to a story"
+			},
+			{
 				value: "openWebsite",
 				label: "Open Website"
 			}
@@ -211,6 +235,21 @@ define( [
 		},
 		show: function ( data ) {
 			return data.action === 'gotoSheet';
+		}
+	};
+
+	var storyList = {
+		type: "string",
+		component: "dropdown",
+		label: "Select Story",
+		ref: "selectedStory",
+		options: function () {
+			return getStoryList().then( function ( items ) {
+				return items;
+			});
+		},
+		show: function ( data ) {
+			return data.action === 'gotoStory'
 		}
 	};
 
@@ -407,6 +446,7 @@ define( [
 					action: action,
 					sheetId: sheetId,
 					sheetList: sheetList,
+					storyList: storyList,
 					websiteUrl: websiteUrl
 				}
 			},
