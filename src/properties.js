@@ -6,9 +6,10 @@ define( [
 	'jquery',
 	'underscore',
 	'qlik',
+	'./lib/js/extUtils',
 	'ng!$q',
 	'ng!$http'
-], function ( $, _, qlik, $q, $http ) {
+], function ( $, _, qlik, extUtils, $q, $http ) {
 
 	var app = qlik.currApp();
 
@@ -77,11 +78,21 @@ define( [
 	var getIcons = function () {
 		var defer = $q.defer();
 
-		$http.get( './data/icons-fa.json' )
+		//Todo: replace with extUtils.getExtensionPath/
+		$http.get( extUtils.getExtensionPath('swr-sheetnavigation') + '/lib/data/icons-fa.json' )
 			.then( function ( res ) {
-				console.log('icons', res);
+
+				var sortedIcons = _.sortBy(res.data.icons, function ( o ) {
+					return o.name;
+				});
+
 				var propDef = [];
-				res.forEach( res, function ( icon ) {
+				propDef.push( {
+						"value": "",
+						"label": ">> No icon <<"
+					} );
+
+				sortedIcons.forEach( function ( icon ) {
 					propDef.push(
 						{
 							"value": icon.id,

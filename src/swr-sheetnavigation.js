@@ -4,15 +4,18 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
+		'./lib/js/extUtils',
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
-		$( "<style>" ).html( cssContent ).appendTo( "head" );
+		extUtils.addStyleToHeader( cssContent );
+		var faUrl = '/extensions/swr-sheetnavigation/lib/external/fontawesome/css/font-awesome.min.css';
+		extUtils.addStyleLinkToHeader( faUrl, 'fontawesome' );
 
 		return {
 

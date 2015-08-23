@@ -1,3 +1,5 @@
 <div qv-extension style="text-align: {{layout.align}};" ng-class="(layout.buttonWidth === 'default') ? 'container default' : 'container full-width'">
-    <div class="btn" ng-class="[(layout.style) ? 'btn-' + layout.style : 'btn-default', (layout.fullWidth) ? 'full-width' : 'auto-width']" ng-bind="layout.label" qva-activate="go();")></div>
+    <div class="btn" ng-class="[(layout.style) ? 'btn-' + layout.style : 'btn-default', (layout.fullWidth) ? 'full-width' : 'auto-width']" qva-activate="go();">
+		<i ng-if="layout.buttonIcon !== ''" class="fa fa-{{layout.buttonIcon}}" style="padding-right:5px;"></i>{{layout.label}}
+	</div>
 </div>
