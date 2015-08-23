@@ -6,8 +6,9 @@ define( [
 	'jquery',
 	'underscore',
 	'qlik',
-	'ng!$q'
-], function ( $, _, qlik, $q ) {
+	'ng!$q',
+	'ng!$http'
+], function ( $, _, qlik, $q, $http ) {
 
 	var app = qlik.currApp();
 
@@ -56,22 +57,43 @@ define( [
 
 		app.getList( 'story', function ( data ) {
 			var stories = [];
-			if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
+			if ( data && data.qAppObjectList && data.qAppObjectList.qItems ) {
 				data.qAppObjectList.qItems.forEach( function ( item ) {
-					stories.push({
+					stories.push( {
 						value: item.qInfo.qId,
 						label: item.qMeta.title
-					});
-				})
+					} );
+				} )
 			}
-			return defer.resolve( _.sortBy(stories, function ( item ) {
+			return defer.resolve( _.sortBy( stories, function ( item ) {
 				return item.label;
-			} ));
+			} ) );
 
 		} );
 
 		return defer.promise;
 
+	};
+	var getIcons = function () {
+		var defer = $q.defer();
+
+		$http.get( './data/icons-fa.json' )
+			.then( function ( res ) {
+				console.log('icons', res);
+				var propDef = [];
+				res.forEach( res, function ( icon ) {
+					propDef.push(
+						{
+							"value": icon.id,
+							"label": icon.name
+						}
+					)
+				} );
+				defer.resolve( propDef );
+
+			} );
+
+		return defer.promise;
 	};
 
 	// ****************************************************************************************
@@ -134,6 +156,18 @@ define( [
 			}
 		],
 		defaultValue: false
+	};
+
+	var icons = {
+		type: "string",
+		component: "dropdown",
+		label: "Icon",
+		ref: "buttonIcon",
+		options: function () {
+			return getIcons().then( function ( items ) {
+				return items;
+			} );
+		}
 	};
 
 	var align = {
@@ -246,7 +280,7 @@ define( [
 		options: function () {
 			return getStoryList().then( function ( items ) {
 				return items;
-			});
+			} );
 		},
 		show: function ( data ) {
 			return data.action === 'gotoStory'
@@ -436,7 +470,8 @@ define( [
 					label: label,
 					style: style,
 					buttonWidth: buttonWidth,
-					align: align
+					align: align,
+					icons: icons
 				}
 			},
 			behavior: {
