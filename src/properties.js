@@ -259,7 +259,7 @@ define( [
 
 	var sheetId = {
 		ref: "props.sheetId",
-		label: "Sheet ID:",
+		label: "Sheet ID",
 		type: "string",
 		expression: "optional",
 		show: function ( data ) {
@@ -415,6 +415,7 @@ define( [
 		}
 	};
 
+	//Todo: Remove, don't think this is needed anymore in the future ...
 	//var bookmarkDropdown = {
 	//    type: "string",
 	//    component: "dropdown",
