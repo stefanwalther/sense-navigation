@@ -205,8 +205,8 @@ define( [
 		}
 	};
 
-	var label = {
-		ref: "props.label",
+	var buttonLabel = {
+		ref: "props.buttonLabel",
 		label: "Label",
 		type: "string",
 		expression: "optional",
@@ -477,7 +477,7 @@ define( [
 				type: "items",
 				label: "Layout",
 				items: {
-					label: label,
+					label: buttonLabel,
 					style: style,
 					buttonWidth: buttonWidth,
 					align: buttonAlign,
