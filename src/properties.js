@@ -168,7 +168,7 @@ define( [
 		defaultValue: false
 	};
 
-	var icons = {
+	var buttonIcon = {
 		type: "string",
 		component: "dropdown",
 		label: "Icon",
@@ -180,8 +180,8 @@ define( [
 		}
 	};
 
-	var align = {
-		ref: "props.align",
+	var buttonAlign = {
+		ref: "props.buttonAlign",
 		label: "Alignment",
 		type: "string",
 		component: "dropdown",
@@ -480,8 +480,8 @@ define( [
 					label: label,
 					style: style,
 					buttonWidth: buttonWidth,
-					align: align,
-					icons: icons
+					align: buttonAlign,
+					icons: buttonIcon
 				}
 			},
 			behavior: {
