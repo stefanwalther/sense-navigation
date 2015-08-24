@@ -4,4 +4,4 @@ packageName: "sense-navigation"
 # -------------------------------------------------------------------
 import:
   files:
-    # - ["./node_modules/sense-extension-utils/dist/extUtils/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]
+    - ["./node_modules/sense-extension-utils/dist/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]

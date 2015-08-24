@@ -6,7 +6,7 @@ define( [
 	'jquery',
 	'underscore',
 	'qlik',
-	'./lib/js/extUtils',
+	'./lib/external/sense-extension-utils/extUtils',
 	'ng!$q',
 	'ng!$http'
 ], function ( $, _, qlik, extUtils, $q, $http ) {
@@ -78,8 +78,7 @@ define( [
 	var getIcons = function () {
 		var defer = $q.defer();
 
-		//Todo: replace with extUtils.getExtensionPath/
-		$http.get( extUtils.getExtensionPath('swr-sheetnavigation') + '/lib/data/icons-fa.json' )
+		$http.get( extUtils.getExtensionPath('swr-sense-navigation') + '/lib/data/icons-fa.json' )
 			.then( function ( res ) {
 
 				var sortedIcons = _.sortBy(res.data.icons, function ( o ) {
@@ -113,7 +112,7 @@ define( [
 	var style = {
 		type: "string",
 		component: "dropdown",
-		ref: "style",
+		ref: "props.buttonStyle",
 		label: "Style",
 		defaultValue: "default",
 		options: [
@@ -153,7 +152,7 @@ define( [
 		type: "boolean",
 		component: "buttongroup",
 		label: "Button Width",
-		ref: "fullWidth",
+		ref: "props.fullWidth",
 		options: [
 			{
 				value: true,
@@ -173,7 +172,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		label: "Icon",
-		ref: "buttonIcon",
+		ref: "props.buttonIcon",
 		options: function () {
 			return getIcons().then( function ( items ) {
 				return items;
@@ -182,7 +181,7 @@ define( [
 	};
 
 	var align = {
-		ref: "align",
+		ref: "props.align",
 		label: "Alignment",
 		type: "string",
 		component: "dropdown",
@@ -207,7 +206,7 @@ define( [
 	};
 
 	var label = {
-		ref: "label",
+		ref: "props.label",
 		label: "Label",
 		type: "string",
 		expression: "optional",
@@ -221,7 +220,7 @@ define( [
 	// Behavior
 	// ****************************************************************************************
 	var action = {
-		ref: "action",
+		ref: "props.action",
 		label: "Navigation Action",
 		type: "string",
 		component: "dropdown",
@@ -259,7 +258,7 @@ define( [
 	};
 
 	var sheetId = {
-		ref: "sheetId",
+		ref: "props.sheetId",
 		label: "Sheet ID:",
 		type: "string",
 		expression: "optional",
@@ -272,7 +271,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		label: "Select Sheet",
-		ref: "selectedSheet",
+		ref: "props.selectedSheet",
 		options: function () {
 			return getSheetList().then( function ( items ) {
 				return items;
@@ -287,7 +286,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		label: "Select Story",
-		ref: "selectedStory",
+		ref: "props.selectedStory",
 		options: function () {
 			return getStoryList().then( function ( items ) {
 				return items;
@@ -299,7 +298,7 @@ define( [
 	};
 
 	var websiteUrl = {
-		ref: "websiteUrl",
+		ref: "props.websiteUrl",
 		label: "Website Url:",
 		type: "string",
 		expression: "optional",
@@ -316,7 +315,7 @@ define( [
 		type: "boolean",
 		component: "switch",
 		label: "Actions before navigating",
-		ref: "isActionsBefore",
+		ref: "props.isActionsBefore",
 		defaultValue: false,
 		options: [
 			{
@@ -334,7 +333,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		label: "First Action",
-		ref: "actionBefore1",
+		ref: "props.actionBefore1",
 		defaultValue: "none",
 		show: function ( data ) {
 			return data.isActionsBefore;
@@ -375,7 +374,7 @@ define( [
 	var field1Enabler = ['selectField', 'clearField'];
 	var field1 = {
 		type: "string",
-		ref: "field1",
+		ref: "props.field1",
 		label: "Field",
 		expression: "optional",
 		show: function ( data ) {
@@ -386,7 +385,7 @@ define( [
 	var bookmark1Enabler = ['applyBookmark'];
 	var bookmark1 = {
 		type: "string",
-		ref: "bookmark1",
+		ref: "props.bookmark1",
 		label: "Bookmark Id",
 		expression: "optional",
 		show: function ( data ) {
@@ -397,7 +396,7 @@ define( [
 	var variable1Enabler = ['setVariable'];
 	var variable1 = {
 		type: "string",
-		ref: "variable1",
+		ref: "props.variable1",
 		label: "Variable Name",
 		expression: "optional",
 		show: function ( data ) {
@@ -408,7 +407,7 @@ define( [
 	var value1Enabler = ['selectField', 'setVariable'];
 	var value1 = {
 		type: "string",
-		ref: "value1",
+		ref: "props.value1",
 		label: "Value",
 		expression: "optional",
 		show: function ( data ) {
@@ -457,7 +456,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		label: "Select Bookmark",
-		ref: "bookmark1",
+		ref: "props.bookmark1",
 		options: function () {
 			return getBookmarkList().then( function ( items ) {
 				return items;

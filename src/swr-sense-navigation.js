@@ -4,7 +4,7 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
-		'./external/sense-extension-utils/extUtils',
+		'./lib/external/sense-extension-utils/extUtils',
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
@@ -27,7 +27,7 @@ define( [
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
-					switch ( $scope.layout.action ) {
+					switch ( $scope.layout.props.action ) {
 						case "nextSheet":
 							$scope.nextSheet();
 							break;
@@ -35,23 +35,23 @@ define( [
 							$scope.prevSheet();
 							break;
 						case "gotoSheet":
-							if ( !_.isEmpty( $scope.layout.selectedSheet ) ) {
-								$scope.gotoSheet( $scope.layout.selectedSheet );
+							if ( !_.isEmpty( $scope.layout.props.selectedSheet ) ) {
+								$scope.gotoSheet( $scope.layout.props.selectedSheet );
 							}
 							break;
 						case "gotoSheetById":
-							if ( !_.isEmpty( $scope.layout.sheetId ) ) {
-								$scope.gotoSheet( $scope.layout.sheetId );
+							if ( !_.isEmpty( $scope.layout.props.sheetId ) ) {
+								$scope.gotoSheet( $scope.layout.props.sheetId );
 							}
 							break;
 						case "gotoStory":
-							if ( !_.isEmpty( $scope.layout.selectedStory ) ) {
-								$scope.gotoStory( $scope.layout.selectedStory );
+							if ( !_.isEmpty( $scope.layout.props.selectedStory ) ) {
+								$scope.gotoStory( $scope.layout.props.selectedStory );
 							}
 							break;
 						case "openWebsite":
-							if ( !_.isEmpty( $scope.layout.websiteUrl ) ) {
-								console.log( 'openWebsite: ', $scope.layout.websiteUrl );
+							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
+								console.log( 'openWebsite: ', $scope.layout.props.websiteUrl );
 							}
 							break;
 						default:
@@ -60,13 +60,13 @@ define( [
 				};
 				$scope.doAction = function () {
 
-					if ( !$scope.layout.isActionsBefore ) {
+					if ( !$scope.layout.props.isActionsBefore ) {
 						return;
 					}
 
 					var app = qlik.currApp();
 
-					switch ( $scope.layout.actionBefore1 ) {
+					switch ( $scope.layout.props.actionBefore1 ) {
 						case "clearAll":
 							app.clearAll();
 							break;
@@ -74,23 +74,23 @@ define( [
 							app.unlockAll();
 							break;
 						case "clearField":
-							if ( !_.isEmpty( $scope.layout.field1 ) ) {
-								app.field( $scope.layout.field1 ).clear();
+							if ( !_.isEmpty( $scope.layout.props.field1 ) ) {
+								app.field( $scope.layout.props.field1 ).clear();
 							}
 							break;
 						case "selectField":
-							if ( !_.isEmpty( $scope.layout.field1 ) && ( !_.isEmpty( $scope.layout.value1 )) ) {
-								app.field( $scope.layout.field1 ).selectMatch( $scope.layout.value1, false );
+							if ( !_.isEmpty( $scope.layout.props.field1 ) && ( !_.isEmpty( $scope.layout.props.value1 )) ) {
+								app.field( $scope.layout.props.field1 ).selectMatch( $scope.layout.props.value1, false );
 							}
 							break;
 						case "applyBookmark":
-							if ( !_.isEmpty( $scope.layout.bookmark1 ) ) {
-								app.bookmark.apply( $scope.layout.bookmark1 );
+							if ( !_.isEmpty( $scope.layout.props.bookmark1 ) ) {
+								app.bookmark.apply( $scope.layout.props.bookmark1 );
 							}
 							break;
 						case "setVariable":
-							if ( !_.isEmpty( $scope.layout.variable1 ) ) {
-								$scope.setVariableContent( $scope.layout.variable1, $scope.layout.value1 );
+							if ( !_.isEmpty( $scope.layout.props.variable1 ) ) {
+								$scope.setVariableContent( $scope.layout.props.variable1, $scope.layout.props.value1 );
 							}
 							break;
 						default:
