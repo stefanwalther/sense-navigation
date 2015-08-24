@@ -4,8 +4,8 @@
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "@@pkg.version",
-	"preview" : "swr-sheetnavigation.png",
+	"preview" : "swr-sense-navigation.png",
 	"author": "@@pkg.author",
 	"license": "@@pkg.license",
-	"homepage": "http://github.com/stefanwalther/sense-sheet-navigation"
+	"homepage": "http://github.com/stefanwalther/sense-navigation"
 }

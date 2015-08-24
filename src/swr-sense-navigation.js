@@ -4,7 +4,7 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
-		'./lib/js/extUtils',
+		'./external/sense-extension-utils/extUtils',
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
@@ -14,7 +14,7 @@ define( [
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
-		var faUrl = '/extensions/swr-sheetnavigation/lib/external/fontawesome/css/font-awesome.min.css';
+		var faUrl = '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'fontawesome' );
 
 		return {

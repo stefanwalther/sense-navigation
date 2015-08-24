@@ -1,1 +1,7 @@
-packageName: "sense-sheet-navigation"
+packageName: "sense-navigation"
+# -------------------------------------------------------------------
+# Import settings
+# -------------------------------------------------------------------
+import:
+  files:
+    # - ["./node_modules/sense-extension-utils/dist/extUtils/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]

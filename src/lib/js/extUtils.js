@@ -1,10 +1,15 @@
 /*global define*/
 define( [
 	'jquery',
-	'underscore'
-], function (
-	$,
-	_ ) {
+	'underscore',
+	'ng!$http',
+	'ng!$q',
+	'qlik'
+], function ( $,
+			  _,
+			  $http,
+			  $q,
+			  qlik ) {
 	'use strict';
 
 	/**
@@ -45,13 +50,51 @@ define( [
 		}
 	}
 
+	function getExtensionInfo ( extensionUniqueName ) {
+		var defer = $q.defer();
+
+		var url = getBasePath() + '/extensions/' + extensionUniqueName + '/' + extensionUniqueName + '.qext';
+		$http.get( url )
+			.then( function ( response ) {
+				defer.resolve( response.data );
+			} ).catch( function ( err ) {
+				defer.reject( err );
+			} );
+
+		return defer.promise;
+	}
+
 	function getExtensionPath ( extensionUniqueName ) {
 		return window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/sense" ) + 1 ) + 'extensions/' + extensionUniqueName;
+	}
+
+	function getProductVersion () {
+		var defer = $q.defer();
+		var global = qlik.getGlobal( {} );
+
+		global.getProductVersion( function ( reply ) {
+			var v = reply.qReturn;
+			var lastDot = xIndexOf( v, '.', 2 );
+			var rest = v.substr( lastDot + 1 );
+			var chars = rest.split();
+			var numDigitsAfterRest = 0;
+			for ( var i = 0; i < chars.length; i++ ) {
+				if ( !_.isNumber( chars[i] ) ) {
+					numDigitsAfterRest = i + 1;
+					break;
+				}
+			}
+			defer.resolve( v.substr( 0, lastDot + 1 + numDigitsAfterRest ) );
+		} );
+
+		return defer.promise;
 	}
 
 	return {
 		addStyleToHeader: addStyleToHeader,
 		addStyleLinkToHeader: addStyleLinkToHeader,
-		getExtensionPath: getExtensionPath
+		getExtensionInfo: getExtensionInfo,
+		getExtensionPath: getExtensionPath,
+		getProductVersion: getProductVersion
 	}
 } );
