@@ -25,6 +25,8 @@ define( [
 			template: ngTemplate,
 			controller: ['$scope', function ( $scope ) {
 
+				//console.log('$scope', $scope);
+
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
 					switch ( $scope.layout.props.action ) {

@@ -213,7 +213,7 @@ define( [
 		show: function () {
 			return true;
 		},
-		defaultValue: "Your Label"
+		defaultValue: "My Button"
 	};
 
 	// ****************************************************************************************
@@ -474,6 +474,13 @@ define( [
 	var settings = {
 		uses: "settings",
 		items: {
+			general: {
+				items: {
+					showTitles: {
+						defaultValue: false
+					}
+				}
+			},
 			layout: {
 				type: "items",
 				label: "Layout",
