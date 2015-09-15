@@ -15,7 +15,7 @@ define( [
 
 		extUtils.addStyleToHeader( cssContent );
 		var faUrl = '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
-		extUtils.addStyleLinkToHeader( faUrl, 'fontawesome' );
+		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		return {
 
@@ -37,23 +37,18 @@ define( [
 							$scope.prevSheet();
 							break;
 						case "gotoSheet":
-							if ( !_.isEmpty( $scope.layout.props.selectedSheet ) ) {
-								$scope.gotoSheet( $scope.layout.props.selectedSheet );
-							}
+							$scope.gotoSheet( $scope.layout.props.selectedSheet );
 							break;
 						case "gotoSheetById":
-							if ( !_.isEmpty( $scope.layout.props.sheetId ) ) {
-								$scope.gotoSheet( $scope.layout.props.sheetId );
-							}
+							$scope.gotoSheet( $scope.layout.props.sheetId );
 							break;
 						case "gotoStory":
-							if ( !_.isEmpty( $scope.layout.props.selectedStory ) ) {
-								$scope.gotoStory( $scope.layout.props.selectedStory );
-							}
+							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
 						case "openWebsite":
 							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
-								console.log( 'openWebsite: ', $scope.layout.props.websiteUrl );
+								//console.log( 'openWebsite: ', $scope.layout.props.websiteUrl );
+								//Todo: Open website in a new window
 							}
 							break;
 						default:
@@ -68,73 +63,69 @@ define( [
 
 					var app = qlik.currApp();
 
-					switch ( $scope.layout.props.actionBefore1 ) {
-						case "clearAll":
-							app.clearAll();
-							break;
-						case "unlockAll":
-							app.unlockAll();
-							break;
-						case "clearField":
-							if ( !_.isEmpty( $scope.layout.props.field1 ) ) {
-								app.field( $scope.layout.props.field1 ).clear();
-							}
-							break;
-						case "selectField":
-							if ( !_.isEmpty( $scope.layout.props.field1 ) && ( !_.isEmpty( $scope.layout.props.value1 )) ) {
-								app.field( $scope.layout.props.field1 ).selectMatch( $scope.layout.props.value1, false );
-							}
-							break;
-						case "applyBookmark":
-							if ( !_.isEmpty( $scope.layout.props.bookmark1 ) ) {
-								app.bookmark.apply( $scope.layout.props.bookmark1 );
-							}
-							break;
-						case "setVariable":
-							if ( !_.isEmpty( $scope.layout.props.variable1 ) ) {
-								$scope.setVariableContent( $scope.layout.props.variable1, $scope.layout.props.value1 );
-							}
-							break;
-						default:
-							break;
+					for ( var i = 1; i <= 2; i++ ) {
+
+						switch ( $scope.layout.props['actionBefore' + i] ) {
+							case "clearAll":
+								app.clearAll();
+								break;
+							case "unlockAll":
+								app.unlockAll();
+								break;
+							case "clearField":
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) ) {
+									app.field( $scope.layout.props['field' + i] ).clear();
+								}
+								break;
+							case "selectField":
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + 1] )) ) {
+									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], false );
+								}
+								break;
+							case "applyBookmark":
+								if ( !_.isEmpty( $scope.layout.props['bookmark' + i] ) ) {
+									app.bookmark.apply( $scope.layout.props['bookmark' + i] );
+								}
+								break;
+							case "setVariable":
+								if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
+									$scope.setVariableContent( $scope.layout.props['variable' + i], $scope.layout.props['value' + i] );
+								}
+								break;
+							default:
+								break;
+						}
 					}
 
 				};
 
-				//Todo: Check the result
 				$scope.go = function () {
-
-					console.log( 'go', $scope );
 					if ( !$scope.$parent.editmode ) {
 						$scope.doAction();
 						$scope.doNavigate();
 					}
-
 				};
 
-				//Todo: Check the result
 				$scope.nextSheet = function () {
 					if ( qlik.navigation ) {
 						qlik.navigation.nextSheet();
 					}
 				};
 
-				//Todo: Check the result
 				$scope.prevSheet = function () {
 					if ( qlik.navigation ) {
 						qlik.navigation.prevSheet();
 					}
 				};
 
-				//Todo: Check the result
 				$scope.gotoSheet = function ( sheetId ) {
-					if ( qlik.navigation ) {
+					if ( qlik.navigation && !_.isEmpty( sheetId ) ) {
 						qlik.navigation.gotoSheet( sheetId );
 					}
 				};
 
 				$scope.gotoStory = function ( storyId ) {
-					if ( qlik.navigation ) {
+					if ( qlik.navigation && !_.isEmpty( storyId ) ) {
 						qlik.navigation.gotoStory( storyId );
 					}
 				};
@@ -142,8 +133,7 @@ define( [
 				$scope.setVariableContent = function ( variableName, variableValue ) {
 					var app = qlik.currApp();
 					app.variable.setContent( variableName, variableValue )
-						.then( function ( reply ) {
-							//console.log( 'variable.setContent', reply );
+						.then( function ( /*reply*/ ) {
 							angular.noop();
 						} );
 				};

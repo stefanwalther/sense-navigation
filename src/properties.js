@@ -78,18 +78,18 @@ define( [
 	var getIcons = function () {
 		var defer = $q.defer();
 
-		$http.get( extUtils.getExtensionPath('swr-sense-navigation') + '/lib/data/icons-fa.json' )
+		$http.get( extUtils.getExtensionPath( 'swr-sense-navigation' ) + '/lib/data/icons-fa.json' )
 			.then( function ( res ) {
 
-				var sortedIcons = _.sortBy(res.data.icons, function ( o ) {
+				var sortedIcons = _.sortBy( res.data.icons, function ( o ) {
 					return o.name;
-				});
+				} );
 
 				var propDef = [];
 				propDef.push( {
-						"value": "",
-						"label": ">> No icon <<"
-					} );
+					"value": "",
+					"label": ">> No icon <<"
+				} );
 
 				sortedIcons.forEach( function ( icon ) {
 					propDef.push(
@@ -242,10 +242,10 @@ define( [
 				value: "gotoSheet",
 				label: "Go to a specific sheet"
 			},
-			{
-				value: "gotoSheetById",
-				label: "Go to a sheet (defined by Sheet Id)"
-			},
+			//{
+			//	value: "gotoSheetById",
+			//	label: "Go to a sheet (defined by Sheet Id)"
+			//},
 			{
 				value: "gotoStory",
 				label: "Go to a story"
@@ -263,7 +263,7 @@ define( [
 		type: "string",
 		expression: "optional",
 		show: function ( data ) {
-			return data.action === 'gotoSheetById';
+			return data.props.action === 'gotoSheetById';
 		}
 	};
 
@@ -278,7 +278,7 @@ define( [
 			} );
 		},
 		show: function ( data ) {
-			return data.action === 'gotoSheet';
+			return data.props.action === 'gotoSheet';
 		}
 	};
 
@@ -293,7 +293,7 @@ define( [
 			} );
 		},
 		show: function ( data ) {
-			return data.action === 'gotoStory'
+			return data.props.action === 'gotoStory'
 		}
 	};
 
@@ -303,7 +303,7 @@ define( [
 		type: "string",
 		expression: "optional",
 		show: function ( data ) {
-			return data.action === 'openWebsite';
+			return data.props.action === 'openWebsite';
 		}
 
 	};
@@ -329,6 +329,37 @@ define( [
 		]
 	};
 
+	var actionOptions = [
+		{
+			value: "none",
+			label: "None"
+		},
+		{
+			value: "clearAll",
+			label: "Clear All Selections"
+		},
+		{
+			value: "unlockAll",
+			label: "Unlock All Selections"
+		},
+		{
+			value: "clearField",
+			label: "Clear Selection in Field"
+		},
+		{
+			value: "selectField",
+			label: "Select in Field"
+		},
+		{
+			value: "setVariable",
+			label: "Set Variable Value"
+		},
+		{
+			value: "applyBookmark",
+			label: "Apply Bookmark"
+		}
+	];
+
 	var actionBefore1 = {
 		type: "string",
 		component: "dropdown",
@@ -336,121 +367,102 @@ define( [
 		ref: "props.actionBefore1",
 		defaultValue: "none",
 		show: function ( data ) {
-			return data.isActionsBefore;
+			return data.props.isActionsBefore;
 		},
-		options: [
-			{
-				value: "none",
-				label: "None"
-			},
-			{
-				value: "clearAll",
-				label: "Clear All Selections"
-			},
-			{
-				value: "unlockAll",
-				label: "Unlock All Selections"
-			},
-			{
-				value: "clearField",
-				label: "Clear Selection in Field"
-			},
-			{
-				value: "selectField",
-				label: "Select in Field"
-			},
-			{
-				value: "setVariable",
-				label: "Set Variable Value"
-			},
-			{
-				value: "applyBookmark",
-				label: "Apply Bookmark"
-			}
-
-		]
+		options: actionOptions
 	};
 
-	var field1Enabler = ['selectField', 'clearField'];
+	var actionBefore2 = {
+		type: "string",
+		component: "dropdown",
+		label: "Second Action",
+		ref: "props.actionBefore2",
+		defaultValue: "none",
+		show: function ( data ) {
+			return data.props.isActionsBefore && props.actionBefore1 !== 'none';
+		},
+		options: actionOptions
+	};
+
+	var fieldEnabler = ['selectField', 'clearField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
 		label: "Field",
 		expression: "optional",
 		show: function ( data ) {
-			return field1Enabler.indexOf( data.actionBefore1 ) > -1;
+			return fieldEnabler.indexOf( data.props.actionBefore1 ) > -1;
+		}
+	};
+	var field2 = {
+		type: "string",
+		ref: "props.field2",
+		label: "Field",
+		expression: "optional",
+		show: function ( data ) {
+			return fieldEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
 
-	var bookmark1Enabler = ['applyBookmark'];
+	var bookmarkEnabler = ['applyBookmark'];
 	var bookmark1 = {
 		type: "string",
 		ref: "props.bookmark1",
 		label: "Bookmark Id",
 		expression: "optional",
 		show: function ( data ) {
-			return bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
+			return bookmarkEnabler.indexOf( data.props.actionBefore1 ) > -1;
+		}
+	};
+	var bookmark2 = {
+		type: "string",
+		ref: "props.bookmark2",
+		label: "Bookmark Id",
+		expression: "optional",
+		show: function ( data ) {
+			return bookmarkEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
 
-	var variable1Enabler = ['setVariable'];
+	var variableEnabler = ['setVariable'];
 	var variable1 = {
 		type: "string",
 		ref: "props.variable1",
 		label: "Variable Name",
 		expression: "optional",
 		show: function ( data ) {
-			return variable1Enabler.indexOf( data.actionBefore1 ) > -1
+			return variableEnabler.indexOf( data.props.actionBefore1 ) > -1
+		}
+	};
+	var variable2 = {
+		type: "string",
+		ref: "props.variable2",
+		label: "Variable Name",
+		expression: "optional",
+		show: function ( data ) {
+			return variableEnabler.indexOf( data.props.actionBefore2 ) > -1
 		}
 	};
 
-	var value1Enabler = ['selectField', 'setVariable'];
+	var valueEnabler = ['selectField', 'setVariable'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
 		label: "Value",
 		expression: "optional",
 		show: function ( data ) {
-			return value1Enabler.indexOf( data.actionBefore1 ) > -1;
+			return valueEnabler.indexOf( data.props.actionBefore1 ) > -1;
 		}
 	};
-
-	//Todo: Remove, don't think this is needed anymore in the future ...
-	//var bookmarkDropdown = {
-	//    type: "string",
-	//    component: "dropdown",
-	//    label: "Bookmark",
-	//    ref: "gotoBookmark",
-	//    options: function () {
-	//        return app.getList( 'BookmarkList' ).then( function ( items ) {
-	//            //console.log('bookmarklist-items', items);
-	//            //var bookmarkList = items.layout.qBookmarkList;
-	//            return items.layout.qBookmarkList.qItems.map( function ( item ) {
-	//                return {
-	//                    value: item.qInfo.qId,
-	//                    label: item.qData.title
-	//                };
-	//            } );
-	//        } );
-	//    }
-	//};
-
-	//var bookmarkDropdown = {
-	//    type: "string",
-	//    component: "dropdown",
-	//    label: "Bookmark",
-	//    ref: "gotoBookmark",
-	//    options: function () {
-	//        return app.getList( 'BookmarkList' , function ( items ) {
-	//            return items.qBookmarkList.qItems.map( function ( item ) {
-	//                return {
-	//                    value: item.qInfo.qId,
-	//                    label: item.qData.title
-	//                };
-	//            } );
-	//        } );
-	//    }
-	//};
+	var value2 = {
+		type: "string",
+		ref: "props.value2",
+		label: "Value",
+		expression: "optional",
+		show: function ( data ) {
+			return valueEnabler.indexOf( data.props.actionBefore2 ) > -1;
+		}
+	};
 
 	var bookmark1Enabler = ['applyBookmark'];
 	var bookmark1 = {
@@ -459,12 +471,13 @@ define( [
 		label: "Select Bookmark",
 		ref: "props.bookmark1",
 		options: function () {
-			return getBookmarkList().then( function ( items ) {
-				return items;
-			} );
+			return getBookmarkList()
+				.then( function ( items ) {
+					return items;
+				} );
 		},
 		show: function ( data ) {
-			return bookmark1Enabler.indexOf( data.actionBefore1 ) > -1;
+			return bookmark1Enabler.indexOf( data.props.actionBefore1 ) > -1;
 		}
 	};
 
@@ -508,11 +521,16 @@ define( [
 				label: "Actions",
 				items: {
 					isActionsBefore: isActionsBefore,
-					actions: actionBefore1,
+					actionBefore1: actionBefore1,
 					field1: field1,
 					variable1: variable1,
 					value1: value1,
-					bookmark1: bookmark1
+					bookmark1: bookmark1,
+					actionBefore2: actionBefore2,
+					field2: field2,
+					variable2: variable2,
+					value2: value2,
+					bookmark2: bookmark2
 				}
 			}
 		}
