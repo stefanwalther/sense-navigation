@@ -379,7 +379,7 @@ define( [
 		ref: "props.actionBefore2",
 		defaultValue: "none",
 		show: function ( data ) {
-			return data.props.isActionsBefore && props.actionBefore1 !== 'none';
+			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none';
 		},
 		options: actionOptions
 	};

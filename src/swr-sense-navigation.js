@@ -47,8 +47,7 @@ define( [
 							break;
 						case "openWebsite":
 							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
-								//console.log( 'openWebsite: ', $scope.layout.props.websiteUrl );
-								//Todo: Open website in a new window
+								window.open($scope.layout.props.websiteUrl);
 							}
 							break;
 						default:
