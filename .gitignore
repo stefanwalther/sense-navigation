@@ -5,6 +5,7 @@ web.*.config
 dist/
 /**/node_modules/
 todos.md
+/build/*_dev.zip
 
 
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
@@ -19,7 +20,6 @@ todos.md
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
 [Bb]in/
 [Oo]bj/
 

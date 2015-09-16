@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.4",
+  "version": "0.5.0",
   "description": "Navigation + Actions visualization extension for Qlik Sense.",
   "dependencies": {},
   "devDependencies": {
@@ -30,5 +30,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/stefanwalther/sense-navigation/issues"
+  },
+  "verb": {
+    "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
+    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense_navigation_latest.zip"
   }
 }
