@@ -17,14 +17,16 @@
     "url": "https://github.com/stefanwalther/sense-navigation"
   },
   "keywords": [
-    "Qlik",
-    "Sense",
-    "Sense",
-    "Qlik",
+    "qlik",
+    "sense",
+    "qlik-sense",
+    "qlik-sense-visualization-extension",
+    "sense",
     "navigation",
     "sheets",
     "actions",
-    "button"
+    "button",
+    "bootstrap"
   ],
   "author": "Stefan Walther",
   "license": "MIT",
