@@ -3,7 +3,9 @@ There are some features I'd like to implement in the near future:
 * Allow to add **additional styles for the button** (very similar to [sense-themable-kpi-tile](https://github.com/stefanwalther/sense-themable-kpi-tile))
 * **Additional actions**, e.g.
 	* Reload the app
-	* Opening another app and pass the current selections to the app (similar to "document chaining in QlikViw")
+	* Opening another app and pass the current selections to the app (similar to "document chaining in QlikView")
+	
+Have a look at the features described [here](https://github.com/stefanwalther/sense-navigation/milestones).
 
 Is there **anything else you'd like to see** in this visualization extension?
 
