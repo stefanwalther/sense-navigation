@@ -19,6 +19,7 @@
   - [Layout](#layout)
   - [Navigation Behavior](#navigation-behavior)
   - [Actions](#actions)
+* [Compatibility](#compatibility)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [Related projects](#related-projects)
@@ -120,6 +121,11 @@ Depending on the selected action you'll see additional settings you can define, 
 > [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions_settings.png)](#layout)
 
 As soon as you have defined the first action, you will also be able to define a second action.
+
+## Compatibility
+
+**sense-navigation** is designed to work with Qlik Sense 2.1.1 or higher.
+If you use the extension in an older version of Qlik Sense some functionality (like navigating to another sheet, etc.) will simply not work because the [Capability APIs](https://help.qlik.com/sense/2.1/en-US/developer/Subsystems/APIs/Content/mashup-api-reference.htm) used in this extension are not available in earlier versions.
 
 ## Roadmap
 

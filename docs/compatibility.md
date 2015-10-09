@@ -1,0 +1,2 @@
+**sense-navigation** is designed to work with Qlik Sense 2.1.1 or higher.
+If you use the extension in an older version of Qlik Sense some functionality (like navigating to another sheet, etc.) will simply not work because the [Capability APIs](https://help.qlik.com/sense/2.1/en-US/developer/Subsystems/APIs/Content/mashup-api-reference.htm) used in this extension are not available in earlier versions.
