@@ -35,6 +35,6 @@
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
-    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense_navigation_latest.zip"
+    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip"
   }
 }
