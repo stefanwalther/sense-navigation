@@ -70,7 +70,7 @@ Every button can also include an icon:
 
 ## Installation
 
-1. Download the [latest version](https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip)
+1. Download the [latest version](https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip) or [any other version](https://github.com/stefanwalther/sense-navigation/tree/master/build) you want to install.
 2. Then install on either _Qlik Sense Desktop_ or _Qlik Sense Server_:
 
 * Qlik Sense Desktop
