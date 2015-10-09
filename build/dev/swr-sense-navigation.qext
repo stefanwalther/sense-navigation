@@ -1,11 +1,15 @@
 {
 	"name" : "Navigation & Actions",
-	"description" : "Navigation + Actions visualization extension for Qlik Sense.",
+	"description" : "Sense Navigation + Actions visualization extension for Qlik Sense.",
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "0.5.0",
 	"preview" : "swr-sense-navigation.png",
 	"author": "Stefan Walther",
 	"license": "MIT",
-	"homepage": "http://github.com/stefanwalther/sense-navigation"
+	"homepage": "http://github.com/stefanwalther/sense-navigation",
+	"keywords" : "qlik-sense, visualization",
+    "license" : "MIT",
+    "repository" : "https://github.com/stefanwalther/sense-navigation",
+    "dependencies" : { "qlik-sense" : ">=2.1.1" }
 }
