@@ -8,7 +8,6 @@ lib/external/fontawesome/fonts/fontawesome-webfont.ttf;
 lib/external/fontawesome/fonts/fontawesome-webfont.woff;
 lib/external/fontawesome/fonts/FontAwesome.otf;
 lib/external/sense-extension-utils/extUtils.js;
-loader.js;
 properties.js;
 swr-sense-navigation.js;
 swr-sense-navigation.png;
