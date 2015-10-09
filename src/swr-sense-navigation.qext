@@ -1,5 +1,5 @@
 {
-	"name" : "Navigation & Actions",
+	"name" : "Sheet Navigation & Actions",
 	"description" : "@@pkg.description",
 	"icon" : "extension",
 	"type" : "visualization",

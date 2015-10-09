@@ -1,9 +1,9 @@
 {
-	"name" : "Navigation & Actions",
-	"description" : "Sense Navigation + Actions visualization extension for Qlik Sense.",
+	"name" : "Sheet Navigation & Actions",
+	"description" : "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
 	"icon" : "extension",
 	"type" : "visualization",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"preview" : "swr-sense-navigation.png",
 	"author": "Stefan Walther",
 	"license": "MIT",
