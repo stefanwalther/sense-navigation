@@ -1,7 +1,4 @@
 /*global define*/
-/**
- * @todo: Refactor the make it easier to understand immediately the difference between actions and navigation-behavior + dependencies
- */
 define( [
 	'jquery',
 	'underscore',
