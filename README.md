@@ -1,6 +1,6 @@
 # sense-navigation
 
-> Sense Navigation + Actions visualization extension for Qlik Sense.
+> Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 
 [![](http://serve.mod.bz/branch/)](https://github.com/stefanwalther/sense-navigation)
 
@@ -58,15 +58,15 @@ Furthermore **_sense-navigation_** offers the option to define **up to two basic
 
 ### Button styles
 
-There are several predefined styles availabe from which you can choose:
+There are several predefined styles available from which you can choose:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_styles.png)](#purpose-and-description)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_styles.png)](#purpose-and-description)
 
 ### Button icons
 
 Every button can also include an icon:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_button_icons.png)](#screenshots)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_button_icons.png)](#screenshots)
 
 ## Installation & Download
 
@@ -85,7 +85,7 @@ Then define how the **sense-navigation** should behave:
 
 ### Layout
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_props_layout.png)](#button-styles)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_props_layout.png)](#button-styles)
 
 * **Label** - The buttons label.
 * **Style** - Select one of the predefined styles.
@@ -96,7 +96,7 @@ Then define how the **sense-navigation** should behave:
 
 Define the behavior of the button. The following options are available:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_behavior.png)](#button-icons)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_behavior.png)](#button-icons)
 
 * Go to the next sheet
 * Go to the previous sheet
@@ -110,15 +110,15 @@ You can furthermore define up to two action which will be executed before the na
 
 First enable this option:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions_enable.png)](#installation---download)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_actions_enable.png)](#installation---download)
 
 Then select from the list of predefined actions:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions.png)](#configuration)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_actions.png)](#configuration)
 
 Depending on the selected action you'll see additional settings you can define, e.g. define the name of a variable and its value:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions_settings.png)](#layout)
+> [![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_actions_settings.png)](#layout)
 
 As soon as you have defined the first action, you will also be able to define a second action.
 
