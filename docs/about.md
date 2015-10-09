@@ -8,7 +8,7 @@ The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to 
 
 The button can be easily styled nicely by selecting some of the predefined designs.
 
-Furthermore ***sense-navigation*** offers the option to define up to two basic actions which will be executed before the navigation happens. The following actions are possible:
+Furthermore ***sense-navigation*** offers the option to define **up to two basic actions** which will be executed before the navigation happens. The following actions are possible:
 
 * Clear all selections
 * Unlock all selections
