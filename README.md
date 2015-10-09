@@ -14,7 +14,7 @@
 * [Screenshots](#screenshots)
   - [Button styles](#button-styles)
   - [Button icons](#button-icons)
-* [Installation](#installation)
+* [Installation & Download](#installation---download)
 * [Configuration](#configuration)
   - [Layout](#layout)
   - [Navigation Behavior](#navigation-behavior)
@@ -68,7 +68,7 @@ Every button can also include an icon:
 
 > [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_button_icons.png)](#screenshots)
 
-## Installation
+## Installation & Download
 
 1. Download the [latest version](https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip) or [any other version](https://github.com/stefanwalther/sense-navigation/tree/master/build) you want to install.
 2. Then install on either _Qlik Sense Desktop_ or _Qlik Sense Server_:
@@ -110,7 +110,7 @@ You can furthermore define up to two action which will be executed before the na
 
 First enable this option:
 
-> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions_enable.png)](#installation)
+> [![](https://github.com/stefanwalther/sense-navigation/blob/master/docs/images/sense_navigation_actions_enable.png)](#installation---download)
 
 Then select from the list of predefined actions:
 
