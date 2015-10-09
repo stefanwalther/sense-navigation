@@ -25,8 +25,6 @@ define( [
 			template: ngTemplate,
 			controller: ['$scope', function ( $scope ) {
 
-				//console.log('$scope', $scope);
-
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
 					switch ( $scope.layout.props.action ) {
@@ -106,25 +104,25 @@ define( [
 				};
 
 				$scope.nextSheet = function () {
-					if ( qlik.navigation ) {
+					if ( $scope.checkQlikNavigation() ) {
 						qlik.navigation.nextSheet();
 					}
 				};
 
 				$scope.prevSheet = function () {
-					if ( qlik.navigation ) {
+					if ( $scope.checkQlikNavigation() ) {
 						qlik.navigation.prevSheet();
 					}
 				};
 
 				$scope.gotoSheet = function ( sheetId ) {
-					if ( qlik.navigation && !_.isEmpty( sheetId ) ) {
+					if ( $scope.checkQlikNavigation() && !_.isEmpty( sheetId ) ) {
 						qlik.navigation.gotoSheet( sheetId );
 					}
 				};
 
 				$scope.gotoStory = function ( storyId ) {
-					if ( qlik.navigation && !_.isEmpty( storyId ) ) {
+					if ( $scope.checkQlikNavigation() && !_.isEmpty( storyId ) ) {
 						qlik.navigation.gotoStory( storyId );
 					}
 				};
@@ -136,6 +134,14 @@ define( [
 							angular.noop();
 						} );
 				};
+
+				$scope.checkQlikNavigation = function() {
+					if (!qlik.navigation) {
+						window.console.error('Capability API qlik.navigation is not supported in the current version of Qlik Sense');
+						return false;
+					}
+					return true;
+				}
 
 			}]
 		};
