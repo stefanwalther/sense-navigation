@@ -11,8 +11,8 @@ senseGo.init( gulp, userConfig, function () {
 		'release',
 		'git:add',
 		'git:commit',
-		'git:push'
-		//'npm:publish'
+		'git:push',
+		'npm:publish'
 	) );
 	gulp.task( 'watch:build', function () {
 		gulp.watch(
