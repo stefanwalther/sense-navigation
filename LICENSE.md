@@ -1,4 +1,4 @@
-**sense-navigation Qlik Sense Extension** is licensed under "MIT" license:
+**sense-navigation Qlik Sense Extension** is licensed under "MIT":
 
 * [License](#license)
 * [External Libraries](#external libraries)

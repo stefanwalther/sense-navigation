@@ -1,4 +1,4 @@
-There are some features I'd like to implement in the near future:
+There are some features planned to be implemented in the near future, but the ""backlog is absolutely up to the feedback to this solution**:
 
 * Allow to add **additional styles for the button** (very similar to [sense-themable-kpi-tile](https://github.com/stefanwalther/sense-themable-kpi-tile))
 * **Additional actions**, e.g.
