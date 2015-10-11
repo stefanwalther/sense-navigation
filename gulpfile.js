@@ -22,6 +22,6 @@ senseGo.init( gulp, userConfig, function () {
 				usePolling: true,
 				interval: 50
 			},
-			gulp.series( 'build' ) )
+			gulp.series( 'build' ) );
 	} );
 } );
