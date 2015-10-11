@@ -2,7 +2,9 @@
   "name": "sense-navigation",
   "version": "0.5.1",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "git://github.com/gulpjs/gulp#4.0"
+  },
   "devDependencies": {
     "sense-extension-utils": "^0.1.1",
     "sense-go": "^0.3.3",
