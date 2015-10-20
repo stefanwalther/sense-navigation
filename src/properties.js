@@ -332,16 +332,20 @@ define( [
 			label: "None"
 		},
 		{
+			value: "applyBookmark",
+			label: "Apply Bookmark"
+		},
+		{
 			value: "clearAll",
 			label: "Clear All Selections"
 		},
 		{
-			value: "unlockAll",
-			label: "Unlock All Selections"
-		},
-		{
 			value: "clearField",
 			label: "Clear Selection in Field"
+		},
+		{
+			value: "unlockAll",
+			label: "Unlock All Selections"
 		},
 		{
 			value: "selectField",
@@ -350,10 +354,6 @@ define( [
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
-		},
-		{
-			value: "applyBookmark",
-			label: "Apply Bookmark"
 		}
 	];
 

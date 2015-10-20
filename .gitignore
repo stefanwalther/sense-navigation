@@ -6,6 +6,7 @@ dist/
 /**/node_modules/
 todos.md
 /build/*_dev.zip
+.tmp/
 
 
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
