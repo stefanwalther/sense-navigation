@@ -1,8 +1,12 @@
-version: 0.5.2
+version: "0.5.3"
+  date: "2015-10-23"
+  enhancements:
+    - "Check if web site Url starts with either http:// or https://"
+version: "0.5.2"
   date: "2015-10-20"
   enhancements:
     - "Sort actions alphabetically"
-version: 0.5.1
+version: "0.5.1"
   date: "2015-10-09"
   new:
     - "Initial release"
