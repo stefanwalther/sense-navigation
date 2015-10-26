@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "0.5.3",
+  "version": "0.5.6",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "devDependencies": {
     "sense-extension-utils": "^0.1.1",

@@ -27,6 +27,7 @@ define( [
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
+
 					switch ( $scope.layout.props.action ) {
 						case "nextSheet":
 							$scope.nextSheet();
@@ -45,16 +46,19 @@ define( [
 							break;
 						case "openWebsite":
 							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
-								if (extUtils.startsWith($scope.layout.props.websiteUrl, 'http://') || extUtils.startsWith($scope.layout.props.websiteUrl, 'https://')) {
-									window.open($scope.layout.props.websiteUrl);
+								if ( extUtils.startsWith( $scope.layout.props.websiteUrl, 'http://' ) || extUtils.startsWith( $scope.layout.props.websiteUrl, 'https://' ) ) {
+									window.open( $scope.layout.props.websiteUrl );
 								} else {
-									window.open('http://' + $scope.layout.props.websiteUrl);
+									window.open( 'http://' + $scope.layout.props.websiteUrl );
 								}
 							}
 							break;
 						default:
 							break;
 					}
+				};
+				$scope.isEditMode = function () {
+					return $scope.$parent.$parent.editmode;
 				};
 				$scope.doAction = function () {
 
@@ -101,7 +105,7 @@ define( [
 				};
 
 				$scope.go = function () {
-					if ( !$scope.$parent.editmode ) {
+					if ( !$scope.isEditMode() ) {
 						$scope.doAction();
 						$scope.doNavigate();
 					}
@@ -139,9 +143,9 @@ define( [
 						} );
 				};
 
-				$scope.checkQlikNavigation = function() {
-					if (!qlik.navigation) {
-						window.console.error('Capability API qlik.navigation is not supported in the current version of Qlik Sense');
+				$scope.checkQlikNavigation = function () {
+					if ( !qlik.navigation ) {
+						window.console.error( 'Capability API qlik.navigation is not supported in the current version of Qlik Sense' );
 						return false;
 					}
 					return true;
