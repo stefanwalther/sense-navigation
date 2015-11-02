@@ -90,15 +90,14 @@ define( [
 		return defer.promise;
 	}
 
-	//Borrowed from underscore.string: https://github.com/epeli/underscore.string/blob/master/startsWith.js
-	function startsWith(str, starts, position) {
-		str = str.split(''); //makeString
-		starts = '' + starts;
-		position = position == null ? 0 : Math.min(toPositive(position), str.length);
-		return str.lastIndexOf(starts, position) === position;
-	}
-	function toPositive(number) {
-		return number < 0 ? 0 : (+number || 0);
+	if(typeof String.prototype.startsWith != 'function'){
+		String.prototype.startsWith = function(str){
+			if(str == null) return false;
+			var i = str.length;
+			if(this.length < i) return false;
+			for(--i; (i >= 0) && (this[i] === str[i]); --i) continue;
+			return i < 0;
+		}
 	}
 
 	return {
@@ -106,7 +105,6 @@ define( [
 		addStyleLinkToHeader: addStyleLinkToHeader,
 		getExtensionInfo: getExtensionInfo,
 		getExtensionPath: getExtensionPath,
-		getProductVersion: getProductVersion,
-		startsWith: startsWith
+		getProductVersion: getProductVersion
 	}
 } );
