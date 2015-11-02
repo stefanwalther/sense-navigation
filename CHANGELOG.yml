@@ -1,3 +1,7 @@
+version: "0.5.7"
+  date: "2015-11-02"
+  enhancements:
+    - "Fix an issue that prevented to open a https based website"
 version: "0.5.6"
   date: "2015-10-26"
   enhancements:

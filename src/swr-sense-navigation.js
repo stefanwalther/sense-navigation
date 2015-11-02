@@ -46,7 +46,7 @@ define( [
 							break;
 						case "openWebsite":
 							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
-								if ( extUtils.startsWith( $scope.layout.props.websiteUrl, 'http://' ) || extUtils.startsWith( $scope.layout.props.websiteUrl, 'https://' ) ) {
+								if ( $scope.layout.props.websiteUrl.startsWith( 'http://' ) || $scope.layout.props.websiteUrl.startsWith( 'https://' ) ) {
 									window.open( $scope.layout.props.websiteUrl );
 								} else {
 									window.open( 'http://' + $scope.layout.props.websiteUrl );
