@@ -198,7 +198,7 @@ define( [
 			}
 		],
 		show: function ( data ) {
-			return data.fullWidth === false;
+			return data.props.fullWidth === false;
 		}
 	};
 

@@ -1,3 +1,7 @@
+version: "0.5.8"
+  date: "2015-11-12"
+  enhancements:
+    - "Fix an issue that the property 'alignment' was never shown (only applicable for <auto-width>)"
 version: "0.5.7"
   date: "2015-11-02"
   enhancements:
