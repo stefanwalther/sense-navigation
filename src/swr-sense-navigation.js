@@ -83,8 +83,19 @@ define( [
 								}
 								break;
 							case "selectField":
-								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + 1] )) ) {
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + i] )) ) {
 									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], false );
+								}
+								break;
+              case "selectandLockField":
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + i] )) ) {
+									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], true );
+                  app.field( $scope.layout.props['field' + i] ).lock()
+								}
+								break;
+              case "lockField":
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) ) {
+                  app.field( $scope.layout.props['field' + i] ).lock()
 								}
 								break;
 							case "applyBookmark":
