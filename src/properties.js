@@ -352,6 +352,10 @@ define( [
 			label: "Select in Field"
 		},
     {
+			value: "lockField",
+			label: "Lock Field"
+		},
+    {
 			value: "selectandLockField",
 			label: "Select and Lock in Field"
 		},
@@ -385,7 +389,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'clearField','selectandLockField'];
+	var fieldEnabler = ['selectField', 'clearField','selectandLockField','lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
