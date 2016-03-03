@@ -87,6 +87,12 @@ define( [
 									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], false );
 								}
 								break;
+              case "selectandLockField":
+								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + 1] )) ) {
+									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], true );
+                  app.field( $scope.layout.props['field' + i] ).lock()
+								}
+								break;
 							case "applyBookmark":
 								if ( !_.isEmpty( $scope.layout.props['bookmark' + i] ) ) {
 									app.bookmark.apply( $scope.layout.props['bookmark' + i] );
