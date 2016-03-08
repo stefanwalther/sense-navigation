@@ -1,7 +1,6 @@
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
 
 {%= related([
-  'sense-export',
   'sense-media-box', 
   'sense-themable-kpi-tile', 
   'sense-on-off-switch', 
@@ -11,5 +10,5 @@ Some related projects (Qlik Sense Visualization Extensions) I have recently crea
   'sense-calendar-heatmap',
   'qliksense-extension-tutorial',
   'sense-extension-recipes'
-  ], {"silent": true}
+  ]
 ) %}  

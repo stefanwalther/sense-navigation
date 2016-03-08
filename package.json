@@ -5,8 +5,7 @@
   "devDependencies": {
     "sense-extension-utils": "^0.3.0",
     "sense-go": "^0.3.3",
-    "verb": "git://github.com/verbose/verb",
-    "gulp": "git://github.com/gulpjs/gulp#4.0"
+    "verb": "git://github.com/verbose/verb"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
