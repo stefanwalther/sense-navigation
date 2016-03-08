@@ -4,6 +4,8 @@ version: "0.5.9"
     - "Optimize the URL handling"
     - "Fix some settings for local deployment"
     - "Update dependencies"
+    - "New action: 'Lock' (#42)"
+    - "New action: 'Select and Lock in Field' (#42)"
 version: "0.5.8"
   date: "2015-11-12"
   enhancements:
