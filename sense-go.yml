@@ -7,3 +7,14 @@ import:
     - ["./node_modules/sense-extension-utils/dist/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]
 wbfolder:
   enabled: false
+localExtensionDir: ""
+deployment:
+  toLocal:
+    enabled: false
+  ssh:
+    enabled: true
+    host: "10.0.0.222"
+    port: 22
+    username: "stefanwalther"
+    password: "Test1234"
+    dest: "/cygdrive/c/Users/stefanwalther/Documents/Qlik/Sense/Extensions/sense-navigation"

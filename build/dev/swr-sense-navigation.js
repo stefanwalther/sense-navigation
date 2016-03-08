@@ -45,11 +45,13 @@ define( [
 							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
 						case "openWebsite":
-							if ( !_.isEmpty( $scope.layout.props.websiteUrl ) ) {
-								if ( $scope.layout.props.websiteUrl.startsWith( 'http://' ) || $scope.layout.props.websiteUrl.startsWith( 'https://' ) ) {
-									window.open( $scope.layout.props.websiteUrl );
+							var url = $scope.layout.props.websiteUrl;
+							console.log(url);
+							if ( !_.isEmpty( url ) ) {
+								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
+									window.open( url );
 								} else {
-									window.open( 'http://' + $scope.layout.props.websiteUrl );
+									window.open ('http://' + url);
 								}
 							}
 							break;
@@ -57,6 +59,7 @@ define( [
 							break;
 					}
 				};
+
 				$scope.isEditMode = function () {
 					return $scope.$parent.$parent.editmode;
 				};
@@ -154,4 +157,5 @@ define( [
 			}]
 		};
 
-	} );
+	} )
+;
