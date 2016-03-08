@@ -344,25 +344,26 @@ define( [
 			label: "Clear Selection in Field"
 		},
 		{
-			value: "unlockAll",
-			label: "Unlock All Selections"
+			value: "lockField",
+			label: "Lock Field"
+		},
+		{
+			value: "selectandLockField",
+			label: "Select and Lock in Field"
 		},
 		{
 			value: "selectField",
 			label: "Select in Field"
 		},
-    {
-			value: "lockField",
-			label: "Lock Field"
-		},
-    {
-			value: "selectandLockField",
-			label: "Select and Lock in Field"
-		},
+
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
-		}
+		},
+		{
+			value: "unlockAll",
+			label: "Unlock All Selections"
+		},
 	];
 
 	var actionBefore1 = {
@@ -389,7 +390,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'clearField','selectandLockField','lockField'];
+	var fieldEnabler = ['selectField', 'clearField', 'selectandLockField', 'lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
@@ -449,7 +450,7 @@ define( [
 		}
 	};
 
-	var valueEnabler = ['selectField', 'setVariable','selectandLockField'];
+	var valueEnabler = ['selectField', 'setVariable', 'selectandLockField'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
