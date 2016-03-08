@@ -351,6 +351,14 @@ define( [
 			value: "selectField",
 			label: "Select in Field"
 		},
+    {
+			value: "lockField",
+			label: "Lock Field"
+		},
+    {
+			value: "selectandLockField",
+			label: "Select and Lock in Field"
+		},
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
@@ -381,7 +389,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'clearField'];
+	var fieldEnabler = ['selectField', 'clearField','selectandLockField','lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
@@ -441,7 +449,7 @@ define( [
 		}
 	};
 
-	var valueEnabler = ['selectField', 'setVariable'];
+	var valueEnabler = ['selectField', 'setVariable','selectandLockField'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
