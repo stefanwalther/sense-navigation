@@ -353,9 +353,12 @@ define( [
 		},
 		{
 			value: "selectField",
-			label: "Select in Field"
+			label: "Select Value in Field"
 		},
-
+		{
+			value: "selectValues",
+			label: "Select Multiple Values in Field"
+		},
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
@@ -363,7 +366,7 @@ define( [
 		{
 			value: "unlockAll",
 			label: "Unlock All Selections"
-		},
+		}
 	];
 
 	var actionBefore1 = {
@@ -390,7 +393,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
@@ -450,7 +453,7 @@ define( [
 		}
 	};
 
-	var valueEnabler = ['selectField', 'setVariable', 'selectandLockField'];
+	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
