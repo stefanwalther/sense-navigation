@@ -51,6 +51,7 @@ Furthermore **_sense-navigation_** offers the option to define **up to two basic
 * Unlock all selections
 * Clear selections of a field
 * Select a value in a field
+* Select multiple values in a field
 * Set a variable value
 * Apply a bookmark
 * Lock field
