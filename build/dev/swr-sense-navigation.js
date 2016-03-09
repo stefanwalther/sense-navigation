@@ -46,12 +46,12 @@ define( [
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
-							console.log(url);
+							console.log( url );
 							if ( !_.isEmpty( url ) ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
 									window.open( url );
 								} else {
-									window.open ('http://' + url);
+									window.open( 'http://' + url );
 								}
 							}
 							break;
@@ -71,7 +71,13 @@ define( [
 
 					var app = qlik.currApp();
 
+					var fld = null;
+					var val = null;
+
 					for ( var i = 1; i <= 2; i++ ) {
+
+						fld = $scope.layout.props['field' + i];
+						val = $scope.layout.props['value' + i];
 
 						switch ( $scope.layout.props['actionBefore' + i] ) {
 							case "clearAll":
@@ -81,24 +87,31 @@ define( [
 								app.unlockAll();
 								break;
 							case "clearField":
-								if ( !_.isEmpty( $scope.layout.props['field' + i] ) ) {
-									app.field( $scope.layout.props['field' + i] ).clear();
+								if ( !_.isEmpty( fld ) ) {
+									app.field( fld ).clear();
 								}
 								break;
 							case "selectField":
-								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + i] )) ) {
-									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], false );
+								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+									app.field( fld ).selectMatch( val, false );
 								}
 								break;
-              case "selectandLockField":
-								if ( !_.isEmpty( $scope.layout.props['field' + i] ) && ( !_.isEmpty( $scope.layout.props['value' + i] )) ) {
-									app.field( $scope.layout.props['field' + i] ).selectMatch( $scope.layout.props['value' + i], true );
-                  app.field( $scope.layout.props['field' + i] ).lock()
+							case "selectValues":
+								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+									var vals = val.split( ';' );
+									console.log('vals', vals);
+									app.field( fld ).selectValues( vals, false );
 								}
 								break;
-              case "lockField":
-								if ( !_.isEmpty( $scope.layout.props['field' + i] ) ) {
-                  app.field( $scope.layout.props['field' + i] ).lock()
+							case "selectandLockField":
+								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+									app.field( fld ).selectMatch( val, true );
+									app.field( fld ).lock()
+								}
+								break;
+							case "lockField":
+								if ( !_.isEmpty( fld ) ) {
+									app.field( fld ).lock()
 								}
 								break;
 							case "applyBookmark":
@@ -108,7 +121,7 @@ define( [
 								break;
 							case "setVariable":
 								if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
-									$scope.setVariableContent( $scope.layout.props['variable' + i], $scope.layout.props['value' + i] );
+									$scope.setVariableContent( $scope.layout.props['variable' + i], val );
 								}
 								break;
 							default:

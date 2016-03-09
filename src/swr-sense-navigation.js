@@ -98,7 +98,9 @@ define( [
 								break;
 							case "selectValues":
 								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
-									app.field( fld ).selectValues( val, false );
+									var vals = val.split( ';' );
+									console.log('vals', vals);
+									app.field( fld ).selectValues( vals, false );
 								}
 								break;
 							case "selectandLockField":

@@ -473,6 +473,27 @@ define( [
 		}
 	};
 
+	var valueDescEnabler = ['selectValues'];
+	var value1Desc = {
+		type: "text",
+		component: "text",
+		ref: "props.value1Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore1) > -1;
+		}
+	};
+	var value2Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value2Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore2) > -1;
+		}
+	};
+
+
 	var bookmark1Enabler = ['applyBookmark'];
 	var bookmark1 = {
 		type: "string",
@@ -534,11 +555,13 @@ define( [
 					field1: field1,
 					variable1: variable1,
 					value1: value1,
+					value1Desc: value1Desc,
 					bookmark1: bookmark1,
 					actionBefore2: actionBefore2,
 					field2: field2,
 					variable2: variable2,
 					value2: value2,
+					value2Desc: value2Desc,
 					bookmark2: bookmark2
 				}
 			}

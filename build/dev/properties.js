@@ -353,9 +353,12 @@ define( [
 		},
 		{
 			value: "selectField",
-			label: "Select in Field"
+			label: "Select Value in Field"
 		},
-
+		{
+			value: "selectValues",
+			label: "Select Multiple Values in Field"
+		},
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
@@ -363,7 +366,7 @@ define( [
 		{
 			value: "unlockAll",
 			label: "Unlock All Selections"
-		},
+		}
 	];
 
 	var actionBefore1 = {
@@ -390,7 +393,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
@@ -450,7 +453,7 @@ define( [
 		}
 	};
 
-	var valueEnabler = ['selectField', 'setVariable', 'selectandLockField'];
+	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
@@ -469,6 +472,27 @@ define( [
 			return valueEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
+
+	var valueDescEnabler = ['selectValues'];
+	var value1Desc = {
+		type: "text",
+		component: "text",
+		ref: "props.value1Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore1) > -1;
+		}
+	};
+	var value2Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value2Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore2) > -1;
+		}
+	};
+
 
 	var bookmark1Enabler = ['applyBookmark'];
 	var bookmark1 = {
@@ -531,11 +555,13 @@ define( [
 					field1: field1,
 					variable1: variable1,
 					value1: value1,
+					value1Desc: value1Desc,
 					bookmark1: bookmark1,
 					actionBefore2: actionBefore2,
 					field2: field2,
 					variable2: variable2,
 					value2: value2,
+					value2Desc: value2Desc,
 					bookmark2: bookmark2
 				}
 			}
