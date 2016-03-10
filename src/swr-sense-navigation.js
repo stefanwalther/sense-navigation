@@ -8,14 +8,14 @@ define( [
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
+		'text!./lib/external/fontawesome/css/font-awesome.min',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, faCSS, ngTemplate ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
-		var faUrl = '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
-		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+		extUtils.addStyleToHeader( faCSS );
 
 		return {
 
@@ -23,6 +23,9 @@ define( [
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
+			getPreferredSize: function () {
+				console.log( 'getPreferredSize' , this);
+			},
 			controller: ['$scope', function ( $scope ) {
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
@@ -99,7 +102,7 @@ define( [
 							case "selectValues":
 								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
 									var vals = val.split( ';' );
-									console.log('vals', vals);
+									console.log( 'vals', vals );
 									app.field( fld ).selectValues( vals, false );
 								}
 								break;
