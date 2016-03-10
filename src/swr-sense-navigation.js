@@ -14,8 +14,8 @@ define( [
 	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, faCSS, ngTemplate ) {
 		'use strict';
 
-		extUtils.addStyleToHeader( cssContent );
-		extUtils.addStyleToHeader( faCSS );
+		extUtils.addStyleToHeader( cssContent, 'sense-navigation-styles' );
+		extUtils.addStyleToHeader( faCSS, 'sense-navigation-faicons' );
 
 		return {
 
