@@ -1,4 +1,8 @@
 version: "0.5.10"
+  date: "2016-03-10"
+  changes:
+    - "Bugfix to get sense-navigation to work with virtual proxies"
+version: "0.5.10"
   date: "2016-03-09"
   changes:
     - "New action: Multiple values in a field"

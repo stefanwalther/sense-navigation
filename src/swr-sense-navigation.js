@@ -8,14 +8,14 @@ define( [
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
-		'text!./lib/external/fontawesome/css/font-awesome.min',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, faCSS, ngTemplate ) {
+	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
-		extUtils.addStyleToHeader( cssContent, 'sense-navigation-styles' );
-		extUtils.addStyleToHeader( faCSS, 'sense-navigation-faicons' );
+		extUtils.addStyleToHeader( cssContent );
+		var faUrl = 'lib/external/fontawesome/css/font-awesome.min.css';
+		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		return {
 
