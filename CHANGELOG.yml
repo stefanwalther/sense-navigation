@@ -1,4 +1,4 @@
-version: "0.5.10"
+version: "0.5.11"
   date: "2016-03-10"
   changes:
     - "Bugfix to get sense-navigation to work with virtual proxies"
