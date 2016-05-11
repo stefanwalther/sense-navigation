@@ -11,7 +11,8 @@ localExtensionDir: ""
 deployment:
   toLocal:
     enabled: false
-  ssh:
+  # Deployment to local test server
+  toSsh:
     enabled: true
     host: "192.168.56.11"
     port: 22

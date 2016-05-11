@@ -12,11 +12,12 @@ define( [
 	],
 	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
+		
 
 		extUtils.addStyleToHeader( cssContent );
-		var faUrl = 'lib/external/fontawesome/css/font-awesome.min.css';
+		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
-
+		
 		return {
 
 			definition: props,
