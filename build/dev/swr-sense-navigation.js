@@ -17,6 +17,16 @@ define( [
 		extUtils.addStyleToHeader( cssContent );
 		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+
+		function splitToStringNum(str, sep) {
+			var a = str.split(sep);
+			for (var i = 0; i < a.length; i++) {
+				if (!isNaN(a[i])) {
+					a[i] = Number(a[i]);
+				}
+			}
+			return a;
+		}
 		
 		return {
 
@@ -102,8 +112,7 @@ define( [
 								break;
 							case "selectValues":
 								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
-									var vals = val.split( ';' );
-									console.log( 'vals', vals );
+									var vals = splitToStringNum(val, ';');
 									app.field( fld ).selectValues( vals, false );
 								}
 								break;

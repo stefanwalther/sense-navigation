@@ -1,3 +1,11 @@
+version: "0.5.14"
+  date: "2016-05-12"
+  changes:
+    - "Fix issue that multiple numeric fields could not be selected"
+version: "0.5.13"
+  date: "2016-05-12"
+  changes:
+    - "Fix to load the icons properly"
 version: "0.5.11"
   date: "2016-03-10"
   changes:
