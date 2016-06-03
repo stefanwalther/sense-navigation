@@ -393,6 +393,54 @@ define( [
 		options: actionOptions
 	};
 
+	var actionBefore3 = {
+		type: "string",
+		component: "dropdown",
+		label: "Third Action",
+		ref: "props.actionBefore3",
+		defaultValue: "none",
+		show: function ( data ) {
+			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none' && data.props.actionBefore2 !== 'none';
+		},
+		options: actionOptions
+	};
+
+	var actionBefore4 = {
+		type: "string",
+		component: "dropdown",
+		label: "Fourth Action",
+		ref: "props.actionBefore4",
+		defaultValue: "none",
+		show: function ( data ) {
+			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none' && data.props.actionBefore2 !== 'none' && data.props.actionBefore3 !== 'none';
+		},
+		options: actionOptions
+	};
+
+	var actionBefore5 = {
+		type: "string",
+		component: "dropdown",
+		label: "Fifth Action",
+		ref: "props.actionBefore5",
+		defaultValue: "none",
+		show: function ( data ) {
+			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none' && data.props.actionBefore2 !== 'none' && data.props.actionBefore3 !== 'none' && data.props.actionBefore4 !== 'none';
+		},
+		options: actionOptions
+	};
+
+	var actionBefore6 = {
+		type: "string",
+		component: "dropdown",
+		label: "Sixth Action",
+		ref: "props.actionBefore6",
+		defaultValue: "none",
+		show: function ( data ) {
+			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none' && data.props.actionBefore2 !== 'none' && data.props.actionBefore3 !== 'none' && data.props.actionBefore4 !== 'none' && data.props.actionBefore5 !== 'none';
+		},
+		options: actionOptions
+	};
+
 	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var field1 = {
 		type: "string",
@@ -412,6 +460,43 @@ define( [
 			return fieldEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
+	var field3 = {
+		type: "string",
+		ref: "props.field3",
+		label: "Field",
+		expression: "optional",
+		show: function ( data ) {
+			return fieldEnabler.indexOf( data.props.actionBefore3 ) > -1;
+		}
+	};
+	var field4 = {
+		type: "string",
+		ref: "props.field4",
+		label: "Field",
+		expression: "optional",
+		show: function ( data ) {
+			return fieldEnabler.indexOf( data.props.actionBefore4 ) > -1;
+		}
+	};
+	var field5 = {
+		type: "string",
+		ref: "props.field5",
+		label: "Field",
+		expression: "optional",
+		show: function ( data ) {
+			return fieldEnabler.indexOf( data.props.actionBefore5 ) > -1;
+		}
+	};
+	var field6 = {
+		type: "string",
+		ref: "props.field6",
+		label: "Field",
+		expression: "optional",
+		show: function ( data ) {
+			return fieldEnabler.indexOf( data.props.actionBefore6 ) > -1;
+		}
+	};
+
 
 	var bookmarkEnabler = ['applyBookmark'];
 	var bookmark1 = {
@@ -430,6 +515,42 @@ define( [
 		expression: "optional",
 		show: function ( data ) {
 			return bookmarkEnabler.indexOf( data.props.actionBefore2 ) > -1;
+		}
+	};
+	var bookmark3 = {
+		type: "string",
+		ref: "props.bookmark3",
+		label: "Bookmark Id",
+		expression: "optional",
+		show: function ( data ) {
+			return bookmarkEnabler.indexOf( data.props.actionBefore3 ) > -1;
+		}
+	};
+	var bookmark4 = {
+		type: "string",
+		ref: "props.bookmark4",
+		label: "Bookmark Id",
+		expression: "optional",
+		show: function ( data ) {
+			return bookmarkEnabler.indexOf( data.props.actionBefore4 ) > -1;
+		}
+	};
+	var bookmark5 = {
+		type: "string",
+		ref: "props.bookmark5",
+		label: "Bookmark Id",
+		expression: "optional",
+		show: function ( data ) {
+			return bookmarkEnabler.indexOf( data.props.actionBefore5 ) > -1;
+		}
+	};
+	var bookmark6 = {
+		type: "string",
+		ref: "props.bookmark6",
+		label: "Bookmark Id",
+		expression: "optional",
+		show: function ( data ) {
+			return bookmarkEnabler.indexOf( data.props.actionBefore6 ) > -1;
 		}
 	};
 
@@ -452,6 +573,42 @@ define( [
 			return variableEnabler.indexOf( data.props.actionBefore2 ) > -1
 		}
 	};
+	var variable3 = {
+		type: "string",
+		ref: "props.variable3",
+		label: "Variable Name",
+		expression: "optional",
+		show: function ( data ) {
+			return variableEnabler.indexOf( data.props.actionBefore3 ) > -1
+		}
+	};
+	var variable4 = {
+		type: "string",
+		ref: "props.variable4",
+		label: "Variable Name",
+		expression: "optional",
+		show: function ( data ) {
+			return variableEnabler.indexOf( data.props.actionBefore4 ) > -1
+		}
+	};
+	var variable5 = {
+		type: "string",
+		ref: "props.variable5",
+		label: "Variable Name",
+		expression: "optional",
+		show: function ( data ) {
+			return variableEnabler.indexOf( data.props.actionBefore5 ) > -1
+		}
+	};
+	var variable6 = {
+		type: "string",
+		ref: "props.variable6",
+		label: "Variable Name",
+		expression: "optional",
+		show: function ( data ) {
+			return variableEnabler.indexOf( data.props.actionBefore6 ) > -1
+		}
+	};
 
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var value1 = {
@@ -472,6 +629,42 @@ define( [
 			return valueEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
+	var value3 = {
+		type: "string",
+		ref: "props.value3",
+		label: "Value",
+		expression: "optional",
+		show: function ( data ) {
+			return valueEnabler.indexOf( data.props.actionBefore3 ) > -1;
+		}
+	};
+	var value4 = {
+		type: "string",
+		ref: "props.value4",
+		label: "Value",
+		expression: "optional",
+		show: function ( data ) {
+			return valueEnabler.indexOf( data.props.actionBefore4 ) > -1;
+		}
+	};
+	var value5 = {
+		type: "string",
+		ref: "props.value5",
+		label: "Value",
+		expression: "optional",
+		show: function ( data ) {
+			return valueEnabler.indexOf( data.props.actionBefore5 ) > -1;
+		}
+	};
+	var value6 = {
+		type: "string",
+		ref: "props.value6",
+		label: "Value",
+		expression: "optional",
+		show: function ( data ) {
+			return valueEnabler.indexOf( data.props.actionBefore6 ) > -1;
+		}
+	};
 
 	var valueDescEnabler = ['selectValues'];
 	var value1Desc = {
@@ -490,6 +683,42 @@ define( [
 		label: "Define multiple values separated with a semi-colon (;).",
 		show: function ( data ) {
 			return valueDescEnabler.indexOf( data.props.actionBefore2) > -1;
+		}
+	};
+	var value3Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value3Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore3) > -1;
+		}
+	};
+	var value4Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value4Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore4) > -1;
+		}
+	};
+	var value5Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value5Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore5) > -1;
+		}
+	};
+	var value6Desc = {
+		type: "string",
+		component: "text",
+		ref: "props.value6Desc",
+		label: "Define multiple values separated with a semi-colon (;).",
+		show: function ( data ) {
+			return valueDescEnabler.indexOf( data.props.actionBefore6) > -1;
 		}
 	};
 
@@ -562,7 +791,31 @@ define( [
 					variable2: variable2,
 					value2: value2,
 					value2Desc: value2Desc,
-					bookmark2: bookmark2
+					bookmark2: bookmark2,
+					actionBefore3: actionBefore3,
+					field3: field3,
+					variable3: variable3,
+					value3: value3,
+					value3Desc: value3Desc,
+					bookmark3: bookmark3,
+					actionBefore4: actionBefore4,
+					field4: field4,
+					variable4: variable4,
+					value4: value4,
+					value4Desc: value4Desc,
+					bookmark4: bookmark4,
+					actionBefore5: actionBefore5,
+					field5: field5,
+					variable5: variable5,
+					value5: value5,
+					value5Desc: value5Desc,
+					bookmark5: bookmark5,
+					actionBefore6: actionBefore6,
+					field6: field6,
+					variable6: variable6,
+					value6: value6,
+					value6Desc: value6Desc,
+					bookmark6: bookmark6
 				}
 			}
 		}

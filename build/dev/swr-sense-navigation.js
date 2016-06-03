@@ -88,7 +88,7 @@ define( [
 					var fld = null;
 					var val = null;
 
-					for ( var i = 1; i <= 2; i++ ) {
+					for ( var i = 1; i <= 6; i++ ) {
 
 						fld = $scope.layout.props['field' + i];
 						val = $scope.layout.props['value' + i];
