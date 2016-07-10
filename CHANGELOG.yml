@@ -1,8 +1,9 @@
-version: "0.6.1"
+version: "0.6.2"
   date: "2016-07-10"
   changes:
     - "Added multiline option for the button"
     - "Disable export button for Qlik Sense 3.0+"
+    - "Disable export for Qlik Sense 3.0+"
 version: "0.5.14"
   date: "2016-05-12"
   changes:

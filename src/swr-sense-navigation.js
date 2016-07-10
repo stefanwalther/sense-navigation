@@ -33,6 +33,8 @@ define( [
 
 			definition: props,
 			support: {
+				canTakeSnapshot: false,
+				export: false,
 				exportData: false
 			},
 			initialProperties: initProps,
