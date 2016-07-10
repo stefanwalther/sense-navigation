@@ -202,6 +202,24 @@ define( [
 		}
 	};
 
+	var buttonMultiLine = {
+		ref: "props.isButtonMultiLine",
+		label: "Multiline",
+		type: "boolean",
+		component: "switch",
+		defaultValue: false,
+		options: [
+			{
+				value: true,
+				label: "Enabled"
+			},
+			{
+				value: false,
+				label: "Disabled"
+			}
+		]
+	};
+
 	var buttonLabel = {
 		ref: "props.buttonLabel",
 		label: "Label",
@@ -532,6 +550,7 @@ define( [
 					style: style,
 					buttonWidth: buttonWidth,
 					align: buttonAlign,
+					buttonMultiLine: buttonMultiLine,
 					icons: buttonIcon
 				}
 			},
