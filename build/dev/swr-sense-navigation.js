@@ -33,7 +33,7 @@ define( [
 
 			definition: props,
 			support: {
-				exportData: true
+				exportData: false
 			},
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
