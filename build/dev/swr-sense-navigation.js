@@ -18,6 +18,7 @@ define( [
 		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
+		// Helper function to split numbers.
 		function splitToStringNum(str, sep) {
 			var a = str.split(sep);
 			for (var i = 0; i < a.length; i++) {
@@ -31,6 +32,9 @@ define( [
 		return {
 
 			definition: props,
+			support: {
+				exportData: true
+			},
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
@@ -60,7 +64,7 @@ define( [
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
-							console.log( url );
+							// console.log( url );
 							if ( !_.isEmpty( url ) ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
 									window.open( url );

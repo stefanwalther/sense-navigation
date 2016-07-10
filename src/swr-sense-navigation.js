@@ -32,6 +32,9 @@ define( [
 		return {
 
 			definition: props,
+			support: {
+				exportData: true
+			},
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
