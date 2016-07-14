@@ -257,10 +257,10 @@ define( [
 				value: "gotoSheet",
 				label: "Go to a specific sheet"
 			},
-			//{
-			//	value: "gotoSheetById",
-			//	label: "Go to a sheet (defined by Sheet Id)"
-			//},
+			{
+				value: "gotoSheetById",
+				label: "Go to a sheet (defined by Sheet Id)"
+			},
 			{
 				value: "gotoStory",
 				label: "Go to a story"
@@ -380,6 +380,10 @@ define( [
 		{
 			value: "setVariable",
 			label: "Set Variable Value"
+		},
+		{
+			value: "lockAll",
+			label: "Lock All Selections"
 		},
 		{
 			value: "unlockAll",
