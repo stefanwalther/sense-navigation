@@ -1,18 +1,9 @@
 'use strict';
-var gulp = require( 'gulp' );
 var senseGo = require( 'sense-go' );
+var gulp = senseGo.gulp;
 var path = require( 'path' );
 
-senseGo.init( gulp, function () {
-	gulp.task( 'all', gulp.series(
-		'bump:patch',
-		'build',
-		'release',
-		'git:add',
-		'git:commit',
-		'git:push',
-		'npm:publish'
-	) );
+senseGo.init( function () {
 	gulp.task( 'watch:build', function () {
 		gulp.watch(
 			['./src/**/*.*'],

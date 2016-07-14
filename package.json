@@ -1,36 +1,35 @@
 {
   "name": "sense-navigation",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
-  "devDependencies": {
-    "sense-extension-utils": "^0.3.1",
-    "sense-go": "^0.3.3",
-    "verb": "git://github.com/verbose/verb"
+  "keywords": [
+    "actions",
+    "bootstrap",
+    "button",
+    "navigation",
+    "qlik",
+    "qlik-sense",
+    "qlik-sense-visualization-extension",
+    "sense",
+    "sense",
+    "sheets"
+  ],
+  "bugs": {
+    "url": "https://github.com/stefanwalther/sense-navigation/issues"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "gulp build"
-  },
+  "license": "MIT",
+  "author": "Stefan Walther",
   "repository": {
     "type": "git",
     "url": "https://github.com/stefanwalther/sense-navigation"
   },
-  "keywords": [
-    "qlik",
-    "sense",
-    "qlik-sense",
-    "qlik-sense-visualization-extension",
-    "sense",
-    "navigation",
-    "sheets",
-    "actions",
-    "button",
-    "bootstrap"
-  ],
-  "author": "Stefan Walther",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/stefanwalther/sense-navigation/issues"
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "sense-extension-utils": "^0.3.0",
+    "verb": "git://github.com/verbose/verb"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",

@@ -4,46 +4,56 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
+		'core.utils/deferred',
 		'./lib/external/sense-extension-utils/extUtils',
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
-		
 
 		extUtils.addStyleToHeader( cssContent );
 		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		// Helper function to split numbers.
-		function splitToStringNum(str, sep) {
-			var a = str.split(sep);
-			for (var i = 0; i < a.length; i++) {
-				if (!isNaN(a[i])) {
-					a[i] = Number(a[i]);
+		function splitToStringNum ( str, sep ) {
+			var a = str.split( sep );
+			for ( var i = 0; i < a.length; i++ ) {
+				if ( !isNaN( a[i] ) ) {
+					a[i] = Number( a[i] );
 				}
 			}
 			return a;
 		}
-		
+
 		return {
 
 			definition: props,
 			support: {
-				canTakeSnapshot: false,
 				export: false,
-				exportData: false
+				exportData: false,
+				snapshot: false
 			},
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
-			getPreferredSize: function () {
-				console.log( 'getPreferredSize' , this);
-			},
-			controller: ['$scope', function ( $scope ) {
+			controller: ['$scope', '$element', function ( $scope, $element ) {
+
+				// Note: getPreferredSize is an undocumented method and not supported right now.
+				// this.getPreferredSize = function () {
+				// 	var $btn = this.$element.find('.btn');
+				// 	var size = {
+				// 		w: $btn.width(),
+				// 		h: $btn.height() + 7
+				// 	};
+				// 	var df = Deferred();
+				// 		df.resolve( size );
+				// 	return df.promise;
+				// };
+				
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
@@ -66,7 +76,6 @@ define( [
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
-							// console.log( url );
 							if ( !_.isEmpty( url ) ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
 									window.open( url );
@@ -103,6 +112,9 @@ define( [
 							case "clearAll":
 								app.clearAll();
 								break;
+							case "lockAll":
+								app.lockAll();
+								break;
 							case "unlockAll":
 								app.unlockAll();
 								break;
@@ -118,7 +130,7 @@ define( [
 								break;
 							case "selectValues":
 								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
-									var vals = splitToStringNum(val, ';');
+									var vals = splitToStringNum( val, ';' );
 									app.field( fld ).selectValues( vals, false );
 								}
 								break;
@@ -200,5 +212,4 @@ define( [
 			}]
 		};
 
-	} )
-;
+	} );

@@ -4,13 +4,14 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
+		'core.utils/deferred',
 		'./lib/external/sense-extension-utils/extUtils',
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
@@ -39,10 +40,20 @@ define( [
 			initialProperties: initProps,
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
-			getPreferredSize: function () {
-				// console.log( 'getPreferredSize' , this);
-			},
-			controller: ['$scope', function ( $scope ) {
+			controller: ['$scope', '$element', function ( $scope, $element ) {
+
+				// Note: getPreferredSize is an undocumented method and not supported right now.
+				// this.getPreferredSize = function () {
+				// 	var $btn = this.$element.find('.btn');
+				// 	var size = {
+				// 		w: $btn.width(),
+				// 		h: $btn.height() + 7
+				// 	};
+				// 	var df = Deferred();
+				// 		df.resolve( size );
+				// 	return df.promise;
+				// };
+				
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
