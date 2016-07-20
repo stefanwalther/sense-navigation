@@ -502,7 +502,7 @@ define( [
 		ref: "props.value1Desc",
 		label: "Define multiple values separated with a semi-colon (;).",
 		show: function ( data ) {
-			return valueDescEnabler.indexOf( data.props.actionBefore1) > -1;
+			return valueDescEnabler.indexOf( data.props.actionBefore1 ) > -1;
 		}
 	};
 	var value2Desc = {
@@ -511,10 +511,9 @@ define( [
 		ref: "props.value2Desc",
 		label: "Define multiple values separated with a semi-colon (;).",
 		show: function ( data ) {
-			return valueDescEnabler.indexOf( data.props.actionBefore2) > -1;
+			return valueDescEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
-
 
 	var bookmark1Enabler = ['applyBookmark'];
 	var bookmark1 = {
@@ -530,6 +529,44 @@ define( [
 		},
 		show: function ( data ) {
 			return bookmark1Enabler.indexOf( data.props.actionBefore1 ) > -1;
+		}
+	};
+
+	var actions = {
+		"type": "array",
+		"ref": "props.actionItems",
+		"label": "Actions",
+		"itemTitleRef": function( data ) {
+			var v = _.where(actionOptions, {value: data.actionType});
+			return (v && v.length > 0) ? v[0].label : data.actionType;
+		},
+		"allowAdd": true,
+		"allowRemove": true,
+		"addTranslation": "Add Item",
+		items: {
+			actionType: {
+				type: "string",
+				ref: "actionType",
+				component: "dropdown",
+				defaultValue: "none",
+				options: actionOptions,
+				action: function ( data ) {
+					//console.log( 'data', data );
+				}
+			},
+			bookmark: {
+				type: "string",
+				ref: "props.bookmark",
+				label: "Bookmark Id",
+				expression: "optional",
+				show: function ( data, foo, bar ) {
+					console.log('data', data);
+					console.log('foo', foo);
+					console.log('bar', bar);
+					return data.actionType === 'applyBookmark';
+				}
+			}
+
 		}
 	};
 
@@ -558,6 +595,7 @@ define( [
 					icons: buttonIcon
 				}
 			},
+			actionsList: actions,
 			behavior: {
 				type: "items",
 				label: "Navigation Behavior",
