@@ -533,16 +533,18 @@ define( [
 	};
 
 	var actions = {
-		"type": "array",
-		"ref": "props.actionItems",
-		"label": "Actions",
-		"itemTitleRef": function( data ) {
+		type: "array",
+		ref: "props.actionItems",
+		label: "Actions",
+		translation: "Actions",
+		itemTitleRef: function( data ) {
 			var v = _.where(actionOptions, {value: data.actionType});
 			return (v && v.length > 0) ? v[0].label : data.actionType;
 		},
-		"allowAdd": true,
-		"allowRemove": true,
-		"addTranslation": "Add Item",
+		allowAdd: true,
+		allowRemove: true,
+		addTranslation: "Add Item",
+		grouped: true,
 		items: {
 			actionType: {
 				type: "string",
