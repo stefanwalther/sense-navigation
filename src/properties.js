@@ -366,6 +366,14 @@ define( [
 			label: "Lock Field"
 		},
 		{
+			value: "selectExcluded",
+			label: "Select Excluded Values"
+		},
+		{
+			value: "selectAlternative",
+			label: "Select Alternative Values"
+		},
+		{
 			value: "selectandLockField",
 			label: "Select and Lock in Field"
 		},
@@ -415,7 +423,7 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField', 'selectAlternative', 'selectExcluded'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
@@ -533,6 +541,26 @@ define( [
 		}
 	};
 
+	var softLockEnabler = ['selectAlternative', 'selectExcluded'];
+	var softlock1 = {
+		type: "boolean",
+		label: "Soft Lock",
+		ref: "props.softlock1",
+		defaultValue: false,
+		show: function ( data ) {
+			return softLockEnabler.indexOf( data.props.actionBefore1 ) > -1;
+		}
+	};
+	var softlock2 = {
+		type: "boolean",
+		label: "Soft Lock",
+		ref: "props.softlock2",
+		defaultValue: false,
+		show: function ( data ) {
+			return softLockEnabler.indexOf( data.props.actionBefore2 ) > -1;
+		}
+	};
+
 	// ****************************************************************************************
 	// Setup
 	// ****************************************************************************************
@@ -580,12 +608,14 @@ define( [
 					value1: value1,
 					value1Desc: value1Desc,
 					bookmark1: bookmark1,
+					softlock1: softlock1,
 					actionBefore2: actionBefore2,
 					field2: field2,
 					variable2: variable2,
 					value2: value2,
 					value2Desc: value2Desc,
-					bookmark2: bookmark2
+					bookmark2: bookmark2,
+					softlock2: softlock2
 				}
 			}
 		}

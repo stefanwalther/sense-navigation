@@ -102,11 +102,14 @@ define( [
 
 					var fld = null;
 					var val = null;
+					var softlock = null;
 
 					for ( var i = 1; i <= 2; i++ ) {
 
 						fld = $scope.layout.props['field' + i];
 						val = $scope.layout.props['value' + i];
+						softlock = $scope.layout.props['softlock' + i];
+
 
 						switch ( $scope.layout.props['actionBefore' + i] ) {
 							case "clearAll":
@@ -121,6 +124,18 @@ define( [
 							case "clearField":
 								if ( !_.isEmpty( fld ) ) {
 									app.field( fld ).clear();
+								}
+								break;
+							case "selectAlternative":
+								console.log('selectAlternative', fld, softlock);
+								if ( !_.isEmpty( fld ) ) {
+									app.field( fld ).selectAlternative( softlock );
+								}
+								break;
+							case "selectExcluded":
+								console.log('selectExcluded', fld, softlock);
+								if ( !_.isEmpty( fld ) ) {
+									app.field( fld ).selectExcluded( softlock );
 								}
 								break;
 							case "selectField":

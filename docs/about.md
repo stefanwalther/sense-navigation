@@ -18,6 +18,8 @@ Furthermore ***sense-navigation*** offers the option to define **up to two basic
 * Unlock all selections
 * Select a value in a field
 * Select multiple values in a field
+* Select excluded values
+* Select alternative values
 * Set a variable value
 * Apply a bookmark
 * Select and lock field
