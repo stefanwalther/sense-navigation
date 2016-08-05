@@ -1,11 +1,12 @@
 {
   "name": "sense-navigation",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
     "bootstrap",
     "button",
+    "macros",
     "navigation",
     "qlik",
     "qlik-sense",
