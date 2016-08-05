@@ -53,6 +53,25 @@ define( [
 				// 		df.resolve( size );
 				// 	return df.promise;
 				// };
+
+				// Legacy
+				// console.log('$scope.layout.props.isActionsBefore', $scope.layout.props.isActionsBefore);
+				// if ($scope.layout.props.isActionsBefore) {
+				// 	if ($scope.layout.props.actionBefore1 && $scope.layout.props.actionBefore1.value !== 'none') {
+				// 		console.log('OK; convert it');
+				// 		if (!Array.isArray($scope.layout.props.actionItems)) {
+				// 			$scope.layout.props.actionItems = [];
+				// 		}
+				// 		var l = {
+				// 			actionType: $scope.layout.props.actionBefore1,
+				// 			bookmark: $scope.layout.props.bookmark1,
+				// 			field: $scope.layout.props.field1,
+				// 			value: $scope.layout.props.value1
+				// 		};
+				// 		console.log('l', l);
+				// 		$scope.layout.props.actionItems.push(l);
+				// 	}
+				// }
 				
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
@@ -203,7 +222,7 @@ define( [
 
 				$scope.checkQlikNavigation = function () {
 					if ( !qlik.navigation ) {
-						window.console.error( 'Capability API qlik.navigation is not supported in the current version of Qlik Sense' );
+						window.console.error( 'Capability API qlik.navigation is not supported in the current version of Qlik Sense.' );
 						return false;
 					}
 					return true;

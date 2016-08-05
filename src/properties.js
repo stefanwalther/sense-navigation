@@ -13,6 +13,8 @@ define( [
 	// ****************************************************************************************
 	// Helper Promises
 	// ****************************************************************************************
+
+	//Todo: Move to sense-extension-utils
 	var getBookmarkList = function () {
 		var defer = $q.defer();
 
@@ -28,6 +30,7 @@ define( [
 		return defer.promise;
 	};
 
+	//Todo: Move to sense-extension-utils
 	var getSheetList = function () {
 
 		var defer = $q.defer();
@@ -49,6 +52,7 @@ define( [
 		return defer.promise;
 	};
 
+	// Todo: Move to sense-extension-utils
 	var getStoryList = function () {
 
 		var defer = $q.defer();
@@ -415,14 +419,14 @@ define( [
 		options: actionOptions
 	};
 
-	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldLegacyEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var field1 = {
 		type: "string",
 		ref: "props.field1",
 		label: "Field",
 		expression: "optional",
 		show: function ( data ) {
-			return fieldEnabler.indexOf( data.props.actionBefore1 ) > -1;
+			return fieldLegacyEnabler.indexOf( data.props.actionBefore1 ) > -1;
 		}
 	};
 	var field2 = {
@@ -431,7 +435,7 @@ define( [
 		label: "Field",
 		expression: "optional",
 		show: function ( data ) {
-			return fieldEnabler.indexOf( data.props.actionBefore2 ) > -1;
+			return fieldLegacyEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
 
@@ -475,14 +479,14 @@ define( [
 		}
 	};
 
-	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
+	var valueLegacyEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var value1 = {
 		type: "string",
 		ref: "props.value1",
 		label: "Value",
 		expression: "optional",
 		show: function ( data ) {
-			return valueEnabler.indexOf( data.props.actionBefore1 ) > -1;
+			return valueLegacyEnabler.indexOf( data.props.actionBefore1 ) > -1;
 		}
 	};
 	var value2 = {
@@ -491,7 +495,7 @@ define( [
 		label: "Value",
 		expression: "optional",
 		show: function ( data ) {
-			return valueEnabler.indexOf( data.props.actionBefore2 ) > -1;
+			return valueLegacyEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
 
@@ -532,12 +536,16 @@ define( [
 		}
 	};
 
+	// n-actions
+	var bookmarkEnabler = ['applyBookmark'];
+	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var actions = {
 		type: "array",
 		ref: "props.actionItems",
 		label: "Actions",
-		itemTitleRef: function( data ) {
-			var v = _.where(actionOptions, {value: data.actionType});
+		itemTitleRef: function ( data ) {
+			var v = _.where( actionOptions, {value: data.actionType} );
 			return (v && v.length > 0) ? v[0].label : data.actionType;
 		},
 		allowAdd: true,
@@ -560,11 +568,30 @@ define( [
 				ref: "props.bookmark",
 				label: "Bookmark Id",
 				expression: "optional",
-				show: function ( data, foo, bar ) {
-					console.log('data', data);
-					console.log('foo', foo);
-					console.log('bar', bar);
-					return data.actionType === 'applyBookmark';
+				show: function ( data, defs ) {
+					console.log( '--' );
+					console.log( 'this', this );
+					console.log( 'data', data );
+					console.log( 'defs', defs );
+					return bookmarkEnabler.indexOf( _.findWhere( defs.layout.props.actionItems, {cId: data.cId} ).actionType ) > -1;
+				}
+			},
+			field: {
+				type: "string",
+				ref: "props.field",
+				label: "Field",
+				expression: "optional",
+				show: function ( data, defs ) {
+					return fieldEnabler.indexOf( _.findWhere( defs.layout.props.actionItems, {cId: data.cId} ).actionType ) > -1;
+				}
+			},
+			value: {
+				type: "string",
+				ref: "props.value",
+				label: "Value",
+				expression: "optional",
+				show: function ( data, defs ) {
+					return valueEnabler.indexOf( _.findWhere( defs.layout.props.actionItems, {cId: data.cId} ).actionType ) > -1;
 				}
 			}
 
