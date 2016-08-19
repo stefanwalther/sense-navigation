@@ -7,11 +7,10 @@ define( [
 		'core.utils/deferred',
 		'./lib/external/sense-extension-utils/extUtils',
 		'./properties',
-		'./initialproperties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, Deferred, extUtils, props, cssContent, ngTemplate ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
@@ -37,7 +36,7 @@ define( [
 				exportData: false,
 				snapshot: false
 			},
-			initialProperties: initProps,
+			initialProperties: {},
 			snapshot: {canTakeSnapshot: false},
 			template: ngTemplate,
 			controller: ['$scope', '$element', function ( $scope, $element ) {
