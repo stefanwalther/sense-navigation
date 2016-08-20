@@ -125,7 +125,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		ref: "props.buttonStyle",
-		label: "Style",
+		label: "Button style",
 		defaultValue: "default",
 		options: [
 			{
@@ -163,7 +163,7 @@ define( [
 	var buttonWidth = {
 		type: "boolean",
 		component: "buttongroup",
-		label: "Button Width",
+		label: "Button width",
 		ref: "props.fullWidth",
 		options: [
 			{
@@ -192,7 +192,7 @@ define( [
 
 	var buttonTextAlign = {
 		ref: "props.buttonTextAlign",
-		label: "Label Alignment",
+		label: "Label alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
@@ -218,6 +218,7 @@ define( [
 	var buttonAlignment = {
 		ref: "props.buttonAlignment",
 		type: "string",
+		label: "Button alignment",
 		component: "dropdown",
 		defaultValue: "top-left",
 		options: [
@@ -262,7 +263,7 @@ define( [
 
 	var buttonMultiLine = {
 		ref: "props.isButtonMultiLine",
-		label: "Multiline Label",
+		label: "Multiline label",
 		type: "boolean",
 		defaultValue: false
 	};
@@ -284,7 +285,7 @@ define( [
 
 	var navigationAction = {
 		ref: "props.navigationAction",
-		label: "Navigation Action",
+		label: "Navigation behavior after actions",
 		type: "string",
 		component: "dropdown",
 		default: "nextSheet",

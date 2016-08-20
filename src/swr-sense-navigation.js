@@ -53,7 +53,6 @@ define( [
 				// 	return df.promise;
 				// };
 
-
 				$scope.doNavigate = function () {
 
 					switch ( $scope.layout.props.navigationAction ) {
@@ -233,7 +232,10 @@ define( [
 
 				$scope.gotoSheet = function ( sheetId ) {
 					if ( $scope.checkQlikNavigation() && !_.isEmpty( sheetId ) ) {
-						qlik.navigation.gotoSheet( sheetId );
+						var r = qlik.navigation.gotoSheet( sheetId );
+						if ( !r.success ) {
+							window.console.error( r.errorMsg );
+						}
 					}
 				};
 
