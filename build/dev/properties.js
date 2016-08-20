@@ -1,4 +1,5 @@
 /*global define*/
+//Todo: Instead of using ng!, use the $inject solution, which is more aligned with AngularJS standards.
 define( [
 	'jquery',
 	'underscore',
@@ -13,6 +14,8 @@ define( [
 	// ****************************************************************************************
 	// Helper Promises
 	// ****************************************************************************************
+
+	//Todo: Move to sense-extension-utils
 	var getBookmarkList = function () {
 		var defer = $q.defer();
 
@@ -28,6 +31,7 @@ define( [
 		return defer.promise;
 	};
 
+	//Todo: Move to sense-extension-utils
 	var getSheetList = function () {
 
 		var defer = $q.defer();
@@ -49,6 +53,7 @@ define( [
 		return defer.promise;
 	};
 
+	// Todo: Move to sense-extension-utils
 	var getStoryList = function () {
 
 		var defer = $q.defer();
@@ -391,154 +396,21 @@ define( [
 		}
 	];
 
-	var actionBefore1 = {
-		type: "string",
-		component: "dropdown",
-		label: "First Action",
-		ref: "props.actionBefore1",
-		defaultValue: "none",
-		show: function ( data ) {
-			return data.props.isActionsBefore;
-		},
-		options: actionOptions
-	};
-
-	var actionBefore2 = {
-		type: "string",
-		component: "dropdown",
-		label: "Second Action",
-		ref: "props.actionBefore2",
-		defaultValue: "none",
-		show: function ( data ) {
-			return data.props.isActionsBefore && data.props.actionBefore1 !== 'none';
-		},
-		options: actionOptions
-	};
-
-	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
-	var field1 = {
-		type: "string",
-		ref: "props.field1",
-		label: "Field",
-		expression: "optional",
-		show: function ( data ) {
-			return fieldEnabler.indexOf( data.props.actionBefore1 ) > -1;
-		}
-	};
-	var field2 = {
-		type: "string",
-		ref: "props.field2",
-		label: "Field",
-		expression: "optional",
-		show: function ( data ) {
-			return fieldEnabler.indexOf( data.props.actionBefore2 ) > -1;
-		}
-	};
-
+	// ****************************************************************************************
+	// n-actions
+	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var bookmark1 = {
-		type: "string",
-		ref: "props.bookmark1",
-		label: "Bookmark Id",
-		expression: "optional",
-		show: function ( data ) {
-			return bookmarkEnabler.indexOf( data.props.actionBefore1 ) > -1;
-		}
-	};
-	var bookmark2 = {
-		type: "string",
-		ref: "props.bookmark2",
-		label: "Bookmark Id",
-		expression: "optional",
-		show: function ( data ) {
-			return bookmarkEnabler.indexOf( data.props.actionBefore2 ) > -1;
-		}
-	};
-
-	var variableEnabler = ['setVariable'];
-	var variable1 = {
-		type: "string",
-		ref: "props.variable1",
-		label: "Variable Name",
-		expression: "optional",
-		show: function ( data ) {
-			return variableEnabler.indexOf( data.props.actionBefore1 ) > -1
-		}
-	};
-	var variable2 = {
-		type: "string",
-		ref: "props.variable2",
-		label: "Variable Name",
-		expression: "optional",
-		show: function ( data ) {
-			return variableEnabler.indexOf( data.props.actionBefore2 ) > -1
-		}
-	};
-
+	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
-	var value1 = {
-		type: "string",
-		ref: "props.value1",
-		label: "Value",
-		expression: "optional",
-		show: function ( data ) {
-			return valueEnabler.indexOf( data.props.actionBefore1 ) > -1;
-		}
-	};
-	var value2 = {
-		type: "string",
-		ref: "props.value2",
-		label: "Value",
-		expression: "optional",
-		show: function ( data ) {
-			return valueEnabler.indexOf( data.props.actionBefore2 ) > -1;
-		}
-	};
-
 	var valueDescEnabler = ['selectValues'];
-	var value1Desc = {
-		type: "text",
-		component: "text",
-		ref: "props.value1Desc",
-		label: "Define multiple values separated with a semi-colon (;).",
-		show: function ( data ) {
-			return valueDescEnabler.indexOf( data.props.actionBefore1 ) > -1;
-		}
-	};
-	var value2Desc = {
-		type: "string",
-		component: "text",
-		ref: "props.value2Desc",
-		label: "Define multiple values separated with a semi-colon (;).",
-		show: function ( data ) {
-			return valueDescEnabler.indexOf( data.props.actionBefore2 ) > -1;
-		}
-	};
-
-	var bookmark1Enabler = ['applyBookmark'];
-	var bookmark1 = {
-		type: "string",
-		component: "dropdown",
-		label: "Select Bookmark",
-		ref: "props.bookmark1",
-		options: function () {
-			return getBookmarkList()
-				.then( function ( items ) {
-					return items;
-				} );
-		},
-		show: function ( data ) {
-			return bookmark1Enabler.indexOf( data.props.actionBefore1 ) > -1;
-		}
-	};
+	var variableEnabler = ['setVariable'];
 
 	var actions = {
 		type: "array",
 		ref: "props.actionItems",
 		label: "Actions",
-		translation: "Actions",
-		itemTitleRef: function( data ) {
-			var v = _.where(actionOptions, {value: data.actionType});
+		itemTitleRef: function ( data ) {
+			var v = _.where( actionOptions, {value: data.actionType} );
 			return (v && v.length > 0) ? v[0].label : data.actionType;
 		},
 		allowAdd: true,
@@ -558,14 +430,56 @@ define( [
 			},
 			bookmark: {
 				type: "string",
-				ref: "props.bookmark",
+				ref: "bookmark",
 				label: "Bookmark Id",
 				expression: "optional",
-				show: function ( data, foo, bar ) {
-					console.log('data', data);
-					console.log('foo', foo);
-					console.log('bar', bar);
-					return data.actionType === 'applyBookmark';
+				show: function ( data, defs ) {
+					// console.log( '--' );
+					// console.log( 'this', this );
+					// console.log( 'data', data );
+					// console.log( 'defs', defs );
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			field: {
+				type: "string",
+				ref: "field",
+				label: "Field",
+				expression: "optional",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && fieldEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			value: {
+				type: "string",
+				ref: "value",
+				label: "Value",
+				expression: "optional",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && valueEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			valueDesc: {
+				type: "text",
+				component: "text",
+				ref: "props.valueDesc",
+				label: "Define multiple values separated with a semi-colon (;).",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && valueDescEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			variable: {
+				type: "string",
+				ref: "props.variable1",
+				label: "Variable Name",
+				expression: "optional",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && variableEnabler.indexOf( def.actionType ) > -1;
 				}
 			}
 
@@ -607,25 +521,6 @@ define( [
 					sheetList: sheetList,
 					storyList: storyList,
 					websiteUrl: websiteUrl
-				}
-			},
-			actionsBefore: {
-				type: "items",
-				label: "Actions",
-				items: {
-					isActionsBefore: isActionsBefore,
-					actionBefore1: actionBefore1,
-					field1: field1,
-					variable1: variable1,
-					value1: value1,
-					value1Desc: value1Desc,
-					bookmark1: bookmark1,
-					actionBefore2: actionBefore2,
-					field2: field2,
-					variable2: variable2,
-					value2: value2,
-					value2Desc: value2Desc,
-					bookmark2: bookmark2
 				}
 			}
 		}
