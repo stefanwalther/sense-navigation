@@ -378,6 +378,11 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "selectExcluded",
+			label: "Select Excluded",
+			group: "selection"
+		},
+		{
 			value: "selectField",
 			label: "Select Value in Field",
 			group: "selection"
@@ -408,11 +413,11 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['selectAlternative', 'selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['selectAlternative', 'selectExcluded', 'selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
-	var overwriteLockedEnabler = ['selectAlternative'];
+	var overwriteLockedEnabler = ['selectAlternative', 'selectExcluded'];
 
 	var actionGroup = {
 		ref: "actionGroup",
