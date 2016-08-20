@@ -368,6 +368,11 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "selectAlternative",
+			label: "Select Alternatives",
+			group: "selection"
+		},
+		{
 			value: "selectandLockField",
 			label: "Select and Lock in Field",
 			group: "selection"
@@ -403,10 +408,11 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['selectAlternative', 'selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
+	var overwriteLockedEnabler = ['selectAlternative'];
 
 	var actionGroup = {
 		ref: "actionGroup",
@@ -499,6 +505,16 @@ define( [
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && variableEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			overwriteLocked: {
+				type: "boolean",
+				ref: "softLock",
+				label: "Overwrite locked selections",
+				defaultValue: false,
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && overwriteLockedEnabler.indexOf( def.actionType ) > -1;
 				}
 			}
 

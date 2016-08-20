@@ -112,9 +112,7 @@ define( [
 
 					var app = qlik.currApp();
 
-					var fld = null;
-					var val = null;
-					var actionType = null;
+					var fld, val, actionType, softLock;
 
 					if ( $scope.layout.props && $scope.layout.props.actionItems ) {
 
@@ -123,6 +121,7 @@ define( [
 							actionType = $scope.layout.props.actionItems[i].actionType;
 							fld = $scope.layout.props.actionItems[i].field;
 							val = $scope.layout.props.actionItems[i].value;
+							softLock = $scope.layout.props.actionItems[i].softLock;
 
 							switch ( actionType ) {
 								case "applyBookmark":
@@ -157,6 +156,10 @@ define( [
 										app.field( fld ).lock()
 									}
 									break;
+								case "selectAlternative":
+									if (!_.isEmpty( fld) ) {
+										app.field( fld).selectAlternative( (softLock) ? softLock : false);
+									}
 								case "selectandLockField":
 									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
 										app.field( fld ).selectMatch( val, true );
