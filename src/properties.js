@@ -25,7 +25,7 @@ define( [
 					return {
 						value: item.qInfo.qId,
 						label: item.qData.title
-					}
+					};
 				} )
 			);
 		} );
@@ -121,7 +121,7 @@ define( [
 	// ****************************************************************************************
 	// Layout
 	// ****************************************************************************************
-	var style = {
+	var buttonStyle = {
 		type: "string",
 		component: "dropdown",
 		ref: "props.buttonStyle",
@@ -411,6 +411,11 @@ define( [
 			group: "bookmark"
 		},
 		{
+			value: "replaceBookmark",
+			label: "Replace Bookmark",
+			group: "bookmark"
+		},
+		{
 			value: "clearAll",
 			label: "Clear All Selections",
 			group: "selection"
@@ -556,11 +561,13 @@ define( [
 				defaultValue: "none",
 				options: actionOptions
 			},
-			bookmark: {
+			bookmarkList: {
 				type: "string",
-				ref: "bookmark",
-				label: "Bookmark Id",
-				expression: "optional",
+				ref: "selectedBookmark",
+				label: "Select bookmark",
+				component: "dropdown",
+				defaultValue: "none",
+				options: getBookmarkList(),
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
@@ -638,7 +645,7 @@ define( [
 				label: "Layout",
 				items: {
 					label: buttonLabel,
-					style: style,
+					style: buttonStyle,
 					buttonWidth: buttonWidth,
 					buttonAlignment: buttonAlignment,
 					buttonTextAlign: buttonTextAlign,
