@@ -1,6 +1,3 @@
-import:
-  files:
-    - ["./node_modules/sense-extension-utils/dist/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]
 wbfolder:
   enabled: false
 localExtensionDir: ""
