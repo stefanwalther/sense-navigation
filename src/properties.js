@@ -368,6 +368,11 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "lockAll",
+			label: "Lock All Selections",
+			group: "selection"
+		},
+		{
 			value: "lockField",
 			label: "Lock Field",
 			group: "selection"
@@ -413,8 +418,8 @@ define( [
 			group: "variables"
 		},
 		{
-			value: "lockAll",
-			label: "Lock All Selections",
+			value: "toggleSelect",
+			label: "Toggle Field Selection",
 			group: "selection"
 		},
 		{
@@ -428,11 +433,11 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['clearField', 'clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'lockField'];
-	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField'];
+	var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect'];
+	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
-	var overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible'];
+	var overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
 	var actionGroup = {
 		ref: "actionGroup",

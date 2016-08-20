@@ -165,8 +165,8 @@ define( [
 									}
 									break;
 								case "selectAlternative":
-									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectAlternative( softLock );
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectAlternative( softLock );
 									}
 									break;
 								case "selectAndLockField":
@@ -176,8 +176,8 @@ define( [
 									}
 									break;
 								case "selectExcluded":
-									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectExcluded( softLock );
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectExcluded( softLock );
 									}
 									break;
 								case "selectField":
@@ -192,13 +192,18 @@ define( [
 									}
 									break;
 								case "selectPossible":
-									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectPossible( softLock );
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectPossible( softLock );
 									}
 									break;
 								case "setVariable":
 									if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
 										$scope.setVariableContent( $scope.layout.props['variable' + i], val );
+									}
+									break;
+								case "toggleSelect":
+									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+										app.field( fld ).toggleSelect( val, softLock );
 									}
 									break;
 								case "unlockAll":
