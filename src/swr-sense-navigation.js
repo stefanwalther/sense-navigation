@@ -159,12 +159,17 @@ define( [
 										app.field( fld ).lock()
 									}
 									break;
+								case "selectAll":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectAll( softLock )
+									}
+									break;
 								case "selectAlternative":
 									if (!_.isEmpty( fld) ) {
 										app.field( fld).selectAlternative( softLock );
 									}
 									break;
-								case "selectandLockField":
+								case "selectAndLockField":
 									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
 										app.field( fld ).selectMatch( val, true );
 										app.field( fld ).lock()
