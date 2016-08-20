@@ -3,12 +3,12 @@ define( [
 	'angular',
 	'underscore',
 	'qlik',
-	'./lib/external/sense-extension-utils/extUtils'
-], function ( angular, _, qlik, extUtils, $q, $http ) {
+	'./lib/external/sense-extension-utils/extUtils',
+	'text!./lib/data/icons-fa.json'
+], function ( angular, _, qlik, extUtils, iconListRaw ) {
 
 	var $injector = angular.injector( ['ng'] );
 	var $q = $injector.get( "$q" );
-	var $http = $injector.get( "$http" );
 
 	var app = qlik.currApp();
 
@@ -24,7 +24,7 @@ define( [
 			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
 					return {
 						value: item.qInfo.qId,
-						label: item.qData.title //Todo: Remove the .qvf
+						label: item.qData.title
 					}
 				} )
 			);
@@ -97,34 +97,25 @@ define( [
 	};
 
 	var getIcons = function () {
-		var defer = $q.defer();
+		var iconList = JSON.parse( iconListRaw );
+		var sortedIcons = _.sortBy( iconList.icons, function ( o ) {
+			return o.name;
+		} );
+		var propDef = [];
+		propDef.push( {
+			"value": "",
+			"label": ">> No icon <<"
+		} );
 
-		$http.get( extUtils.getExtensionPath( 'swr-sense-navigation' ) + '/lib/data/icons-fa.json' )
-			.then( function ( res ) {
-
-				var sortedIcons = _.sortBy( res.data.buttonIcons, function ( o ) {
-					return o.name;
-				} );
-
-				var propDef = [];
-				propDef.push( {
-					"value": "",
-					"label": ">> No icon <<"
-				} );
-
-				sortedIcons.forEach( function ( icon ) {
-					propDef.push(
-						{
-							"value": icon.id,
-							"label": icon.name
-						}
-					)
-				} );
-				defer.resolve( propDef );
-
-			} );
-
-		return defer.promise;
+		sortedIcons.forEach( function ( icon ) {
+			propDef.push(
+				{
+					"value": icon.id,
+					"label": icon.name
+				}
+			)
+		} );
+		return propDef;
 	};
 
 	// ****************************************************************************************
@@ -195,9 +186,7 @@ define( [
 		label: "Icon",
 		ref: "props.buttonIcon",
 		options: function () {
-			return getIcons().then( function ( items ) {
-				return items;
-			} );
+			return getIcons();
 		}
 	};
 

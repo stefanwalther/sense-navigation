@@ -53,28 +53,7 @@ define( [
 				// 	return df.promise;
 				// };
 
-				// Legacy - Convert old props to the new array format
-				// 	if ($scope.layout.props.actionBefore1 && $scope.layout.props.actionBefore1.value !== 'none') {
-				// 		console.log('OK; convert it');
-				// 		console.log('$scope.layout', $scope.layout);
-				// 		if (!Array.isArray($scope.layout.props.actionItems)) {
-				// 			$scope.layout.props.actionItems = [];
-				// 		}
-				// 		var l = {
-				// 			cId: $scope.layout,
-				// 			actionType: $scope.layout.props.actionBefore1,
-				// 			bookmark: $scope.layout.props.bookmark1,
-				// 			field: $scope.layout.props.field1,
-				// 			value: $scope.layout.props.value1
-				// 		};
-				// 		console.log('l', l);
-				// 		$scope.layout.props.actionItems.push(l);
-				// 	}
 
-				$scope.textAlignmentStyle = {
-					"text-align": $scope.layout.props.buttonTextAlign
-				};
-				console.log($scope.textAlignmentStyle);
 				$scope.doNavigate = function () {
 
 					switch ( $scope.layout.props.navigationAction ) {
