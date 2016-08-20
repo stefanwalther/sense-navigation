@@ -185,9 +185,7 @@ define( [
 		component: "dropdown",
 		label: "Icon",
 		ref: "props.buttonIcon",
-		options: function () {
-			return getIcons();
-		}
+		options: getIcons()
 	};
 
 	var buttonTextAlign = {
@@ -273,9 +271,6 @@ define( [
 		label: "Label",
 		type: "string",
 		expression: "optional",
-		show: function () {
-			return true;
-		},
 		defaultValue: "My Button"
 	};
 
@@ -345,15 +340,7 @@ define( [
 		component: "dropdown",
 		label: "Select App",
 		ref: "props.selectedApp",
-		options: function () {
-			return getAppList()
-				.then( function ( items ) {
-					return items;
-				} )
-				.catch( function ( err ) {
-					window.console.log( err );
-				} );
-		},
+		options: getAppList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'openApp';
 		}
@@ -364,11 +351,7 @@ define( [
 		component: "dropdown",
 		label: "Select Sheet",
 		ref: "props.selectedSheet",
-		options: function () {
-			return getSheetList().then( function ( items ) {
-				return items;
-			} );
-		},
+		options: getSheetList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheet';
 		}
@@ -379,11 +362,7 @@ define( [
 		component: "dropdown",
 		label: "Select Story",
 		ref: "props.selectedStory",
-		options: function () {
-			return getStoryList().then( function ( items ) {
-				return items;
-			} );
-		},
+		options: getStoryList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoStory'
 		}
