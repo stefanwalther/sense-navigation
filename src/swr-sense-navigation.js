@@ -14,7 +14,7 @@ define( [
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
-		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
+		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		// Helper function to split numbers.
@@ -75,12 +75,6 @@ define( [
 				$scope.doNavigate = function () {
 
 					switch ( $scope.layout.props.navigationAction ) {
-						case "nextSheet":
-							$scope.nextSheet();
-							break;
-						case "prevSheet":
-							$scope.prevSheet();
-							break;
 						case "gotoSheet":
 							$scope.gotoSheet( $scope.layout.props.selectedSheet );
 							break;
@@ -90,9 +84,8 @@ define( [
 						case "gotoStory":
 							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
-						case "openApp":
-							console.log('Open', $scope.layout.props.selectedApp);
-							qlik.openApp( $scope.layout.props.selectedApp );
+						case "nextSheet":
+							$scope.nextSheet();
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
@@ -102,6 +95,19 @@ define( [
 								} else {
 									window.open( 'http://' + url );
 								}
+							}
+							break;
+						case "prevSheet":
+							$scope.prevSheet();
+							break;
+						// case "openApp":
+						// 	console.log('Open', $scope.layout.props.selectedApp);
+						// 	qlik.openApp( $scope.layout.props.selectedApp );
+						// 	break;
+						case "switchToEdit":
+							var result = qlik.navigation.setMode( qlik.navigation.EDIT );
+							if ( !result.success ) {
+								window.console.error( result.errorMsg );
 							}
 							break;
 						default:

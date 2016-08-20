@@ -293,6 +293,10 @@ define( [
 			{
 				label: "Open website",
 				value: "openWebsite"
+			},
+			{
+				label: "Switch to Edit Mode",
+				value: "switchToEdit"
 			}
 			// ,
 			// {
