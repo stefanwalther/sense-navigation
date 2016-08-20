@@ -10,3 +10,7 @@ localExtensionDir: ""
 deployment:
   toLocal:
     enabled: false
+watch:
+  - "./src/**/*.*"
+  - "./node_modules/sense-extension-utils/dist/**/*.*"
+
