@@ -10,7 +10,7 @@ define( [
 	// Helper Promises
 	// ****************************************************************************************
 
-	function getIcons() {
+	function getIcons () {
 		var iconList = JSON.parse( iconListRaw );
 		var propDef = [];
 		propDef.push( {
@@ -26,9 +26,9 @@ define( [
 				}
 			)
 		} );
-		return _.sortBy(propDef, function( item) {
+		return _.sortBy( propDef, function ( item ) {
 			return item.label;
-		});
+		} );
 	}
 
 	// ****************************************************************************************
@@ -464,6 +464,26 @@ define( [
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
+			fieldList: {
+				type: "string",
+				ref: "selectedField",
+				component: "dropdown",
+				label: "Select field",
+				defaultValue: "",
+				options: function () {
+					return ppHelper.getFieldList().then( function ( fieldList ) {
+						fieldList.splice( 0, 0, {
+							value: "by-expr",
+							label: ">> Define field by expression <<"
+						} );
+						return fieldList;
+					} )
+				},
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && fieldEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
 			field: {
 				type: "string",
 				ref: "field",
@@ -471,7 +491,7 @@ define( [
 				expression: "optional",
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
-					return def && fieldEnabler.indexOf( def.actionType ) > -1;
+					return def && fieldEnabler.indexOf( def.actionType ) > -1 && def.selectedField === 'by-expr';
 				}
 			},
 			value: {
