@@ -102,7 +102,7 @@ define( [
 		$http.get( extUtils.getExtensionPath( 'swr-sense-navigation' ) + '/lib/data/icons-fa.json' )
 			.then( function ( res ) {
 
-				var sortedIcons = _.sortBy( res.data.icons, function ( o ) {
+				var sortedIcons = _.sortBy( res.data.buttonIcons, function ( o ) {
 					return o.name;
 				} );
 
@@ -189,7 +189,7 @@ define( [
 		defaultValue: false
 	};
 
-	var buttonIcon = {
+	var buttonIcons = {
 		type: "string",
 		component: "dropdown",
 		label: "Icon",
@@ -201,9 +201,9 @@ define( [
 		}
 	};
 
-	var buttonAlign = {
-		ref: "props.buttonAlign",
-		label: "Alignment",
+	var buttonTextAlign = {
+		ref: "props.buttonTextAlign",
+		label: "Label Alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
@@ -222,26 +222,15 @@ define( [
 			}
 		],
 		show: function ( data ) {
-			return data.props.fullWidth === false;
+			return data.props.fullWidth;
 		}
 	};
 
 	var buttonMultiLine = {
 		ref: "props.isButtonMultiLine",
-		label: "Multiline",
+		label: "Multiline Label",
 		type: "boolean",
-		component: "switch",
-		defaultValue: false,
-		options: [
-			{
-				value: true,
-				label: "Enabled"
-			},
-			{
-				value: false,
-				label: "Disabled"
-			}
-		]
+		defaultValue: false
 	};
 
 	var buttonLabel = {
@@ -616,9 +605,9 @@ define( [
 					label: buttonLabel,
 					style: style,
 					buttonWidth: buttonWidth,
-					align: buttonAlign,
+					buttonTextAlign: buttonTextAlign,
 					buttonMultiLine: buttonMultiLine,
-					icons: buttonIcon
+					buttonIcons: buttonIcons
 				}
 			},
 			actionsList: actions,

@@ -71,7 +71,10 @@ define( [
 				// 		$scope.layout.props.actionItems.push(l);
 				// 	}
 
-				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
+				$scope.textAlignmentStyle = {
+					"text-align": $scope.layout.props.buttonTextAlign
+				};
+				console.log($scope.textAlignmentStyle);
 				$scope.doNavigate = function () {
 
 					switch ( $scope.layout.props.navigationAction ) {
