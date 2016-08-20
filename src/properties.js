@@ -390,11 +390,11 @@ define( [
 			label: "Apply Bookmark",
 			group: "bookmark"
 		},
-		{
-			value: "replaceBookmark",
-			label: "Replace Bookmark",
-			group: "bookmark"
-		},
+		// {
+		// 	value: "replaceBookmark",
+		// 	label: "Replace Bookmark",
+		// 	group: "bookmark"
+		// },
 		{
 			value: "clearAll",
 			label: "Clear All Selections",
@@ -491,7 +491,7 @@ define( [
 	// ****************************************************************************************
 	// n-actions
 	// ****************************************************************************************
-	var bookmarkEnabler = ['applyBookmark'];
+	var bookmarkEnabler = ['applyBookmark', 'replaceBookmark'];
 	var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
 	var valueDescEnabler = ['selectValues'];

@@ -151,6 +151,11 @@ define( [
 										app.field( fld ).lock()
 									}
 									break;
+								case "replaceBookmark":
+									if ( !_.isEmpty( bookmark ) ) {
+										app.bookmark.apply( bookmark );
+									}
+									break;
 								case "selectAll":
 									if ( !_.isEmpty( fld ) ) {
 										app.field( fld ).selectAll( softLock )
