@@ -1,4 +1,4 @@
-/*global define*/
+/*global window,define*/
 define( [
 	'angular',
 	'underscore',
@@ -24,11 +24,28 @@ define( [
 			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
 					return {
 						value: item.qInfo.qId,
-						label: item.qData.title
+						label: item.qData.title //Todo: Remove the .qvf
 					}
 				} )
 			);
 		} );
+		return defer.promise;
+	};
+
+	var getAppList = function () {
+		var defer = $q.defer();
+
+		qlik.getAppList( function ( items ) {
+			console.log( 'appList', items );
+			defer.resolve( items.map( function ( item ) {
+					return {
+						value: item.qDocId,
+						label: item.qTitle
+					}
+				} )
+			);
+		} );
+
 		return defer.promise;
 	};
 
@@ -277,6 +294,11 @@ define( [
 				label: "Open website",
 				value: "openWebsite"
 			}
+			// ,
+			// {
+			// 	label: "Open app",
+			// 	value: "openApp"
+			// }
 		]
 	};
 
@@ -287,6 +309,25 @@ define( [
 		expression: "optional",
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheetById';
+		}
+	};
+
+	var appList = {
+		type: "string",
+		component: "dropdown",
+		label: "Select App",
+		ref: "props.selectedApp",
+		options: function () {
+			return getAppList()
+				.then( function ( items ) {
+					return items;
+				} )
+				.catch( function ( err ) {
+					window.console.log( err );
+				} );
+		},
+		show: function ( data ) {
+			return data.props.navigationAction === 'openApp';
 		}
 	};
 
@@ -334,8 +375,6 @@ define( [
 	// ****************************************************************************************
 	// Action-Group
 	// ****************************************************************************************
-
-
 
 	var actionOptions = [
 		{
@@ -587,7 +626,8 @@ define( [
 					sheetId: sheetId,
 					sheetList: sheetList,
 					storyList: storyList,
-					websiteUrl: websiteUrl
+					websiteUrl: websiteUrl,
+					appList: appList
 				}
 			}
 		}

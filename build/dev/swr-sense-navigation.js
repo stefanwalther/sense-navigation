@@ -90,6 +90,10 @@ define( [
 						case "gotoStory":
 							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
+						case "openApp":
+							console.log('Open', $scope.layout.props.selectedApp);
+							qlik.openApp( $scope.layout.props.selectedApp );
+							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
@@ -159,20 +163,25 @@ define( [
 										app.field( fld ).lock()
 									}
 									break;
-								case "selectAlternative":
-									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectAlternative( softLock );
+								case "selectAll":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectAll( softLock )
 									}
 									break;
-								case "selectandLockField":
+								case "selectAlternative":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectAlternative( softLock );
+									}
+									break;
+								case "selectAndLockField":
 									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
 										app.field( fld ).selectMatch( val, true );
 										app.field( fld ).lock()
 									}
 									break;
 								case "selectExcluded":
-									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectExcluded( softLock );
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectExcluded( softLock );
 									}
 									break;
 								case "selectField":
@@ -186,20 +195,33 @@ define( [
 										app.field( fld ).selectValues( vals, false );
 									}
 									break;
+								case "selectPossible":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).selectPossible( softLock );
+									}
+									break;
 								case "setVariable":
 									if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
 										$scope.setVariableContent( $scope.layout.props['variable' + i], val );
 									}
 									break;
+								case "toggleSelect":
+									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+										app.field( fld ).toggleSelect( val, softLock );
+									}
+									break;
 								case "unlockAll":
 									app.unlockAll();
 									break;
+								case "unlockField":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).unlock();
+									}
 								default:
 									break;
 							}
 						}
 					}
-
 				};
 
 				$scope.go = function () {

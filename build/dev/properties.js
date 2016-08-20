@@ -1,13 +1,14 @@
-/*global define*/
-//Todo: Instead of using ng!, use the $inject solution, which is more aligned with AngularJS standards.
+/*global window,define*/
 define( [
-	'jquery',
+	'angular',
 	'underscore',
 	'qlik',
-	'./lib/external/sense-extension-utils/extUtils',
-	'ng!$q',
-	'ng!$http'
-], function ( $, _, qlik, extUtils, $q, $http ) {
+	'./lib/external/sense-extension-utils/extUtils'
+], function ( angular, _, qlik, extUtils, $q, $http ) {
+
+	var $injector = angular.injector( ['ng'] );
+	var $q = $injector.get( "$q" );
+	var $http = $injector.get( "$http" );
 
 	var app = qlik.currApp();
 
@@ -23,11 +24,28 @@ define( [
 			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
 					return {
 						value: item.qInfo.qId,
-						label: item.qData.title
+						label: item.qData.title //Todo: Remove the .qvf
 					}
 				} )
 			);
 		} );
+		return defer.promise;
+	};
+
+	var getAppList = function () {
+		var defer = $q.defer();
+
+		qlik.getAppList( function ( items ) {
+			console.log( 'appList', items );
+			defer.resolve( items.map( function ( item ) {
+					return {
+						value: item.qDocId,
+						label: item.qTitle
+					}
+				} )
+			);
+		} );
+
 		return defer.promise;
 	};
 
@@ -276,6 +294,11 @@ define( [
 				label: "Open website",
 				value: "openWebsite"
 			}
+			// ,
+			// {
+			// 	label: "Open app",
+			// 	value: "openApp"
+			// }
 		]
 	};
 
@@ -286,6 +309,25 @@ define( [
 		expression: "optional",
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheetById';
+		}
+	};
+
+	var appList = {
+		type: "string",
+		component: "dropdown",
+		label: "Select App",
+		ref: "props.selectedApp",
+		options: function () {
+			return getAppList()
+				.then( function ( items ) {
+					return items;
+				} )
+				.catch( function ( err ) {
+					window.console.log( err );
+				} );
+		},
+		show: function ( data ) {
+			return data.props.navigationAction === 'openApp';
 		}
 	};
 
@@ -334,8 +376,6 @@ define( [
 	// Action-Group
 	// ****************************************************************************************
 
-
-
 	var actionOptions = [
 		{
 			value: "applyBookmark",
@@ -368,8 +408,18 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "lockAll",
+			label: "Lock All",
+			group: "selection"
+		},
+		{
 			value: "lockField",
 			label: "Lock Field",
+			group: "selection"
+		},
+		{
+			value: "selectAll",
+			label: "Select All Values in Field",
 			group: "selection"
 		},
 		{
@@ -378,7 +428,7 @@ define( [
 			group: "selection"
 		},
 		{
-			value: "selectandLockField",
+			value: "selectAndLockField",
 			label: "Select and Lock in Field",
 			group: "selection"
 		},
@@ -393,6 +443,11 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "selectPossible",
+			label: "Select Possible Values in Field",
+			group: "selection"
+		},
+		{
 			value: "selectValues",
 			label: "Select Multiple Values in Field",
 			group: "selection"
@@ -403,14 +458,20 @@ define( [
 			group: "variables"
 		},
 		{
-			value: "lockAll",
-			label: "Lock All Selections",
+			value: "toggleSelect",
+			label: "Toggle Field Selection",
 			group: "selection"
 		},
 		{
 			value: "unlockAll",
-			label: "Unlock All Selections",
+			label: "Unlock All",
 			group: "selection"
+		},
+		{
+			value: "unlockField",
+			label: "Unlock Field",
+			group: "selection"
+
 		}
 	];
 
@@ -418,11 +479,11 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['clearField', 'clearOther', 'selectAlternative', 'selectExcluded', 'selectField', 'selectValues', 'selectandLockField', 'lockField'];
-	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
+	var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
+	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
-	var overwriteLockedEnabler = ['clearOther', 'selectAlternative', 'selectExcluded'];
+	var overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
 	var actionGroup = {
 		ref: "actionGroup",
@@ -565,7 +626,8 @@ define( [
 					sheetId: sheetId,
 					sheetList: sheetList,
 					storyList: storyList,
-					websiteUrl: websiteUrl
+					websiteUrl: websiteUrl,
+					appList: appList
 				}
 			}
 		}

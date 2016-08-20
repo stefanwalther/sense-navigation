@@ -90,6 +90,10 @@ define( [
 						case "gotoStory":
 							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
+						case "openApp":
+							console.log('Open', $scope.layout.props.selectedApp);
+							qlik.openApp( $scope.layout.props.selectedApp );
+							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
