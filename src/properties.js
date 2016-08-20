@@ -215,6 +215,51 @@ define( [
 		}
 	};
 
+	var buttonAlignment = {
+		ref: "props.buttonAlignment",
+		type: "string",
+		component: "dropdown",
+		defaultValue: "top-left",
+		options: [
+			{
+				label: "Top left",
+				value: "top-left"
+			},
+			{
+				label: "Top middle",
+				value: "top-middle"
+			},
+			{
+				label: "Top right",
+				value: "top-right"
+			},
+			{
+				label: "Left middle",
+				value: "left-middle"
+			},
+			{
+				label: "Centered",
+				value: "centered"
+			},
+			{
+				label: "Right middle",
+				value: "right-middle"
+			},
+			{
+				label: "Bottom left",
+				value: "bottom-left"
+			},
+			{
+				label: "Bottom middle",
+				value: "bottom-middle"
+			},
+			{
+				label: "Bottom right",
+				value: "bottom-right"
+			}
+		]
+	};
+
 	var buttonMultiLine = {
 		ref: "props.isButtonMultiLine",
 		label: "Multiline Label",
@@ -594,6 +639,7 @@ define( [
 					label: buttonLabel,
 					style: style,
 					buttonWidth: buttonWidth,
+					buttonAlignment: buttonAlignment,
 					buttonTextAlign: buttonTextAlign,
 					buttonMultiLine: buttonMultiLine,
 					buttonIcons: buttonIcons
