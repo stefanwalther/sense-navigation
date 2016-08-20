@@ -17,6 +17,7 @@ define( [
 	// ****************************************************************************************
 
 	//Todo: Move to sense-extension-utils
+	// Todo: Add sorting for the list of bookmarks
 	var getBookmarkList = function () {
 		var defer = $q.defer();
 
@@ -32,11 +33,11 @@ define( [
 		return defer.promise;
 	};
 
+	// Todo: probablly easier if we added some sorting for the apps
 	var getAppList = function () {
 		var defer = $q.defer();
 
 		qlik.getAppList( function ( items ) {
-			console.log( 'appList', items );
 			defer.resolve( items.map( function ( item ) {
 					return {
 						value: item.qDocId,
@@ -50,6 +51,7 @@ define( [
 	};
 
 	//Todo: Move to sense-extension-utils
+	//Todo: Check if sorting really works by qData.rank
 	var getSheetList = function () {
 
 		var defer = $q.defer();
@@ -98,16 +100,13 @@ define( [
 
 	var getIcons = function () {
 		var iconList = JSON.parse( iconListRaw );
-		var sortedIcons = _.sortBy( iconList.icons, function ( o ) {
-			return o.name;
-		} );
 		var propDef = [];
 		propDef.push( {
 			"value": "",
 			"label": ">> No icon <<"
 		} );
 
-		sortedIcons.forEach( function ( icon ) {
+		iconList.forEach( function ( icon ) {
 			propDef.push(
 				{
 					"value": icon.id,
@@ -115,7 +114,9 @@ define( [
 				}
 			)
 		} );
-		return propDef;
+		return _.sortBy( propDef, function( item) {
+			return item.label;
+		});
 	};
 
 	// ****************************************************************************************
@@ -562,6 +563,16 @@ define( [
 					return def && fieldEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
+			variable: {
+				type: "string",
+				ref: "variable",
+				label: "Variable Name",
+				expression: "optional",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && variableEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
 			value: {
 				type: "string",
 				ref: "value",
@@ -580,16 +591,6 @@ define( [
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && valueDescEnabler.indexOf( def.actionType ) > -1;
-				}
-			},
-			variable: {
-				type: "string",
-				ref: "variable",
-				label: "Variable Name",
-				expression: "optional",
-				show: function ( data, defs ) {
-					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
-					return def && variableEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
 			overwriteLocked: {
