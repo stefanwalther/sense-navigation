@@ -209,12 +209,15 @@ define( [
 								case "unlockAll":
 									app.unlockAll();
 									break;
+								case "unlockField":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).unlock();
+									}
 								default:
 									break;
 							}
 						}
 					}
-
 				};
 
 				$scope.go = function () {
