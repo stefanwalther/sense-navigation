@@ -1,13 +1,14 @@
 /*global define*/
-//Todo: Instead of using ng!, use the $inject solution, which is more aligned with AngularJS standards.
 define( [
-	'jquery',
+	'angular',
 	'underscore',
 	'qlik',
-	'./lib/external/sense-extension-utils/extUtils',
-	'ng!$q',
-	'ng!$http'
-], function ( $, _, qlik, extUtils, $q, $http ) {
+	'./lib/external/sense-extension-utils/extUtils'
+], function ( angular, _, qlik, extUtils, $q, $http ) {
+
+	var $injector = angular.injector( ['ng'] );
+	var $q = $injector.get( "$q" );
+	var $http = $injector.get( "$http" );
 
 	var app = qlik.currApp();
 
@@ -369,7 +370,7 @@ define( [
 		},
 		{
 			value: "lockAll",
-			label: "Lock All Selections",
+			label: "Lock All",
 			group: "selection"
 		},
 		{
@@ -424,7 +425,7 @@ define( [
 		},
 		{
 			value: "unlockAll",
-			label: "Unlock All Selections",
+			label: "Unlock All",
 			group: "selection"
 		},
 		{
