@@ -1,14 +1,11 @@
 /*global window,define*/
 define( [
-	'angular',
 	'underscore',
 	'qlik',
-	'./lib/external/sense-extension-utils/extUtils',
+	'./lib/external/sense-extension-utils/pp-helper',
 	'text!./lib/data/icons-fa.json'
-], function ( angular, _, qlik, extUtils, iconListRaw ) {
+], function ( _, qlik, ppHelper, iconListRaw ) {
 
-	var $injector = angular.injector( ['ng'] );
-	var $q = $injector.get( "$q" );
 
 	var app = qlik.currApp();
 
@@ -16,89 +13,7 @@ define( [
 	// Helper Promises
 	// ****************************************************************************************
 
-	//Todo: Move to sense-extension-utils
-	// Todo: Add sorting for the list of bookmarks
-	var getBookmarkList = function () {
-		var defer = $q.defer();
-
-		app.getList( 'BookmarkList', function ( items ) {
-			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
-					return {
-						value: item.qInfo.qId,
-						label: item.qData.title
-					};
-				} )
-			);
-		} );
-		return defer.promise;
-	};
-
-	// Todo: probablly easier if we added some sorting for the apps
-	var getAppList = function () {
-		var defer = $q.defer();
-
-		qlik.getAppList( function ( items ) {
-			defer.resolve( items.map( function ( item ) {
-					return {
-						value: item.qDocId,
-						label: item.qTitle
-					}
-				} )
-			);
-		} );
-
-		return defer.promise;
-	};
-
-	//Todo: Move to sense-extension-utils
-	//Todo: Check if sorting really works by qData.rank
-	var getSheetList = function () {
-
-		var defer = $q.defer();
-
-		app.getAppObjectList( function ( data ) {
-			var sheets = [];
-			var sortedData = _.sortBy( data.qAppObjectList.qItems, function ( item ) {
-				return item.qData.rank;
-			} );
-			_.each( sortedData, function ( item ) {
-				sheets.push( {
-					value: item.qInfo.qId,
-					label: item.qMeta.title
-				} );
-			} );
-			return defer.resolve( sheets );
-		} );
-
-		return defer.promise;
-	};
-
-	// Todo: Move to sense-extension-utils
-	var getStoryList = function () {
-
-		var defer = $q.defer();
-
-		app.getList( 'story', function ( data ) {
-			var stories = [];
-			if ( data && data.qAppObjectList && data.qAppObjectList.qItems ) {
-				data.qAppObjectList.qItems.forEach( function ( item ) {
-					stories.push( {
-						value: item.qInfo.qId,
-						label: item.qMeta.title
-					} );
-				} )
-			}
-			return defer.resolve( _.sortBy( stories, function ( item ) {
-				return item.label;
-			} ) );
-
-		} );
-
-		return defer.promise;
-
-	};
-
-	var getIcons = function () {
+	function getIcons() {
 		var iconList = JSON.parse( iconListRaw );
 		var propDef = [];
 		propDef.push( {
@@ -114,10 +29,10 @@ define( [
 				}
 			)
 		} );
-		return _.sortBy( propDef, function( item) {
+		return _.sortBy(propDef, function( item) {
 			return item.label;
 		});
-	};
+	}
 
 	// ****************************************************************************************
 	// Layout
@@ -126,7 +41,7 @@ define( [
 		type: "string",
 		component: "dropdown",
 		ref: "props.buttonStyle",
-		label: "Button style",
+		label: "Style",
 		defaultValue: "default",
 		options: [
 			{
@@ -164,7 +79,7 @@ define( [
 	var buttonWidth = {
 		type: "boolean",
 		component: "buttongroup",
-		label: "Button width",
+		label: "Button Width",
 		ref: "props.fullWidth",
 		options: [
 			{
@@ -186,12 +101,14 @@ define( [
 		component: "dropdown",
 		label: "Icon",
 		ref: "props.buttonIcon",
-		options: getIcons()
+		options: function () {
+			return getIcons();
+		}
 	};
 
 	var buttonTextAlign = {
 		ref: "props.buttonTextAlign",
-		label: "Label alignment",
+		label: "Label Alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
@@ -217,7 +134,6 @@ define( [
 	var buttonAlignment = {
 		ref: "props.buttonAlignment",
 		type: "string",
-		label: "Button alignment",
 		component: "dropdown",
 		defaultValue: "top-left",
 		options: [
@@ -262,7 +178,7 @@ define( [
 
 	var buttonMultiLine = {
 		ref: "props.isButtonMultiLine",
-		label: "Multiline label",
+		label: "Multiline Label",
 		type: "boolean",
 		defaultValue: false
 	};
@@ -272,6 +188,9 @@ define( [
 		label: "Label",
 		type: "string",
 		expression: "optional",
+		show: function () {
+			return true;
+		},
 		defaultValue: "My Button"
 	};
 
@@ -281,7 +200,7 @@ define( [
 
 	var navigationAction = {
 		ref: "props.navigationAction",
-		label: "Navigation behavior after actions",
+		label: "Navigation Action",
 		type: "string",
 		component: "dropdown",
 		default: "nextSheet",
@@ -341,7 +260,7 @@ define( [
 		component: "dropdown",
 		label: "Select App",
 		ref: "props.selectedApp",
-		options: getAppList(),
+		options: ppHelper.getAppList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'openApp';
 		}
@@ -352,7 +271,7 @@ define( [
 		component: "dropdown",
 		label: "Select Sheet",
 		ref: "props.selectedSheet",
-		options: getSheetList(),
+		options: ppHelper.getSheetList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheet';
 		}
@@ -363,7 +282,7 @@ define( [
 		component: "dropdown",
 		label: "Select Story",
 		ref: "props.selectedStory",
-		options: getStoryList(),
+		options: ppHelper.getStoryList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoStory'
 		}
@@ -390,11 +309,6 @@ define( [
 			label: "Apply Bookmark",
 			group: "bookmark"
 		},
-		// {
-		// 	value: "replaceBookmark",
-		// 	label: "Replace Bookmark",
-		// 	group: "bookmark"
-		// },
 		{
 			value: "clearAll",
 			label: "Clear All Selections",
@@ -491,7 +405,7 @@ define( [
 	// ****************************************************************************************
 	// n-actions
 	// ****************************************************************************************
-	var bookmarkEnabler = ['applyBookmark', 'replaceBookmark'];
+	var bookmarkEnabler = ['applyBookmark'];
 	var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
 	var valueDescEnabler = ['selectValues'];
@@ -544,10 +458,10 @@ define( [
 			bookmarkList: {
 				type: "string",
 				ref: "selectedBookmark",
-				label: "Select bookmark",
 				component: "dropdown",
-				defaultValue: "none",
-				options: getBookmarkList(),
+				label: "Select bookmark",
+				expression: "optional",
+				options: ppHelper.getBookmarkList(),
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
@@ -561,16 +475,6 @@ define( [
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && fieldEnabler.indexOf( def.actionType ) > -1;
-				}
-			},
-			variable: {
-				type: "string",
-				ref: "variable",
-				label: "Variable Name",
-				expression: "optional",
-				show: function ( data, defs ) {
-					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
-					return def && variableEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
 			value: {
@@ -591,6 +495,16 @@ define( [
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && valueDescEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			variable: {
+				type: "string",
+				ref: "variable",
+				label: "Variable Name",
+				expression: "optional",
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && variableEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
 			overwriteLocked: {
