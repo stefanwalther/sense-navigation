@@ -1,6 +1,9 @@
 import:
-  files:
-    - ["./node_modules/sense-extension-utils/dist/extUtils.js", "./.tmp/lib/external/sense-extension-utils"]
+  fromLocal:
+    enabled: true
+    files:
+      - ["./node_modules/sense-extension-utils/dist/general-utils.js", "./.tmp/lib/external/sense-extension-utils"]
+      - ["./node_modules/sense-extension-utils/dist/pp-helper.js", "./.tmp/lib/external/sense-extension-utils"]
 wbfolder:
   enabled: false
 localExtensionDir: ""

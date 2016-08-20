@@ -1,1 +1,4 @@
-# extUtils.js will be copied here from node_modules/sense-extension-utils
+# The following files will be copied by sense-go to the ./lib/external/sense-extension-utils directory:
+#
+## ./general-utils.js
+## ./pp-helper.js

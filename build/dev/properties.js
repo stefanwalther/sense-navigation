@@ -1,14 +1,11 @@
 /*global window,define*/
 define( [
-	'angular',
 	'underscore',
 	'qlik',
-	'./lib/external/sense-extension-utils/extUtils'
-], function ( angular, _, qlik, extUtils, $q, $http ) {
+	'./lib/external/sense-extension-utils/pp-helper',
+	'text!./lib/data/icons-fa.json'
+], function ( _, qlik, ppHelper, iconListRaw ) {
 
-	var $injector = angular.injector( ['ng'] );
-	var $q = $injector.get( "$q" );
-	var $http = $injector.get( "$http" );
 
 	var app = qlik.currApp();
 
@@ -16,116 +13,27 @@ define( [
 	// Helper Promises
 	// ****************************************************************************************
 
-	//Todo: Move to sense-extension-utils
-	var getBookmarkList = function () {
-		var defer = $q.defer();
-
-		app.getList( 'BookmarkList', function ( items ) {
-			defer.resolve( items.qBookmarkList.qItems.map( function ( item ) {
-					return {
-						value: item.qInfo.qId,
-						label: item.qData.title //Todo: Remove the .qvf
-					}
-				} )
-			);
+	function getIcons() {
+		var iconList = JSON.parse( iconListRaw );
+		var sortedIcons = _.sortBy( iconList.icons, function ( o ) {
+			return o.name;
 		} );
-		return defer.promise;
-	};
-
-	var getAppList = function () {
-		var defer = $q.defer();
-
-		qlik.getAppList( function ( items ) {
-			console.log( 'appList', items );
-			defer.resolve( items.map( function ( item ) {
-					return {
-						value: item.qDocId,
-						label: item.qTitle
-					}
-				} )
-			);
+		var propDef = [];
+		propDef.push( {
+			"value": "",
+			"label": ">> No icon <<"
 		} );
 
-		return defer.promise;
-	};
-
-	//Todo: Move to sense-extension-utils
-	var getSheetList = function () {
-
-		var defer = $q.defer();
-
-		app.getAppObjectList( function ( data ) {
-			var sheets = [];
-			var sortedData = _.sortBy( data.qAppObjectList.qItems, function ( item ) {
-				return item.qData.rank;
-			} );
-			_.each( sortedData, function ( item ) {
-				sheets.push( {
-					value: item.qInfo.qId,
-					label: item.qMeta.title
-				} );
-			} );
-			return defer.resolve( sheets );
+		sortedIcons.forEach( function ( icon ) {
+			propDef.push(
+				{
+					"value": icon.id,
+					"label": icon.name
+				}
+			)
 		} );
-
-		return defer.promise;
-	};
-
-	// Todo: Move to sense-extension-utils
-	var getStoryList = function () {
-
-		var defer = $q.defer();
-
-		app.getList( 'story', function ( data ) {
-			var stories = [];
-			if ( data && data.qAppObjectList && data.qAppObjectList.qItems ) {
-				data.qAppObjectList.qItems.forEach( function ( item ) {
-					stories.push( {
-						value: item.qInfo.qId,
-						label: item.qMeta.title
-					} );
-				} )
-			}
-			return defer.resolve( _.sortBy( stories, function ( item ) {
-				return item.label;
-			} ) );
-
-		} );
-
-		return defer.promise;
-
-	};
-
-	var getIcons = function () {
-		var defer = $q.defer();
-
-		$http.get( extUtils.getExtensionPath( 'swr-sense-navigation' ) + '/lib/data/icons-fa.json' )
-			.then( function ( res ) {
-
-				var sortedIcons = _.sortBy( res.data.icons, function ( o ) {
-					return o.name;
-				} );
-
-				var propDef = [];
-				propDef.push( {
-					"value": "",
-					"label": ">> No icon <<"
-				} );
-
-				sortedIcons.forEach( function ( icon ) {
-					propDef.push(
-						{
-							"value": icon.id,
-							"label": icon.name
-						}
-					)
-				} );
-				defer.resolve( propDef );
-
-			} );
-
-		return defer.promise;
-	};
+		return propDef;
+	}
 
 	// ****************************************************************************************
 	// Layout
@@ -189,21 +97,19 @@ define( [
 		defaultValue: false
 	};
 
-	var buttonIcon = {
+	var buttonIcons = {
 		type: "string",
 		component: "dropdown",
 		label: "Icon",
 		ref: "props.buttonIcon",
 		options: function () {
-			return getIcons().then( function ( items ) {
-				return items;
-			} );
+			return getIcons();
 		}
 	};
 
-	var buttonAlign = {
-		ref: "props.buttonAlign",
-		label: "Alignment",
+	var buttonTextAlign = {
+		ref: "props.buttonTextAlign",
+		label: "Label Alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
@@ -222,26 +128,60 @@ define( [
 			}
 		],
 		show: function ( data ) {
-			return data.props.fullWidth === false;
+			return data.props.fullWidth;
 		}
+	};
+
+	var buttonAlignment = {
+		ref: "props.buttonAlignment",
+		type: "string",
+		component: "dropdown",
+		defaultValue: "top-left",
+		options: [
+			{
+				label: "Top left",
+				value: "top-left"
+			},
+			{
+				label: "Top middle",
+				value: "top-middle"
+			},
+			{
+				label: "Top right",
+				value: "top-right"
+			},
+			{
+				label: "Left middle",
+				value: "left-middle"
+			},
+			{
+				label: "Centered",
+				value: "centered"
+			},
+			{
+				label: "Right middle",
+				value: "right-middle"
+			},
+			{
+				label: "Bottom left",
+				value: "bottom-left"
+			},
+			{
+				label: "Bottom middle",
+				value: "bottom-middle"
+			},
+			{
+				label: "Bottom right",
+				value: "bottom-right"
+			}
+		]
 	};
 
 	var buttonMultiLine = {
 		ref: "props.isButtonMultiLine",
-		label: "Multiline",
+		label: "Multiline Label",
 		type: "boolean",
-		component: "switch",
-		defaultValue: false,
-		options: [
-			{
-				value: true,
-				label: "Enabled"
-			},
-			{
-				value: false,
-				label: "Disabled"
-			}
-		]
+		defaultValue: false
 	};
 
 	var buttonLabel = {
@@ -293,6 +233,10 @@ define( [
 			{
 				label: "Open website",
 				value: "openWebsite"
+			},
+			{
+				label: "Switch to Edit Mode",
+				value: "switchToEdit"
 			}
 			// ,
 			// {
@@ -317,15 +261,7 @@ define( [
 		component: "dropdown",
 		label: "Select App",
 		ref: "props.selectedApp",
-		options: function () {
-			return getAppList()
-				.then( function ( items ) {
-					return items;
-				} )
-				.catch( function ( err ) {
-					window.console.log( err );
-				} );
-		},
+		options: ppHelper.getAppList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'openApp';
 		}
@@ -336,11 +272,7 @@ define( [
 		component: "dropdown",
 		label: "Select Sheet",
 		ref: "props.selectedSheet",
-		options: function () {
-			return getSheetList().then( function ( items ) {
-				return items;
-			} );
-		},
+		options: ppHelper.getSheetList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheet';
 		}
@@ -351,11 +283,7 @@ define( [
 		component: "dropdown",
 		label: "Select Story",
 		ref: "props.selectedStory",
-		options: function () {
-			return getStoryList().then( function ( items ) {
-				return items;
-			} );
-		},
+		options: ppHelper.getStoryList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoStory'
 		}
@@ -612,9 +540,10 @@ define( [
 					label: buttonLabel,
 					style: style,
 					buttonWidth: buttonWidth,
-					align: buttonAlign,
+					buttonAlignment: buttonAlignment,
+					buttonTextAlign: buttonTextAlign,
 					buttonMultiLine: buttonMultiLine,
-					icons: buttonIcon
+					buttonIcons: buttonIcons
 				}
 			},
 			actionsList: actions,

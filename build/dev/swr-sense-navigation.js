@@ -4,18 +4,17 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
-		'core.utils/deferred',
-		'./lib/external/sense-extension-utils/extUtils',
+		'./lib/external/sense-extension-utils/general-utils',
 		'./properties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, Deferred, extUtils, props, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, generalUtils, props, cssContent, ngTemplate ) {
 		'use strict';
 
-		extUtils.addStyleToHeader( cssContent );
-		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
-		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+		generalUtils.addStyleToHeader( cssContent );
+		var faUrl = generalUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.css';
+		generalUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		// Helper function to split numbers.
 		function splitToStringNum ( str, sep ) {
@@ -53,34 +52,10 @@ define( [
 				// 	return df.promise;
 				// };
 
-				// Legacy - Convert old props to the new array format
-				// 	if ($scope.layout.props.actionBefore1 && $scope.layout.props.actionBefore1.value !== 'none') {
-				// 		console.log('OK; convert it');
-				// 		console.log('$scope.layout', $scope.layout);
-				// 		if (!Array.isArray($scope.layout.props.actionItems)) {
-				// 			$scope.layout.props.actionItems = [];
-				// 		}
-				// 		var l = {
-				// 			cId: $scope.layout,
-				// 			actionType: $scope.layout.props.actionBefore1,
-				// 			bookmark: $scope.layout.props.bookmark1,
-				// 			field: $scope.layout.props.field1,
-				// 			value: $scope.layout.props.value1
-				// 		};
-				// 		console.log('l', l);
-				// 		$scope.layout.props.actionItems.push(l);
-				// 	}
 
-				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
 
 					switch ( $scope.layout.props.navigationAction ) {
-						case "nextSheet":
-							$scope.nextSheet();
-							break;
-						case "prevSheet":
-							$scope.prevSheet();
-							break;
 						case "gotoSheet":
 							$scope.gotoSheet( $scope.layout.props.selectedSheet );
 							break;
@@ -90,9 +65,8 @@ define( [
 						case "gotoStory":
 							$scope.gotoStory( $scope.layout.props.selectedStory );
 							break;
-						case "openApp":
-							console.log('Open', $scope.layout.props.selectedApp);
-							qlik.openApp( $scope.layout.props.selectedApp );
+						case "nextSheet":
+							$scope.nextSheet();
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
@@ -102,6 +76,19 @@ define( [
 								} else {
 									window.open( 'http://' + url );
 								}
+							}
+							break;
+						case "prevSheet":
+							$scope.prevSheet();
+							break;
+						// case "openApp":
+						// 	console.log('Open', $scope.layout.props.selectedApp);
+						// 	qlik.openApp( $scope.layout.props.selectedApp );
+						// 	break;
+						case "switchToEdit":
+							var result = qlik.navigation.setMode( qlik.navigation.EDIT );
+							if ( !result.success ) {
+								window.console.error( result.errorMsg );
 							}
 							break;
 						default:

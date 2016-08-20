@@ -4,18 +4,17 @@ define( [
 		'underscore',
 		'qlik',
 		'angular',
-		'core.utils/deferred',
-		'./lib/external/sense-extension-utils/extUtils',
+		'./lib/external/sense-extension-utils/general-utils',
 		'./properties',
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, Deferred, extUtils, props, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, generalUtils, props, cssContent, ngTemplate ) {
 		'use strict';
 
-		extUtils.addStyleToHeader( cssContent );
-		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.css';
-		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+		generalUtils.addStyleToHeader( cssContent );
+		var faUrl = generalUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.css';
+		generalUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
 
 		// Helper function to split numbers.
 		function splitToStringNum ( str, sep ) {
@@ -52,6 +51,7 @@ define( [
 				// 		df.resolve( size );
 				// 	return df.promise;
 				// };
+
 
 				$scope.doNavigate = function () {
 
@@ -232,10 +232,7 @@ define( [
 
 				$scope.gotoSheet = function ( sheetId ) {
 					if ( $scope.checkQlikNavigation() && !_.isEmpty( sheetId ) ) {
-						var r = qlik.navigation.gotoSheet( sheetId );
-						if ( !r.success ) {
-							window.console.error( r.errorMsg );
-						}
+						qlik.navigation.gotoSheet( sheetId );
 					}
 				};
 
