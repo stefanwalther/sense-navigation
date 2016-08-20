@@ -11,7 +11,7 @@ define( [
 	// ****************************************************************************************
 
 	function getIcons () {
-		var iconList = JSON.parse( iconListRaw );
+		var iconList = JSON.parse( iconListRaw ).icons;
 		var propDef = [];
 		propDef.push( {
 			"value": "",
