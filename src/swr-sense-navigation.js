@@ -191,6 +191,11 @@ define( [
 										app.field( fld ).selectValues( vals, false );
 									}
 									break;
+								case "selectPossible":
+									if (!_.isEmpty( fld) ) {
+										app.field( fld).selectPossible( softLock );
+									}
+									break;
 								case "setVariable":
 									if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
 										$scope.setVariableContent( $scope.layout.props['variable' + i], val );
