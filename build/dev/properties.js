@@ -6,25 +6,19 @@ define( [
 	'text!./lib/data/icons-fa.json'
 ], function ( _, qlik, ppHelper, iconListRaw ) {
 
-
-	var app = qlik.currApp();
-
 	// ****************************************************************************************
 	// Helper Promises
 	// ****************************************************************************************
 
-	function getIcons() {
-		var iconList = JSON.parse( iconListRaw );
-		var sortedIcons = _.sortBy( iconList.icons, function ( o ) {
-			return o.name;
-		} );
+	function getIcons () {
+		var iconList = JSON.parse( iconListRaw ).icons;
 		var propDef = [];
 		propDef.push( {
 			"value": "",
 			"label": ">> No icon <<"
 		} );
 
-		sortedIcons.forEach( function ( icon ) {
+		iconList.forEach( function ( icon ) {
 			propDef.push(
 				{
 					"value": icon.id,
@@ -32,13 +26,15 @@ define( [
 				}
 			)
 		} );
-		return propDef;
+		return _.sortBy( propDef, function ( item ) {
+			return item.label;
+		} );
 	}
 
 	// ****************************************************************************************
 	// Layout
 	// ****************************************************************************************
-	var style = {
+	var buttonStyle = {
 		type: "string",
 		component: "dropdown",
 		ref: "props.buttonStyle",
@@ -456,14 +452,36 @@ define( [
 				defaultValue: "none",
 				options: actionOptions
 			},
-			bookmark: {
+			bookmarkList: {
 				type: "string",
-				ref: "bookmark",
-				label: "Bookmark Id",
+				ref: "selectedBookmark",
+				component: "dropdown",
+				label: "Select bookmark",
 				expression: "optional",
+				options: ppHelper.getBookmarkList(),
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			fieldList: {
+				type: "string",
+				ref: "selectedField",
+				component: "dropdown",
+				label: "Select field",
+				defaultValue: "",
+				options: function () {
+					return ppHelper.getFieldList().then( function ( fieldList ) {
+						fieldList.splice( 0, 0, {
+							value: "by-expr",
+							label: ">> Define field by expression <<"
+						} );
+						return fieldList;
+					} )
+				},
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && fieldEnabler.indexOf( def.actionType ) > -1;
 				}
 			},
 			field: {
@@ -473,7 +491,7 @@ define( [
 				expression: "optional",
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
-					return def && fieldEnabler.indexOf( def.actionType ) > -1;
+					return def && fieldEnabler.indexOf( def.actionType ) > -1 && def.selectedField === 'by-expr';
 				}
 			},
 			value: {
@@ -538,7 +556,7 @@ define( [
 				label: "Layout",
 				items: {
 					label: buttonLabel,
-					style: style,
+					style: buttonStyle,
 					buttonWidth: buttonWidth,
 					buttonAlignment: buttonAlignment,
 					buttonTextAlign: buttonTextAlign,
