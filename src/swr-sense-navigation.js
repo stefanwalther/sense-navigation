@@ -142,6 +142,9 @@ define( [
 										app.field( fld ).clear();
 									}
 									break;
+								case "clearOther":
+									app.field( fld ).clearOther( softLock );
+									break;
 								case "forward":
 									app.forward()
 										.catch( function ( err ) {
@@ -158,7 +161,7 @@ define( [
 									break;
 								case "selectAlternative":
 									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectAlternative( (softLock) ? softLock : false);
+										app.field( fld).selectAlternative( softLock );
 									}
 									break;
 								case "selectandLockField":
@@ -169,7 +172,7 @@ define( [
 									break;
 								case "selectExcluded":
 									if (!_.isEmpty( fld) ) {
-										app.field( fld).selectExcluded( (softLock) ? softLock : false);
+										app.field( fld).selectExcluded( softLock );
 									}
 									break;
 								case "selectField":

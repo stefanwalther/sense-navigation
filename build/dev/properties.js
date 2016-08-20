@@ -77,6 +77,7 @@ define( [
 		return defer.promise;
 
 	};
+
 	var getIcons = function () {
 		var defer = $q.defer();
 
@@ -237,42 +238,43 @@ define( [
 	};
 
 	// ****************************************************************************************
-	// Behavior
+	// Navigation Action
 	// ****************************************************************************************
-	var action = {
-		ref: "props.action",
+
+	var navigationAction = {
+		ref: "props.navigationAction",
 		label: "Navigation Action",
 		type: "string",
 		component: "dropdown",
 		default: "nextSheet",
 		options: [
 			{
-				value: "none",
-				label: "None"
+				label: "None",
+				value: "none"
 			},
 			{
-				value: "nextSheet",
-				label: "Go to next sheet"
+				label: "Go to next sheet",
+				value: "nextSheet"
 			},
 			{
-				value: "prevSheet",
-				label: "Go to previous sheet"
+				label: "Go to previous sheet",
+				value: "prevSheet"
 			},
 			{
-				value: "gotoSheet",
-				label: "Go to a specific sheet"
+				label: "Go to a specific sheet",
+				value: "gotoSheet"
 			},
 			{
-				value: "gotoSheetById",
-				label: "Go to a sheet (defined by Sheet Id)"
+				label: "Go to a sheet (defined by Sheet Id)",
+				value: "gotoSheetById"
 			},
 			{
-				value: "gotoStory",
-				label: "Go to a story"
+				label: "Go to a story",
+				value: "gotoStory"
 			},
 			{
-				value: "openWebsite",
-				label: "Open website"
+				label: "Open website",
+				value: "openWebsite"
 			}
 		]
 	};
@@ -283,7 +285,7 @@ define( [
 		type: "string",
 		expression: "optional",
 		show: function ( data ) {
-			return data.props.action === 'gotoSheetById';
+			return data.props.navigationAction === 'gotoSheetById';
 		}
 	};
 
@@ -298,7 +300,7 @@ define( [
 			} );
 		},
 		show: function ( data ) {
-			return data.props.action === 'gotoSheet';
+			return data.props.navigationAction === 'gotoSheet';
 		}
 	};
 
@@ -313,7 +315,7 @@ define( [
 			} );
 		},
 		show: function ( data ) {
-			return data.props.action === 'gotoStory'
+			return data.props.navigationAction === 'gotoStory'
 		}
 	};
 
@@ -323,76 +325,92 @@ define( [
 		type: "string",
 		expression: "optional",
 		show: function ( data ) {
-			return data.props.action === 'openWebsite';
+			return data.props.navigationAction === 'openWebsite';
 		}
 
 	};
 
 	// ****************************************************************************************
-	// Actions
+	// Action-Group
 	// ****************************************************************************************
-	var isActionsBefore = {
-		type: "boolean",
-		component: "switch",
-		label: "Actions before navigating",
-		ref: "props.isActionsBefore",
-		defaultValue: false,
-		options: [
-			{
-				value: true,
-				label: "Enabled"
-			},
-			{
-				value: false,
-				label: "Disabled"
-			}
-		]
-	};
+
+
 
 	var actionOptions = [
 		{
-			value: "none",
-			label: "None"
-		},
-		{
 			value: "applyBookmark",
-			label: "Apply Bookmark"
+			label: "Apply Bookmark",
+			group: "bookmark"
 		},
 		{
 			value: "clearAll",
-			label: "Clear All Selections"
+			label: "Clear All Selections",
+			group: "selection"
+		},
+		{
+			value: "clearOther",
+			label: "Clear Other Fields",
+			group: "selection"
+		},
+		{
+			value: "forward",
+			label: "Forward (in your Selections)",
+			group: "selection"
+		},
+		{
+			value: "back",
+			label: "Back (in your Selections)",
+			group: "selection"
 		},
 		{
 			value: "clearField",
-			label: "Clear Selection in Field"
+			label: "Clear Selection in Field",
+			group: "selection"
 		},
 		{
 			value: "lockField",
-			label: "Lock Field"
+			label: "Lock Field",
+			group: "selection"
+		},
+		{
+			value: "selectAlternative",
+			label: "Select Alternatives",
+			group: "selection"
 		},
 		{
 			value: "selectandLockField",
-			label: "Select and Lock in Field"
+			label: "Select and Lock in Field",
+			group: "selection"
+		},
+		{
+			value: "selectExcluded",
+			label: "Select Excluded",
+			group: "selection"
 		},
 		{
 			value: "selectField",
-			label: "Select Value in Field"
+			label: "Select Value in Field",
+			group: "selection"
 		},
 		{
 			value: "selectValues",
-			label: "Select Multiple Values in Field"
+			label: "Select Multiple Values in Field",
+			group: "selection"
 		},
 		{
 			value: "setVariable",
-			label: "Set Variable Value"
+			label: "Set Variable Value",
+			group: "variables"
 		},
 		{
 			value: "lockAll",
-			label: "Lock All Selections"
+			label: "Lock All Selections",
+			group: "selection"
 		},
 		{
 			value: "unlockAll",
-			label: "Unlock All Selections"
+			label: "Unlock All Selections",
+			group: "selection"
 		}
 	];
 
@@ -400,10 +418,33 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['clearField', 'clearOther', 'selectAlternative', 'selectExcluded', 'selectField', 'selectValues', 'selectandLockField', 'lockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
+	var overwriteLockedEnabler = ['clearOther', 'selectAlternative', 'selectExcluded'];
+
+	var actionGroup = {
+		ref: "actionGroup",
+		label: "Selection Action Type",
+		type: "string",
+		component: "dropdown",
+		defaultValue: "selection",
+		options: [
+			{
+				label: "Selection",
+				value: "selection"
+			},
+			{
+				label: "Bookmark",
+				value: "bookmark"
+			},
+			{
+				label: "Variables",
+				value: "variables"
+			}
+		]
+	};
 
 	var actions = {
 		type: "array",
@@ -418,15 +459,13 @@ define( [
 		addTranslation: "Add Item",
 		grouped: true,
 		items: {
+			//actionGroup: actionGroup,
 			actionType: {
 				type: "string",
 				ref: "actionType",
 				component: "dropdown",
 				defaultValue: "none",
-				options: actionOptions,
-				action: function ( data ) {
-					//console.log( 'data', data );
-				}
+				options: actionOptions
 			},
 			bookmark: {
 				type: "string",
@@ -434,10 +473,6 @@ define( [
 				label: "Bookmark Id",
 				expression: "optional",
 				show: function ( data, defs ) {
-					// console.log( '--' );
-					// console.log( 'this', this );
-					// console.log( 'data', data );
-					// console.log( 'defs', defs );
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
 				}
@@ -465,7 +500,7 @@ define( [
 			valueDesc: {
 				type: "text",
 				component: "text",
-				ref: "props.valueDesc",
+				ref: "valueDesc",
 				label: "Define multiple values separated with a semi-colon (;).",
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
@@ -474,12 +509,22 @@ define( [
 			},
 			variable: {
 				type: "string",
-				ref: "props.variable1",
+				ref: "variable",
 				label: "Variable Name",
 				expression: "optional",
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && variableEnabler.indexOf( def.actionType ) > -1;
+				}
+			},
+			overwriteLocked: {
+				type: "boolean",
+				ref: "softLock",
+				label: "Overwrite locked selections",
+				defaultValue: false,
+				show: function ( data, defs ) {
+					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
+					return def && overwriteLockedEnabler.indexOf( def.actionType ) > -1;
 				}
 			}
 
@@ -516,7 +561,7 @@ define( [
 				type: "items",
 				label: "Navigation Behavior",
 				items: {
-					action: action,
+					action: navigationAction,
 					sheetId: sheetId,
 					sheetList: sheetList,
 					storyList: storyList,

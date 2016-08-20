@@ -1,4 +1,4 @@
-/*global define*/
+/*global define,window*/
 define( [
 		'jquery',
 		'underscore',
@@ -74,7 +74,7 @@ define( [
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
 				$scope.doNavigate = function () {
 
-					switch ( $scope.layout.props.action ) {
+					switch ( $scope.layout.props.navigationAction ) {
 						case "nextSheet":
 							$scope.nextSheet();
 							break;
@@ -110,12 +110,9 @@ define( [
 				};
 				$scope.doAction = function () {
 
-
 					var app = qlik.currApp();
 
-					var fld = null;
-					var val = null;
-					var actionType = null;
+					var fld, val, actionType, softLock;
 
 					if ( $scope.layout.props && $scope.layout.props.actionItems ) {
 
@@ -124,20 +121,58 @@ define( [
 							actionType = $scope.layout.props.actionItems[i].actionType;
 							fld = $scope.layout.props.actionItems[i].field;
 							val = $scope.layout.props.actionItems[i].value;
+							softLock = $scope.layout.props.actionItems[i].softLock;
 
 							switch ( actionType ) {
+								case "applyBookmark":
+									if ( !_.isEmpty( $scope.layout.props['bookmark' + i] ) ) {
+										app.bookmark.apply( $scope.layout.props['bookmark' + i] );
+									}
+									break;
+								case "back":
+									app.back().catch( function ( err ) {
+										window.console.error( err );
+									} );
+									break;
 								case "clearAll":
 									app.clearAll();
-									break;
-								case "lockAll":
-									app.lockAll();
-									break;
-								case "unlockAll":
-									app.unlockAll();
 									break;
 								case "clearField":
 									if ( !_.isEmpty( fld ) ) {
 										app.field( fld ).clear();
+									}
+									break;
+								case "clearOther":
+									app.field( fld ).clearOther( softLock );
+									break;
+								case "forward":
+									app.forward()
+										.catch( function ( err ) {
+											window.console.error( err );
+										} );
+									break;
+								case "lockAll":
+									app.lockAll();
+									break;
+								case "lockField":
+									if ( !_.isEmpty( fld ) ) {
+										app.field( fld ).lock()
+									}
+									break;
+								case "selectAlternative":
+									if (!_.isEmpty( fld) ) {
+										app.field( fld).selectAlternative( softLock );
+									}
+									break;
+								case "selectandLockField":
+									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+										app.field( fld ).selectMatch( val, true );
+										app.field( fld ).lock()
+									}
+									break;
+								case "selectExcluded":
+									if (!_.isEmpty( fld) ) {
+										app.field( fld).selectExcluded( softLock );
 									}
 									break;
 								case "selectField":
@@ -151,26 +186,13 @@ define( [
 										app.field( fld ).selectValues( vals, false );
 									}
 									break;
-								case "selectandLockField":
-									if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
-										app.field( fld ).selectMatch( val, true );
-										app.field( fld ).lock()
-									}
-									break;
-								case "lockField":
-									if ( !_.isEmpty( fld ) ) {
-										app.field( fld ).lock()
-									}
-									break;
-								case "applyBookmark":
-									if ( !_.isEmpty( $scope.layout.props['bookmark' + i] ) ) {
-										app.bookmark.apply( $scope.layout.props['bookmark' + i] );
-									}
-									break;
 								case "setVariable":
 									if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
 										$scope.setVariableContent( $scope.layout.props['variable' + i], val );
 									}
+									break;
+								case "unlockAll":
+									app.unlockAll();
 									break;
 								default:
 									break;
@@ -232,5 +254,4 @@ define( [
 
 			}]
 		};
-
 	} );

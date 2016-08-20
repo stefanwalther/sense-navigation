@@ -348,6 +348,11 @@ define( [
 			group: "selection"
 		},
 		{
+			value: "clearOther",
+			label: "Clear Other Fields",
+			group: "selection"
+		},
+		{
 			value: "forward",
 			label: "Forward (in your Selections)",
 			group: "selection"
@@ -413,11 +418,11 @@ define( [
 	// n-actions
 	// ****************************************************************************************
 	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['selectAlternative', 'selectExcluded', 'selectField', 'selectValues', 'clearField', 'selectandLockField', 'lockField'];
+	var fieldEnabler = ['clearField', 'clearOther', 'selectAlternative', 'selectExcluded', 'selectField', 'selectValues', 'selectandLockField', 'lockField'];
 	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectandLockField'];
 	var valueDescEnabler = ['selectValues'];
 	var variableEnabler = ['setVariable'];
-	var overwriteLockedEnabler = ['selectAlternative', 'selectExcluded'];
+	var overwriteLockedEnabler = ['clearOther', 'selectAlternative', 'selectExcluded'];
 
 	var actionGroup = {
 		ref: "actionGroup",

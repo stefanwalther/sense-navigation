@@ -1,5 +1,5 @@
 {
-	"name" : "Sheet Navigation",
+	"name" : "Navigation & Actions",
 	"description" : "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
 	"icon" : "extension",
 	"type" : "visualization",
