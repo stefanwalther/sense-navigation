@@ -15,16 +15,13 @@ define( [
 
 	function getIcons() {
 		var iconList = JSON.parse( iconListRaw );
-		var sortedIcons = _.sortBy( iconList.icons, function ( o ) {
-			return o.name;
-		} );
 		var propDef = [];
 		propDef.push( {
 			"value": "",
 			"label": ">> No icon <<"
 		} );
 
-		sortedIcons.forEach( function ( icon ) {
+		iconList.forEach( function ( icon ) {
 			propDef.push(
 				{
 					"value": icon.id,
@@ -32,13 +29,15 @@ define( [
 				}
 			)
 		} );
-		return propDef;
+		return _.sortBy(propDef, function( item) {
+			return item.label;
+		});
 	}
 
 	// ****************************************************************************************
 	// Layout
 	// ****************************************************************************************
-	var style = {
+	var buttonStyle = {
 		type: "string",
 		component: "dropdown",
 		ref: "props.buttonStyle",
@@ -80,7 +79,7 @@ define( [
 	var buttonWidth = {
 		type: "boolean",
 		component: "buttongroup",
-		label: "Button width",
+		label: "Button Width",
 		ref: "props.fullWidth",
 		options: [
 			{
@@ -109,7 +108,7 @@ define( [
 
 	var buttonTextAlign = {
 		ref: "props.buttonTextAlign",
-		label: "Label alignment",
+		label: "Label Alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
@@ -456,11 +455,13 @@ define( [
 				defaultValue: "none",
 				options: actionOptions
 			},
-			bookmark: {
+			bookmarkList: {
 				type: "string",
-				ref: "bookmark",
-				label: "Bookmark Id",
+				ref: "selectedBookmark",
+				component: "dropdown",
+				label: "Select bookmark",
 				expression: "optional",
+				options: ppHelper.getBookmarkList(),
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
 					return def && bookmarkEnabler.indexOf( def.actionType ) > -1;
@@ -538,7 +539,7 @@ define( [
 				label: "Layout",
 				items: {
 					label: buttonLabel,
-					style: style,
+					style: buttonStyle,
 					buttonWidth: buttonWidth,
 					buttonAlignment: buttonAlignment,
 					buttonTextAlign: buttonTextAlign,
