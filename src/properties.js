@@ -80,7 +80,7 @@ define( [
 	var buttonWidth = {
 		type: "boolean",
 		component: "buttongroup",
-		label: "Button Width",
+		label: "Button width",
 		ref: "props.fullWidth",
 		options: [
 			{
@@ -109,7 +109,7 @@ define( [
 
 	var buttonTextAlign = {
 		ref: "props.buttonTextAlign",
-		label: "Label Alignment",
+		label: "Label alignment",
 		type: "string",
 		component: "dropdown",
 		defaultValue: "left",
