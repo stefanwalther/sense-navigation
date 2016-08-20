@@ -1,8 +1,0 @@
-deployment:
-  toSsh:
-    enabled: true
-    host: "192.168.56.13"
-    port: 22
-    username: "stefanwalther"
-    password: "Test1234"
-    dest: "/cygdrive/c/Users/stefanwalther/Documents/Qlik/Sense/Extensions/sense-navigation"

@@ -8,7 +8,7 @@
 	"author": "Stefan Walther",
 	"license": "MIT",
 	"homepage": "http://github.com/stefanwalther/sense-navigation",
-	"keywords" : "qlik-sense, visualization",
+	"keywords" : ["actions","bootstrap","button","navigation","qlik","qlik-sense","qlik-sense-visualization-extension","sense","sense","sheets"],
     "license" : "MIT",
     "repository" : "https://github.com/stefanwalther/sense-navigation",
     "dependencies" : { "qlik-sense" : ">=2.1.1" }
