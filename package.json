@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -14,6 +14,7 @@
     "sense",
     "sheets"
   ],
+  "homepage": "https://github.com/stefanwalther/sense-navigation",
   "bugs": {
     "url": "https://github.com/stefanwalther/sense-navigation/issues"
   },
@@ -28,7 +29,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "sense-extension-utils": "^0.3.0",
+    "sense-extension-utils": "^0.4.0",
     "verb": "git://github.com/verbose/verb"
   },
   "verb": {

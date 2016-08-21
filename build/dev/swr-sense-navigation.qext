@@ -3,7 +3,7 @@
 	"description" : "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
 	"icon" : "extension",
 	"type" : "visualization",
-	"version": "1.0.0",
+	"version": "1.0.0-alpha",
 	"preview" : "swr-sense-navigation.png",
 	"author": "Stefan Walther",
 	"license": "MIT",

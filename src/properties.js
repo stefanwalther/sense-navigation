@@ -10,6 +10,12 @@ define( [
 	// Helper Promises
 	// ****************************************************************************************
 
+	/**
+	 * Helper method to return a list of icons in a format that can be used by the
+	 * dropdown component.
+	 *
+	 * @returns {Array<value,label>}
+	 */
 	function getIcons () {
 		var iconList = JSON.parse( iconListRaw ).icons;
 		var propDef = [];

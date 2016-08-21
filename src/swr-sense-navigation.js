@@ -6,15 +6,15 @@ define( [
 		'angular',
 		'./lib/external/sense-extension-utils/general-utils',
 		'./properties',
-		'text!./lib/css/main.css',
+		'text!./lib/css/main.min.css',
+		'text!./lib/external/fontawesome/css/font-awesome.min.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, generalUtils, props, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, generalUtils, props, cssContent, cssFa, ngTemplate ) {
 		'use strict';
 
 		generalUtils.addStyleToHeader( cssContent );
-		var faUrl = generalUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.css';
-		generalUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+		generalUtils.addStyleToHeader( cssFa );
 
 		// Helper function to split numbers.
 		function splitToStringNum ( str, sep ) {
@@ -51,7 +51,6 @@ define( [
 				// 		df.resolve( size );
 				// 	return df.promise;
 				// };
-
 
 				$scope.doNavigate = function () {
 
@@ -110,7 +109,7 @@ define( [
 						for ( var i = 0; i < $scope.layout.props.actionItems.length; i++ ) {
 
 							actionType = $scope.layout.props.actionItems[i].actionType;
-							fld = $scope.layout.props.actionItems[i].field;
+							fld = !_.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].selectedField: $scope.layout.props.actionItems[i].field;
 							val = $scope.layout.props.actionItems[i].value;
 							softLock = $scope.layout.props.actionItems[i].softLock;
 							bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
@@ -210,6 +209,7 @@ define( [
 									if ( !_.isEmpty( fld ) ) {
 										app.field( fld ).unlock();
 									}
+									break;
 								default:
 									break;
 							}
@@ -251,6 +251,7 @@ define( [
 					}
 				};
 
+				// Todo: Use method from sense-extension-utils/variable-utils.js
 				$scope.setVariableContent = function ( variableName, variableValue ) {
 					var app = qlik.currApp();
 					app.variable.setContent( variableName, variableValue )
