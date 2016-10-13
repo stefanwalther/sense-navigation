@@ -9,14 +9,29 @@ define( [
 		'./properties',
 		'./initialproperties',
 		'text!./lib/css/main.css',
-		'text!./template.ng.html'
+		'text!./template.ng.html', 
+		"text!./lib/css/reload_btn.css"
 	],
-	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate, cssContentRB ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
+		extUtils.addStyleToHeader( cssContentRB );
 		var faUrl = extUtils.getBasePath() + '/extensions/swr-sense-navigation/lib/external/fontawesome/css/font-awesome.min.css';
 		extUtils.addStyleLinkToHeader( faUrl, 'swr-sense-navigation__fontawesome' );
+
+		//Start animated
+		function startAnimated(){
+	    	$(".qv-panel-sheet").append('<div id="modal-overlay"></div>');
+			$("#modal-overlay").fadeIn("slow");
+			$("#modal-overlay").append('<div id="loader" class="loader">Loading...</div>');
+    	}
+
+    	//Stop animated
+	    function stopAnimated(){
+	    	$("#loader").remove();
+		    $("#modal-overlay").fadeOut("slow");
+	    }
 
 		// Helper function to split numbers.
 		function splitToStringNum ( str, sep ) {
@@ -103,13 +118,14 @@ define( [
 					var fld = null;
 					var val = null;
 					var softlock = null;
+					var isPartial = null,
 
 					for ( var i = 1; i <= 2; i++ ) {
 
 						fld = $scope.layout.props['field' + i];
 						val = $scope.layout.props['value' + i];
 						softlock = $scope.layout.props['softlock' + i];
-
+						isPartial = $scope.layout.props['refresh' + i];
 
 						switch ( $scope.layout.props['actionBefore' + i] ) {
 							case "clearAll":
@@ -172,6 +188,21 @@ define( [
 								break;
 							default:
 								break;
+							case "refresh":
+	                    	startAnimated();
+	                        setTimeout(function(){
+	                        	app.doReload( 0, isPartial, false ).then(function(e){
+									stopAnimated();
+	                        		if(e.qReturn) {
+										app.doSave();
+										console.log("refresh: sucsses");
+									} else {
+										stopAnimated();
+										console.log('refresh: erorr');
+									}
+	                        	})
+	                        },100);
+	                        break;
 						}
 					}
 
