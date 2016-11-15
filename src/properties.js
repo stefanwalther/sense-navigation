@@ -1,10 +1,14 @@
 /*global window,define*/
 define( [
+	'angular',
 	'underscore',
 	'qlik',
 	'./lib/external/sense-extension-utils/pp-helper',
 	'text!./lib/data/icons-fa.json'
-], function ( _, qlik, ppHelper, iconListRaw ) {
+], function ( angular, _, qlik, ppHelper, iconListRaw ) {
+
+	var $injector = angular.injector( ['ng'] );
+	var $timeout = $injector.get( "$timeout" );
 
 	// ****************************************************************************************
 	// Helper Promises
@@ -486,6 +490,11 @@ define( [
 							value: "by-expr",
 							label: ">> Define field by expression <<"
 						} );
+						// Ugly workaround for bug in Qlik Sense 2.1 - 3.1 that will cause
+						// the loading of the field not to be finished
+						$timeout( function () {
+							$( '.cell' ).trigger( 'mouseover' );
+						}, 0 );
 						return fieldList;
 					} )
 				},

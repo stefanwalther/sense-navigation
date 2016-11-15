@@ -11,11 +11,15 @@
 
 /*global window,define*/
 define( [
+	'angular',
 	'underscore',
 	'qlik',
 	'./lib/external/sense-extension-utils/pp-helper',
 	'text!./lib/data/icons-fa.json'
-], function ( _, qlik, ppHelper, iconListRaw ) {
+], function ( angular, _, qlik, ppHelper, iconListRaw ) {
+
+	var $injector = angular.injector( ['ng'] );
+	var $timeout = $injector.get( "$timeout" );
 
 	// ****************************************************************************************
 	// Helper Promises
@@ -497,6 +501,9 @@ define( [
 							value: "by-expr",
 							label: ">> Define field by expression <<"
 						} );
+						$timeout( function () {
+							$( '.cell' ).trigger( 'mouseover' );
+						}, 0 );
 						return fieldList;
 					} )
 				},
