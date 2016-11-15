@@ -501,6 +501,8 @@ define( [
 							value: "by-expr",
 							label: ">> Define field by expression <<"
 						} );
+						// Ugly workaround for bug in Qlik Sense 2.1 - 3.1 that will cause
+						// the loading of the field not to be finished
 						$timeout( function () {
 							$( '.cell' ).trigger( 'mouseover' );
 						}, 0 );
@@ -603,6 +605,14 @@ define( [
 					storyList: storyList,
 					websiteUrl: websiteUrl,
 					appList: appList
+				}
+			},
+			addons: {
+				uses: "addons",
+				items: {
+					dataHandling: {
+						uses: "dataHandling"
+					}
 				}
 			}
 		}

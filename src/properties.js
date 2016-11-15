@@ -595,6 +595,14 @@ define( [
 					websiteUrl: websiteUrl,
 					appList: appList
 				}
+			},
+			addons: {
+				uses: "addons",
+				items: {
+					dataHandling: {
+						uses: "dataHandling"
+					}
+				}
 			}
 		}
 	};
