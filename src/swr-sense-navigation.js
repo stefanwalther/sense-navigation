@@ -70,7 +70,7 @@ define( [
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
-								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
+								if (url.startsWith("http://")||url.startsWith("https://")||(url.startsWith("mailto://"))) {
 									window.open( url );
 								} else {
 									window.open( 'http://' + url );

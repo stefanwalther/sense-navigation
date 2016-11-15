@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "sense-go build",
+    "docs": "verb",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
