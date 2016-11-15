@@ -81,7 +81,7 @@ define( [
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
-								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
+								if (url.startsWith("http://")||url.startsWith("https://")||(url.startsWith("mailto://"))) {
 									window.open( url );
 								} else {
 									window.open( 'http://' + url );
@@ -216,6 +216,9 @@ define( [
 								case "unlockAll":
 									app.unlockAll();
 									break;
+								case "unlockAllAndClearAll":
+									$scope.unlockAllAndClearAll();
+									break;
 								case "unlockField":
 									if ( !_.isEmpty( fld ) ) {
 										app.field( fld ).unlock();
@@ -280,7 +283,13 @@ define( [
 						return false;
 					}
 					return true;
-				}
+				};
+
+				$scope.unlockAllAndClearAll = function() {
+					var app = qlik.currApp();
+					app.unlockAll();
+					app.clearAll();
+				};
 
 			}]
 		};

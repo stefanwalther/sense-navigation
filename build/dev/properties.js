@@ -412,7 +412,11 @@ define( [
 			value: "unlockField",
 			label: "Unlock Field",
 			group: "selection"
-
+		},
+		{
+			value: "unlockAllAndClearAll",
+			label: "Unlock All and Clear All Fields",
+			group: "selection"
 		}
 	];
 

@@ -205,6 +205,9 @@ define( [
 								case "unlockAll":
 									app.unlockAll();
 									break;
+								case "unlockAllAndClearAll":
+									$scope.unlockAllAndClearAll();
+									break;
 								case "unlockField":
 									if ( !_.isEmpty( fld ) ) {
 										app.field( fld ).unlock();
@@ -269,7 +272,13 @@ define( [
 						return false;
 					}
 					return true;
-				}
+				};
+
+				$scope.unlockAllAndClearAll = function() {
+					var app = qlik.currApp();
+					app.unlockAll();
+					app.clearAll();
+				};
 
 			}]
 		};

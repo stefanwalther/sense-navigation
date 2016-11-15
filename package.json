@@ -30,12 +30,31 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "sense-extension-utils": "^0.4.0",
-    "verb": "git://github.com/verbose/verb"
+    "gulp-format-md": "^0.1.11",
+    "sense-extension-utils": "^0.4.0"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
     "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/",
-    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip"
+    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip",
+    "run": true,
+    "toc": true,
+    "layout": "empty",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "related": {
+      "list": []
+    },
+    "lint": {
+      "reflinks": true
+    },
+    "reflinks": [
+      "verb",
+      "verb-readme-generator"
+    ]
   }
 }
