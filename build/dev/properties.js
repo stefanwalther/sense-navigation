@@ -244,7 +244,7 @@ define( [
 				value: "gotoStory"
 			},
 			{
-				label: "Open website",
+				label: "Open a website / eMail",
 				value: "openWebsite"
 			},
 			{

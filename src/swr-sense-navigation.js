@@ -6,15 +6,12 @@ define( [
 		'angular',
 		'./lib/external/sense-extension-utils/general-utils',
 		'./properties',
-		'text!./lib/css/main.min.css',
-		'text!./lib/external/fontawesome/css/font-awesome.min.css',
-		'text!./template.ng.html'
+		'text!./template.ng.html',
+		'css!./lib/css/main.min.css',
+		'css!./lib/external/fontawesome/css/font-awesome.min.css'
 	],
-	function ( $, _, qlik, angular, generalUtils, props, cssContent, cssFa, ngTemplate ) {
+	function ( $, _, qlik, angular, generalUtils, props, ngTemplate ) {
 		'use strict';
-
-		generalUtils.addStyleToHeader( cssContent );
-		generalUtils.addStyleToHeader( cssFa );
 
 		// Helper function to split numbers.
 		function splitToStringNum ( str, sep ) {
