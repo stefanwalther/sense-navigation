@@ -9,7 +9,7 @@
 */
 
 
-/*global window,define*/
+/* global define */
 define( [
 	'angular',
 	'underscore',
@@ -18,8 +18,8 @@ define( [
 	'text!./lib/data/icons-fa.json'
 ], function ( angular, _, qlik, ppHelper, iconListRaw ) {
 
-	var $injector = angular.injector( ['ng'] );
-	var $timeout = $injector.get( "$timeout" );
+	const $injector = angular.injector( ['ng'] );
+	const $timeout = $injector.get( '$timeout' );
 
 	// ****************************************************************************************
 	// Helper Promises
@@ -32,20 +32,20 @@ define( [
 	 * @returns {Array<value,label>}
 	 */
 	function getIcons () {
-		var iconList = JSON.parse( iconListRaw ).icons;
-		var propDef = [];
+		const iconList = JSON.parse( iconListRaw ).icons;
+		const propDef = [];
 		propDef.push( {
-			"value": "",
-			"label": ">> No icon <<"
+			value: '',
+			label: '>> No icon <<'
 		} );
 
 		iconList.forEach( function ( icon ) {
 			propDef.push(
 				{
-					"value": icon.id,
-					"label": icon.name
+					value: icon.id,
+					label: icon.name
 				}
-			)
+			);
 		} );
 		return _.sortBy( propDef, function ( item ) {
 			return item.label;
@@ -55,205 +55,205 @@ define( [
 	// ****************************************************************************************
 	// Layout
 	// ****************************************************************************************
-	var buttonStyle = {
-		type: "string",
-		component: "dropdown",
-		ref: "props.buttonStyle",
-		label: "Style",
-		defaultValue: "default",
+	const buttonStyle = {
+		type: 'string',
+		component: 'dropdown',
+		ref: 'props.buttonStyle',
+		label: 'Style',
+		defaultValue: 'default',
 		options: [
 			{
-				value: "default",
-				label: "Default"
+				value: 'default',
+				label: 'Default'
 			},
 			{
-				value: "primary",
-				label: "Primary"
+				value: 'primary',
+				label: 'Primary'
 			},
 			{
-				value: "success",
-				label: "Success"
+				value: 'success',
+				label: 'Success'
 			},
 			{
-				value: "info",
-				label: "Info"
+				value: 'info',
+				label: 'Info'
 			},
 			{
-				value: "warning",
-				label: "Warning"
+				value: 'warning',
+				label: 'Warning'
 			},
 			{
-				value: "danger",
-				label: "Danger"
+				value: 'danger',
+				label: 'Danger'
 			},
 			{
-				value: "link",
-				label: "Link"
+				value: 'link',
+				label: 'Link'
 			}
 		]
 
 	};
 
-	var buttonWidth = {
-		type: "boolean",
-		component: "buttongroup",
-		label: "Button Width",
-		ref: "props.fullWidth",
+	const buttonWidth = {
+		type: 'boolean',
+		component: 'buttongroup',
+		label: 'Button Width',
+		ref: 'props.fullWidth',
 		options: [
 			{
 				value: true,
-				label: "Full Width",
-				tooltip: "Button has the same width as the element."
+				label: 'Full Width',
+				tooltip: 'Button has the same width as the element.'
 			},
 			{
 				value: false,
-				label: "Auto Width",
-				tooltip: "Auto width depending on the label defined."
+				label: 'Auto Width',
+				tooltip: 'Auto width depending on the label defined.'
 			}
 		],
 		defaultValue: false
 	};
 
-	var buttonIcons = {
-		type: "string",
-		component: "dropdown",
-		label: "Icon",
-		ref: "props.buttonIcon",
+	const buttonIcons = {
+		type: 'string',
+		component: 'dropdown',
+		label: 'Icon',
+		ref: 'props.buttonIcon',
 		options: function () {
 			return getIcons();
 		}
 	};
 
-	var buttonTextAlign = {
-		ref: "props.buttonTextAlign",
-		label: "Label Alignment",
-		type: "string",
-		component: "dropdown",
-		defaultValue: "left",
+	const buttonTextAlign = {
+		ref: 'props.buttonTextAlign',
+		label: 'Label Alignment',
+		type: 'string',
+		component: 'dropdown',
+		defaultValue: 'left',
 		options: [
 			{
-				value: "center",
-				label: "Center"
+				value: 'center',
+				label: 'Center'
 			},
 			{
-				value: "left",
-				label: "Left"
+				value: 'left',
+				label: 'Left'
 			},
 			{
-				value: "right",
-				label: "Right"
+				value: 'right',
+				label: 'Right'
 			}
 		],
-		show: function ( data ) {
+		show: function ( data ) { /* eslint-disable-line object-shorthand */
 			return data.props.fullWidth;
 		}
 	};
 
-	var buttonAlignment = {
-		ref: "props.buttonAlignment",
-		type: "string",
-		component: "dropdown",
-		defaultValue: "top-left",
+	const buttonAlignment = {
+		ref: 'props.buttonAlignment',
+		type: 'string',
+		component: 'dropdown',
+		defaultValue: 'top-left',
 		options: [
 			{
-				label: "Top left",
-				value: "top-left"
+				label: 'Top left',
+				value: 'top-left'
 			},
 			{
-				label: "Top middle",
-				value: "top-middle"
+				label: 'Top middle',
+				value: 'top-middle'
 			},
 			{
-				label: "Top right",
-				value: "top-right"
+				label: 'Top right',
+				value: 'top-right'
 			},
 			{
-				label: "Left middle",
-				value: "left-middle"
+				label: 'Left middle',
+				value: 'left-middle'
 			},
 			{
-				label: "Centered",
-				value: "centered"
+				label: 'Centered',
+				value: 'centered'
 			},
 			{
-				label: "Right middle",
-				value: "right-middle"
+				label: 'Right middle',
+				value: 'right-middle'
 			},
 			{
-				label: "Bottom left",
-				value: "bottom-left"
+				label: 'Bottom left',
+				value: 'bottom-left'
 			},
 			{
-				label: "Bottom middle",
-				value: "bottom-middle"
+				label: 'Bottom middle',
+				value: 'bottom-middle'
 			},
 			{
-				label: "Bottom right",
-				value: "bottom-right"
+				label: 'Bottom right',
+				value: 'bottom-right'
 			}
 		]
 	};
 
-	var buttonMultiLine = {
-		ref: "props.isButtonMultiLine",
-		label: "Multiline Label",
-		type: "boolean",
+	const buttonMultiLine = {
+		ref: 'props.isButtonMultiLine',
+		label: 'Multiline Label',
+		type: 'boolean',
 		defaultValue: false
 	};
 
-	var buttonLabel = {
-		ref: "props.buttonLabel",
-		label: "Label",
-		type: "string",
-		expression: "optional",
+	const buttonLabel = {
+		ref: 'props.buttonLabel',
+		label: 'Label',
+		type: 'string',
+		expression: 'optional',
 		show: function () {
 			return true;
 		},
-		defaultValue: "My Button"
+		defaultValue: 'My Button'
 	};
 
 	// ****************************************************************************************
 	// Navigation Action
 	// ****************************************************************************************
 
-	var navigationAction = {
-		ref: "props.navigationAction",
-		label: "Navigation Action",
-		type: "string",
-		component: "dropdown",
-		default: "nextSheet",
+	const navigationAction = {
+		ref: 'props.navigationAction',
+		label: 'Navigation Action',
+		type: 'string',
+		component: 'dropdown',
+		default: 'nextSheet',
 		options: [
 			{
-				label: "None",
-				value: "none"
+				label: 'None',
+				value: 'none'
 			},
 			{
-				label: "Go to next sheet",
-				value: "nextSheet"
+				label: 'Go to next sheet',
+				value: 'nextSheet'
 			},
 			{
-				label: "Go to previous sheet",
-				value: "prevSheet"
+				label: 'Go to previous sheet',
+				value: 'prevSheet'
 			},
 			{
-				label: "Go to a specific sheet",
-				value: "gotoSheet"
+				label: 'Go to a specific sheet',
+				value: 'gotoSheet'
 			},
 			{
-				label: "Go to a sheet (defined by Sheet Id)",
-				value: "gotoSheetById"
+				label: 'Go to a sheet (defined by Sheet Id)',
+				value: 'gotoSheetById'
 			},
 			{
-				label: "Go to a story",
-				value: "gotoStory"
+				label: 'Go to a story',
+				value: 'gotoStory'
 			},
 			{
-				label: "Open a website / eMail",
-				value: "openWebsite"
+				label: 'Open a website / eMail',
+				value: 'openWebsite'
 			},
 			{
-				label: "Switch to Edit Mode",
-				value: "switchToEdit"
+				label: 'Switch to Edit Mode',
+				value: 'switchToEdit'
 			}
 			// ,
 			// {
@@ -263,54 +263,54 @@ define( [
 		]
 	};
 
-	var sheetId = {
-		ref: "props.sheetId",
-		label: "Sheet ID",
-		type: "string",
-		expression: "optional",
+	const sheetId = {
+		ref: 'props.sheetId',
+		label: 'Sheet ID',
+		type: 'string',
+		expression: 'optional',
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheetById';
 		}
 	};
 
-	var appList = {
-		type: "string",
-		component: "dropdown",
-		label: "Select App",
-		ref: "props.selectedApp",
+	const appList = {
+		type: 'string',
+		component: 'dropdown',
+		label: 'Select App',
+		ref: 'props.selectedApp',
 		options: ppHelper.getAppList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'openApp';
 		}
 	};
 
-	var sheetList = {
-		type: "string",
-		component: "dropdown",
-		label: "Select Sheet",
-		ref: "props.selectedSheet",
+	const sheetList = {
+		type: 'string',
+		component: 'dropdown',
+		label: 'Select Sheet',
+		ref: 'props.selectedSheet',
 		options: ppHelper.getSheetList(),
 		show: function ( data ) {
 			return data.props.navigationAction === 'gotoSheet';
 		}
 	};
 
-	var storyList = {
-		type: "string",
-		component: "dropdown",
-		label: "Select Story",
-		ref: "props.selectedStory",
+	const storyList = {
+		type: 'string',
+		component: 'dropdown',
+		label: 'Select Story',
+		ref: 'props.selectedStory',
 		options: ppHelper.getStoryList(),
 		show: function ( data ) {
-			return data.props.navigationAction === 'gotoStory'
+			return data.props.navigationAction === 'gotoStory';
 		}
 	};
 
-	var websiteUrl = {
-		ref: "props.websiteUrl",
-		label: "Website Url:",
-		type: "string",
-		expression: "optional",
+	const websiteUrl = {
+		ref: 'props.websiteUrl',
+		label: 'Website Url:',
+		type: 'string',
+		expression: 'optional',
 		show: function ( data ) {
 			return data.props.navigationAction === 'openWebsite';
 		}
@@ -321,168 +321,168 @@ define( [
 	// Action-Group
 	// ****************************************************************************************
 
-	var actionOptions = [
+	const actionOptions = [
 		{
-			value: "applyBookmark",
-			label: "Apply Bookmark",
-			group: "bookmark"
+			value: 'applyBookmark',
+			label: 'Apply Bookmark',
+			group: 'bookmark'
 		},
 		{
-			value: "clearAll",
-			label: "Clear All Selections",
-			group: "selection"
+			value: 'clearAll',
+			label: 'Clear All Selections',
+			group: 'selection'
 		},
 		{
-			value: "clearOther",
-			label: "Clear Other Fields",
-			group: "selection"
+			value: 'clearOther',
+			label: 'Clear Other Fields',
+			group: 'selection'
 		},
 		{
-			value: "forward",
-			label: "Forward (in your Selections)",
-			group: "selection"
+			value: 'forward',
+			label: 'Forward (in your Selections)',
+			group: 'selection'
 		},
 		{
-			value: "back",
-			label: "Back (in your Selections)",
-			group: "selection"
+			value: 'back',
+			label: 'Back (in your Selections)',
+			group: 'selection'
 		},
 		{
-			value: "clearField",
-			label: "Clear Selection in Field",
-			group: "selection"
+			value: 'clearField',
+			label: 'Clear Selection in Field',
+			group: 'selection'
 		},
 		{
-			value: "lockAll",
-			label: "Lock All",
-			group: "selection"
+			value: 'lockAll',
+			label: 'Lock All',
+			group: 'selection'
 		},
 		{
-			value: "lockField",
-			label: "Lock Field",
-			group: "selection"
+			value: 'lockField',
+			label: 'Lock Field',
+			group: 'selection'
 		},
 		{
-			value: "selectAll",
-			label: "Select All Values in Field",
-			group: "selection"
+			value: 'selectAll',
+			label: 'Select All Values in Field',
+			group: 'selection'
 		},
 		{
-			value: "selectAlternative",
-			label: "Select Alternatives",
-			group: "selection"
+			value: 'selectAlternative',
+			label: 'Select Alternatives',
+			group: 'selection'
 		},
 		{
-			value: "selectAndLockField",
-			label: "Select and Lock in Field",
-			group: "selection"
+			value: 'selectAndLockField',
+			label: 'Select and Lock in Field',
+			group: 'selection'
 		},
 		{
-			value: "selectExcluded",
-			label: "Select Excluded",
-			group: "selection"
+			value: 'selectExcluded',
+			label: 'Select Excluded',
+			group: 'selection'
 		},
 		{
-			value: "selectField",
-			label: "Select Value in Field",
-			group: "selection"
+			value: 'selectField',
+			label: 'Select Value in Field',
+			group: 'selection'
 		},
 		{
-			value: "selectPossible",
-			label: "Select Possible Values in Field",
-			group: "selection"
+			value: 'selectPossible',
+			label: 'Select Possible Values in Field',
+			group: 'selection'
 		},
 		{
-			value: "selectValues",
-			label: "Select Multiple Values in Field",
-			group: "selection"
+			value: 'selectValues',
+			label: 'Select Multiple Values in Field',
+			group: 'selection'
 		},
 		{
-			value: "setVariable",
-			label: "Set Variable Value",
-			group: "variables"
+			value: 'setVariable',
+			label: 'Set Variable Value',
+			group: 'variables'
 		},
 		{
-			value: "toggleSelect",
-			label: "Toggle Field Selection",
-			group: "selection"
+			value: 'toggleSelect',
+			label: 'Toggle Field Selection',
+			group: 'selection'
 		},
 		{
-			value: "unlockAll",
-			label: "Unlock All",
-			group: "selection"
+			value: 'unlockAll',
+			label: 'Unlock All',
+			group: 'selection'
 		},
 		{
-			value: "unlockField",
-			label: "Unlock Field",
-			group: "selection"
+			value: 'unlockField',
+			label: 'Unlock Field',
+			group: 'selection'
 		},
 		{
-			value: "unlockAllAndClearAll",
-			label: "Unlock All and Clear All Fields",
-			group: "selection"
+			value: 'unlockAllAndClearAll',
+			label: 'Unlock All and Clear All Fields',
+			group: 'selection'
 		}
 	];
 
 	// ****************************************************************************************
 	// n-actions
 	// ****************************************************************************************
-	var bookmarkEnabler = ['applyBookmark'];
-	var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
-	var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
-	var valueDescEnabler = ['selectValues'];
-	var variableEnabler = ['setVariable'];
-	var overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
+	const bookmarkEnabler = ['applyBookmark'];
+	const fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
+	const valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
+	const valueDescEnabler = ['selectValues'];
+	const variableEnabler = ['setVariable'];
+	const overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
-	var actionGroup = {
-		ref: "actionGroup",
-		label: "Selection Action Type",
-		type: "string",
-		component: "dropdown",
-		defaultValue: "selection",
+	const actionGroup = {
+		ref: 'actionGroup',
+		label: 'Selection Action Type',
+		type: 'string',
+		component: 'dropdown',
+		defaultValue: 'selection',
 		options: [
 			{
-				label: "Selection",
-				value: "selection"
+				label: 'Selection',
+				value: 'selection'
 			},
 			{
-				label: "Bookmark",
-				value: "bookmark"
+				label: 'Bookmark',
+				value: 'bookmark'
 			},
 			{
-				label: "Variables",
-				value: "variables"
+				label: 'Variables',
+				value: 'variables'
 			}
 		]
 	};
 
 	var actions = {
-		type: "array",
-		ref: "props.actionItems",
-		label: "Actions",
+		type: 'array',
+		ref: 'props.actionItems',
+		label: 'Actions',
 		itemTitleRef: function ( data ) {
 			var v = _.where( actionOptions, {value: data.actionType} );
 			return (v && v.length > 0) ? v[0].label : data.actionType;
 		},
 		allowAdd: true,
 		allowRemove: true,
-		addTranslation: "Add Item",
+		addTranslation: 'Add Item',
 		grouped: true,
 		items: {
-			//actionGroup: actionGroup,
+			// actionGroup: actionGroup,
 			actionType: {
-				type: "string",
-				ref: "actionType",
-				component: "dropdown",
-				defaultValue: "none",
+				type: 'string',
+				ref: 'actionType',
+				component: 'dropdown',
+				defaultValue: 'none',
 				options: actionOptions
 			},
 			bookmarkList: {
-				type: "string",
-				ref: "selectedBookmark",
-				component: "dropdown",
-				label: "Select bookmark",
-				expression: "optional",
+				type: 'string',
+				ref: 'selectedBookmark',
+				component: 'dropdown',
+				label: 'Select bookmark',
+				expression: 'optional',
 				options: ppHelper.getBookmarkList(),
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
@@ -555,9 +555,9 @@ define( [
 				}
 			},
 			overwriteLocked: {
-				type: "boolean",
-				ref: "softLock",
-				label: "Overwrite locked selections",
+				type: 'boolean',
+				ref: 'softLock',
+				label: 'Overwrite locked selections',
 				defaultValue: false,
 				show: function ( data, defs ) {
 					var def = _.findWhere( defs.layout.props.actionItems, {cId: data.cId} );
@@ -571,8 +571,8 @@ define( [
 	// ****************************************************************************************
 	// Setup
 	// ****************************************************************************************
-	var settings = {
-		uses: "settings",
+	const settings = {
+		uses: 'settings',
 		items: {
 			general: {
 				items: {
@@ -582,8 +582,8 @@ define( [
 				}
 			},
 			layout: {
-				type: "items",
-				label: "Layout",
+				type: 'items',
+				label: 'Layout',
 				items: {
 					label: buttonLabel,
 					style: buttonStyle,
@@ -596,8 +596,8 @@ define( [
 			},
 			actionsList: actions,
 			behavior: {
-				type: "items",
-				label: "Navigation Behavior",
+				type: 'items',
+				label: 'Navigation Behavior',
 				items: {
 					action: navigationAction,
 					sheetId: sheetId,
@@ -608,19 +608,19 @@ define( [
 				}
 			},
 			addons: {
-				uses: "addons",
+				uses: 'addons',
 				items: {
 					dataHandling: {
-						uses: "dataHandling"
+						uses: 'dataHandling'
 					}
 				}
 			}
 		}
 	};
 
-	var panelDefinition = {
-		type: "items",
-		component: "accordion",
+	const panelDefinition = {
+		type: 'items',
+		component: 'accordion',
 		items: {
 			settings: settings
 		}

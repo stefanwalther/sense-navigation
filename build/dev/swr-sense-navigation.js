@@ -78,7 +78,7 @@ define( [
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
-								if (url.startsWith("http://")||url.startsWith("https://")||(url.startsWith("mailto://"))) {
+								if ( url.startsWith( "http://" ) || url.startsWith( "https://" ) || (url.startsWith( "mailto://" )) ) {
 									window.open( url );
 								} else {
 									window.open( 'http://' + url );
@@ -117,7 +117,7 @@ define( [
 						for ( var i = 0; i < $scope.layout.props.actionItems.length; i++ ) {
 
 							actionType = $scope.layout.props.actionItems[i].actionType;
-							fld = !_.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].selectedField: $scope.layout.props.actionItems[i].field;
+							fld = !_.isEmpty( $scope.layout.props.actionItems[i].selectedField ) ? $scope.layout.props.actionItems[i].selectedField : $scope.layout.props.actionItems[i].field;
 							val = $scope.layout.props.actionItems[i].value;
 							softLock = $scope.layout.props.actionItems[i].softLock;
 							bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
@@ -282,7 +282,7 @@ define( [
 					return true;
 				};
 
-				$scope.unlockAllAndClearAll = function() {
+				$scope.unlockAllAndClearAll = function () {
 					var app = qlik.currApp();
 					app.unlockAll();
 					app.clearAll();
