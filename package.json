@@ -27,9 +27,13 @@
   "scripts": {
     "build": "sense-go build",
     "docs": "verb",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:src": "eslint src",
+    "lint:src:fix": "eslint src --fix"
   },
   "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-space-single": "^0.0.4",
     "gulp-format-md": "^0.1.11",
     "sense-extension-utils": "^0.4.0"
   },
