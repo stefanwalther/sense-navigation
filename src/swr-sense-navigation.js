@@ -110,7 +110,7 @@ define([
             for (var i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
               actionType = $scope.layout.props.actionItems[i].actionType;
-              fld = !_.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].selectedField : $scope.layout.props.actionItems[i].field;
+              fld = _.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
               val = $scope.layout.props.actionItems[i].value;
               softLock = $scope.layout.props.actionItems[i].softLock;
               bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
