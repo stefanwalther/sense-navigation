@@ -32,9 +32,9 @@
     "lint:src:fix": "eslint src --fix"
   },
   "devDependencies": {
-    "eslint": "^3.15.0",
-    "eslint-config-space-single": "^0.0.4",
-    "gulp-format-md": "^0.1.11",
+    "eslint": "^3.19.0",
+    "eslint-config-space-single": "^0.2.0",
+    "gulp-format-md": "^0.1.12",
     "sense-extension-utils": "^0.4.0"
   },
   "verb": {
