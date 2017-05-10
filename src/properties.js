@@ -460,7 +460,7 @@ define([
     addTranslation: 'Add Item',
     grouped: true,
     items: {
-      // actionGroup: actionGroup,
+      // ActionGroup: actionGroup, // eslint-disable-line capitalized-comments
       actionType: {
         type: 'string',
         ref: 'actionType',
