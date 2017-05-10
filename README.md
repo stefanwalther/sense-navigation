@@ -7,10 +7,6 @@ Please have a look at this branch [v1.0 - Alpha](https://github.com/stefanwalthe
 
 ![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense-navigation.png)
 
----
-https://github.com/stefanwalther/sense-navigation/tree/v1.0
----
-
 ## Purpose and Description
 The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to add a button to a Qlik Sense sheet to navigate in your app:
 
