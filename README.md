@@ -1,10 +1,14 @@
 # sense-navigation
 > Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 
+HEADS-UP:
+I am working on a major revision of sense-navigation, which is already available as v1.0-alpha.
+Please have a look at this branch: [v1.0 - Alpha](https://github.com/stefanwalther/sense-navigation/tree/v1.0)
+
 ![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense-navigation.png)
 
 ---
-
+https://github.com/stefanwalther/sense-navigation/tree/v1.0
 ---
 
 ## Purpose and Description
