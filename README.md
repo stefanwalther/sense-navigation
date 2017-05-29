@@ -1,4 +1,7 @@
 # sense-navigation
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/84d52444a6084f6cb3694424a968b036)](https://www.codacy.com/app/stefan-walther/sense-navigation?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=stefanwalther/sense-navigation&amp;utm_campaign=badger)
+
 > Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 
 HEADS-UP:
