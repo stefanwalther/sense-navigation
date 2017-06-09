@@ -149,7 +149,7 @@ I cannot guarantee that I will merge all PRs but I will evaluate them all.
 
 ### Building the project
 
-See [stefanwalther/stefanwalther/sense-extension-contrib](https://github.com/stefanwalther/sense-extension-contrib)
+See [https://github.com/stefanwalther/sense-extension-contrib](https://github.com/stefanwalther/sense-extension-contrib)
 
 ## Related projects
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
