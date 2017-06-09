@@ -147,6 +147,10 @@ The process for contributing is outlined below:
 
 I cannot guarantee that I will merge all PRs but I will evaluate them all.
 
+### Building the project
+
+See [stefanwalther/sense-extension-contrib](https://github.com/sense-extension-contrib)
+
 ## Related projects
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
 
