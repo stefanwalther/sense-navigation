@@ -40,6 +40,8 @@ define(
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
 
           // Note: getPreferredSize is an undocumented method and not supported right now.
+          // (Therefore it is not used in this extension)
+
           // this.getPreferredSize = function () {
           // 	var $btn = this.$element.find('.btn');
           // 	var size = {
