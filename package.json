@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "sense-go build",
-    "docs": "verb",
+    "docs": "docker run -v ${PWD}:/opt/verb stefanwalther/verb",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint:src": "eslint src",
     "lint:src:fix": "eslint src --fix"
@@ -34,7 +34,6 @@
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-space-single": "^0.2.0",
-    "gulp-format-md": "^0.1.12",
     "sense-extension-utils": "^0.4.0"
   },
   "verb": {
