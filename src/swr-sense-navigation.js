@@ -42,17 +42,17 @@ define( [
 			template: ngTemplate,
 			controller: ['$scope', '$element', function ( $scope, $element ) {
 
-				// Note: getPreferredSize is an undocumented method and not supported right now.
-				// this.getPreferredSize = function () {
-				// 	var $btn = this.$element.find('.btn');
-				// 	var size = {
-				// 		w: $btn.width(),
-				// 		h: $btn.height() + 7
-				// 	};
-				// 	var df = Deferred();
-				// 		df.resolve( size );
-				// 	return df.promise;
-				// };
+				//Note: getPreferredSize is an undocumented method and not supported right now.
+				 this.getPreferredSize = function () {
+				 	var $btn = this.$element.find('.btn');
+				 	var size = {
+				 		w: $btn.width(),
+				 		h: $btn.height() + 7
+				 		};
+				 		var df = Deferred();
+			 			df.resolve( size );
+				 		return df.promise;
+					 	};
 				
 
 				$scope.alignmentStyle = '{text-align: ' + $scope.align + ';}';
