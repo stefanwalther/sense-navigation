@@ -601,6 +601,8 @@ define([
     }
   };
 
+  // Note for the extension certification process:
+  //   Using the calculation condition is not officially supported!
   var addons = {
     type: 'items',
     component: 'expandable-items',
@@ -617,8 +619,7 @@ define([
 
   // ****************************************************************************************
   // Return Values
-  // **************************************************************************
-  // **************
+  // ****************************************************************************************
   return {
     type: 'items',
     component: 'accordion',
