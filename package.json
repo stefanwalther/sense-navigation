@@ -27,7 +27,7 @@
   "scripts": {
     "postinstall": "npm install -g sense-go",
     "build": "sense-go build",
-    "docs": "docker run -v ${PWD}:/opt/verb stefanwalther/verb",
+    "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
