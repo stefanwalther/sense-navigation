@@ -1,3 +1,8 @@
+version: "1.0.0"
+  date: ""
+  changes:
+    - "Added multiple actions instead of just two"
+    -
 version: "0.7.0"
   date: "2016-07-14"
   changes:
