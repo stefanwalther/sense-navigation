@@ -1,6 +1,7 @@
 /* global define,window */
 define(
   [
+    // Todo: Remove the jQuery dependency, not needed at all here ...
     'jquery',
     'underscore',
     'qlik',
@@ -13,6 +14,8 @@ define(
   ],
   function ($, _, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
+
+    var DEBUG = true;
 
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
@@ -98,12 +101,15 @@ define(
             }
           };
 
+          // Note for the extension certification process:
+          //   This is not supported, but there is no other way to fetch the state from the
+          //   official APIs
           $scope.isEditMode = function () {
             return $scope.$parent.$parent.editmode;
           };
           $scope.doAction = function () {
 
-            var app = qlik.currApp();
+            var app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
 
             var fld;
             var val;
@@ -120,6 +126,14 @@ define(
                 val = $scope.layout.props.actionItems[i].value;
                 softLock = $scope.layout.props.actionItems[i].softLock;
                 bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
+
+                if (DEBUG) {
+                  window.console.group('DEBUG');
+                  window.console.log('actionItems', $scope.layout.props.actionItems);
+                  window.console.log('actionType: ', actionType);
+                  window.console.log('fld: ', fld);
+                  window.console.groupEnd();
+                }
 
                 switch (actionType) {
                   case 'applyBookmark':
