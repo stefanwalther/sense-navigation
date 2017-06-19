@@ -1,13 +1,12 @@
 /*!
 
 * sense-navigation - Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
-*
+* --
 * @version v1.0.0-alpha
 * @link https://github.com/stefanwalther/sense-navigation
 * @author Stefan Walther
 * @license MIT
 */
-
 
 /* global define */
 define([
@@ -471,7 +470,7 @@ define([
     addTranslation: 'Add Item',
     grouped: true,
     items: {
-      // actionGroup: actionGroup,
+      // ActionGroup: actionGroup, // eslint-disable-line capitalized-comments
       actionType: {
         type: 'string',
         ref: 'actionType',
@@ -503,7 +502,7 @@ define([
               value: 'by-expr',
               label: '>> Define field by expression <<'
             });
-            // Ugly workaround for bug in Qlik Sense 2.1 - 3.1 that will cause
+            // Ugly workaround/fix for bug in Qlik Sense 2.1 - 3.1 that will cause
             // the loading of the field not to be finished
             $timeout(function () {
               $('.cell').trigger('mouseover');
@@ -573,7 +572,7 @@ define([
   // ****************************************************************************************
   // Setup
   // ****************************************************************************************
-  const settings = {
+  const appearanceSettings = {
     uses: 'settings',
     items: {
       general: {
@@ -608,29 +607,36 @@ define([
           websiteUrl: websiteUrl,
           appList: appList
         }
-      },
-      addons: {
-        uses: 'addons',
-        items: {
-          dataHandling: {
-            uses: 'dataHandling'
-          }
-        }
       }
     }
   };
 
-  const panelDefinition = {
+  // Note for the extension certification process:
+  //   Using the calculation condition is not officially supported!
+  var addons = {
     type: 'items',
-    component: 'accordion',
+    component: 'expandable-items',
+    translation: 'properties.addons',
     items: {
-      settings: settings
+      dataHandling: {
+        uses: 'dataHandling',
+        items: {
+          suppressZero: null
+        }
+      }
     }
   };
 
   // ****************************************************************************************
   // Return Values
   // ****************************************************************************************
-  return panelDefinition;
+  return {
+    type: 'items',
+    component: 'accordion',
+    items: {
+      settings: appearanceSettings,
+      addons: addons
+    }
+  };
 
 });
