@@ -562,7 +562,7 @@ define([
   // ****************************************************************************************
   // Setup
   // ****************************************************************************************
-  const settings = {
+  const appearanceSettings = {
     uses: 'settings',
     items: {
       general: {
@@ -597,13 +597,19 @@ define([
           websiteUrl: websiteUrl,
           appList: appList
         }
-      },
-      addons: {
-        uses: 'addons',
+      }
+    }
+  };
+
+  var addons = {
+    type: 'items',
+    component: 'expandable-items',
+    translation: 'properties.addons',
+    items: {
+      dataHandling: {
+        uses: 'dataHandling',
         items: {
-          dataHandling: {
-            uses: 'dataHandling'
-          }
+          suppressZero: null
         }
       }
     }
@@ -611,12 +617,14 @@ define([
 
   // ****************************************************************************************
   // Return Values
-  // ****************************************************************************************
+  // **************************************************************************
+  // **************
   return {
     type: 'items',
     component: 'accordion',
     items: {
-      settings: settings
+      settings: appearanceSettings,
+      addons: addons
     }
   };
 
