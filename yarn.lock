@@ -720,9 +720,9 @@ rx-lite@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-3.1.2.tgz#19ce502ca572665f3b647b10939f97fd1615f102"
 
-sense-extension-utils@^0.4.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/sense-extension-utils/-/sense-extension-utils-0.3.0.tgz#acb0b0cd9ea6d364098f8bf58227625bf5686902"
+sense-extension-utils@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/sense-extension-utils/-/sense-extension-utils-0.4.1.tgz#db94faa062ec6637da82666d896a882dbc93d043"
 
 shelljs@^0.7.5:
   version "0.7.6"
