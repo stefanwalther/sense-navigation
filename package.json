@@ -32,12 +32,21 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "lint:src": "eslint src",
-    "lint:src:fix": "eslint src --fix"
+    "lint:src:fix": "eslint src --fix",
+    "lint:test": "eslint test",
+    "lint:test:fix": "eslint test --fix",
+    "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --standalone false",
+    "test:integration": "aw-webdriver-test-runner ./test/conf.dev.js --specs test/**/*.comp.spec.js --aw-artifacts-path ./test/integration/artifacts"
   },
   "devDependencies": {
+    "after-work.js": "^2.1.0",
     "eslint": "^3.19.0",
     "eslint-config-space-single": "^0.2.0",
-    "sense-extension-utils": "^0.4.1"
+    "extend": "^3.0.1",
+    "playground-js-api": "^0.1.15",
+    "protractor": "^5.1.2",
+    "sense-extension-utils": "^0.4.1",
+    "webdriver-manager": "^12.0.6"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
@@ -62,5 +71,6 @@
       "verb",
       "verb-readme-generator"
     ]
-  }
+  },
+  "dependencies": {}
 }

@@ -1,0 +1,11 @@
+{
+  "logLevel": "debug",
+  "port": 8000,
+  "server": {
+    "baseDir": "./test/fixtures/",
+    "routes": {
+      "/src": "./build/dev/",
+      "/main": "./test/fixtures/index.html"
+    }
+  }
+}
