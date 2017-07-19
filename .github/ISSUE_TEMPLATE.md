@@ -45,6 +45,7 @@
 
 ### Versions
 
+* Extension version: 
 * Browser: 
 * Qlik Sense: 
 * Operating system: 
