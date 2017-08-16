@@ -90,7 +90,7 @@ Drag & drop the object onto a sheet (as you would do it with any other native ob
 Then define how the **sense-navigation** should behave:
 
 - [Layout Options](./docs/config-layout.md)
-- [Navigation Bevavior](./docs/config-navigation-behavior.md)
+- [Navigation Behavior](./docs/config-navigation-behavior.md)
 - [Actions](./docs/config-actions.md)
 
 ## Compatibility
