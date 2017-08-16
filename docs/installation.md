@@ -11,4 +11,8 @@
 
 ### You are already using an **sense-navigation** version 0.x?
 
-
+* I have unfortunately bad news: Version 0.x of **sense-navigation** does not seamlessly upgrade to version v1.x of **sense-navigation**!
+* If you upgrade to v1.x, you will have to
+  * First install new new version of **sense-navigation**.
+  * Delete existing old instances of **sense-navigation**.
+  * Add it again to your sheets and apply the previous configurations.

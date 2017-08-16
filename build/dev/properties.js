@@ -349,7 +349,7 @@ define([
     },
     {
       value: 'clearField',
-      label: 'Clear Selection in Field',
+      label: 'Clear Selections in Field',
       group: 'selection'
     },
     {

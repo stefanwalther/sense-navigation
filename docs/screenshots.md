@@ -10,6 +10,6 @@ Every button can also include an icon:
 
 > ![]({%= verb.baseImgUrl %}docs/images/sense_navigation_button_icons.png)
 
-**sense-navigation** uses the [Fontawesome icons|(http://fontawesome.io/), therefore you can select from a collection of 675 icons.
+**sense-navigation** uses the [Fontawesome icons](http://fontawesome.io/), therefore you can select from a collection of 675 icons.
 
 ###
