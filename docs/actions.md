@@ -1,21 +1,22 @@
+## Possible Actions
 
-- Apply Bookmark
-- Clear All Selections
-- Clear Other Fields
-- Forward (in your Selections)
-- Back (in your Selections)
-- Clear Selection in Field
-- Lock All
-- Lock Field
-- Select All Values in Field
-- Select Alternatives
-- Select and Lock in Field
-- Select Excluded
-- Select Value in Field
-- Select Possible Values in Field
-- Select Multiple Values in Field
-- Set Variable Value
-- Toggle Field Selection
-- Unlock All
-- Unlock Field
-- Unlock All and Clear All Fields
+* Apply a bookmark
+* Clear all selections
+* Clear selections in other fields
+* Move forwards (in your selections)
+* Move backwards (in your selections)
+* Clear selections in a field
+* Lock all selections
+* Lock a specific field
+* Unlock all selections
+* Unlock a specific field
+* Unlock all and clear all
+* Select a value in a field
+* Select all values in a field
+* Select multiple values in a field
+* Select alternatives
+* Select a value and lock field
+* Select excluded
+* Select possible values in a field
+* Set a variable value
+* Toggle field selection

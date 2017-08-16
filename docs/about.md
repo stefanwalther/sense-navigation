@@ -10,26 +10,18 @@ The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to 
 
 The button can be easily styled nicely by selecting some of the predefined designs.
 
-Furthermore ***sense-navigation*** offers the option to define **~~up to two basic~ actions**~ which will be executed before the navigation happens. The following actions are possible:
+Furthermore ***sense-navigation*** offers the option to define **actions**~ which will be executed **before** the navigation happens.
+This could for example be:
 
 * Apply a bookmark
-* Clear all selections
-* Clear selections in other fields
-* Move forwards (in your selections)
-* Move backwards (in your selections)
-* Clear selections in a field
-* Lock all selections
-* Lock a specific field
-* Unlock all selections
-* Unlock a specific field
-* Unlock all and clear all
-* Select a value in a field
-* Select all values in a field
-* Select multiple values in a field
+* Clear selections
+* Lock selections
+* Unlock selections
+* Select value(s) in a field
 * Select alternatives
-* Select a value and lock field
-* Select excluded
 * Select possible values in a field
 * Set a variable value
-* Toggle field selection
 
+See [here](./docs/actions.md) for a complete list of all available 20 actions.
+
+Note: The main difference between version 0.x and 1.x of sense-navigation is that with v1.x you can define more than two actions.
