@@ -1,7 +1,7 @@
 ### Navigation Behavior
 Define the behavior of the button. The following options are available:
 
-> ![]({%= verb.baseImgUrl %}docs/images/sense_navigation_behavior.png)
+> ![](./images/sense_navigation_behavior.png)
 
 * Go to the next sheet
 * Go to the previous sheet

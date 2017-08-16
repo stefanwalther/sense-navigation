@@ -1,6 +1,6 @@
 ### Layout
 
-> ![]({%= verb.baseImgUrl %}docs/images/sense_navigation_props_layout.png)
+> ![](./images/sense_navigation_props_layout.png)
 
 * **Label** - The buttons label.
 * **Style** - Select one of the predefined styles.
