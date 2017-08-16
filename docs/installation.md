@@ -1,6 +1,6 @@
 ### Fresh Installation
 
-0. Do not download the entire Github repository, this will not work!
+0. **Do not download the entire Github repository, this will not work!**
 1. Download the [latest version]({%= verb.buildLatest %}) or [any other version](https://github.com/stefanwalther/sense-navigation/tree/master/build) you want to install.
 2. Then install on either *Qlik Sense Desktop* or *Qlik Sense Server*:
 
