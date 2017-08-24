@@ -78,15 +78,17 @@ define( [
 							var url = $scope.layout.props.websiteUrl;
 							if ( !_.isEmpty( url ) ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
-									if( same == false)
+									if ( same === false) {
 										window.open( url );
-									else
-										window.open( url ,'_self');
+									} else {
+										window.open( url ,"_self");
+									}
 								} else {
-									if( same == false)
+									if( same === false) {
 										window.open( 'http://' + url );
-									else
-										window.open( 'http://' + url ,'_self');
+									} else {
+										window.open( 'http://' + url ,"_self");
+									}
 								}
 							}
 							break;
