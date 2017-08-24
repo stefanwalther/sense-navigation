@@ -604,7 +604,8 @@ define( [
 					sheetId: sheetId,
 					sheetList: sheetList,
 					storyList: storyList,
-					websiteUrl: websiteUrl
+					websiteUrl: websiteUrl,
+					sameWindow: sameWindow
 				}
 			},
 			actionsBefore: {
