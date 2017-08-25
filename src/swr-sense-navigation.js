@@ -79,16 +79,16 @@ define( [
 							var same = $scope.layout.props.sameWindow;
 							if ( !_.isEmpty( url ) ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
-									if ( same == false) {
+									if ( same === false) {
 										window.open( url );
 									} else {
 										window.open( url ,"_self");
 									}
 								} else {
-									if( same == false) {
-										window.open( 'http://' + url );
+									if( same === false) {
+										window.open( "http://" + url );
 									} else {
-										window.open( 'http://' + url ,"_self");
+										window.open( "http://" + url ,"_self");
 									}
 								}
 							}
