@@ -396,7 +396,11 @@ define( [
 		{
 			value: "unlockAll",
 			label: "Unlock All Selections"
-		}
+		},
+		{
+            value: "refresh",
+            label: "Refresh Page"
+        }
 	];
 
 	var actionBefore1 = {
@@ -560,6 +564,25 @@ define( [
 			return softLockEnabler.indexOf( data.props.actionBefore2 ) > -1;
 		}
 	};
+	var partialEnabler = ["refresh"]
+    var refresh1 = {
+        type: "boolean",
+        label: "Partial Reload",
+        ref: "props.refresh1",
+        defaultValue: false,
+        show: function (data) {
+            return partialEnabler.indexOf(data.props.actionBefore1) > -1
+        }
+    };
+    var refresh2 = {
+        type: "boolean",
+        label: "Partial Reload",
+        ref: "props.refresh2",
+        defaultValue: false,
+        show: function (data) {
+            return partialEnabler.indexOf(data.props.actionBefore2) > -1
+        }
+    };
 
 	// ****************************************************************************************
 	// Setup
@@ -609,13 +632,15 @@ define( [
 					value1Desc: value1Desc,
 					bookmark1: bookmark1,
 					softlock1: softlock1,
+					refresh1: refresh1,
 					actionBefore2: actionBefore2,
 					field2: field2,
 					variable2: variable2,
 					value2: value2,
 					value2Desc: value2Desc,
 					bookmark2: bookmark2,
-					softlock2: softlock2
+					softlock2: softlock2,
+					refresh2: refresh2  
 				}
 			}
 		}
