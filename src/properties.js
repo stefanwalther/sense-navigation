@@ -322,6 +322,16 @@ define( [
 		}
 
 	};
+	
+	var sameWindow = {
+		ref: "props.sameWindow",
+		label: "Same Window",
+		defaultValue: true,
+		type: "boolean",
+		show: function ( data ) {
+			return data.props.action === 'openWebsite';
+		}
+	};
 
 	// ****************************************************************************************
 	// Actions
@@ -594,7 +604,8 @@ define( [
 					sheetId: sheetId,
 					sheetList: sheetList,
 					storyList: storyList,
-					websiteUrl: websiteUrl
+					websiteUrl: websiteUrl,
+					sameWindow: sameWindow
 				}
 			},
 			actionsBefore: {
