@@ -1,13 +1,9 @@
 /*global define*/
 define( [
-	'jquery',
-	'underscore',
 	'ng!$http',
 	'ng!$q',
 	'qlik'
-], function ( $,
-			  _,
-			  $http,
+], function ( $http,
 			  $q,
 			  qlik ) {
 	'use strict';
@@ -19,16 +15,17 @@ define( [
 	 * If yes, it will not be added again.
 	 */
 	function addStyleLinkToHeader ( linkUrl, id ) {
-		if ( id && !_.isEmpty( id ) ) {
-			if ( !$( '#' + id ).length ) {
-				var $styleLink = $( document.createElement( 'link' ) );
-				$styleLink.attr( 'rel', 'stylesheet' );
-				$styleLink.attr( 'type', 'text/css' );
-				$styleLink.attr( 'href', linkUrl );
-				if ( id && !_.isEmpty( id ) ) {
-					$styleLink.attr( 'id', id );
+		if ( id && !id.isEmpty() ) {
+			let element = document.getElementById(id);
+			if (element) {
+				var styleLink = document.createElement( 'link' );
+				styleLink.setAttribute( 'rel', 'stylesheet' );
+				styleLink.setAttribute( 'type', 'text/css' );
+				styleLink.setAttribute( 'href', linkUrl );
+				if ( id && !id.isEmpty() ) {
+					styleLink.setAttribute( 'id', id );
 				}
-				$( 'head' ).append( $styleLink );
+				document.head.appendChild(styleLink);
 			}
 		}
 	}
@@ -40,13 +37,20 @@ define( [
 	 */
 	function addStyleToHeader ( cssContent, id ) {
 		if ( id && typeof id === 'string' ) {
-			if ( !$( '#' + id ).length ) {
-				$( "<style>" )
-					.attr( 'id', id )
-					.html( cssContent ).appendTo( "head" );
+			let element = document.getElementById(id);
+			if (element != null) {
+				element = document.createElement("style");
+				element.setAttribute("type","text/css");
+				element.setAttribute("id",id);
+				element.appendChild(document.createTextNode(cssContent));
+				document.head.appendChild(element);
 			}
 		} else {
-			$( "<style>" ).html( cssContent ).appendTo( "head" );
+			let style = document.createElement("style");
+			style.setAttribute("type","text/css");
+			style.setAttribute("id",id);
+			style.appendChild(document.createTextNode(cssContent));
+			document.head.appendChild(style);
 		}
 	}
 
@@ -86,7 +90,7 @@ define( [
 			var chars = rest.split();
 			var numDigitsAfterRest = 0;
 			for ( var i = 0; i < chars.length; i++ ) {
-				if ( !_.isNumber( chars[i] ) ) {
+				if ( !chars[i].isNumber() ) {
 					numDigitsAfterRest = i + 1;
 					break;
 				}
@@ -104,6 +108,19 @@ define( [
 			if(this.length < i) return false;
 			for(--i; (i >= 0) && (this[i] === str[i]); --i) continue;
 			return i < 0;
+		}
+	}
+
+	if (typeof String.prototype.isEmpty != 'function') {
+		String.prototype.isEmpty = function(obj) {
+			if (obj == null) return true
+			return obj.length === 0
+		}
+	}
+	
+	if (typeof Object.prototype.isNumber != 'function') {
+		Object.prototype.isNumber = function(obj) {
+			return toString.call(obj) === '[object ' + name + ']'
 		}
 	}
 

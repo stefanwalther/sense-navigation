@@ -1,7 +1,5 @@
 /*global define*/
 define( [
-		'jquery',
-		'underscore',
 		'qlik',
 		'angular',
 		'core.utils/deferred',
@@ -11,7 +9,7 @@ define( [
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, _, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function (qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );
@@ -27,6 +25,13 @@ define( [
 				}
 			}
 			return a;
+		}
+
+		if (typeof String.prototype.isEmpty != 'function') {
+			String.prototype.isEmpty = function(obj) {
+				if (obj == null) return true
+				return obj.length === 0
+			}
 		}
 
 		return {
@@ -76,7 +81,7 @@ define( [
 							break;
 						case "openWebsite":
 							var url = $scope.layout.props.websiteUrl;
-							if ( !_.isEmpty( url ) ) {
+							if ( !url.isEmpty() ) {
 								if ( url.startsWith( 'http://' ) || url.startsWith( 'https://' ) ) {
 									window.open( url );
 								} else {
@@ -122,51 +127,51 @@ define( [
 								app.unlockAll();
 								break;
 							case "clearField":
-								if ( !_.isEmpty( fld ) ) {
+								if ( !fld.isEmpty() ) {
 									app.field( fld ).clear();
 								}
 								break;
 							case "selectAlternative":
 								console.log('selectAlternative', fld, softlock);
-								if ( !_.isEmpty( fld ) ) {
+								if ( !fld.isEmpty() ) {
 									app.field( fld ).selectAlternative( softlock );
 								}
 								break;
 							case "selectExcluded":
 								console.log('selectExcluded', fld, softlock);
-								if ( !_.isEmpty( fld ) ) {
+								if ( !fld.isEmpty() ) {
 									app.field( fld ).selectExcluded( softlock );
 								}
 								break;
 							case "selectField":
-								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+								if ( !fld.isEmpty() && ( !val.isEmpty()) ) {
 									app.field( fld ).selectMatch( val, false );
 								}
 								break;
 							case "selectValues":
-								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+								if ( !fld.isEmpty() && ( !val.isEmpty()) ) {
 									var vals = splitToStringNum( val, ';' );
 									app.field( fld ).selectValues( vals, false );
 								}
 								break;
 							case "selectandLockField":
-								if ( !_.isEmpty( fld ) && ( !_.isEmpty( val )) ) {
+								if ( !fld.isEmpty() && ( !val.isEmpty()) ) {
 									app.field( fld ).selectMatch( val, true );
 									app.field( fld ).lock()
 								}
 								break;
 							case "lockField":
-								if ( !_.isEmpty( fld ) ) {
+								if ( !fld.isEmpty() ) {
 									app.field( fld ).lock()
 								}
 								break;
 							case "applyBookmark":
-								if ( !_.isEmpty( $scope.layout.props['bookmark' + i] ) ) {
+								if ( !$scope.layout.props['bookmark' + i].isEmpty() ) {
 									app.bookmark.apply( $scope.layout.props['bookmark' + i] );
 								}
 								break;
 							case "setVariable":
-								if ( !_.isEmpty( $scope.layout.props['variable' + i] ) ) {
+								if ( !$scope.layout.props['variable' + i].isEmpty() ) {
 									$scope.setVariableContent( $scope.layout.props['variable' + i], val );
 								}
 								break;
@@ -197,13 +202,13 @@ define( [
 				};
 
 				$scope.gotoSheet = function ( sheetId ) {
-					if ( $scope.checkQlikNavigation() && !_.isEmpty( sheetId ) ) {
+					if ( $scope.checkQlikNavigation() && !sheetId.isEmpty() ) {
 						qlik.navigation.gotoSheet( sheetId );
 					}
 				};
 
 				$scope.gotoStory = function ( storyId ) {
-					if ( $scope.checkQlikNavigation() && !_.isEmpty( storyId ) ) {
+					if ( $scope.checkQlikNavigation() && !storyId.isEmpty() ) {
 						qlik.navigation.gotoStory( storyId );
 					}
 				};
