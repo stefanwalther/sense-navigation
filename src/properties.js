@@ -1,12 +1,11 @@
 /*global define*/
 define( [
 	'jquery',
-	'underscore',
 	'qlik',
 	'./lib/external/sense-extension-utils/extUtils',
 	'ng!$q',
 	'ng!$http'
-], function ( $, _, qlik, extUtils, $q, $http ) {
+], function ( $, qlik, extUtils, $q, $http ) {
 
 	var app = qlik.currApp();
 
@@ -33,12 +32,10 @@ define( [
 		var defer = $q.defer();
 
 		app.getAppObjectList( function ( data ) {
-			var sheets = [];
-			var sortedData = _.sortBy( data.qAppObjectList.qItems, function ( item ) {
+			var sortedData = data.qAppObjectList.qItems.slice().sort(function ( item ) {
 				return item.qData.rank;
 			} );
-			_.each( sortedData, function ( item ) {
-				sheets.push( {
+			var sheets = sortedData.map(function ( item ) {
 					value: item.qInfo.qId,
 					label: item.qMeta.title
 				} );
@@ -63,7 +60,7 @@ define( [
 					} );
 				} )
 			}
-			return defer.resolve( _.sortBy( stories, function ( item ) {
+			return defer.resolve(stories.slice().sort(function ( item ) {
 				return item.label;
 			} ) );
 
@@ -78,7 +75,7 @@ define( [
 		$http.get( extUtils.getExtensionPath( 'swr-sense-navigation' ) + '/lib/data/icons-fa.json' )
 			.then( function ( res ) {
 
-				var sortedIcons = _.sortBy( res.data.icons, function ( o ) {
+				var sortedIcons = res.data.icons.slice().sort(function ( o ) {
 					return o.name;
 				} );
 

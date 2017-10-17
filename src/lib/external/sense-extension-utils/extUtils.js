@@ -1,12 +1,10 @@
 /*global define*/
 define( [
 	'jquery',
-	'underscore',
 	'ng!$http',
 	'ng!$q',
 	'qlik'
 ], function ( $,
-			  _,
 			  $http,
 			  $q,
 			  qlik ) {
@@ -19,13 +17,13 @@ define( [
 	 * If yes, it will not be added again.
 	 */
 	function addStyleLinkToHeader ( linkUrl, id ) {
-		if ( id && !_.isEmpty( id ) ) {
+		if ( id && !id.isEmpty() ) {
 			if ( !$( '#' + id ).length ) {
 				var $styleLink = $( document.createElement( 'link' ) );
 				$styleLink.attr( 'rel', 'stylesheet' );
 				$styleLink.attr( 'type', 'text/css' );
 				$styleLink.attr( 'href', linkUrl );
-				if ( id && !_.isEmpty( id ) ) {
+				if ( id && !id.isEmpty() ) {
 					$styleLink.attr( 'id', id );
 				}
 				$( 'head' ).append( $styleLink );
@@ -86,7 +84,7 @@ define( [
 			var chars = rest.split();
 			var numDigitsAfterRest = 0;
 			for ( var i = 0; i < chars.length; i++ ) {
-				if ( !_.isNumber( chars[i] ) ) {
+				if ( !chars[i].isNumber() ) {
 					numDigitsAfterRest = i + 1;
 					break;
 				}
@@ -104,6 +102,19 @@ define( [
 			if(this.length < i) return false;
 			for(--i; (i >= 0) && (this[i] === str[i]); --i) continue;
 			return i < 0;
+		}
+	}
+
+	if (typeof String.prototype.isEmpty != 'function') {
+		String.prototype.isEmpty = function(obj) {
+			if (obj == null) return true
+			return obj.length === 0
+		}
+	}
+	
+	if (typeof Object.prototype.isNumber != 'function') {
+		Object.prototype.isNumber = function(obj) {
+			return toString.call(obj) === '[object ' + name + ']'
 		}
 	}
 
