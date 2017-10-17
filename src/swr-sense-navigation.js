@@ -1,6 +1,5 @@
 /*global define*/
 define( [
-		'jquery',
 		'qlik',
 		'angular',
 		'core.utils/deferred',
@@ -10,7 +9,7 @@ define( [
 		'text!./lib/css/main.css',
 		'text!./template.ng.html'
 	],
-	function ( $, qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
+	function (qlik, angular, Deferred, extUtils, props, initProps, cssContent, ngTemplate ) {
 		'use strict';
 
 		extUtils.addStyleToHeader( cssContent );

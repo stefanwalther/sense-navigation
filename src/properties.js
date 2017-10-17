@@ -1,11 +1,10 @@
 /*global define*/
 define( [
-	'jquery',
 	'qlik',
 	'./lib/external/sense-extension-utils/extUtils',
 	'ng!$q',
 	'ng!$http'
-], function ( $, qlik, extUtils, $q, $http ) {
+], function (qlik, extUtils, $q, $http ) {
 
 	var app = qlik.currApp();
 

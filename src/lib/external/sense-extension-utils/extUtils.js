@@ -1,11 +1,9 @@
 /*global define*/
 define( [
-	'jquery',
 	'ng!$http',
 	'ng!$q',
 	'qlik'
-], function ( $,
-			  $http,
+], function ( $http,
 			  $q,
 			  qlik ) {
 	'use strict';
@@ -18,15 +16,16 @@ define( [
 	 */
 	function addStyleLinkToHeader ( linkUrl, id ) {
 		if ( id && !id.isEmpty() ) {
-			if ( !$( '#' + id ).length ) {
-				var $styleLink = $( document.createElement( 'link' ) );
-				$styleLink.attr( 'rel', 'stylesheet' );
-				$styleLink.attr( 'type', 'text/css' );
-				$styleLink.attr( 'href', linkUrl );
+			let element = document.getElementById(id);
+			if (element) {
+				var styleLink = document.createElement( 'link' );
+				styleLink.setAttribute( 'rel', 'stylesheet' );
+				styleLink.setAttribute( 'type', 'text/css' );
+				styleLink.setAttribute( 'href', linkUrl );
 				if ( id && !id.isEmpty() ) {
-					$styleLink.attr( 'id', id );
+					styleLink.setAttribute( 'id', id );
 				}
-				$( 'head' ).append( $styleLink );
+				document.head.appendChild(styleLink);
 			}
 		}
 	}
@@ -38,13 +37,20 @@ define( [
 	 */
 	function addStyleToHeader ( cssContent, id ) {
 		if ( id && typeof id === 'string' ) {
-			if ( !$( '#' + id ).length ) {
-				$( "<style>" )
-					.attr( 'id', id )
-					.html( cssContent ).appendTo( "head" );
+			let element = document.getElementById(id);
+			if (element != null) {
+				element = document.createElement("style");
+				element.setAttribute("type","text/css");
+				element.setAttribute("id",id);
+				element.appendChild(document.createTextNode(cssContent));
+				document.head.appendChild(element);
 			}
 		} else {
-			$( "<style>" ).html( cssContent ).appendTo( "head" );
+			let style = document.createElement("style");
+			style.setAttribute("type","text/css");
+			style.setAttribute("id",id);
+			style.appendChild(document.createTextNode(cssContent));
+			document.head.appendChild(style);
 		}
 	}
 
