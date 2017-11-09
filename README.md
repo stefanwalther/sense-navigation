@@ -143,12 +143,16 @@ Some related projects (Qlik Sense Visualization Extensions) I have recently crea
 - [sense-range-slider](https://www.npmjs.com/package/sense-range-slider): Slider object for Qlik Sense to manipulate one or two variables. | [homepage](https://github.com/QlikDev/qsRangeSlider "Slider object for Qlik Sense to manipulate one or two variables.")
 - [sense-themable-kpi-tile](https://www.npmjs.com/package/sense-themable-kpi-tile): KPI Tile for Qlik Sense with the ability to use themes or to customize background… [more](https://github.com/stefanwalther/sense-themable-kpi-tile) | [homepage](https://github.com/stefanwalther/sense-themable-kpi-tile "KPI Tile for Qlik Sense with the ability to use themes or to customize background color, comparison indicator, etc.")  
 
-## Author
+## Authors & Contributors
 **Stefan Walther**
 
 * [qliksite.io](http://qliksite.io)  
 * [twitter/waltherstefan](http://twitter.com/waltherstefan)  
 * [github.com/stefanwalther](http://github.com/stefanwalther)  
+
+### Contributors
+- [rvaheldendaten](https://github.com/rvaheldendaten)
+- [rjriel](https://github.com/rjriel)
 
 ## License
 MIT
