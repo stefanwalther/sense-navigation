@@ -8,6 +8,7 @@ todos.md
 /build/*_dev.zip
 .tmp/
 .sense-go.local.yml
+docker-compose.yml
 
 
 #https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
