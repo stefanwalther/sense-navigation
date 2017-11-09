@@ -30,8 +30,7 @@
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb"
   },
   "devDependencies": {
-    "sense-extension-utils": "^0.3.0",
-    "verb": "git://github.com/verbose/verb"
+    "sense-extension-utils": "^0.4.1"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
