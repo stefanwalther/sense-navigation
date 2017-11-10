@@ -101,11 +101,8 @@ define(
             }
           };
 
-          // Note for the extension certification process:
-          //   This is not supported, but there is no other way to fetch the state from the
-          //   official APIs
           $scope.isEditMode = function () {
-            return $scope.$parent.$parent.editmode;
+            return qlik.navigation.getMode() === qlik.navigation.EDIT;
           };
           $scope.doAction = function () { // eslint-disable-line complexity
 
