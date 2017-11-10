@@ -25,8 +25,8 @@
     "url": "https://github.com/stefanwalther/sense-navigation"
   },
   "scripts": {
-    "postinstall": "npm install -g sense-go",
-    "build": "sense-go build",
+    "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go build",
+    "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go release",
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
