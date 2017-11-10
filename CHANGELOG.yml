@@ -1,3 +1,9 @@
+version: "0.8.2"
+  date: "2017-11-10"
+  changes:
+    - "docs: add contributors"
+    - "chore: ignore docker-compose.yml for now"
+    - "ci: use docker-sense-go instead of the global node.js package"
 version: "0.8.1"
   date: "2016-08-06"
   changes:
