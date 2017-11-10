@@ -1,12 +1,11 @@
 /* global define */
 define([
   'angular',
-  'underscore',
   'jquery',
   'qlik',
   './lib/external/sense-extension-utils/pp-helper',
   'text!./lib/data/icons-fa.json'
-], function (angular, _, $, qlik, ppHelper, iconListRaw) { // eslint-disable-line max-params
+], function (angular, $, qlik, ppHelper, iconListRaw) { // eslint-disable-line max-params
 
   const $injector = angular.injector(['ng']);
   const $timeout = $injector.get('$timeout');
@@ -37,8 +36,8 @@ define([
         }
       );
     });
-    return _.sortBy(propDef, function (item) {
-      return item.label;
+    return propDef.sort(function (item1, item2) {
+      return item1.label.localeCompare(item2.label);
     });
   }
 
@@ -452,7 +451,7 @@ define([
     ref: 'props.actionItems',
     label: 'Actions',
     itemTitleRef: function (data) {
-      var v = _.where(actionOptions, {value: data.actionType});
+      var v = actionOptions.filter(function(option) { return option.value === data.actionType });
       return (v && v.length > 0) ? v[0].label : data.actionType;
     },
     allowAdd: true,
@@ -476,7 +475,7 @@ define([
         expression: 'optional',
         options: ppHelper.getBookmarkList(),
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -501,7 +500,7 @@ define([
           });
         },
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -511,7 +510,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -521,7 +520,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -531,7 +530,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -541,7 +540,7 @@ define([
         label: 'Variable Name',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def =defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -551,7 +550,7 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          var def = defs.layout.props.actionItems.find(function(option) { return option.cId === data.cId });
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
