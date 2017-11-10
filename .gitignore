@@ -106,3 +106,6 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
+
+# a settings folder for Visual Studio Code
+.vscode
