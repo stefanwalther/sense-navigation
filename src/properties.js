@@ -447,7 +447,7 @@ define([
   //   ]
   // };
 
-  var actions = {
+  const actions = {
     type: 'array',
     ref: 'props.actionItems',
     label: 'Actions',
@@ -476,7 +476,7 @@ define([
         expression: 'optional',
         options: ppHelper.getBookmarkList(),
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -501,7 +501,7 @@ define([
           });
         },
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -511,7 +511,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -521,7 +521,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -531,7 +531,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -541,7 +541,7 @@ define([
         label: 'Variable Name',
         expression: 'optional',
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -551,7 +551,7 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          var def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
+          const def = _.findWhere(defs.layout.props.actionItems, {cId: data.cId});
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
@@ -603,7 +603,7 @@ define([
 
   // Note for the extension certification process:
   //   Using the calculation condition is not officially supported!
-  var addons = {
+  const addons = {
     type: 'items',
     component: 'expandable-items',
     translation: 'properties.addons',
@@ -628,5 +628,4 @@ define([
       addons: addons
     }
   };
-
 });

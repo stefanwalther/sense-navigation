@@ -15,12 +15,12 @@ define(
   function ($, _, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
-    var DEBUG = true;
+    const DEBUG = true;
 
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
-      var a = str.split(sep);
-      for (var i = 0; i < a.length; i++) {
+      const a = str.split(sep);
+      for (let i = 0; i < a.length; i++) {
         if (!isNaN(a[i])) {
           a[i] = Number(a[i]);
         }
@@ -72,7 +72,7 @@ define(
                 $scope.nextSheet();
                 break;
               case 'openWebsite':
-                var url = $scope.layout.props.websiteUrl;
+                const url = $scope.layout.props.websiteUrl;
                 if (!_.isEmpty(url)) {
                   if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
                     window.open(url);
@@ -91,7 +91,7 @@ define(
               // 	break;
               // eslint-enable capitalized-comments
               case 'switchToEdit':
-                var result = qlik.navigation.setMode(qlik.navigation.EDIT);
+                const result = qlik.navigation.setMode(qlik.navigation.EDIT);
                 if (!result.success) {
                   window.console.error(result.errorMsg);
                 }
@@ -109,17 +109,17 @@ define(
           };
           $scope.doAction = function () {
 
-            var app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
+            const app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
 
-            var fld;
-            var val;
-            var actionType;
-            var softLock;
-            var bookmark;
+            let fld;
+            let val;
+            let actionType;
+            let softLock;
+            let bookmark;
 
             if ($scope.layout.props && $scope.layout.props.actionItems) {
 
-              for (var i = 0; i < $scope.layout.props.actionItems.length; i++) {
+              for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
                 actionType = $scope.layout.props.actionItems[i].actionType;
                 fld = _.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
@@ -204,7 +204,7 @@ define(
                     break;
                   case 'selectValues':
                     if (!_.isEmpty(fld) && (!_.isEmpty(val))) {
-                      var vals = splitToStringNum(val, ';');
+                      let vals = splitToStringNum(val, ';');
                       app.field(fld).selectValues(vals, false);
                     }
                     break;
@@ -277,7 +277,7 @@ define(
 
           // Todo: Use method from sense-extension-utils/variable-utils.js
           $scope.setVariableContent = function (variableName, variableValue) {
-            var app = qlik.currApp();
+            const app = qlik.currApp();
             app.variable.setContent(variableName, variableValue)
               .then(function (/* reply */) {
                 angular.noop();
@@ -296,7 +296,7 @@ define(
           };
 
           $scope.unlockAllAndClearAll = function () {
-            var app = qlik.currApp();
+            const app = qlik.currApp();
             app.unlockAll();
             app.clearAll();
           };
