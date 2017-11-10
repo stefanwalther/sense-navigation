@@ -26,7 +26,7 @@
   },
   "scripts": {
     "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go build",
-    "release": "docker run --rm -v ${P∆WD}:/opt/sense-go stefanwalther/sense-go release",
+    "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go release",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb"
   },
