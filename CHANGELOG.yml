@@ -1,8 +1,8 @@
-version: "1.0.0"
-  date: ""
+version: "1.0.0-rc1-01"
+  date: "2017-11-01"
   changes:
     - "Added multiple actions instead of just two"
-    -
+    - "fix: isEditMode uses qlik.navigation.getMode (#102)"
 version: "0.7.0"
   date: "2016-07-14"
   changes:

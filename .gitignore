@@ -109,3 +109,6 @@ $RECYCLE.BIN/
 
 # a settings folder for Visual Studio Code
 .vscode
+
+# local debugging
+docker-compose.yml
