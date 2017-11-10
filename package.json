@@ -41,10 +41,10 @@
   "devDependencies": {
     "after-work.js": "^2.1.0",
     "eslint": "^3.19.0",
-    "eslint-config-space-single": "^0.2.0",
+    "eslint-config-space-single": "^0.2.1",
     "extend": "^3.0.1",
     "playground-js-api": "^0.1.15",
-    "protractor": "^5.1.2",
+    "protractor": "^5.2.0",
     "sense-extension-utils": "^0.4.1",
     "webdriver-manager": "^12.0.6"
   },
