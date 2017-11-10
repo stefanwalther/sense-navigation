@@ -71,7 +71,7 @@ define(
               case 'nextSheet':
                 $scope.nextSheet();
                 break;
-              case 'openWebsite':
+              case 'openWebsite': // eslint-disable-line no-case-declarations
                 const url = $scope.layout.props.websiteUrl;
                 if (!_.isEmpty(url)) {
                   if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
@@ -90,7 +90,7 @@ define(
               // 	qlik.openApp( $scope.layout.props.selectedApp );
               // 	break;
               // eslint-enable capitalized-comments
-              case 'switchToEdit':
+              case 'switchToEdit': // eslint-disable-line no-case-declarations
                 const result = qlik.navigation.setMode(qlik.navigation.EDIT);
                 if (!result.success) {
                   window.console.error(result.errorMsg);
@@ -107,7 +107,7 @@ define(
           $scope.isEditMode = function () {
             return $scope.$parent.$parent.editmode;
           };
-          $scope.doAction = function () {
+          $scope.doAction = function () { // eslint-disable-line complexity
 
             const app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
 
