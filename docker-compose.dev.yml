@@ -20,7 +20,7 @@ services:
       - sense-client
 
   sense-client:
-    image: qlik/sense-client:4.43.0
+    image: qlik/sense-client:4.58.5
     container_name: sense_client
     volumes:
       - sense-client-files:/client

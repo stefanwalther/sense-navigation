@@ -112,3 +112,4 @@ $RECYCLE.BIN/
 
 # local debugging
 docker-compose.yml
+docker-compose.dev.yml
