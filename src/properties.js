@@ -2,11 +2,10 @@
 define([
   'angular',
   'underscore',
-  'jquery',
   'qlik',
   './lib/external/sense-extension-utils/pp-helper',
   'text!./lib/data/icons-fa.json'
-], function (angular, _, $, qlik, ppHelper, iconListRaw) { // eslint-disable-line max-params
+], function (angular, _, qlik, ppHelper, iconListRaw) { // eslint-disable-line max-params
 
   const $injector = angular.injector(['ng']);
   const $timeout = $injector.get('$timeout');
@@ -452,7 +451,7 @@ define([
     ref: 'props.actionItems',
     label: 'Actions',
     itemTitleRef: function (data) {
-      var v = _.where(actionOptions, {value: data.actionType});
+      let v = _.where(actionOptions, {value: data.actionType});
       return (v && v.length > 0) ? v[0].label : data.actionType;
     },
     allowAdd: true,
@@ -494,9 +493,9 @@ define([
             });
             // Ugly workaround/fix for bug in Qlik Sense 2.1 - 3.1 that will cause
             // the loading of the field not to be finished
-            $timeout(function () {
-              $('.cell').trigger('mouseover');
-            }, 0);
+            // $timeout(function () {
+            //   $('.cell').trigger('mouseover');
+            // }, 0);
             return fieldList;
           });
         },

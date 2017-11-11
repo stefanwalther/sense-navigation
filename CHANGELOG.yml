@@ -1,5 +1,9 @@
+version: "1.0.0-rc1-02"
+  date: "2017-11-11"
+  changes:
+    - "Remove jQuery dependency"
 version: "1.0.0-rc1-01"
-  date: "2017-11-01"
+  date: "2017-11-11"
   changes:
     - "Added multiple actions instead of just two"
     - "fix: isEditMode uses qlik.navigation.getMode (#102)"

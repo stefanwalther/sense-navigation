@@ -1,8 +1,6 @@
 /* global define,window */
 define(
   [
-    // Todo: Remove the jQuery dependency, not needed at all here ...
-    'jquery',
     'underscore',
     'qlik',
     'angular',
@@ -12,7 +10,7 @@ define(
     'css!./lib/css/main.min.css',
     'css!./lib/external/fontawesome/css/font-awesome.min.css'
   ],
-  function ($, _, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
+  function (_, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
