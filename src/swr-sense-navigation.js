@@ -111,6 +111,7 @@ define(
             let actionType;
             let softLock;
             let bookmark;
+            let variable;
 
             if ($scope.layout.props && $scope.layout.props.actionItems) {
 
@@ -121,6 +122,7 @@ define(
                 val = $scope.layout.props.actionItems[i].value;
                 softLock = $scope.layout.props.actionItems[i].softLock;
                 bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
+                variable = $scope.layout.props.actionItems[i].variable;
 
                 if (DEBUG) {
                   window.console.group('DEBUG');
@@ -209,8 +211,8 @@ define(
                     }
                     break;
                   case 'setVariable':
-                    if (!_.isEmpty($scope.layout.props['variable' + i])) {
-                      $scope.setVariableContent($scope.layout.props['variable' + i], val);
+                    if (!_.isEmpty(variable)) {
+                      $scope.setVariableContent(variable, val);
                     }
                     break;
                   case 'toggleSelect':
