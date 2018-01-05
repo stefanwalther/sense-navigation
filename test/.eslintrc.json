@@ -1,3 +1,6 @@
 {
-  "extends": "eslint-config-space-single/test"
+  "extends": "eslint-config-space-single/test",
+  "rules": {
+    "padded-blocks": "off"
+  }
 }

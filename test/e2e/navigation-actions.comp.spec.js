@@ -128,7 +128,45 @@ describe('Extension rendering', function () {
       .click();
 
     await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
+  });
 
+  it('should be possible to use button to open a new website (SAME window)', async () => {
+    await sheetThumbs
+      .filter(elem => elem.getText().then(text => text === 'test:navigation-actions'))
+      .first()
+      .click();
+
+    await browser.wait(EC.visibilityOf($('#grid')), timeoutTime);
+    await browser.wait(EC.invisibilityOf(loadBlocker), timeoutTime);
+
+    await $$('.btn')
+      .filter(elem => elem.getText().then(text => text === 'OpenUrl:self'))
+      .first()
+      .click();
+
+    await browser.wait(EC.urlContains('https://github.com'), timeoutTime);
+  });
+
+  it('should be possible to use button to open a new website (NEW window)', async () => {
+
+    await sheetThumbs
+      .filter(elem => elem.getText().then(text => text === 'test:navigation-actions'))
+      .first()
+      .click();
+
+    await browser.wait(EC.visibilityOf($('#grid')), timeoutTime);
+    await browser.wait(EC.invisibilityOf(loadBlocker), timeoutTime);
+
+    await $$('.btn')
+      .filter(elem => elem.getText().then(text => text === 'OpenUrl:blank'))
+      .first()
+      .click();
+
+    let handles = await browser.getAllWindowHandles();
+
+    await browser.switchTo().window(handles[1]);
+    let newUrl = await browser.getCurrentUrl();
+    expect(newUrl).to.contain('https://github.com');
   });
 
 });

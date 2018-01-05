@@ -1,3 +1,13 @@
+version: "1.0.0-rc1-03"
+  date: "2018-01-06"
+  added:
+    - "Same window for navigation-action `Open a website`"
+    - "e2e test: go to edit mode"
+    - "e2e test: go to sheet"
+    - "e2e test: go to next sheet"
+    - "e2e test: go to prev sheet"
+    - "e2e test: open website (same window)"
+    - "e2e test: open website (new window)"
 version: "1.0.0-rc1-02"
   date: "2017-11-11"
   changes:

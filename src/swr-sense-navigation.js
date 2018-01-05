@@ -26,6 +26,13 @@ define(
       return a;
     }
 
+    function fixUrl(url) {
+      if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
+        return url;
+      }
+      return 'http://' + url;
+    }
+
     return {
 
       definition: props,
@@ -71,12 +78,10 @@ define(
                 break;
               case 'openWebsite': // eslint-disable-line no-case-declarations
                 const url = $scope.layout.props.websiteUrl;
+                const same = $scope.layout.props.sameWindow;
                 if (!_.isEmpty(url)) {
-                  if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
-                    window.open(url);
-                  } else {
-                    window.open('http://' + url);
-                  }
+                  console.log(same);
+                  window.open(fixUrl(url), (same ? '_self' : ''));
                 }
                 break;
               case 'prevSheet':

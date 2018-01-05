@@ -313,7 +313,16 @@ define([
     show: function (data) {
       return data.props.navigationAction === 'openWebsite';
     }
+  };
 
+  const sameWindow = {
+    ref: 'props.sameWindow',
+    label: 'Open in same window',
+    type: 'boolean',
+    defaultValue: true,
+    show: function (data) {
+      return data.props.navigationAction === 'openWebsite';
+    }
   };
 
   // ****************************************************************************************
@@ -604,6 +613,7 @@ define([
           sheetList: sheetList,
           storyList: storyList,
           websiteUrl: websiteUrl,
+          sameWindow: sameWindow,
           appList: appList
         }
       }
