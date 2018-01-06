@@ -32,7 +32,7 @@
     "dc-up": "docker-compose -f docker-compose.dev.yml up -d --build"
   },
   "devDependencies": {
-    "sense-extension-utils": "^0.4.1"
+    "sense-extension-utils": "^0.4.5"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
