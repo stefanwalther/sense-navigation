@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -29,7 +29,9 @@
     "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go release",
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
-    "dc-up": "docker-compose -f docker-compose.dev.yml up -d --build"
+    "dc-up": "export COMPOSE_FILE=./docker-compose.dev.yml && docker-compose up -d --build",
+    "dc-down": "export COMPOSE_FILE=./docker-compose.dev.yml && docker-compose down",
+    "dc-rs": "npm run dc-down && npm run dc-up"
   },
   "devDependencies": {
     "sense-extension-utils": "^0.4.5"

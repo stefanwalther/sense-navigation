@@ -29,6 +29,13 @@ define([
       return a;
     }
 
+    function fixUrl(url) {
+      if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
+        return url;
+      }
+      return 'http://' + url;
+    }
+
     return {
 
       definition: props,
@@ -76,12 +83,9 @@ define([
                 break;
               case "openWebsite":
                 var url = $scope.layout.props.websiteUrl;
+                var same = $scope.layout.props.sameWindow;
                 if (!_.isEmpty(url)) {
-                  if (url.startsWith('http://') || url.startsWith('https://')) {
-                    window.open(url);
-                  } else {
-                    window.open('http://' + url);
-                  }
+                  window.open(fixUrl(url), (same ? '_self' : ''));
                 }
                 break;
               default:

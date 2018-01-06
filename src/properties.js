@@ -323,6 +323,16 @@ define([
 
   };
 
+  const sameWindow = {
+    ref: 'props.sameWindow',
+    label: 'Open in same window',
+    type: 'boolean',
+    defaultValue: true,
+    show: function (data) {
+      return data.props.action === 'openWebsite';
+    }
+  };
+
   // ****************************************************************************************
   // Actions
   // ****************************************************************************************
@@ -593,7 +603,8 @@ define([
           sheetId: sheetId,
           sheetList: sheetList,
           storyList: storyList,
-          websiteUrl: websiteUrl
+          websiteUrl: websiteUrl,
+          sameWindow: sameWindow
         }
       },
       actionsBefore: {

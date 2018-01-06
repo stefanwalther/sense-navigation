@@ -1,0 +1,5 @@
+<div qv-extension style="text-align: {{layout.props.buttonAlign}}" ng-class="(layout.buttonWidth === 'default') ? 'container default' : 'container full-width'">
+<div class="btn" ng-class="[(layout.props.buttonStyle) ? 'btn-' + layout.props.buttonStyle : 'btn-default', (layout.props.fullWidth) ? 'full-width' : 'auto-width', (layout.props.isButtonMultiLine) ? 'btn-multiline' : '']" qva-activate="go();">
+<i ng-if="layout.props.buttonIcon !== ''" class="fa fa-{{layout.props.buttonIcon}}" style="padding-right:5px"></i>{{layout.props.buttonLabel}}
+</div>
+</div>
