@@ -18,6 +18,14 @@ module.exports = function initConfig(baseConfig) {
         args: ['--disable-infobars']
       }
     },
+    plugins: [
+      {
+        package: 'protractor-console-plugin',
+        failOnWarning: false,
+        failOnError: false,
+        logWarnings: false
+      }
+    ],
     mochaOpts: {
       //   bail: true,
     },
@@ -25,7 +33,8 @@ module.exports = function initConfig(baseConfig) {
     specs: [
       path.resolve(__dirname, './**/*.spec.js'),
     ],
-    beforeLaunch() { },
+    beforeLaunch() {
+    },
     onComplete() {
       browser.manage().logs().get('browser').then(browserLog => {
         console.log(`log: ${util.inspect(browserLog)}`); //eslint-disable-line

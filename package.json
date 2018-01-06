@@ -36,9 +36,10 @@
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --standalone false --gecko false",
-    "test:integration": "aw-webdriver-test-runner ./test/conf.dev.js --specs test/**/*.comp.spec.js --aw-artifacts-path ./test/integration/artifacts",
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js",
-    "dc-up": "docker-compose -f docker-compose.dev.yml up -d --build"
+    "dc-up": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose up -d --build",
+    "dc-dwon": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
+    "dc-rs": "docker-clean -s && npm run dc-up"
   },
   "devDependencies": {
     "after-work.js": "github:qlik-oss/after-work.js",
@@ -47,6 +48,7 @@
     "extend": "^3.0.1",
     "playground-js-api": "^0.1.15",
     "protractor": "^5.2.2",
+    "protractor-console-plugin": "^0.1.1",
     "sense-extension-utils": "^0.4.5",
     "webdriver-manager": "^12.0.6"
   },

@@ -17,6 +17,11 @@ describe('Extension rendering', function () {
     await browser.wait(EC.stalenessOf(loadBlocker), timeoutTime);
   });
 
+  afterEach(async () => {
+    browser.executeScript('window.sessionStorage.clear();');
+    browser.executeScript('window.localStorage.clear();');
+  });
+
   xit('should render sheets correctly', async () => {
     let i = 0;
     let sheetThumbsCount = await sheetThumbs.count();
@@ -162,6 +167,7 @@ describe('Extension rendering', function () {
       .first()
       .click();
 
+    await browser.sleep(1000);
     let handles = await browser.getAllWindowHandles();
 
     await browser.switchTo().window(handles[1]);
