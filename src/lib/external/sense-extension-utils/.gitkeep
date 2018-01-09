@@ -1,4 +1,4 @@
 # The following files will be copied by sense-go to the ./lib/external/sense-extension-utils directory:
 #
-## ./general-utils.js
-## ./pp-helper.js
+## node_modules/sense-extension-utils/dist/general-utils.js => ./general-utils.js
+## node_modules/sense-extension-utils/dist/pp-helper.js => ./pp-helper.js
