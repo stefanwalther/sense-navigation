@@ -4,6 +4,7 @@ import:
     files:
       - ["./node_modules/sense-extension-utils/dist/general-utils.js", "./.tmp/lib/external/sense-extension-utils"]
       - ["./node_modules/sense-extension-utils/dist/pp-helper.js", "./.tmp/lib/external/sense-extension-utils"]
+      - ["./node_modules/lodash/lodash.min.js", "./.tmp/lib/external/lodash"]
 wbfolder:
   enabled: false
 htmlmin:

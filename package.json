@@ -38,15 +38,15 @@
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --standalone false --gecko false",
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js",
     "dc-up": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose up -d --build",
-    "dc-dwon": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
+    "dc-down": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
     "dc-rs": "docker-clean -s && npm run dc-up"
   },
   "devDependencies": {
     "after-work.js": "github:qlik-oss/after-work.js",
-    "eslint": "^4.14.0",
+    "eslint": "^4.15.0",
     "eslint-config-space-single": "^0.3.1",
     "extend": "^3.0.1",
-    "playground-js-api": "^0.1.15",
+    "lodash": "^4.17.4",
     "protractor": "^5.2.2",
     "protractor-console-plugin": "^0.1.1",
     "sense-extension-utils": "^0.4.5",

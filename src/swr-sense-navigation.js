@@ -1,7 +1,7 @@
 /* global define,window */
 define(
   [
-    'underscore',
+    './lib/external/lodash/lodash.min',
     'qlik',
     'angular',
     './lib/external/sense-extension-utils/general-utils',
@@ -10,7 +10,7 @@ define(
     'css!./lib/css/main.min.css',
     'css!./lib/external/fontawesome/css/font-awesome.min.css'
   ],
-  function (_, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
+  function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
@@ -79,7 +79,7 @@ define(
               case 'openWebsite': // eslint-disable-line no-case-declarations
                 const url = $scope.layout.props.websiteUrl;
                 const same = $scope.layout.props.sameWindow;
-                if (!_.isEmpty(url)) {
+                if (!__.isEmpty(url)) {
                   console.log(same);
                   window.open(fixUrl(url), (same ? '_self' : ''));
                 }
@@ -122,7 +122,7 @@ define(
               for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
                 actionType = $scope.layout.props.actionItems[i].actionType;
-                fld = _.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
+                fld = __.isEmpty($scope.layout.props.actionItems[i].selectedField) ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
                 val = $scope.layout.props.actionItems[i].value;
                 softLock = $scope.layout.props.actionItems[i].softLock;
                 bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
@@ -137,7 +137,7 @@ define(
 
                 switch (actionType) {
                   case 'applyBookmark':
-                    if (!_.isEmpty(bookmark)) {
+                    if (!__.isEmpty(bookmark)) {
                       app.bookmark.apply(bookmark);
                     }
                     break;
@@ -150,7 +150,7 @@ define(
                     app.clearAll();
                     break;
                   case 'clearField':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).clear();
                     }
                     break;
@@ -167,59 +167,59 @@ define(
                     app.lockAll();
                     break;
                   case 'lockField':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).lock();
                     }
                     break;
                   case 'replaceBookmark':
-                    if (!_.isEmpty(bookmark)) {
+                    if (!__.isEmpty(bookmark)) {
                       app.bookmark.apply(bookmark);
                     }
                     break;
                   case 'selectAll':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).selectAll(softLock);
                     }
                     break;
                   case 'selectAlternative':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).selectAlternative(softLock);
                     }
                     break;
                   case 'selectAndLockField':
-                    if (!_.isEmpty(fld) && (!_.isEmpty(val))) {
+                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
                       app.field(fld).selectMatch(val, true);
                       app.field(fld).lock();
                     }
                     break;
                   case 'selectExcluded':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).selectExcluded(softLock);
                     }
                     break;
                   case 'selectField':
-                    if (!_.isEmpty(fld) && (!_.isEmpty(val))) {
+                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
                       app.field(fld).selectMatch(val, false);
                     }
                     break;
                   case 'selectValues':
-                    if (!_.isEmpty(fld) && (!_.isEmpty(val))) {
+                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
                       let vals = splitToStringNum(val, ';');
                       app.field(fld).selectValues(vals, false);
                     }
                     break;
                   case 'selectPossible':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).selectPossible(softLock);
                     }
                     break;
                   case 'setVariable':
-                    if (!_.isEmpty($scope.layout.props['variable' + i])) {
+                    if (!__.isEmpty($scope.layout.props['variable' + i])) {
                       $scope.setVariableContent($scope.layout.props['variable' + i], val);
                     }
                     break;
                   case 'toggleSelect':
-                    if (!_.isEmpty(fld) && (!_.isEmpty(val))) {
+                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
                       app.field(fld).toggleSelect(val, softLock);
                     }
                     break;
@@ -230,7 +230,7 @@ define(
                     $scope.unlockAllAndClearAll();
                     break;
                   case 'unlockField':
-                    if (!_.isEmpty(fld)) {
+                    if (!__.isEmpty(fld)) {
                       app.field(fld).unlock();
                     }
                     break;
@@ -261,7 +261,7 @@ define(
           };
 
           $scope.gotoSheet = function (sheetId) {
-            if ($scope.checkQlikNavigation() && !_.isEmpty(sheetId)) {
+            if ($scope.checkQlikNavigation() && !__.isEmpty(sheetId)) {
               var r = qlik.navigation.gotoSheet(sheetId);
               if (!r.success) {
                 window.console.error(r.errorMsg);
@@ -270,7 +270,7 @@ define(
           };
 
           $scope.gotoStory = function (storyId) {
-            if ($scope.checkQlikNavigation() && !_.isEmpty(storyId)) {
+            if ($scope.checkQlikNavigation() && !__.isEmpty(storyId)) {
               qlik.navigation.gotoStory(storyId);
             }
           };
