@@ -4,7 +4,7 @@ const path = require('path');
 const extend = require('extend');
 const util = require('util');
 
-process.env.SELENIUM_PROMISE_MANAGER = 0;
+// process.env.SELENIUM_PROMISE_MANAGER = 1;
 
 module.exports = function initConfig(baseConfig) {
   const config = {
@@ -27,7 +27,7 @@ module.exports = function initConfig(baseConfig) {
       }
     ],
     mochaOpts: {
-      //   bail: true,
+      bail: true
     },
     multiCapabilities: [],
     specs: [
@@ -37,7 +37,7 @@ module.exports = function initConfig(baseConfig) {
     },
     onComplete() {
       browser.manage().logs().get('browser').then(browserLog => {
-        console.log(`log: ${util.inspect(browserLog)}`); //eslint-disable-line
+        //   console.log(`log: ${util.inspect(browserLog)}`); //eslint-disable-line
       });
     }
   };
