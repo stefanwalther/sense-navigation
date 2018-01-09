@@ -77,7 +77,7 @@ define(
                 $scope.nextSheet();
                 break;
               case 'openWebsite': // eslint-disable-line no-case-declarations
-                const url = $scope.layout.props.websiteUrl;
+                let url = $scope.layout.props.websiteUrl;
                 const same = $scope.layout.props.sameWindow;
                 if (!__.isEmpty(url)) {
                   window.open(fixUrl(url), (same ? '_self' : ''));
@@ -263,7 +263,7 @@ define(
 
           $scope.gotoSheet = function (sheetId) {
             if ($scope.checkQlikNavigation() && !__.isEmpty(sheetId)) {
-              var r = qlik.navigation.gotoSheet(sheetId);
+              let r = qlik.navigation.gotoSheet(sheetId);
               if (!r.success) {
                 window.console.error(r.errorMsg);
               }

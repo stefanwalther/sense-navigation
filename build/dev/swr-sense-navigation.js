@@ -2,7 +2,7 @@
 
 * sense-navigation - Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 * --
-* @version v1.0.0-rc1-05
+* @version v1.0.0-rc1-06
 * @link https://github.com/stefanwalther/sense-navigation
 * @author Stefan Walther
 * @license MIT
@@ -87,7 +87,7 @@ define(
                 $scope.nextSheet();
                 break;
               case 'openWebsite': // eslint-disable-line no-case-declarations
-                const url = $scope.layout.props.websiteUrl;
+                let url = $scope.layout.props.websiteUrl;
                 const same = $scope.layout.props.sameWindow;
                 if (!__.isEmpty(url)) {
                   window.open(fixUrl(url), (same ? '_self' : ''));
