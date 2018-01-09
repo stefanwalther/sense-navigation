@@ -2,7 +2,7 @@
 
 * sense-navigation - Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 * --
-* @version v1.0.0-rc1-04
+* @version v1.0.0-rc1-05
 * @link https://github.com/stefanwalther/sense-navigation
 * @author Stefan Walther
 * @license MIT
@@ -23,11 +23,11 @@ define(
   function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
-    const DEBUG = true;
+    const DEBUG = false;
 
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
-      const a = str.split(sep);
+      let a = str.split(sep);
       for (let i = 0; i < a.length; i++) {
         if (!isNaN(a[i])) {
           a[i] = Number(a[i]);

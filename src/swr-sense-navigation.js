@@ -13,11 +13,11 @@ define(
   function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
-    const DEBUG = true;
+    const DEBUG = false;
 
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
-      const a = str.split(sep);
+      let a = str.split(sep);
       for (let i = 0; i < a.length; i++) {
         if (!isNaN(a[i])) {
           a[i] = Number(a[i]);

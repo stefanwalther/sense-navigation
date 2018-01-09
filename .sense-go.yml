@@ -11,10 +11,6 @@ import:
       - ["./node_modules/font-awesome/fonts/fontawesome-webfont.ttf", "./.tmp/lib/external/font-awesome/fonts"]
       - ["./node_modules/font-awesome/fonts/fontawesome-webfont.woff", "./.tmp/lib/external/font-awesome/fonts"]
       - ["./node_modules/font-awesome/fonts/fontawesome-webfont.woff2", "./.tmp/lib/external/font-awesome/fonts"]
-
-
-
-
       - ["./node_modules/lodash/lodash.min.js", "./.tmp/lib/external/lodash"]
 wbfolder:
   enabled: false

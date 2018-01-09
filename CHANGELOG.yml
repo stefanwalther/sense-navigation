@@ -1,3 +1,10 @@
+version: "1.0.0-rc1-05"
+  date: "2018-01-09"
+  changes:
+    - "fix an issue in splitToStringNum - assigning a value to a const"
+    - "Set debug mode to false !"
+    - "Bump sense-go to v0.14.3: fixes an issue where .css files are not copied to the /release folder"
+    - "Include sense-go to dev-dependencies"
 version: "1.0.0-rc1-04"
   date: "2018-01-09"
   changes:

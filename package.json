@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.0-rc1-04",
+  "version": "1.0.0-rc1-05",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -51,6 +51,7 @@
     "protractor": "^5.2.2",
     "protractor-console-plugin": "^0.1.1",
     "sense-extension-utils": "^0.4.5",
+    "sense-go": "^0.14.3",
     "webdriver-manager": "^12.0.6"
   },
   "verb": {
