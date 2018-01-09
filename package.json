@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.0-rc1-03",
+  "version": "1.0.0-rc1-04",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -46,6 +46,7 @@
     "eslint": "^4.15.0",
     "eslint-config-space-single": "^0.3.1",
     "extend": "^3.0.1",
+    "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "protractor": "^5.2.2",
     "protractor-console-plugin": "^0.1.1",

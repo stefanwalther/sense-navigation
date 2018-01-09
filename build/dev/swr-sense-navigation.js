@@ -2,7 +2,7 @@
 
 * sense-navigation - Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 * --
-* @version v1.0.0-rc1-03
+* @version v1.0.0-rc1-04
 * @link https://github.com/stefanwalther/sense-navigation
 * @author Stefan Walther
 * @license MIT
@@ -18,7 +18,7 @@ define(
     './properties',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
-    'css!./lib/external/fontawesome/css/font-awesome.min.css'
+    'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
   function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';

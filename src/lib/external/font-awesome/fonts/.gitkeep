@@ -1,0 +1,8 @@
+# The following files will be copied by sense-go to the ./lib/external/sense-extension-utils directory:
+#
+## node_modules/font-awesome/dist/Fontawesome.otf => ./
+## node_modules/font-awesome/dist/fontawesome-webfont.eot => ./
+## node_modules/font-awesome/dist/fontawesome-webfont.svg => ./
+## node_modules/font-awesome/dist/fontawesome-webfont.ttf => ./
+## node_modules/font-awesome/dist/fontawesome-webfont.woff => ./
+## node_modules/font-awesome/dist/fontawesome-webfont.woff2 => ./

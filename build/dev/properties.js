@@ -2,7 +2,7 @@
 
 * sense-navigation - Sense Sheet Navigation + Actions visualization extension for Qlik Sense.
 * --
-* @version v1.0.0-rc1-03
+* @version v1.0.0-rc1-04
 * @link https://github.com/stefanwalther/sense-navigation
 * @author Stefan Walther
 * @license MIT

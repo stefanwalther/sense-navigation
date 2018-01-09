@@ -8,7 +8,7 @@ define(
     './properties',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
-    'css!./lib/external/fontawesome/css/font-awesome.min.css'
+    'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
   function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
