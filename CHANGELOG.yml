@@ -1,3 +1,7 @@
+version: "unpublished"
+  date: "2018-01-12"
+  changes:
+    - "test: added e2e button alignment test"
 version: "1.0.0-rc1-06"
   date: "2018-01-09"
   changes:
