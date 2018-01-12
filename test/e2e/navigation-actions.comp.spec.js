@@ -76,6 +76,18 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
   });
 
+  it.only('should be possible to use button to navigate to a SELECTED sheet', async() => {
+    const targetSheetId = '7976f92b-8b88-444a-b10f-6d878e72d498'; // =Icon-Buttons
+
+    await appOverview.openSheet('test:navigation-actions');
+
+    const btn = new Button();
+    await btn.get('GotoSelectedSheet');
+    await btn.click();
+
+    await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
+  });
+
   it('should be possible to use button to open a new website (SAME window)', async () => {
 
     await appOverview.openSheet('test:navigation-actions');
