@@ -8,7 +8,7 @@ const selectors = {
 
 describe('Button Icons => ', () => {
 
-  it.only('should be equal to the taken screenshot', async () => {
+  it('should be equal to the taken screenshot', async () => {
 
     const appOverview = new AppOverviewPage();
     await appOverview.get('sense-navigation_v1x');

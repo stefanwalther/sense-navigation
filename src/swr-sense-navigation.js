@@ -4,16 +4,16 @@ define(
     './lib/external/lodash/lodash.min',
     'qlik',
     'angular',
-    './lib/external/sense-extension-utils/general-utils',
+    './lib/external/sense-extension-utils/index',
     './properties',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
     'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
-  function (__, qlik, angular, generalUtils, props, ngTemplate) { // eslint-disable-line max-params
+  function (__, qlik, angular, extUtils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
-    const DEBUG = false;
+    const DEBUG = true;
 
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
@@ -63,6 +63,12 @@ define(
 
           $scope.doNavigate = function () {
 
+            if (DEBUG) {
+              window.console.group('DEBUG');
+              window.console.log('navigationAction', $scope.layout.props.navigationAction);
+              window.console.groupEnd();
+            }
+
             switch ($scope.layout.props.navigationAction) {
               case 'gotoSheet':
                 $scope.gotoSheet($scope.layout.props.selectedSheet);
@@ -72,6 +78,9 @@ define(
                 break;
               case 'gotoStory':
                 $scope.gotoStory($scope.layout.props.selectedStory);
+                break;
+              case 'firstSheet':
+                $scope.firstSheet();
                 break;
               case 'nextSheet':
                 $scope.nextSheet();
@@ -85,6 +94,9 @@ define(
                 break;
               case 'prevSheet':
                 $scope.prevSheet();
+                break;
+              case 'lastSheet':
+                $scope.lastSheet();
                 break;
               // eslint-disable capitalized-comments
               // case "openApp":
@@ -249,6 +261,14 @@ define(
             }
           };
 
+          $scope.firstSheet = function () {
+            if ($scope.checkQlikNavigation()) {
+              extUtils.getFirstSheet().then(function (result) {
+                qlik.navigation.gotoSheet(result.id);
+              });
+            }
+          };
+
           $scope.nextSheet = function () {
             if ($scope.checkQlikNavigation()) {
               qlik.navigation.nextSheet();
@@ -258,6 +278,14 @@ define(
           $scope.prevSheet = function () {
             if ($scope.checkQlikNavigation()) {
               qlik.navigation.prevSheet();
+            }
+          };
+
+          $scope.lastSheet = function () {
+            if ($scope.checkQlikNavigation()) {
+              extUtils.getLastSheet().then(function (result) {
+                qlik.navigation.gotoSheet(result.id);
+              });
             }
           };
 

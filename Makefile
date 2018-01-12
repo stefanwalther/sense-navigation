@@ -23,3 +23,18 @@ release: 			## Build the extensions (release build)
 gen-readme:
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: docs
+
+test-release:
+	npm run release && \
+	export ENV=release && \
+	npm run dc-rs && \
+	npm run test:e2e
+.PHONY: test-release
+
+test-dev:
+	npm run release && \
+	export ENV=dev && \
+	npm run dc-rs && \
+	npm run test:e2e
+.PHONY: test-dev
+

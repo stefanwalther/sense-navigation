@@ -1,8 +1,12 @@
-version: "unpublished"
+version: "1.0.0-rc1-07"
   date: "2018-01-12"
   added:
     - "test: button alignment "
     - "test:e2e: icon buttons"
+    - "feat: navigation action => first sheet + e2e test"
+    - "fest: navigation action => last sheet + e2e test"
+    - "chore: update extension-utils, use one general file"
+    - "test: add some test rules to the makeFile"
 version: "1.0.0-rc1-06"
   date: "2018-01-09"
   changes:

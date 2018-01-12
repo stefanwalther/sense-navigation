@@ -2,8 +2,10 @@ import:
   fromLocal:
     enabled: true
     files:
+      - ["./node_modules/sense-extension-utils/dist/index.js", "./.tmp/lib/external/sense-extension-utils"]
       - ["./node_modules/sense-extension-utils/dist/general-utils.js", "./.tmp/lib/external/sense-extension-utils"]
       - ["./node_modules/sense-extension-utils/dist/pp-helper.js", "./.tmp/lib/external/sense-extension-utils"]
+      - ["./node_modules/sense-extension-utils/dist/variable-utils.js", "./.tmp/lib/external/sense-extension-utils"]
       - ["./node_modules/font-awesome/css/font-awesome.css", "./.tmp/lib/external/font-awesome/css"]
       - ["./node_modules/font-awesome/fonts/FontAwesome.otf", "./.tmp/lib/external/font-awesome/fonts"]
       - ["./node_modules/font-awesome/fonts/fontawesome-webfont.eot", "./.tmp/lib/external/font-awesome/fonts"]

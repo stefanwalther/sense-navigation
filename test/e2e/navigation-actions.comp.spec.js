@@ -29,8 +29,27 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains('/state/edit'), timeoutTime);
   });
 
-  xit('should be possible to use button to navigate to the FIRST sheet');
-  xit('should be possible to use button to navigate to the LAST sheet');
+  it('should be possible to use button to navigate to the FIRST sheet', async () => {
+    const targetSheetId = '392462be-a70b-4f14-a4cd-05a7aab19ed8';
+
+    await appOverview.openSheet('test:navigation-actions');
+    const btn = new Button();
+    await btn.get('GotoFirstSheet');
+    await btn.click();
+
+    await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
+  });
+
+  it('should be possible to use button to navigate to the LAST sheet', async () => {
+    const targetSheetId = 'e9f4240b-2185-4b56-af7f-8e9a25253db0';
+
+    await appOverview.openSheet('test:navigation-actions');
+    const btn = new Button();
+    await btn.get('GotoLastSheet');
+    await btn.click();
+
+    await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
+  });
 
   it('should be possible to use button to navigate to the NEXT sheet', async () => {
     const targetSheetId = '36b1f160-b676-4a3e-a753-c5f51a467f90';
@@ -83,4 +102,5 @@ describe('Navigation Actions => ', () => {
     let newUrl = await browser.getCurrentUrl();
     expect(newUrl).to.contain('https://github.com');
   });
+
 });

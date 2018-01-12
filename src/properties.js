@@ -3,12 +3,12 @@ define([
   'angular',
   './lib/external/lodash/lodash.min',
   'qlik',
-  './lib/external/sense-extension-utils/pp-helper',
+  './lib/external/sense-extension-utils/index',
   'text!./lib/data/icons-fa.json'
-], function (angular, __, qlik, ppHelper, iconListRaw) { // eslint-disable-line max-params
+], function (angular, __, qlik, extHelper, iconListRaw) { // eslint-disable-line max-params
 
-  const $injector = angular.injector(['ng']);
-  const $timeout = $injector.get('$timeout');
+  // const $injector = angular.injector(['ng']);
+  // const $timeout = $injector.get('$timeout');
 
   // ****************************************************************************************
   // Helper Promises
@@ -217,12 +217,20 @@ define([
         value: 'none'
       },
       {
+        label: 'Go to first sheet',
+        value: 'firstSheet'
+      },
+      {
         label: 'Go to next sheet',
         value: 'nextSheet'
       },
       {
         label: 'Go to previous sheet',
         value: 'prevSheet'
+      },
+      {
+        label: 'Go to last sheet',
+        value: 'lastSheet'
       },
       {
         label: 'Go to a specific sheet',
@@ -267,7 +275,7 @@ define([
     component: 'dropdown',
     label: 'Select App',
     ref: 'props.selectedApp',
-    options: ppHelper.getAppList(),
+    options: extHelper.getAppList(),
     show: function (data) {
       return data.props.navigationAction === 'openApp';
     }
@@ -278,7 +286,7 @@ define([
     component: 'dropdown',
     label: 'Select Sheet',
     ref: 'props.selectedSheet',
-    options: ppHelper.getSheetList(),
+    options: extHelper.getSheetList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoSheet';
     }
@@ -289,7 +297,7 @@ define([
     component: 'dropdown',
     label: 'Select Story',
     ref: 'props.selectedStory',
-    options: ppHelper.getStoryList(),
+    options: extHelper.getStoryList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoStory';
     }
@@ -482,7 +490,7 @@ define([
         component: 'dropdown',
         label: 'Select bookmark',
         expression: 'optional',
-        options: ppHelper.getBookmarkList(),
+        options: extHelper.getBookmarkList(),
         show: function (data, defs) {
           const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
@@ -495,7 +503,7 @@ define([
         label: 'Select field',
         defaultValue: '',
         options: function () {
-          return ppHelper.getFieldList().then(function (fieldList) {
+          return extHelper.getFieldList().then(function (fieldList) {
             fieldList.splice(0, 0, {
               value: 'by-expr',
               label: '>> Define field by expression <<'
