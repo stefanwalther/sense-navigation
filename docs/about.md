@@ -4,7 +4,7 @@ The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to 
 * Go to the next sheet
 * Go to the previous sheet
 * Go to the last sheet
-* Go to a selected sheet
+* Go to a sheet
 * Go to a sheet (defined by sheet Id)
 * Go to a story
 * Open a website / eMail
