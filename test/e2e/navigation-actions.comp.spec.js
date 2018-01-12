@@ -18,6 +18,20 @@ describe('Navigation Actions => ', () => {
     // await browser.sleep(1000);
   });
 
+  it('should be possible to use a button to do NOTHING', async() => {
+
+    const targetSheetId = 'd38aba7e-c691-448c-bb69-91e63374f716';
+    await appOverview.openSheet('test:navigation-actions');
+
+    const btn = new Button();
+    await btn.get('Nothing');
+    await btn.click();
+
+    await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
+    await browser.wait(EC.urlContains('state/analysis'), timeoutTime);
+
+  });
+
   it('should be possible to use button for navigate to EDIT MODE', async () => {
 
     await appOverview.openSheet('test:navigation-actions');

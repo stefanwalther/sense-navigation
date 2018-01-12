@@ -249,7 +249,7 @@ define([
         value: 'openWebsite'
       },
       {
-        label: 'Switch to Edit mode',
+        label: 'Switch to edit mode',
         value: 'switchToEdit'
       }
       // ,
