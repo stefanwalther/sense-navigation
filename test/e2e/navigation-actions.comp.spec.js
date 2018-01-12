@@ -15,7 +15,7 @@ describe('Navigation Actions => ', () => {
   afterEach(async () => {
     await browser.executeScript('window.sessionStorage.clear();');
     await browser.executeScript('window.localStorage.clear();');
-    await browser.sleep(1000);
+    // await browser.sleep(1000);
   });
 
   it('should be possible to use button for navigate to EDIT MODE', async () => {
@@ -125,6 +125,18 @@ describe('Navigation Actions => ', () => {
     await browser.switchTo().window(handles[1]);
     let newUrl = await browser.getCurrentUrl();
     expect(newUrl).to.contain('https://github.com');
+  });
+
+  it('should be possible to use button to go to a story', async () => {
+    const targetId = '3bf18616-4e88-46df-bbec-9287e5f52f83'; // =test-story
+
+    await appOverview.openSheet('test:navigation-actions');
+
+    const btn = new Button();
+    await btn.get('GotoStory');
+    await btn.click();
+
+    await browser.wait(EC.urlContains(targetId), timeoutTime);
   });
 
 });
