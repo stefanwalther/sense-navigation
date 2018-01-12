@@ -247,7 +247,7 @@ define([
         value: 'gotoSheet'
       },
       {
-        label: 'Go to a sheet (defined by Sheet Id)',
+        label: 'Go to a sheet (defined by sheet Id)',
         value: 'gotoSheetById'
       },
       {
@@ -259,7 +259,7 @@ define([
         value: 'openWebsite'
       },
       {
-        label: 'Switch to Edit Mode',
+        label: 'Switch to Edit mode',
         value: 'switchToEdit'
       }
       // ,
@@ -340,102 +340,102 @@ define([
   const actionOptions = [
     {
       value: 'applyBookmark',
-      label: 'Apply Bookmark',
+      label: 'Apply a bookmark',
       group: 'bookmark'
     },
     {
       value: 'clearAll',
-      label: 'Clear All Selections',
+      label: 'Clear all selections',
       group: 'selection'
     },
     {
       value: 'clearOther',
-      label: 'Clear Other Fields',
+      label: 'Clear selections in other fields',
       group: 'selection'
     },
     {
       value: 'forward',
-      label: 'Forward (in your Selections)',
+      label: 'Move forwards (in your selections)',
       group: 'selection'
     },
     {
       value: 'back',
-      label: 'Back (in your Selections)',
+      label: 'Move backwards (in your selections)',
       group: 'selection'
     },
     {
       value: 'clearField',
-      label: 'Clear Selections in Field',
+      label: 'Clear selections in field',
       group: 'selection'
     },
     {
       value: 'lockAll',
-      label: 'Lock All',
+      label: 'Lock all selections',
       group: 'selection'
     },
     {
       value: 'lockField',
-      label: 'Lock Field',
-      group: 'selection'
-    },
-    {
-      value: 'selectAll',
-      label: 'Select All Values in Field',
-      group: 'selection'
-    },
-    {
-      value: 'selectAlternative',
-      label: 'Select Alternatives',
-      group: 'selection'
-    },
-    {
-      value: 'selectAndLockField',
-      label: 'Select and Lock in Field',
-      group: 'selection'
-    },
-    {
-      value: 'selectExcluded',
-      label: 'Select Excluded',
-      group: 'selection'
-    },
-    {
-      value: 'selectField',
-      label: 'Select Value in Field',
-      group: 'selection'
-    },
-    {
-      value: 'selectPossible',
-      label: 'Select Possible Values in Field',
-      group: 'selection'
-    },
-    {
-      value: 'selectValues',
-      label: 'Select Multiple Values in Field',
-      group: 'selection'
-    },
-    {
-      value: 'setVariable',
-      label: 'Set Variable Value',
-      group: 'variables'
-    },
-    {
-      value: 'toggleSelect',
-      label: 'Toggle Field Selection',
+      label: 'Lock a specific field',
       group: 'selection'
     },
     {
       value: 'unlockAll',
-      label: 'Unlock All',
+      label: 'Unlock all selections',
       group: 'selection'
     },
     {
       value: 'unlockField',
-      label: 'Unlock Field',
+      label: 'Unlock a specific field',
       group: 'selection'
     },
     {
       value: 'unlockAllAndClearAll',
-      label: 'Unlock All and Clear All Fields',
+      label: 'Unlock all and clear all',
+      group: 'selection'
+    },
+    {
+      value: 'selectField',
+      label: 'Select a value in a field',
+      group: 'selection'
+    },
+    {
+      value: 'selectAll',
+      label: 'Select all values in a field',
+      group: 'selection'
+    },
+    {
+      value: 'selectValues',
+      label: 'Select multiple values in a field',
+      group: 'selection'
+    },
+    {
+      value: 'selectAlternative',
+      label: 'Select alternatives',
+      group: 'selection'
+    },
+    {
+      value: 'selectAndLockField',
+      label: 'Select a value and lock field',
+      group: 'selection'
+    },
+    {
+      value: 'selectExcluded',
+      label: 'Select excluded',
+      group: 'selection'
+    },
+    {
+      value: 'selectPossible',
+      label: 'Select possible values in a field',
+      group: 'selection'
+    },
+    {
+      value: 'setVariable',
+      label: 'Set variable value',
+      group: 'variables'
+    },
+    {
+      value: 'toggleSelect',
+      label: 'Toggle field selection',
       group: 'selection'
     }
   ];

@@ -1,16 +1,18 @@
 The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to add a button to a Qlik Sense sheet to navigate in your app:
 
+* Go to the first sheet
 * Go to the next sheet
 * Go to the previous sheet
+* Go to the last sheet
 * Go to a specific sheet
-* Go to a sheet (defined by the sheet Id)
+* Go to a sheet (defined by sheet Id)
 * Go to a story
-* Open a website
-* Switch to the edit mode
+* Open a website / eMail
+* Switch to the Edit mode
 
 The button can be easily styled nicely by selecting some of the predefined designs.
 
-Furthermore ***sense-navigation*** offers the option to define **actions**~ which will be executed **before** the navigation happens.
+Furthermore ***sense-navigation*** offers the option to define **actions** which will be executed **before** the navigation happens.
 This could for example be:
 
 * Apply a bookmark
