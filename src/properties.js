@@ -233,7 +233,7 @@ define([
         value: 'lastSheet'
       },
       {
-        label: 'Go to a specific sheet',
+        label: 'Go to a selected sheet',
         value: 'gotoSheet'
       },
       {
