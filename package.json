@@ -50,7 +50,7 @@
     "lodash": "^4.17.4",
     "protractor": "^5.2.2",
     "protractor-console-plugin": "^0.1.1",
-    "sense-extension-utils": "^0.4.5",
+    "sense-extension-utils": "^0.5.0",
     "sense-go": "^0.14.3",
     "webdriver-manager": "^12.0.6"
   },
