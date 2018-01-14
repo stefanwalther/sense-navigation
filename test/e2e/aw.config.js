@@ -24,6 +24,10 @@ module.exports = function initConfig(baseConfig) {
         failOnWarning: false,
         failOnError: false,
         logWarnings: false
+      },
+      {
+        package: 'protractor-console',
+        logLevels: ['debug']
       }
     ],
     mochaOpts: {
@@ -31,13 +35,13 @@ module.exports = function initConfig(baseConfig) {
     },
     multiCapabilities: [],
     specs: [
-      path.resolve(__dirname, './**/*.spec.js'),
+      path.resolve(__dirname, './**/*.spec.js')
     ],
     beforeLaunch() {
     },
     onComplete() {
-      browser.manage().logs().get('browser').then(browserLog => {
-        //   console.log(`log: ${util.inspect(browserLog)}`); //eslint-disable-line
+      browser.manage().logs().get('browser').then((browserLog) => {
+        console.log(`browser log: ${util.inspect(browserLog)}`); //eslint-disable-line
       });
     }
   };
