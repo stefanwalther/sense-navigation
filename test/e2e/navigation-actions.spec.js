@@ -1,7 +1,7 @@
 'use strict';
 
 const AppOverviewPage = require('./models/app-overview');
-const Button = require('./models/button-click');
+const Button = require('./models/button');
 const timeoutTime = 10000;
 
 describe('Navigation Actions => ', () => {
