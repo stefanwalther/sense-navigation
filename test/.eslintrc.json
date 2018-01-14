@@ -1,6 +1,7 @@
 {
   "extends": "eslint-config-space-single/test",
   "rules": {
-    "padded-blocks": "off"
+    "padded-blocks": "off",
+    "no-warning-comments": "off"
   }
 }

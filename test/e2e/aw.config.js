@@ -4,9 +4,9 @@ const path = require('path');
 const extend = require('extend');
 const util = require('util');
 
-// process.env.SELENIUM_PROMISE_MANAGER = 1;
+// Process.env.SELENIUM_PROMISE_MANAGER = 1;
 
-module.exports = function initConfig(baseConfig) {
+module.exports = function initConfig(baseConfig) { // eslint-disable-line func-names
   const config = {
     baseUrl: 'http://127.0.0.1:4848/sense/app/',
     directConnect: true,
@@ -40,7 +40,7 @@ module.exports = function initConfig(baseConfig) {
     beforeLaunch() {
     },
     onComplete() {
-      browser.manage().logs().get('browser').then((browserLog) => {
+      browser.manage().logs().get('browser').then(browserLog => {
         console.log(`browser log: ${util.inspect(browserLog)}`); //eslint-disable-line
       });
     }

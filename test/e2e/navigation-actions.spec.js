@@ -15,10 +15,10 @@ describe('Navigation Actions => ', () => {
   afterEach(async () => {
     await browser.executeScript('window.sessionStorage.clear();');
     await browser.executeScript('window.localStorage.clear();');
-    // await browser.sleep(1000);
+    // Await browser.sleep(1000);
   });
 
-  it('should be possible to use a button to do NOTHING', async() => {
+  it('should be possible to use a button to do NOTHING', async () => {
 
     const targetSheetId = 'd38aba7e-c691-448c-bb69-91e63374f716';
     await appOverview.openSheet('test:navigation-actions');
