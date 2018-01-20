@@ -36,23 +36,30 @@
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --standalone false --gecko false",
+    "test:unit": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js",
+    "test:unit:debug": "./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js",
     "dc-up": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose up -d --build",
     "dc-down": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
     "dc-rs": "export ENV=release && docker-clean -s && npm run dc-up"
   },
   "devDependencies": {
-    "after-work.js": "github:qlik-oss/after-work.js",
-    "eslint": "^4.15.0",
+    "after-work.js": "^4.0.1",
+    "angular": "1.5.8",
+    "babel-core": "^6.26.0",
+    "babel-plugin-istanbul": "^4.1.5",
+    "eslint": "^4.16.0",
     "eslint-config-space-single": "^0.3.1",
     "extend": "^3.0.1",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.3.0",
     "lodash": "^4.17.4",
     "protractor": "^5.2.2",
     "protractor-console": "^3.0.0",
     "protractor-console-plugin": "^0.1.1",
-    "sense-extension-utils": "^0.5.4",
-    "sense-go": "^0.14.3",
+    "requirejs": "^2.3.5",
+    "requirejs-text": "^2.0.15",
+    "underscore": "^1.8.3",
     "webdriver-manager": "^12.0.6"
   },
   "verb": {
@@ -79,5 +86,7 @@
       "verb-readme-generator"
     ]
   },
-  "dependencies": {}
+  "dependencies": {
+    "sense-extension-utils": "^0.5.6"
+  }
 }

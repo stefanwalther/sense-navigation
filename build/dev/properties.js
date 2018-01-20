@@ -31,6 +31,7 @@ define([
    * @returns {Array<value,label>}
    */
   function getIcons() {
+    debugger
     const iconList = JSON.parse(iconListRaw).icons;
     const propDef = [];
     propDef.push({
@@ -46,6 +47,7 @@ define([
         }
       );
     });
+    // Can be replaced by iconList.sort
     return __.sortBy(propDef, function (item) {
       return item.label;
     });
@@ -243,7 +245,7 @@ define([
         value: 'lastSheet'
       },
       {
-        label: 'Go to a specific sheet',
+        label: 'Go to a sheet',
         value: 'gotoSheet'
       },
       {
@@ -259,7 +261,7 @@ define([
         value: 'openWebsite'
       },
       {
-        label: 'Switch to Edit mode',
+        label: 'Switch to edit mode',
         value: 'switchToEdit'
       }
       // ,
@@ -653,6 +655,9 @@ define([
     items: {
       settings: appearanceSettings,
       addons: addons
+    },
+    __test_only__: {
+      getIcons: getIcons
     }
   };
 });

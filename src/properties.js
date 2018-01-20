@@ -36,6 +36,7 @@ define([
         }
       );
     });
+    // Can be replaced by iconList.sort
     return __.sortBy(propDef, function (item) {
       return item.label;
     });
@@ -643,6 +644,9 @@ define([
     items: {
       settings: appearanceSettings,
       addons: addons
+    },
+    __test_only__: {
+      getIcons: getIcons
     }
   };
 });

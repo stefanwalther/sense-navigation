@@ -11,6 +11,8 @@ todos.md
 .tmp/
 .sense-go.local.yml
 /example/Search
+build/dev/
+build/release/
 
 # local debugging
 docker-compose.yml
