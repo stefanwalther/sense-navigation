@@ -532,6 +532,16 @@ define([
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
+      variable: {
+        type: 'string',
+        ref: 'variable',
+        label: 'Variable Name',
+        expression: 'optional',
+        show: function (data, defs) {
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          return def && variableEnabler.indexOf(def.actionType) > -1;
+        }
+      },
       value: {
         type: 'string',
         ref: 'value',
@@ -550,16 +560,6 @@ define([
         show: function (data, defs) {
           const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
-        }
-      },
-      variable: {
-        type: 'string',
-        ref: 'variable',
-        label: 'Variable Name',
-        expression: 'optional',
-        show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
-          return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
       overwriteLocked: {
