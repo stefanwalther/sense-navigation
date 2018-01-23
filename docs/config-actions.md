@@ -10,5 +10,9 @@ Depending on the selected action you'll see additional settings you can define, 
 
 > ![](images/sense_navigation_actions_settings.png)
 
+You can add as many actions as you want:
+
+> ![](images/unlimited-actions.png)
+
 As soon as you have defined the first action, you will also be able to define another action.
 Either after the last action or in case no action has been defined, the [Navigation behavior](./config-navigation-behavior.md) will then apply.
