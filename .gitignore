@@ -13,6 +13,7 @@ todos.md
 /example/Search
 build/dev/
 build/release/
+coverage/
 
 # local debugging
 docker-compose.yml
