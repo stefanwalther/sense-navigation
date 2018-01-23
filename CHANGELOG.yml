@@ -1,3 +1,7 @@
+version: "1.0.0-beta-01"
+  date: "2018-01-22"
+  changes:
+    - "Update documentation"
 version: "1.0.0-rc1-07"
   date: "2018-01-12"
   added:
