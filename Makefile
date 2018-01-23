@@ -25,17 +25,17 @@ gen-readme:
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: docs
 
-test-release:	## Test release build
+test-e2e-release:	## Test release build
 	npm run release && \
 	export ENV=release && \
 	npm run dc-rs && \
 	npm run test:e2e
-.PHONY: test-release
+.PHONY: test-e2e-release
 
-test-dev:			## Test dev build
+test-e2e-dev:			## Test dev build
 	npm run release && \
 	export ENV=dev && \
 	npm run dc-rs && \
 	npm run test:e2e
-.PHONY: test-dev
+.PHONY: test-e2e-dev
 
