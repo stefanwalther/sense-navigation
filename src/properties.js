@@ -87,7 +87,7 @@ define([
   const buttonWidth = {
     type: 'boolean',
     component: 'buttongroup',
-    label: 'Button Width',
+    label: 'Button width',
     ref: 'props.fullWidth',
     options: [
       {
@@ -116,7 +116,7 @@ define([
 
   const buttonTextAlign = {
     ref: 'props.buttonTextAlign',
-    label: 'Label Alignment',
+    label: 'Label alignment',
     type: 'string',
     component: 'dropdown',
     defaultValue: 'left',
@@ -143,6 +143,7 @@ define([
     ref: 'props.buttonAlignment',
     type: 'string',
     component: 'dropdown',
+    label: 'Button position',
     defaultValue: 'top-left',
     options: [
       {
@@ -186,7 +187,7 @@ define([
 
   const buttonMultiLine = {
     ref: 'props.isButtonMultiLine',
-    label: 'Multiline Label',
+    label: 'Multiline label',
     type: 'boolean',
     defaultValue: false
   };
@@ -208,7 +209,7 @@ define([
 
   const navigationAction = {
     ref: 'props.navigationAction',
-    label: 'Navigation Action',
+    label: 'Navigation action',
     type: 'string',
     component: 'dropdown',
     default: 'nextSheet',
@@ -263,7 +264,7 @@ define([
 
   const sheetId = {
     ref: 'props.sheetId',
-    label: 'Sheet ID',
+    label: 'Sheet Id',
     type: 'string',
     expression: 'optional',
     show: function (data) {
@@ -274,7 +275,7 @@ define([
   const appList = {
     type: 'string',
     component: 'dropdown',
-    label: 'Select App',
+    label: 'Select app',
     ref: 'props.selectedApp',
     options: extHelper.getAppList(),
     show: function (data) {
@@ -285,7 +286,7 @@ define([
   const sheetList = {
     type: 'string',
     component: 'dropdown',
-    label: 'Select Sheet',
+    label: 'Select sheet',
     ref: 'props.selectedSheet',
     options: extHelper.getSheetList(),
     show: function (data) {
@@ -296,7 +297,7 @@ define([
   const storyList = {
     type: 'string',
     component: 'dropdown',
-    label: 'Select Story',
+    label: 'Select story',
     ref: 'props.selectedStory',
     options: extHelper.getStoryList(),
     show: function (data) {
@@ -535,7 +536,7 @@ define([
       variable: {
         type: 'string',
         ref: 'variable',
-        label: 'Variable Name',
+        label: 'Variable name',
         expression: 'optional',
         show: function (data, defs) {
           const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
@@ -605,7 +606,7 @@ define([
       actionsList: actions,
       behavior: {
         type: 'items',
-        label: 'Navigation Behavior',
+        label: 'Navigation behavior',
         items: {
           action: navigationAction,
           sheetId: sheetId,

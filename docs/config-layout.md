@@ -4,7 +4,7 @@
 
 * **Label** - The buttons label.
 * **Style** - Select one of the predefined styles.
-* **Button Width** - Whether the button should spread of the entire grid column or just be as wide as necessary.
-* **Alignment** - Align the button to "Left", "Center" or right of the parent container.
+* **Button width** - Whether the button should spread of the entire grid column or just be as wide as necessary.
+* **Button position** - Align the button within the given container.
 * **Multiline** - Whether the button can take one than more line.
 * **Icon** - Choose one of the provided icons (based on [Font Awesome](https://fortawesome.github.io/Font-Awesome/))
