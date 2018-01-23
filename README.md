@@ -66,9 +66,7 @@ Every button can also include an icon:
 
 > ![](https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/docs/images/sense_navigation_button_icons.png)
 
-**sense-navigation** uses the [Fontawesome icons](http://fontawesome.io/), therefore you can select from a collection of 675 icons.
-
-###
+**sense-navigation** uses [Fontawesome icons](http://fontawesome.io/), therefore you can select from a collection of 675 icons.
 
 ## Installation & Download
 ### Fresh Installation
@@ -95,8 +93,8 @@ Drag & drop the object onto a sheet (as you would do it with any other native ob
 Then define how the **sense-navigation** should behave:
 
 - [Layout Options](./docs/config-layout.md)
-- [Navigation Behavior](./docs/config-navigation-behavior.md)
 - [Actions](./docs/config-actions.md)
+- [Navigation Behavior](./docs/config-navigation-behavior.md)
 
 ## Compatibility
 **sense-navigation** is designed to work with Qlik Sense *September 2017* or higher.
