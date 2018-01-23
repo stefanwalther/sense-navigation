@@ -7,6 +7,7 @@ version: "1.0.0-rc1-07"
     - "fest: navigation action => last sheet + e2e test"
     - "chore: update extension-utils, use one general file"
     - "test: add some test rules to the makeFile"
+    - "test: some basic unit tests"
 version: "1.0.0-rc1-06"
   date: "2018-01-09"
   changes:
