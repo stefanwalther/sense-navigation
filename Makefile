@@ -32,7 +32,7 @@ test-e2e-release: 		## Test release build
 	npm run test:e2e
 .PHONY: test-e2e-release
 
-test-e2e-dev:         			## Test dev build
+test-e2e-dev:					## Test dev build
 	npm run release && \
 	export ENV=dev && \
 	npm run dc-rs && \
