@@ -79,9 +79,23 @@ define([
       {
         value: 'link',
         label: 'Link'
+      },
+      {
+        value: 'expression',
+        label: 'Defined by expression'
       }
     ]
+  };
 
+  const buttonStyleExpression = {
+    ref: 'props.buttonStyleExpression',
+    label: 'Expression to define button style',
+    type: 'string',
+    expression: 'optional',
+    defaultValue: '=\'default\'',
+    show: function (data) {
+      return data.props.buttonStyle === 'expression';
+    }
   };
 
   const buttonWidth = {
@@ -596,6 +610,7 @@ define([
         items: {
           label: buttonLabel,
           style: buttonStyle,
+          styleExpression: buttonStyleExpression,
           buttonWidth: buttonWidth,
           buttonAlignment: buttonAlignment,
           buttonTextAlign: buttonTextAlign,
@@ -622,6 +637,7 @@ define([
 
   // Note for the extension certification process:
   //   Using the calculation condition is not officially supported!
+  //   But seems to work well and using it is of low risk.
   const addons = {
     type: 'items',
     component: 'expandable-items',

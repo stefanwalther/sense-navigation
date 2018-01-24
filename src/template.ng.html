@@ -2,11 +2,7 @@
 	 class="container {{layout.props.buttonAlignment}}">
 	<div class="btn btn-sm"
 		 style="text-align: {{layout.props.buttonTextAlign}}"
-		 ng-class="[
-		 	(layout.props.buttonStyle) ? 'btn-' + layout.props.buttonStyle : 'btn-default',
-		 	(layout.props.fullWidth) ? 'full-width' : 'auto-width',
-		 	(layout.props.isButtonMultiLine) ? 'btn-multiline' : ''
-		 	]"
+		 ng-class="getButtonClasses(layout.props)"
 		 ng-click="go();"
 	     title="{{layout.props.buttonLabel}}">
 		<i ng-if="layout.props.buttonIcon !== ''"

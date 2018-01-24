@@ -279,6 +279,37 @@ define(
             }
           };
 
+          // Helper function to be used in the template, defining the button class.
+          $scope.getButtonClasses = function (props) {
+
+            let classes = [];
+
+            // Main style
+            if (props.buttonStyle === 'expression') {
+              classes.push('btn-' + props.buttonStyleExpression);
+            }
+
+            if (props.buttonStyle) {
+              classes.push('btn-' + props.buttonStyle);
+            } else {
+              classes.push('btn-default');
+            }
+
+            // Width
+            if (props.fullWidth) {
+              classes.push('full-width');
+            } else {
+              classes.push('auto-width');
+            }
+
+            // Multiline
+            if (props.isButtonMultiLine) {
+              classes.push('btn-multiline');
+            }
+
+            return classes.join(' ');
+          };
+
           $scope.go = function () {
             if (!$scope.isEditMode()) {
               $scope.doAction();
