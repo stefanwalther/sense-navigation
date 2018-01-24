@@ -651,7 +651,7 @@ define([
         expression: 'optional',
         options: extHelper.getBookmarkList(),
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -667,16 +667,11 @@ define([
               value: 'by-expr',
               label: '>> Define field by expression <<'
             });
-            // Ugly workaround/fix for bug in Qlik Sense 2.1 - 3.1 that will cause
-            // the loading of the field not to be finished
-            // $timeout(function () {
-            //   $('.cell').trigger('mouseover');
-            // }, 0);
             return fieldList;
           });
         },
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -686,7 +681,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -696,7 +691,7 @@ define([
         label: 'Variable name',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -706,7 +701,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -716,7 +711,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -726,7 +721,7 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
