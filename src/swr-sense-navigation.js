@@ -55,7 +55,7 @@ define(
 
       definition: props,
       support: {
-        export: false,
+        export: true,
         exportData: false,
         snapshot: false
       },
