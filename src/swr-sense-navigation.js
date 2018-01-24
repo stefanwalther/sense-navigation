@@ -33,6 +33,24 @@ define(
       return 'http://' + url;
     }
 
+    /**
+     * Check if running in an iframe.
+     *
+     * Catching the error is necessary as browsers could block access to window.top due to the same-origin-policy.
+     * (see same origin policy)
+     *
+     * @link https://stackoverflow.com/questions/326069/how-to-identify-if-a-webpage-is-being-loaded-inside-an-iframe-or-directly-into-t
+     *
+     * @returns {boolean}
+     */
+    function inIframe() {
+      try {
+        return window.self !== window.top;
+      } catch (e) {
+        return true;
+      }
+    }
+
     return {
 
       definition: props,
@@ -89,7 +107,14 @@ define(
                 let url = $scope.layout.props.websiteUrl;
                 const same = $scope.layout.props.sameWindow;
                 if (!__.isEmpty(url)) {
-                  window.open(fixUrl(url), (same ? '_self' : ''));
+                  const isIframe = inIframe();
+                  let target = '';
+                  if (same && isIframe) {
+                    target = '_parent';
+                  } else if (same) {
+                    target = '_self';
+                  }
+                  window.open(fixUrl(url), target);
                 }
                 break;
               case 'prevSheet':

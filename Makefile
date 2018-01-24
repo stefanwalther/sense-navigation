@@ -13,26 +13,26 @@ run-dev: build 				## Run the local development environment
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
 	# We might use: python -mwebbrowser http://example.com
 
-build: 								## Build the extension (dev build)
+build:                ## Build the extension (dev build)
 	npm run build
 .PHONY: build
 
-release: 							## Build the extensions (release build)
+release:              ## Build the extensions (release build)
 	npm run release
 .PHONY: release
 
-gen-readme:						## Generate the README.md (using docker-verb)
+gen-readme:           ## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
-.PHONY: docs
+.PHONY: gen-readme
 
-test-e2e-release:			## Test release build
+test-e2e-release: 		## Test release build
 	npm run release && \
 	export ENV=release && \
 	npm run dc-rs && \
 	npm run test:e2e
 .PHONY: test-e2e-release
 
-test-e2e-dev:					## Test dev build
+test-e2e-dev:         			## Test dev build
 	npm run release && \
 	export ENV=dev && \
 	npm run dc-rs && \
