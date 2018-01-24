@@ -49,29 +49,29 @@ define([
   const buttonTheme = {
     type: 'string',
     component: 'dropdown',
-    label: 'Button style',
+    label: 'Button theme',
     ref: 'props.buttonTheme',
     options: [
       {
-        value: 'bootstrap',
-        label: 'Bootstrap'
+        value: 'bootstrap-v3',
+        label: 'Bootstrap v3'
       }, {
         value: 'lui',
         label: 'Leonardo UI'
       },
       {
-        value: 'custom',
-        label: 'Custom'
+        value: 'css',
+        label: 'Custom (by CSS)'
       }
     ],
-    defaultValue: 'bootstrap'
+    defaultValue: 'bootstrap-v3'
   };
 
   const buttonStyleBs = {
     type: 'string',
     component: 'dropdown',
     ref: 'props.buttonStyleBs',
-    label: 'Style',
+    label: 'Bootstrap v3 style',
     defaultValue: 'default',
     options: [
       {
@@ -105,19 +105,18 @@ define([
       {
         value: 'by-expression',
         label: 'Defined by expression'
-      },
-      {
-        value: 'by-css',
-        label: 'Custom style (CSS)'
       }
-    ]
+    ],
+    show: function (data) {
+      return data.props.buttonTheme === 'bootstrap-v3';
+    }
   };
 
   const buttonStyleLui = {
     type: 'string',
     component: 'dropdown',
     ref: 'props.buttonStyleLui',
-    label: 'Style',
+    label: 'Leonardo UI style',
     defaultValue: 'default',
     options: [
       {
@@ -144,7 +143,10 @@ define([
         value: 'by-expression',
         label: 'Defined by expression'
       }
-    ]
+    ],
+    show: function (data) {
+      return data.props.buttonTheme === 'lui';
+    }
   };
 
   const buttonStyleExpression = {
@@ -153,8 +155,17 @@ define([
     type: 'string',
     expression: 'optional',
     defaultValue: '=\'default\'',
+    // Todo: either for Lui or for Bs
     show: function (data) {
-      return data.props.buttonStyle === 'by-expression';
+      return data.props.buttonStyleBs === 'by-expression';
+    }
+  };
+
+  const helpButtonStyleExprBs = {
+    label: 'My text',
+    component: 'The expression has to return one of the following values: default, primary, success, info, warning, danger or link.',
+    show: function (data) {
+      return data.props.buttonTheme === 'bootstrap-v3';
     }
   };
 
@@ -165,7 +176,7 @@ define([
     expression: 'optional',
     defaultValue: '=\'background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)\'',
     show: function (data) {
-      return data.props.buttonStyle === 'by-css';
+      return data.props.buttonTheme === 'css';
     }
   };
 
@@ -198,13 +209,15 @@ define([
     component: 'switch',
     label: 'Show icon',
     ref: 'props.buttonShowIcon',
-    options: [{
-      value: true,
-      label: 'On'
-    }, {
-      value: false,
-      label: 'Off'
-    }],
+    options: [
+      {
+        value: true,
+        label: 'On'
+      }, {
+        value: false,
+        label: 'Off'
+      }
+    ],
     defaultValue: false
   };
 
@@ -250,7 +263,7 @@ define([
       return getIcons();
     },
     show: function (data) { /* eslint-disable-line object-shorthand */
-      return data.props.buttonShowIcon === true &&  data.props.buttonIconSet === 'lui';
+      return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'lui';
     }
   };
 
@@ -278,6 +291,10 @@ define([
       return data.props.fullWidth;
     }
   };
+
+  // ****************************************************************************************
+  // Position, size & alignment
+  // ****************************************************************************************
 
   const buttonAlignment = {
     ref: 'props.buttonAlignment',
@@ -466,7 +483,7 @@ define([
   };
 
   // ****************************************************************************************
-  // Action-Group
+  // Action Options
   // ****************************************************************************************
 
   const actionOptions = [
@@ -619,7 +636,6 @@ define([
     addTranslation: 'Add Item',
     grouped: true,
     items: {
-      // ActionGroup: actionGroup, // eslint-disable-line capitalized-comments
       actionType: {
         type: 'string',
         ref: 'actionType',
@@ -714,7 +730,6 @@ define([
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
-
     }
   };
 
@@ -751,8 +766,10 @@ define([
         label: 'Style',
         items: {
           buttonTheme: buttonTheme,
-          buttonStyle: buttonStyleBs,
+          buttonStyleBs: buttonStyleBs,
+          buttonStyleLui: buttonStyleLui,
           buttonStyleExpression: buttonStyleExpression,
+          helpButtonStyleExprBs: helpButtonStyleExprBs,
           buttonStyleCss: buttonStyleCss
         }
       },
@@ -784,13 +801,7 @@ define([
     component: 'expandable-items',
     label: 'Navigation & actions',
     items: {
-      actionsList: {
-        type: 'items',
-        label: 'Actions',
-        items: {
-          actions: actionsList
-        }
-      },
+      actionsList: actionsList,
       navigationBehavior: {
         type: 'items',
         label: 'Navigation behavior',
