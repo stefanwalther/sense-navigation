@@ -5,10 +5,9 @@ There are several predefined styles available, you can choose from:
 
 > ![]({%= verb.baseImgUrl %}docs/images/sense_navigation_styles.png)
 
-Buttons can also be styles based on a custom expression:
+Buttons can also be [styled based on a custom expression](docs/config-layout.md):
 
 > ![]({%= verb.baseImgUrl %}docs/images/sense_navigation_style_by_expression.png)
-
 
 ### Button icons
 Every button can also include an icon:
