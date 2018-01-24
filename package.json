@@ -42,7 +42,7 @@
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js --coverage",
     "dc-up": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose up -d --build",
     "dc-down": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
-    "dc-rs": "export ENV=release && docker-clean -s && npm run dc-up"
+    "dc-rs": "export ENV=release && npm run dc-up"
   },
   "devDependencies": {
     "after-work.js": "^4.0.1",
@@ -74,7 +74,7 @@
     "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip",
     "run": true,
     "toc": true,
-    "layout": "empty",
+    "label": "empty",
     "tasks": [
       "readme"
     ],
