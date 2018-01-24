@@ -6,13 +6,16 @@ help: 								## Call the help
 	@echo ''
 .PHONY: help
 
+
 run-dev: build 				## Run the local development environment
 	export ENV=dev && \
-	docker kill $$(docker ps -q) && \
+	docker-clean -s && \
 	docker-compose --f=./docker-compose.dev.yml up -d --build && \
 	echo "" && \
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
 	# We might use: python -mwebbrowser http://example.com
+	#	docker kill $$(docker ps -q) && \
+.PHONY: run-dev
 
 build:                ## Build the extension (dev build)
 	npm run build

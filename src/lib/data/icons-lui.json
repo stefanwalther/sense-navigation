@@ -1,0 +1,16 @@
+{
+  "icons": [
+    {
+      "name": "Image",
+      "id": "image"
+    },
+    {
+      "name": "Back",
+      "id": "back"
+    },
+    {
+      "name": "Forward",
+      "id": "forward"
+    }
+  ]
+}

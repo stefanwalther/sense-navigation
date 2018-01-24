@@ -5,7 +5,7 @@ define([
   'qlik',
   './lib/external/sense-extension-utils/index',
   'text!./lib/data/icons-fa.json'
-], function (angular, __, qlik, extHelper, iconListRaw) { // eslint-disable-line max-params
+], function (angular, __, qlik, extHelper, iconListFA) { // eslint-disable-line max-params
 
   // const $injector = angular.injector(['ng']);
   // const $timeout = $injector.get('$timeout');
@@ -21,12 +21,8 @@ define([
    * @returns {Array<value,label>}
    */
   function getIcons() {
-    const iconList = JSON.parse(iconListRaw).icons;
-    const propDef = [];
-    propDef.push({
-      value: '',
-      label: '>> No icon <<'
-    });
+    const iconList = JSON.parse(iconListFA).icons;
+    let propDef = [];
 
     iconList.forEach(function (icon) {
       propDef.push(
@@ -36,15 +32,41 @@ define([
         }
       );
     });
-    // Can be replaced by iconList.sort
-    return __.sortBy(propDef, function (item) {
+    // Todo: Can be replaced by iconList.sort
+    propDef = __.sortBy(propDef, function (item) {
       return item.label;
     });
+    propDef.unshift({
+      value: '',
+      label: '>> No icon <<'
+    });
+    return propDef;
   }
 
   // ****************************************************************************************
   // Layout
   // ****************************************************************************************
+  const buttonTheme = {
+    type: 'string',
+    component: 'radiobuttons',
+    label: 'Theme',
+    ref: 'props.buttonTheme',
+    options: [
+      {
+        value: 'bootstrap',
+        label: 'Bootstrap'
+      }, {
+        value: 'lui',
+        label: 'Leonardo UI'
+      },
+      {
+        value: 'custom',
+        label: 'Custom'
+      }
+    ],
+    defaultValue: 'bootstrap'
+  };
+
   const buttonStyle = {
     type: 'string',
     component: 'dropdown',
@@ -133,13 +155,68 @@ define([
     defaultValue: false
   };
 
-  const buttonIcons = {
+  // ****************************************************************************************
+  // Icons
+  // ****************************************************************************************
+
+  const buttonShowIcon = {
+    type: 'boolean',
+    component: 'switch',
+    label: 'Show icon',
+    ref: 'props.buttonShowIcon',
+    options: [{
+      value: true,
+      label: 'On'
+    }, {
+      value: false,
+      label: 'Off'
+    }],
+    defaultValue: true
+  };
+
+  const buttonIconSet = {
     type: 'string',
     component: 'dropdown',
-    label: 'Icon',
+    label: 'Icon set',
+    ref: 'props.buttonIconSet',
+    options: [
+      {
+        value: 'fa',
+        label: 'Fontawesome Icons'
+      }, {
+        value: 'lui',
+        label: 'Leonardo UI Icons'
+      }
+    ],
+    defaultValue: 'fa',
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true;
+    }
+  };
+
+  const buttonIconsFa = {
+    type: 'string',
+    component: 'dropdown',
+    label: 'Icon (Fontawesome icon-set)',
     ref: 'props.buttonIcon',
     options: function () {
       return getIcons();
+    },
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'fa';
+    }
+  };
+
+  const buttonIconsLui = {
+    type: 'string',
+    component: 'dropdown',
+    label: 'Icon (Leonardo UI icon-set)',
+    ref: 'props.buttonIconLui',
+    options: function () {
+      return getIcons();
+    },
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true &&  data.props.buttonIconSet === 'lui';
     }
   };
 
@@ -471,6 +548,7 @@ define([
   const variableEnabler = ['setVariable'];
   const overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
+  // Todo: can be removed
   // Just an idea for now:
   // const actionGroup = {
   //   ref: 'actionGroup',
@@ -619,21 +697,6 @@ define([
           }
         }
       }
-      // ,
-      // actionsList: actions,
-      // behavior: {
-      //   type: 'items',
-      //   label: 'Navigation behavior',
-      //   items: {
-      //     action: navigationAction,
-      //     sheetId: sheetId,
-      //     sheetList: sheetList,
-      //     storyList: storyList,
-      //     websiteUrl: websiteUrl,
-      //     sameWindow: sameWindow,
-      //     appList: appList
-      //   }
-      // }
     }
   };
 
@@ -646,7 +709,8 @@ define([
         type: 'items',
         label: 'Layout',
         items: {
-          label: buttonLabel
+          buttonTheme: buttonTheme,
+          buttonLabel: buttonLabel
         }
       },
       style: {
@@ -655,8 +719,17 @@ define([
         items: {
           buttonStyle: buttonStyle,
           buttonStyleExpression: buttonStyleExpression,
-          buttonStyleCss: buttonStyleCss,
-          buttonIcons: buttonIcons
+          buttonStyleCss: buttonStyleCss
+        }
+      },
+      icons: {
+        type: 'items',
+        label: 'Icon',
+        items: {
+          buttonShowIcon: buttonShowIcon,
+          buttonIconTheme: buttonIconSet,
+          buttonIconsFa: buttonIconsFa,
+          buttonIconsLui: buttonIconsLui
         }
       },
       alignment: {
