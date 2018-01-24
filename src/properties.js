@@ -48,8 +48,8 @@ define([
   // ****************************************************************************************
   const buttonTheme = {
     type: 'string',
-    component: 'radiobuttons',
-    label: 'Theme',
+    component: 'dropdown',
+    label: 'Button style',
     ref: 'props.buttonTheme',
     options: [
       {
@@ -67,10 +67,10 @@ define([
     defaultValue: 'bootstrap'
   };
 
-  const buttonStyle = {
+  const buttonStyleBs = {
     type: 'string',
     component: 'dropdown',
-    ref: 'props.buttonStyle',
+    ref: 'props.buttonStyleBs',
     label: 'Style',
     defaultValue: 'default',
     options: [
@@ -109,6 +109,40 @@ define([
       {
         value: 'by-css',
         label: 'Custom style (CSS)'
+      }
+    ]
+  };
+
+  const buttonStyleLui = {
+    type: 'string',
+    component: 'dropdown',
+    ref: 'props.buttonStyleLui',
+    label: 'Style',
+    defaultValue: 'default',
+    options: [
+      {
+        value: 'default',
+        label: 'Default'
+      },
+      {
+        value: 'toolbar',
+        label: 'Toolbar'
+      },
+      {
+        value: 'success',
+        label: 'Success'
+      },
+      {
+        value: 'info',
+        label: 'Info'
+      },
+      {
+        value: 'warning',
+        label: 'Warning'
+      },
+      {
+        value: 'by-expression',
+        label: 'Defined by expression'
       }
     ]
   };
@@ -171,7 +205,7 @@ define([
       value: false,
       label: 'Off'
     }],
-    defaultValue: true
+    defaultValue: false
   };
 
   const buttonIconSet = {
@@ -707,9 +741,8 @@ define([
     items: {
       label: {
         type: 'items',
-        label: 'Layout',
+        label: 'Label',
         items: {
-          buttonTheme: buttonTheme,
           buttonLabel: buttonLabel
         }
       },
@@ -717,7 +750,8 @@ define([
         type: 'items',
         label: 'Style',
         items: {
-          buttonStyle: buttonStyle,
+          buttonTheme: buttonTheme,
+          buttonStyle: buttonStyleBs,
           buttonStyleExpression: buttonStyleExpression,
           buttonStyleCss: buttonStyleCss
         }
