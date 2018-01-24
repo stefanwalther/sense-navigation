@@ -2,8 +2,9 @@ version: "next"
   date: "2018-01-24"
   changes:
     - "Show buttons in PDF export by default (fixes #83)"
+    - "Re-organize the property panel (#125)"
   fixes:
-    - "Fix issue with 'select value in field' and field expressions"
+    - "Fix issue with 'select value in field' and field expressions (solves #106)"
 version: "1.0.0-beta-03"
   date: "2018-01-23"
   fixes:

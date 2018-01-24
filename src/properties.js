@@ -494,7 +494,7 @@ define([
   //   ]
   // };
 
-  const actions = {
+  const actionsList = {
     type: 'array',
     ref: 'props.actionItems',
     label: 'Actions',
@@ -523,7 +523,7 @@ define([
         expression: 'optional',
         options: extHelper.getBookmarkList(),
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -548,7 +548,7 @@ define([
           });
         },
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -558,7 +558,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -568,7 +568,7 @@ define([
         label: 'Variable name',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -578,7 +578,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -588,7 +588,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -598,7 +598,7 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
@@ -609,7 +609,7 @@ define([
   // ****************************************************************************************
   // Setup
   // ****************************************************************************************
-  const appearanceSettings = {
+  const sectionAppearance = {
     uses: 'settings',
     items: {
       general: {
@@ -618,24 +618,73 @@ define([
             defaultValue: false
           }
         }
-      },
-      layout: {
+      }
+      // ,
+      // actionsList: actions,
+      // behavior: {
+      //   type: 'items',
+      //   label: 'Navigation behavior',
+      //   items: {
+      //     action: navigationAction,
+      //     sheetId: sheetId,
+      //     sheetList: sheetList,
+      //     storyList: storyList,
+      //     websiteUrl: websiteUrl,
+      //     sameWindow: sameWindow,
+      //     appList: appList
+      //   }
+      // }
+    }
+  };
+
+  const sectionButtonLayout = {
+    type: 'items',
+    component: 'expandable-items',
+    label: 'Button layout',
+    items: {
+      label: {
         type: 'items',
         label: 'Layout',
         items: {
-          label: buttonLabel,
-          style: buttonStyle,
+          label: buttonLabel
+        }
+      },
+      style: {
+        type: 'items',
+        label: 'Style',
+        items: {
+          buttonStyle: buttonStyle,
           buttonStyleExpression: buttonStyleExpression,
           buttonStyleCss: buttonStyleCss,
-          buttonWidth: buttonWidth,
-          buttonAlignment: buttonAlignment,
-          buttonTextAlign: buttonTextAlign,
-          buttonMultiLine: buttonMultiLine,
           buttonIcons: buttonIcons
         }
       },
-      actionsList: actions,
-      behavior: {
+      alignment: {
+        type: 'items',
+        label: 'Size & alignment',
+        items: {
+          buttonWidth: buttonWidth,
+          buttonAlignment: buttonAlignment,
+          buttonTextAlign: buttonTextAlign,
+          buttonMultiLine: buttonMultiLine
+        }
+      }
+    }
+  };
+
+  const sectionNavigationAndActions = {
+    type: 'items',
+    component: 'expandable-items',
+    label: 'Navigation & actions',
+    items: {
+      actionsList: {
+        type: 'items',
+        label: 'Actions',
+        items: {
+          actions: actionsList
+        }
+      },
+      navigationBehavior: {
         type: 'items',
         label: 'Navigation behavior',
         items: {
@@ -654,7 +703,7 @@ define([
   // Note for the extension certification process:
   //   Using the calculation condition is not officially supported!
   //   But seems to work well and using it is of low risk.
-  const addons = {
+  const sectionAddOns = {
     type: 'items',
     component: 'expandable-items',
     translation: 'properties.addons',
@@ -675,8 +724,10 @@ define([
     type: 'items',
     component: 'accordion',
     items: {
-      settings: appearanceSettings,
-      addons: addons
+      sectionAppearance: sectionAppearance,
+      sectionButtonLayout: sectionButtonLayout,
+      sectionNavigationAndActions: sectionNavigationAndActions,
+      sectionAddOns: sectionAddOns
     },
     __test_only__: {
       getIcons: getIcons
