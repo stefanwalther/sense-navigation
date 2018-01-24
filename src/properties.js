@@ -81,20 +81,35 @@ define([
         label: 'Link'
       },
       {
-        value: 'expression',
+        value: 'by-expression',
         label: 'Defined by expression'
+      },
+      {
+        value: 'by-css',
+        label: 'Custom style (CSS)'
       }
     ]
   };
 
   const buttonStyleExpression = {
     ref: 'props.buttonStyleExpression',
-    label: 'Expression to define button style',
+    label: 'Expression to define the button style',
     type: 'string',
     expression: 'optional',
     defaultValue: '=\'default\'',
     show: function (data) {
-      return data.props.buttonStyle === 'expression';
+      return data.props.buttonStyle === 'by-expression';
+    }
+  };
+
+  const buttonStyleCss = {
+    ref: 'props.buttonStyleCss',
+    label: 'Expression to define button\'s CSS',
+    type: 'string',
+    expression: 'optional',
+    defaultValue: '=\'background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)\'',
+    show: function (data) {
+      return data.props.buttonStyle === 'by-css';
     }
   };
 
@@ -610,7 +625,8 @@ define([
         items: {
           label: buttonLabel,
           style: buttonStyle,
-          styleExpression: buttonStyleExpression,
+          buttonStyleExpression: buttonStyleExpression,
+          buttonStyleCss: buttonStyleCss,
           buttonWidth: buttonWidth,
           buttonAlignment: buttonAlignment,
           buttonTextAlign: buttonTextAlign,

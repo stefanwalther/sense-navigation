@@ -2,6 +2,9 @@ version: "next"
   date: "2018-01-23"
   fixes:
     - "Fix overflow of buttons if text is too large, show ellipsis"
+  added:
+    - "Add conditional styles based on expressions"
+    - "Add custom styling using CSS"
 version: "1.0.0-beta-02"
   date: "2018-01-23"
   fixes:

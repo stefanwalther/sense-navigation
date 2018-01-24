@@ -285,7 +285,7 @@ define(
             let classes = [];
 
             // Main style
-            if (props.buttonStyle === 'expression') {
+            if (props.buttonStyle === 'by-expression') {
               classes.push('btn-' + props.buttonStyleExpression);
             }
 
@@ -308,6 +308,14 @@ define(
             }
 
             return classes.join(' ');
+          };
+
+          $scope.getButtonCustomCss = function (props) {
+            if (props.buttonStyle === 'by-css') {
+              window.console.log(props.buttonStyleCss);
+              return props.buttonStyleCss;
+            }
+            return '';
           };
 
           $scope.go = function () {
