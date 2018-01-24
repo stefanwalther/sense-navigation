@@ -1,3 +1,7 @@
+version: "next"
+  date: "2018-01-24"
+  changes:
+    - "Show buttons in PDF export by default (fixes #83)"
 version: "1.0.0-beta-03"
   date: "2018-01-23"
   fixes:
