@@ -8,6 +8,7 @@ help: 								## Call the help
 
 run-dev: build 				## Run the local development environment
 	export ENV=dev && \
+	docker-clean -s && \
 	docker-compose --f=./docker-compose.dev.yml up -d --build && \
 	echo "" && \
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
