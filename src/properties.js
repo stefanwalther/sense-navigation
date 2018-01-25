@@ -4,9 +4,11 @@ define([
   './lib/external/lodash/lodash.min',
   'qlik',
   './lib/external/sense-extension-utils/index',
-  'text!./lib/data/icons-fa.json'
-], function (angular, __, qlik, extHelper, iconListFA) { // eslint-disable-line max-params
+  'text!./lib/data/icons-fa.json',
+  'text!./lib/data/icons-lui.json'
+], function (angular, __, qlik, extHelper, iconListFa, iconListLui) { // eslint-disable-line max-params
 
+  // Todo: clean up & remove - if not needed anywhere
   // const $injector = angular.injector(['ng']);
   // const $timeout = $injector.get('$timeout');
 
@@ -20,8 +22,8 @@ define([
    *
    * @returns {Array<value,label>}
    */
-  function getIcons() {
-    const iconList = JSON.parse(iconListFA).icons;
+  function getIcons(iconListRaw) {
+    const iconList = JSON.parse(iconListRaw).icons;
     let propDef = [];
 
     iconList.forEach(function (icon) {
@@ -36,6 +38,7 @@ define([
     propDef = __.sortBy(propDef, function (item) {
       return item.label;
     });
+    // Todo: Probably not needed anymore
     propDef.unshift({
       value: '',
       label: '>> No icon <<'
@@ -162,8 +165,8 @@ define([
   };
 
   const helpButtonStyleExprBs = {
-    label: 'My text',
-    component: 'The expression has to return one of the following values: default, primary, success, info, warning, danger or link.',
+    text: 'The expression has to return one of the following values: default, primary, success, info, warning, danger or link.',
+    component: 'text',
     show: function (data) {
       return data.props.buttonTheme === 'bootstrap-v3';
     }
@@ -245,9 +248,9 @@ define([
     type: 'string',
     component: 'dropdown',
     label: 'Icon (Fontawesome icon-set)',
-    ref: 'props.buttonIcon',
+    ref: 'props.buttonIconFa',
     options: function () {
-      return getIcons();
+      return getIcons(iconListFa);
     },
     show: function (data) { /* eslint-disable-line object-shorthand */
       return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'fa';
@@ -260,7 +263,7 @@ define([
     label: 'Icon (Leonardo UI icon-set)',
     ref: 'props.buttonIconLui',
     options: function () {
-      return getIcons();
+      return getIcons(iconListLui);
     },
     show: function (data) { /* eslint-disable-line object-shorthand */
       return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'lui';
@@ -411,11 +414,6 @@ define([
         label: 'Switch to edit mode',
         value: 'switchToEdit'
       }
-      // ,
-      // {
-      // 	label: "Open app",
-      // 	value: "openApp"
-      // }
     ]
   };
 
@@ -598,30 +596,6 @@ define([
   const valueDescEnabler = ['selectValues'];
   const variableEnabler = ['setVariable'];
   const overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
-
-  // Todo: can be removed
-  // Just an idea for now:
-  // const actionGroup = {
-  //   ref: 'actionGroup',
-  //   label: 'Selection Action Type',
-  //   type: 'string',
-  //   component: 'dropdown',
-  //   defaultValue: 'selection',
-  //   options: [
-  //     {
-  //       label: 'Selection',
-  //       value: 'selection'
-  //     },
-  //     {
-  //       label: 'Bookmark',
-  //       value: 'bookmark'
-  //     },
-  //     {
-  //       label: 'Variables',
-  //       value: 'variables'
-  //     }
-  //   ]
-  // };
 
   const actionsList = {
     type: 'array',

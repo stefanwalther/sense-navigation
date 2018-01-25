@@ -11,6 +11,66 @@
     {
       "name": "Forward",
       "id": "forward"
+    },
+    {
+      "name": "History",
+      "id": "history"
+    },
+    {
+      "name": "Help",
+      "id": "help"
+    },
+    {
+      "name": "Info",
+      "id": "info"
+    },
+    {
+      "name": "Toggle left",
+      "id": "toggle-left"
+    },
+    {
+      "name": "Toggle right",
+      "id": "toggle-right"
+    },
+    {
+      "name": "Text",
+      "id": "text"
+    },
+    {
+      "name": "Group",
+      "id": "group"
+    },
+    {
+      "name": "Search",
+      "id": "search"
+    },
+    {
+      "name": "Zoom in",
+      "id": "zoom-in"
+    },
+    {
+      "name": "Zoom out",
+      "id": "zoom-out"
+    },
+    {
+      "name": "Export",
+      "id": "export"
+    },
+    {
+      "name": "Import",
+      "id": "import"
+    },
+    {
+      "name": "Field",
+      "id": "field"
+    },
+    {
+      "name": "Lock",
+      "id": "lock"
+    },
+    {
+      "name": "Unlock",
+      "id": "unlock"
     }
   ]
 }

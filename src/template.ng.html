@@ -1,18 +1,39 @@
 <div qv-extension
      class="container {{layout.props.buttonAlignment}}">
-  <!--<div class="btn btn-sm"-->
-       <!--style="text-align: {{layout.props.buttonTextAlign}}; {{getButtonCustomCss(layout.props)}}"-->
-       <!--ng-class="getButtonClasses(layout.props)"-->
-       <!--ng-click="go();"-->
-       <!--title="{{layout.props.buttonLabel}}">-->
-    <!--<i ng-if="layout.props.buttonIcon !== ''"-->
-       <!--class="fa fa-{{layout.props.buttonIcon}}"-->
-       <!--style="padding-right:5px;"></i>{{layout.props.buttonLabel}}-->
-  <!--</div>-->
-  <div class="lui-button lui-button--info"
-       ng-click="go();">
+
+  <!-- Bootstrap v3 buttons -->
+  <div ng-if="layout.props.buttonTheme === 'bootstrap-v3'"
+       class="btn btn-sm"
+       style="text-align: {{layout.props.buttonTextAlign}};"
+       ng-class="getButtonClassesBs(layout.props)"
+       ng-click="go();"
+       title="{{layout.props.buttonLabel}}">
     <i ng-if="layout.props.buttonShowIcon === true"
-      class="fa fa-{{layout.props.buttonIcon}}"
-      style="padding-right:5px;"></i>{{layout.props.buttonLabel}}
- </div>
+       class="fa fa-{{layout.props.buttonIconFa}}"
+       style="padding-right:5px;"></i>{{layout.props.buttonLabel}}
+  </div>
+  <!-- (Bootstrap v3 buttons) -->
+
+  <!-- Lui Button -->
+  <div ng-if="layout.props.buttonTheme === 'lui'"
+       class="lui-button lui-button--{{layout.props.buttonStyleLui}}"
+       ng-class="getButtonClassesLui(layout.props)"
+       style="text-align: {{layout.props.buttonTextAlign}};"
+       ng-click="go();"
+       title="{{layout.props.buttonLabel}}">
+    <i ng-if="layout.props.buttonShowIcon === true"
+       class="fa fa-{{layout.props.buttonIcon}}"
+       style="padding-right:5px;"></i>{{layout.props.buttonLabel}}
+  </div>
+  <!-- (Lui Button) -->
+
+  <!-- Custom CSS Button -->
+  <div ng-if="layout.props.buttonTheme === 'css'"
+       class="btn btn-sm btn-default"
+       style="text-align: {{layout.props.buttonTextAlign}}; {{getButtonCustomCss(layout.props)}}"
+       ng-click="go();"
+       title="{{layout.props.buttonLabel}}">
+    {{layout.props.buttonLabel}}
+  </div>
+  <!-- (Custom CSS Button -->
 </div>

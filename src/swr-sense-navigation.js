@@ -281,17 +281,18 @@ define(
           };
 
           // Helper function to be used in the template, defining the button class.
-          $scope.getButtonClasses = function (props) {
+          $scope.getButtonClassesBs = function (props) {
 
             let classes = [];
 
-            // Main style
-            if (props.buttonStyle === 'by-expression') {
-              classes.push('btn-' + props.buttonStyleExpression);
-            }
+            // Todo: needs to be changed
+            // if (props.buttonStyleBs === 'by-expression') {
+            //   classes.push('btn-' + props.buttonStyleExpression);
+            // }
 
-            if (props.buttonStyle) {
-              classes.push('btn-' + props.buttonStyle);
+            // Todo: We can probably just omit this
+            if (props.buttonStyleBs) {
+              classes.push('btn-' + props.buttonStyleBs);
             } else {
               classes.push('btn-default');
             }
@@ -305,15 +306,38 @@ define(
 
             // Multiline
             if (props.isButtonMultiLine) {
-              classes.push('btn-multiline');
+              classes.push('multiline');
             }
 
             return classes.join(' ');
           };
 
+          $scope.getButtonClassesLui = function(props)
+          {
+            let classes = [];
+
+            // Todo: needs to be changed
+            // if (props.buttonStyleBs === 'by-expression') {
+            //   classes.push('btn-' + props.buttonStyleExpression);
+            // }
+
+            if (props.fullWidth) {
+              classes.push('full-width');
+            } else {
+              classes.push('auto-width');
+            }
+
+            if (props.isButtonMultiLine) {
+              classes.push('multiline');
+            }
+
+            let retVal = classes.join(' ');
+            window.console.log('lui', retVal);
+            return retVal;
+          };
+
           $scope.getButtonCustomCss = function (props) {
             if (props.buttonStyle === 'by-css') {
-              window.console.log(props.buttonStyleCss);
               return props.buttonStyleCss;
             }
             return '';

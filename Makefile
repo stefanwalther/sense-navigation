@@ -6,7 +6,6 @@ help: 								## Call the help
 	@echo ''
 .PHONY: help
 
-
 run-dev: build 				## Run the local development environment
 	export ENV=dev && \
 	docker-clean -s && \
@@ -29,6 +28,13 @@ gen-readme:           ## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
+test-e2e-dev:					## Test dev build
+	npm run release && \
+	export ENV=dev && \
+	npm run dc-rs && \
+	npm run test:e2e
+.PHONY: test-e2e-dev
+
 test-e2e-release: 		## Test release build
 	npm run release && \
 	export ENV=release && \
@@ -37,11 +43,4 @@ test-e2e-release: 		## Test release build
 	npm run test:e2e
 .PHONY: test-e2e-release
 
-test-e2e-dev:					## Test dev build
-	npm run release && \
-	export ENV=dev && \
-	docker kill $$(docker ps -q) && \
-	npm run dc-rs && \
-	npm run test:e2e
-.PHONY: test-e2e-dev
 
