@@ -63,6 +63,10 @@ define([
         label: 'Leonardo UI'
       },
       {
+        value: 'by-expr',
+        label: 'Custom (by expression)'
+      },
+      {
         value: 'css',
         label: 'Custom (by CSS)'
       }
@@ -104,10 +108,6 @@ define([
       {
         value: 'link',
         label: 'Link'
-      },
-      {
-        value: 'by-expression',
-        label: 'Defined by expression'
       }
     ],
     show: function (data) {
@@ -141,10 +141,6 @@ define([
       {
         value: 'warning',
         label: 'Warning'
-      },
-      {
-        value: 'by-expression',
-        label: 'Defined by expression'
       }
     ],
     show: function (data) {

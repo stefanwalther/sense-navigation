@@ -305,10 +305,7 @@ define(
           $scope.getButtonClassesLui = function (props) {
             let classes = [];
 
-            // Todo: needs to be changed
-            // if (props.buttonStyleBs === 'by-expression') {
-            //   classes.push('btn-' + props.buttonStyleExpression);
-            // }
+
 
             if (props.fullWidth) {
               classes.push('full-width');
