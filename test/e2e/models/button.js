@@ -21,7 +21,7 @@ class Button {
   }
 
   async areButtonsPresent() {
-    await browser.sleep(1000); // Todo: This drives me crazy; we urgently need a better, more reliable solution
+    // await browser.sleep(1000); // Todo: This drives me crazy; we urgently need a better, more reliable solution
     return $(selectors.buttons).isPresent();
   }
 

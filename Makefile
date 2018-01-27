@@ -12,8 +12,6 @@ run-dev: build 				## Run the local development environment
 	docker-compose --f=./docker-compose.dev.yml up -d --build && \
 	echo "" && \
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
-	# We might use: python -mwebbrowser http://example.com
-	#	docker kill $$(docker ps -q) && \
 .PHONY: run-dev
 
 build:                ## Build the extension (dev build)
@@ -31,6 +29,7 @@ gen-readme:           ## Generate the README.md (using docker-verb)
 test-e2e-dev:					## Test dev build
 	npm run release && \
 	export ENV=dev && \
+	docker-clean -s && \
 	npm run dc-rs && \
 	npm run test:e2e
 .PHONY: test-e2e-dev
@@ -38,9 +37,13 @@ test-e2e-dev:					## Test dev build
 test-e2e-release: 		## Test release build
 	npm run release && \
 	export ENV=release && \
-	docker kill $$(docker ps -q) && \
+	docker-clean -s && \
 	npm run dc-rs && \
 	npm run test:e2e
 .PHONY: test-e2e-release
+
+test-e2e: test-e2e-dev test-e2e-release
+.PHONY: test-e2e;
+
 
 
