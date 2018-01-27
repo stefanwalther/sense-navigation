@@ -45,5 +45,9 @@ test-e2e-release: 		## Test release build
 test-e2e: test-e2e-dev test-e2e-release
 .PHONY: test-e2e;
 
+clean:
+#	rm -rf ./
+.PHONY: clean
+
 
 
