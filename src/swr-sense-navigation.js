@@ -16,6 +16,7 @@ define(
 
     const DEBUG = true;
 
+    // Todo: Break out to lib/js/helpers
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
       let a = str.split(sep);
@@ -27,6 +28,7 @@ define(
       return a;
     }
 
+    // Todo: Break out to lib/js/helpers
     function fixUrl(url) {
       if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
         return url;
@@ -34,6 +36,7 @@ define(
       return 'http://' + url;
     }
 
+    // Todo: Break out to lib/js/helpers
     /**
      * Check if running in an iframe.
      *
