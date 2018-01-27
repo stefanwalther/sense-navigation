@@ -6,11 +6,12 @@ define(
     'angular',
     './lib/external/sense-extension-utils/index',
     './properties',
+    './lib/js/helpers',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
     'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
-  function (__, qlik, angular, extUtils, props, ngTemplate) { // eslint-disable-line max-params
+  function (__, qlik, angular, extUtils, props, helpers, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
@@ -64,20 +65,6 @@ define(
       template: ngTemplate,
       controller: [
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
-
-          // Note: getPreferredSize is an undocumented method and not supported right now.
-          // (Therefore it is not used in this extension)
-
-          // this.getPreferredSize = function () {
-          // 	var $btn = this.$element.find('.btn');
-          // 	var size = {
-          // 		w: $btn.width(),
-          // 		h: $btn.height() + 7
-          // 	};
-          // 	var df = Deferred();
-          // 		df.resolve( size );
-          // 	return df.promise;
-          // };
 
           $scope.doNavigate = function () {
 
@@ -312,8 +299,7 @@ define(
             return classes.join(' ');
           };
 
-          $scope.getButtonClassesLui = function(props)
-          {
+          $scope.getButtonClassesLui = function (props) {
             let classes = [];
 
             // Todo: needs to be changed
