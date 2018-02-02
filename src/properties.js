@@ -74,6 +74,7 @@ define([
     defaultValue: 'bootstrap-v3'
   };
 
+  // Todo: Should be renamed to buttonStyleBs3
   const buttonStyleBs = {
     type: 'string',
     component: 'dropdown',

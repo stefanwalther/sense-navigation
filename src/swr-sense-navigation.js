@@ -305,21 +305,34 @@ define(
           $scope.getButtonClassesLui = function (props) {
             let classes = [];
 
-
-
             if (props.fullWidth) {
               classes.push('full-width');
             } else {
               classes.push('auto-width');
             }
-
             if (props.isButtonMultiLine) {
               classes.push('multiline');
             }
+            return classes.join(' ');
+          };
 
-            let retVal = classes.join(' ');
-            window.console.log('lui', retVal);
-            return retVal;
+          $scope.getIconClasses = function (props) {
+            console.log('props', props);
+            let classes = [];
+            switch (props.buttonIconSet) {
+              case 'fa':
+                classes.push('fa');
+                classes.push('fa-' + props.buttonIconFa)
+                break;
+              case 'lui':
+                classes.push('lui-icon');
+                classes.push('lui-icon--small');
+                classes.push('lui-icon--' + props.buttonIconLui);
+                break;
+              default:
+                break;
+            }
+            return classes.join(' ');
           };
 
           $scope.getButtonCustomCss = function (props) {
