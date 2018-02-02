@@ -291,7 +291,7 @@ define(
             if (props.fullWidth) {
               classes.push('full-width');
             } else {
-              classes.push('auto-width');
+              classes.push('auto-width'); // Todo: in case of LUI we could/should use the block style buttons
             }
 
             // Multiline
