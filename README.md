@@ -11,7 +11,7 @@
 - [Installation & Download](#installation--download)
 - [Configuration](#configuration)
 - [Compatibility](#compatibility)
-- [Room for improvement / contribution](#room-for-improvement--contribution)
+- [Room for improvements / contribution](#room-for-improvements--contribution)
 - [Contributing](#contributing)
 - [Related projects](#related-projects)
 - [Authors & Contributors](#authors--contributors)
@@ -124,15 +124,7 @@ If you want to use _sense-navigation_ in older versions, install an older versio
 Any usage in a mashup-based solution might work, but there are many features in ***sense-navigation*** which can never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
 So use ***sense-navigation*** in a mashup-based solution only at your own risk!
 
-## Room for improvement / contribution
-* Allow to add **additional styles for the button** (very similar to [sense-themable-kpi-tile](https://github.com/stefanwalther/sense-themable-kpi-tile))
-* Allow templates for buttons ([see here](https://github.com/stefanwalther/sense-navigation/issues/14))
-* **Additional actions**, e.g.
-	* Reload the app
-	* Opening another app and pass the current selections to the app (similar to "document chaining in QlikView")
-* Allow icons instead of images ([see here](https://github.com/stefanwalther/sense-navigation/issues/37))
-* Select fields instead of defining fields in the expression editor ([see here](https://github.com/stefanwalther/sense-navigation/issues/25))
-	
+## Room for improvements / contribution
 Is there **anything else you'd like to see** in this visualization extension?
 
 * Don't hesitate to add the feature and create a pull request!
