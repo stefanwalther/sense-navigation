@@ -322,7 +322,7 @@ define(
             switch (props.buttonIconSet) {
               case 'fa':
                 classes.push('fa');
-                classes.push('fa-' + props.buttonIconFa)
+                classes.push('fa-' + props.buttonIconFa);
                 break;
               case 'lui':
                 classes.push('lui-icon');

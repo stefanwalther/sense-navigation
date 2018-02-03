@@ -11,7 +11,7 @@ define(['chai', './properties'], function (chai, properties) {
     });
     it('getIcons()', function () {
       expect(properties).to.have.a.property('__test_only__').to.have.a.property('getIcons').to.be.a('function');
-      let icons = properties['__test_only__'].getIcons();
+      let icons = properties.__test_only__.getIcons();
       expect(icons).to.be.an('array');
     });
   });

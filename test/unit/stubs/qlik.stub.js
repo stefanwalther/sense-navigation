@@ -11,7 +11,7 @@ define([], function () {
 
         },
         getList: () => {}
-      }
+      };
     },
     getGlobal: () => {
       return {
