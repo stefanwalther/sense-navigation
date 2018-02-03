@@ -6,15 +6,17 @@ define(
     'angular',
     './lib/external/sense-extension-utils/index',
     './properties',
+    './lib/js/helpers',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
     'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
-  function (__, qlik, angular, extUtils, props, ngTemplate) { // eslint-disable-line max-params
+  function (__, qlik, angular, extUtils, props, helpers, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
 
+    // Todo: Break out to lib/js/helpers
     // Helper function to split numbers.
     function splitToStringNum(str, sep) {
       let a = str.split(sep);
@@ -26,6 +28,7 @@ define(
       return a;
     }
 
+    // Todo: Break out to lib/js/helpers
     function fixUrl(url) {
       if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
         return url;
@@ -33,6 +36,7 @@ define(
       return 'http://' + url;
     }
 
+    // Todo: Break out to lib/js/helpers
     /**
      * Check if running in an iframe.
      *
@@ -64,20 +68,6 @@ define(
       template: ngTemplate,
       controller: [
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
-
-          // Note: getPreferredSize is an undocumented method and not supported right now.
-          // (Therefore it is not used in this extension)
-
-          // this.getPreferredSize = function () {
-          // 	var $btn = this.$element.find('.btn');
-          // 	var size = {
-          // 		w: $btn.width(),
-          // 		h: $btn.height() + 7
-          // 	};
-          // 	var df = Deferred();
-          // 		df.resolve( size );
-          // 	return df.promise;
-          // };
 
           $scope.doNavigate = function () {
 
@@ -281,17 +271,18 @@ define(
           };
 
           // Helper function to be used in the template, defining the button class.
-          $scope.getButtonClasses = function (props) {
+          $scope.getButtonClassesBs = function (props) {
 
             let classes = [];
 
-            // Main style
-            if (props.buttonStyle === 'by-expression') {
-              classes.push('btn-' + props.buttonStyleExpression);
-            }
+            // Todo: needs to be changed
+            // if (props.buttonStyleBs === 'by-expression') {
+            //   classes.push('btn-' + props.buttonStyleExpression);
+            // }
 
-            if (props.buttonStyle) {
-              classes.push('btn-' + props.buttonStyle);
+            // Todo: We can probably just omit this
+            if (props.buttonStyleBs) {
+              classes.push('btn-' + props.buttonStyleBs);
             } else {
               classes.push('btn-default');
             }
@@ -300,20 +291,52 @@ define(
             if (props.fullWidth) {
               classes.push('full-width');
             } else {
-              classes.push('auto-width');
+              classes.push('auto-width'); // Todo: in case of LUI we could/should use the block style buttons
             }
 
             // Multiline
             if (props.isButtonMultiLine) {
-              classes.push('btn-multiline');
+              classes.push('multiline');
             }
 
             return classes.join(' ');
           };
 
+          $scope.getButtonClassesLui = function (props) {
+            let classes = [];
+
+            if (props.fullWidth) {
+              classes.push('full-width');
+            } else {
+              classes.push('auto-width');
+            }
+            if (props.isButtonMultiLine) {
+              classes.push('multiline');
+            }
+            return classes.join(' ');
+          };
+
+          $scope.getIconClasses = function (props) {
+            console.log('props', props);
+            let classes = [];
+            switch (props.buttonIconSet) {
+              case 'fa':
+                classes.push('fa');
+                classes.push('fa-' + props.buttonIconFa);
+                break;
+              case 'lui':
+                classes.push('lui-icon');
+                classes.push('lui-icon--small');
+                classes.push('lui-icon--' + props.buttonIconLui);
+                break;
+              default:
+                break;
+            }
+            return classes.join(' ');
+          };
+
           $scope.getButtonCustomCss = function (props) {
             if (props.buttonStyle === 'by-css') {
-              window.console.log(props.buttonStyleCss);
               return props.buttonStyleCss;
             }
             return '';

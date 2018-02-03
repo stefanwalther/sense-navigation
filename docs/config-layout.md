@@ -16,13 +16,22 @@
 If you have selected "Defined by expression" you can select one of the predefined styles by expression.
 
 The expression must result to one of the following values, which represent the available styles:
-    - `default`
-    - `primary`
-    - `success`
-    - `info`
-    - `warning`
-    - `danger`
-    - `link`
+
+Bootstrap v3 styles:
+  - `bs3-default`
+  - `bs3-primary`
+  - `bs3-success`
+  - `bs3-info`
+  - `bs3-warning`
+  - `bs3-danger`
+  - `bs3-link`
+    
+Leonardo UI styles:
+  - `lui-default`
+  - `lui-toolbar`
+  - `lui-success`
+  - `lui-info`
+  - `lui-warning`
     
 > ![](./images/sense_navigation_style_by_expression.png)
 

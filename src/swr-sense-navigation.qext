@@ -1,6 +1,6 @@
 {
-	"name" : "Navigation & Actions (v@@pkg.version)",
-	"description" : "@@pkg.description",
+	"name" : "Navigation & Actions",
+	"description" : "Enhance your app with custom buttons and actions. (Version @@pkg.version)",
 	"icon" : "extension",
 	"type" : "visualization",
 	"version": "@@pkg.version",

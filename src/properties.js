@@ -4,9 +4,11 @@ define([
   './lib/external/lodash/lodash.min',
   'qlik',
   './lib/external/sense-extension-utils/index',
-  'text!./lib/data/icons-fa.json'
-], function (angular, __, qlik, extHelper, iconListRaw) { // eslint-disable-line max-params
+  'text!./lib/data/icons-fa.json',
+  'text!./lib/data/icons-lui.json'
+], function (angular, __, qlik, extHelper, iconListFa, iconListLui) { // eslint-disable-line max-params
 
+  // Todo: clean up & remove - if not needed anywhere
   // const $injector = angular.injector(['ng']);
   // const $timeout = $injector.get('$timeout');
 
@@ -20,13 +22,9 @@ define([
    *
    * @returns {Array<value,label>}
    */
-  function getIcons() {
+  function getIcons(iconListRaw) {
     const iconList = JSON.parse(iconListRaw).icons;
-    const propDef = [];
-    propDef.push({
-      value: '',
-      label: '>> No icon <<'
-    });
+    let propDef = [];
 
     iconList.forEach(function (icon) {
       propDef.push(
@@ -36,20 +34,52 @@ define([
         }
       );
     });
-    // Can be replaced by iconList.sort
-    return __.sortBy(propDef, function (item) {
+    // Todo: Can be replaced by iconList.sort
+    propDef = __.sortBy(propDef, function (item) {
       return item.label;
     });
+    // Todo: Probably not needed anymore
+    propDef.unshift({
+      value: '',
+      label: '>> No icon <<'
+    });
+    return propDef;
   }
 
   // ****************************************************************************************
   // Layout
   // ****************************************************************************************
-  const buttonStyle = {
+  const buttonTheme = {
     type: 'string',
     component: 'dropdown',
-    ref: 'props.buttonStyle',
-    label: 'Style',
+    label: 'Button theme',
+    ref: 'props.buttonTheme',
+    options: [
+      {
+        value: 'bootstrap-v3',
+        label: 'Bootstrap v3'
+      }, {
+        value: 'lui',
+        label: 'Leonardo UI'
+      },
+      {
+        value: 'by-expr',
+        label: 'Custom (by expression)'
+      },
+      {
+        value: 'css',
+        label: 'Custom (by CSS)'
+      }
+    ],
+    defaultValue: 'bootstrap-v3'
+  };
+
+  // Todo: Should be renamed to buttonStyleBs3
+  const buttonStyleBs = {
+    type: 'string',
+    component: 'dropdown',
+    ref: 'props.buttonStyleBs',
+    label: 'Bootstrap v3 style',
     defaultValue: 'default',
     options: [
       {
@@ -79,16 +109,44 @@ define([
       {
         value: 'link',
         label: 'Link'
-      },
-      {
-        value: 'by-expression',
-        label: 'Defined by expression'
-      },
-      {
-        value: 'by-css',
-        label: 'Custom style (CSS)'
       }
-    ]
+    ],
+    show: function (data) {
+      return data.props.buttonTheme === 'bootstrap-v3';
+    }
+  };
+
+  const buttonStyleLui = {
+    type: 'string',
+    component: 'dropdown',
+    ref: 'props.buttonStyleLui',
+    label: 'Leonardo UI style',
+    defaultValue: 'default',
+    options: [
+      {
+        value: 'default',
+        label: 'Default'
+      },
+      {
+        value: 'toolbar',
+        label: 'Toolbar'
+      },
+      {
+        value: 'success',
+        label: 'Success'
+      },
+      {
+        value: 'info',
+        label: 'Info'
+      },
+      {
+        value: 'warning',
+        label: 'Warning'
+      }
+    ],
+    show: function (data) {
+      return data.props.buttonTheme === 'lui';
+    }
   };
 
   const buttonStyleExpression = {
@@ -97,8 +155,17 @@ define([
     type: 'string',
     expression: 'optional',
     defaultValue: '=\'default\'',
+    // Todo: either for Lui or for Bs
     show: function (data) {
-      return data.props.buttonStyle === 'by-expression';
+      return data.props.buttonStyleBs === 'by-expression';
+    }
+  };
+
+  const helpButtonStyleExprBs = {
+    text: 'The expression has to return one of the following values: default, primary, success, info, warning, danger or link.',
+    component: 'text',
+    show: function (data) {
+      return data.props.buttonTheme === 'bootstrap-v3';
     }
   };
 
@@ -109,7 +176,7 @@ define([
     expression: 'optional',
     defaultValue: '=\'background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)\'',
     show: function (data) {
-      return data.props.buttonStyle === 'by-css';
+      return data.props.buttonTheme === 'css';
     }
   };
 
@@ -133,13 +200,70 @@ define([
     defaultValue: false
   };
 
-  const buttonIcons = {
+  // ****************************************************************************************
+  // Icons
+  // ****************************************************************************************
+
+  const buttonShowIcon = {
+    type: 'boolean',
+    component: 'switch',
+    label: 'Show icon',
+    ref: 'props.buttonShowIcon',
+    options: [
+      {
+        value: true,
+        label: 'On'
+      }, {
+        value: false,
+        label: 'Off'
+      }
+    ],
+    defaultValue: false
+  };
+
+  const buttonIconSet = {
     type: 'string',
     component: 'dropdown',
-    label: 'Icon',
-    ref: 'props.buttonIcon',
+    label: 'Icon set',
+    ref: 'props.buttonIconSet',
+    options: [
+      {
+        value: 'fa',
+        label: 'Fontawesome Icons'
+      }, {
+        value: 'lui',
+        label: 'Leonardo UI Icons'
+      }
+    ],
+    defaultValue: 'fa',
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true;
+    }
+  };
+
+  const buttonIconsFa = {
+    type: 'string',
+    component: 'dropdown',
+    label: 'Icon (Fontawesome icon-set)',
+    ref: 'props.buttonIconFa',
     options: function () {
-      return getIcons();
+      return getIcons(iconListFa);
+    },
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'fa';
+    }
+  };
+
+  const buttonIconsLui = {
+    type: 'string',
+    component: 'dropdown',
+    label: 'Icon (Leonardo UI icon-set)',
+    ref: 'props.buttonIconLui',
+    options: function () {
+      return getIcons(iconListLui);
+    },
+    show: function (data) { /* eslint-disable-line object-shorthand */
+      return data.props.buttonShowIcon === true && data.props.buttonIconSet === 'lui';
     }
   };
 
@@ -167,6 +291,10 @@ define([
       return data.props.fullWidth;
     }
   };
+
+  // ****************************************************************************************
+  // Position, size & alignment
+  // ****************************************************************************************
 
   const buttonAlignment = {
     ref: 'props.buttonAlignment',
@@ -283,11 +411,6 @@ define([
         label: 'Switch to edit mode',
         value: 'switchToEdit'
       }
-      // ,
-      // {
-      // 	label: "Open app",
-      // 	value: "openApp"
-      // }
     ]
   };
 
@@ -355,7 +478,7 @@ define([
   };
 
   // ****************************************************************************************
-  // Action-Group
+  // Action Options
   // ****************************************************************************************
 
   const actionOptions = [
@@ -471,29 +594,6 @@ define([
   const variableEnabler = ['setVariable'];
   const overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
-  // Just an idea for now:
-  // const actionGroup = {
-  //   ref: 'actionGroup',
-  //   label: 'Selection Action Type',
-  //   type: 'string',
-  //   component: 'dropdown',
-  //   defaultValue: 'selection',
-  //   options: [
-  //     {
-  //       label: 'Selection',
-  //       value: 'selection'
-  //     },
-  //     {
-  //       label: 'Bookmark',
-  //       value: 'bookmark'
-  //     },
-  //     {
-  //       label: 'Variables',
-  //       value: 'variables'
-  //     }
-  //   ]
-  // };
-
   const actionsList = {
     type: 'array',
     ref: 'props.actionItems',
@@ -507,7 +607,6 @@ define([
     addTranslation: 'Add Item',
     grouped: true,
     items: {
-      // ActionGroup: actionGroup, // eslint-disable-line capitalized-comments
       actionType: {
         type: 'string',
         ref: 'actionType',
@@ -523,7 +622,7 @@ define([
         expression: 'optional',
         options: extHelper.getBookmarkList(),
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -539,16 +638,11 @@ define([
               value: 'by-expr',
               label: '>> Define field by expression <<'
             });
-            // Ugly workaround/fix for bug in Qlik Sense 2.1 - 3.1 that will cause
-            // the loading of the field not to be finished
-            // $timeout(function () {
-            //   $('.cell').trigger('mouseover');
-            // }, 0);
             return fieldList;
           });
         },
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -558,7 +652,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -568,7 +662,7 @@ define([
         label: 'Variable name',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -578,7 +672,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -588,7 +682,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -598,11 +692,10 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          const def = __.find(defs.label.props.actionItems, {cId: data.cId});
+          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
-
     }
   };
 
@@ -619,21 +712,6 @@ define([
           }
         }
       }
-      // ,
-      // actionsList: actions,
-      // behavior: {
-      //   type: 'items',
-      //   label: 'Navigation behavior',
-      //   items: {
-      //     action: navigationAction,
-      //     sheetId: sheetId,
-      //     sheetList: sheetList,
-      //     storyList: storyList,
-      //     websiteUrl: websiteUrl,
-      //     sameWindow: sameWindow,
-      //     appList: appList
-      //   }
-      // }
     }
   };
 
@@ -644,19 +722,31 @@ define([
     items: {
       label: {
         type: 'items',
-        label: 'Layout',
+        label: 'Label',
         items: {
-          label: buttonLabel
+          buttonLabel: buttonLabel
         }
       },
       style: {
         type: 'items',
         label: 'Style',
         items: {
-          buttonStyle: buttonStyle,
+          buttonTheme: buttonTheme,
+          buttonStyleBs: buttonStyleBs,
+          buttonStyleLui: buttonStyleLui,
           buttonStyleExpression: buttonStyleExpression,
-          buttonStyleCss: buttonStyleCss,
-          buttonIcons: buttonIcons
+          helpButtonStyleExprBs: helpButtonStyleExprBs,
+          buttonStyleCss: buttonStyleCss
+        }
+      },
+      icons: {
+        type: 'items',
+        label: 'Icon',
+        items: {
+          buttonShowIcon: buttonShowIcon,
+          buttonIconTheme: buttonIconSet,
+          buttonIconsFa: buttonIconsFa,
+          buttonIconsLui: buttonIconsLui
         }
       },
       alignment: {
@@ -677,13 +767,7 @@ define([
     component: 'expandable-items',
     label: 'Navigation & actions',
     items: {
-      actionsList: {
-        type: 'items',
-        label: 'Actions',
-        items: {
-          actions: actionsList
-        }
-      },
+      actionsList: actionsList,
       navigationBehavior: {
         type: 'items',
         label: 'Navigation behavior',

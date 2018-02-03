@@ -1,0 +1,17 @@
+.lui-button {
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &.full-width {
+    width: ~"calc(100%)";
+  }
+  &.auto-width {
+    width: auto;
+  }
+  &.multiline {
+    white-space: normal !important;
+    height: auto;
+  }
+}

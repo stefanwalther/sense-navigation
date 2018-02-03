@@ -4,8 +4,6 @@ const path = require('path');
 const extend = require('extend');
 const util = require('util');
 
-// Process.env.SELENIUM_PROMISE_MANAGER = 1;
-
 module.exports = function initConfig(baseConfig) { // eslint-disable-line func-names
   const config = {
     baseUrl: 'http://127.0.0.1:4848/sense/app/',
@@ -15,7 +13,7 @@ module.exports = function initConfig(baseConfig) { // eslint-disable-line func-n
       browserName: 'chrome',
       unexpectedAlertBehaviour: 'accept',
       chromeOptions: {
-        args: ['--disable-infobars']
+        args: ['--disable-infobars --window-size=1024x768']
       }
     },
     plugins: [
@@ -31,7 +29,7 @@ module.exports = function initConfig(baseConfig) { // eslint-disable-line func-n
       }
     ],
     mochaOpts: {
-      bail: true
+      bail: false
     },
     multiCapabilities: [],
     specs: [
