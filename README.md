@@ -66,23 +66,25 @@ Every button can also include an icon:
 
 > ![](docs/images/sense_navigation__button_icons.png)
 
-_sense-navigation_make offers in total 851 icons to use:
+***sense-navigation√ offers in total 851 icons to use:
  
 - Icon library [Fontawesome icons](http://fontawesome.io/): 675 icons
 - Icon library [Leonardo UI icons](https://qlik-oss.github.io/leonardo-ui/icons.html): 176 icons
 
+### Button Style by Qlik Expression
+
 Buttons can also be [styled based on a custom expression](docs/config-layout.md#advanced-styling):
 
-> ![](docs/images/sense_navigation_style_by_expression.png)
+> ![](docs/images/sense_navigation__style_by_expression.png)
 ### Custom Styles (Custom CSS)
 
 If you want to have full freedom over designing your button, just use CSS:
 
-> ![](docs/images/sense_navigation__by_css.png)
+> ![](docs/images/sense_navigation__style_by_css.png)
 
 Result:
 
-> ![](docs/images/sense_navigation__by_css_result.png)
+> ![](docs/images/sense_navigation__style_by_css_result.png)
 
 ## Installation & Download
 ### Fresh Installation
@@ -106,7 +108,7 @@ Result:
 
 ## Configuration
 Drag & drop the object onto a sheet (as you would do it with any other native object or visualization extension).
-Then define how the **sense-navigation** should behave:
+Then define how the ***sense-navigation*** should behave:
 
 - [Layout Options](./docs/config-layout.md)
 - [Actions](./docs/config-actions.md)
@@ -116,11 +118,11 @@ Then define how the **sense-navigation** should behave:
 **sense-navigation** is designed to work with Qlik Sense *September 2017* or higher.
 If you want to use _sense-navigation_ in older versions, install an older version than v1.0.
 
-### **sense-navigation** & Mashups
+### ***sense-navigation*** & Mashups
 
-**sense-navigation** it built to be used within the Qlik Sense Client.
-Any usage in a mashup-based solution might work, but there are many features in **sense-navigation** which can never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
-So use **sense-navigation** in a mashup-based solution only at your own risk!
+***sense-navigation*** it built to be used within the Qlik Sense Client.
+Any usage in a mashup-based solution might work, but there are many features in ***sense-navigation*** which can never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
+So use ***sense-navigation*** in a mashup-based solution only at your own risk!
 
 ## Room for improvement / contribution
 * Allow to add **additional styles for the button** (very similar to [sense-themable-kpi-tile](https://github.com/stefanwalther/sense-themable-kpi-tile))

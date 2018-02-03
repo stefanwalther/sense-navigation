@@ -1,4 +1,5 @@
 ### Navigation Behavior
+
 Define the behavior of the button. The following options are available:
 
 > ![](./images/sense_navigation_behavior.png)
