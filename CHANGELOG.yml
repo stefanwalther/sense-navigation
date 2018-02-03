@@ -1,3 +1,7 @@
+version: "1.0.0-beta-04"
+  date: "2018-02-03"
+  added:
+    - "Leonardo UI Button Theme"
 version: "1.0.0-beta-03"
   date: "2018-01-24"
   changes:

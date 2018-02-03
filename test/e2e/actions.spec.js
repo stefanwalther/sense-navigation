@@ -16,7 +16,7 @@ describe('ACTIONS', () => {
     await appOverview.openSheet('test:actions');
   });
 
-  it('does something', async () => {
+  it('do something', async () => {
 
     const btn = new Button();
     await btn.get('ApplyBookmark');
