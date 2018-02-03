@@ -25,6 +25,7 @@ request('https://qlik-oss.github.io/leonardo-ui/icons.html', function (error, re
       let name = makeName(id);
       result.icons.push({id, name});
     });
+    console.log('Num of icons: ', result.icons.length);
     fs.writeFileSync(path.join(__dirname, 'icons-lui.json'), JSON.stringify(result));
   }
 });
