@@ -12,11 +12,11 @@
 - [Configuration](#configuration)
 - [Compatibility](#compatibility)
 - [Room for improvements / contribution](#room-for-improvements--contribution)
-- [Contributing](#contributing)
 - [Related projects](#related-projects)
 - [About](#about)
   * [Authors & Contributors](#authors--contributors)
   * [Contributors](#contributors)
+  * [Contributing](#contributing)
   * [License](#license)
   * [Change log](#change-log)
 
@@ -131,20 +131,6 @@ Is there **anything else you'd like to see** in this visualization extension?
 * Don't hesitate to add the feature and create a pull request!
 * You don't have the time or skills to implement this specific feature? No problem, [drop a note here](https://github.com/stefanwalther/sense-navigation/issues).
 
-## Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/stefanwalther/sense-navigation/issues).
-The process for contributing is outlined below:
-
-1. Create a fork of the project
-2. Work on whatever bug or feature you wish
-3. Create a pull request (PR)
-
-I cannot guarantee that I will merge all PRs but I will evaluate them all.
-
-### Building the project
-
-See [https://github.com/stefanwalther/sense-extension-contrib](https://github.com/stefanwalther/sense-extension-contrib)
-
 ## Related projects
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
 
@@ -172,6 +158,20 @@ Some related projects (Qlik Sense Visualization Extensions) I have recently crea
 ### Contributors
 - [rvaheldendaten](https://github.com/rvaheldendaten)
 - [rjriel](https://github.com/rjriel)
+
+### Contributing
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/stefanwalther/sense-navigation/issues).
+The process for contributing is outlined below:
+
+1. Create a fork of the project
+2. Work on whatever bug or feature you wish
+3. Create a pull request (PR)
+
+I cannot guarantee that I will merge all PRs but I will evaluate them all.
+
+### Building the project
+
+See [https://github.com/stefanwalther/sense-extension-contrib](https://github.com/stefanwalther/sense-extension-contrib)
 
 ### License
 MIT
