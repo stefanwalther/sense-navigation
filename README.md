@@ -64,29 +64,25 @@ There are several predefined styles available, you can choose from:
 
 Every button can also include an icon:
 
-> ![](docs/images/sense_navigation_button_icons.png)
+> ![](docs/images/sense_navigation__button_icons.png)
 
-**sense-navigation** offers in total 851 icons to use:
+_sense-navigation_make offers in total 851 icons to use:
  
 - Icon library [Fontawesome icons](http://fontawesome.io/): 675 icons
 - Icon library [Leonardo UI icons](https://qlik-oss.github.io/leonardo-ui/icons.html): 176 icons
 
-Buttons can also be [styled based on a custom expression or by using custom CSS](docs/config-layout.md#advanced-styling):
+Buttons can also be [styled based on a custom expression](docs/config-layout.md#advanced-styling):
 
 > ![](docs/images/sense_navigation_style_by_expression.png)
-
-Result:
-
-> ![](docs/images/custom-css-button.png)
 ### Custom Styles (Custom CSS)
 
-Buttons can also be [styled based on a custom expression or by using custom CSS](docs/config-layout.md#advanced-styling):
+If you want to have full freedom over designing your button, just use CSS:
 
-> ![](docs/images/sense_navigation_style_by_expression.png)
+> ![](docs/images/sense_navigation__by_css.png)
 
 Result:
 
-> ![](docs/images/custom-css-button.png)
+> ![](docs/images/sense_navigation__by_css_result.png)
 
 ## Installation & Download
 ### Fresh Installation

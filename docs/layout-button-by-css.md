@@ -1,10 +1,10 @@
 
 ### Custom Styles (Custom CSS)
 
-Buttons can also be [styled based on a custom expression or by using custom CSS](docs/config-layout.md#advanced-styling):
+If you want to have full freedom over designing your button, just use CSS:
 
-> ![](docs/images/sense_navigation_style_by_expression.png)
+> ![](docs/images/sense_navigation__by_css.png)
 
 Result:
 
-> ![](docs/images/custom-css-button.png)
+> ![](docs/images/sense_navigation__by_css_result.png)
