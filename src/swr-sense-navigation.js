@@ -199,7 +199,7 @@ define(
                     break;
                   case 'selectAll':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectAll(softLock);
+                      actionPromises.push($scope.actions.lockField.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectAlternative':
@@ -376,7 +376,7 @@ define(
             },
             back: function () {
               let cApp = qlik.currApp();
-              return cApp.back()
+              return cApp.back();
             },
             clearAll: function () {
               let cApp = qlik.currApp();
@@ -401,6 +401,10 @@ define(
             lockField: function (field) {
               let cApp = qlik.currApp();
               return cApp.field(field).lock();
+            },
+            selectAll: function(field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectAll(softLock);
             },
             toggleSelect: function (field, value, softLock) {
               let cApp = qlik.currApp();
