@@ -215,7 +215,7 @@ define(
                     break;
                   case 'selectExcluded':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectExcluded(softLock);
+                      actionPromises.push($scope.actions.selectExcluded.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectField':
@@ -409,6 +409,10 @@ define(
             selectAlternative: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectAlternative(softLock);
+            },
+            selectExcluded: function(field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectExcluded(softLock);
             },
             toggleSelect: function (field, value, softLock) {
               let cApp = qlik.currApp();
