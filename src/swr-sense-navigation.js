@@ -69,6 +69,8 @@ define(
       controller: [
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
 
+          const DELAY_ACTIONS = 100;
+
           $scope.doNavigate = function () {
 
             if (DEBUG) {
@@ -133,50 +135,44 @@ define(
           $scope.isEditMode = function () {
             return qlik.navigation.getMode() === qlik.navigation.EDIT;
           };
+
+          /**
+           * Executes the actions
+           *
+           * @returns a promise
+           */
           $scope.doAction = function () { // eslint-disable-line complexity
 
             const app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
 
-            let fld;
-            let val;
-            let actionType;
-            let softLock;
-            let bookmark;
-            let variable;
-
             if ($scope.layout.props && $scope.layout.props.actionItems) {
+
+              let actionPromises = [];
+              window.console.log('$scope', $scope);
 
               for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
-                actionType = $scope.layout.props.actionItems[i].actionType;
-                fld = (__.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
-                val = $scope.layout.props.actionItems[i].value;
-                softLock = $scope.layout.props.actionItems[i].softLock;
-                bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
-                variable = $scope.layout.props.actionItems[i].variable;
+                let actionType = $scope.layout.props.actionItems[i].actionType;
+                let fld = (__.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
+                let val = $scope.layout.props.actionItems[i].value;
+                let softLock = $scope.layout.props.actionItems[i].softLock;
+                let bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
+                let variable = $scope.layout.props.actionItems[i].variable;
 
-                if (DEBUG) {
-                  window.console.group('DEBUG');
-                  window.console.log('actionItems', $scope.layout.props.actionItems);
-                  window.console.log('actionType: ', actionType);
-                  window.console.log('fld: ', fld);
-                  window.console.log('val: ', val);
-                  window.console.groupEnd();
-                }
+                let l = actionPromises.length;
 
                 switch (actionType) {
                   case 'applyBookmark':
                     if (!__.isEmpty(bookmark)) {
-                      app.bookmark.apply(bookmark);
+                      actionPromises.push($scope.actions.applyBookmark.bind(this, bookmark));
                     }
                     break;
                   case 'back':
-                    app.back().catch(function (err) {
-                      window.console.error(err);
-                    });
+                    actionPromises.push($scope.actions.back.bind(this));
                     break;
                   case 'clearAll':
-                    app.clearAll();
+                    actionPromises.push($scope.actions.clearAll.bind(this));
+
                     break;
                   case 'clearField':
                     if (!__.isEmpty(fld)) {
@@ -266,10 +262,33 @@ define(
                   default:
                     break;
                 }
+
+                if (l < actionPromises.length) {
+                  actionPromises.push($scope.actions.wait.bind(null, 100));
+                }
+
+                if (DEBUG) {
+                  window.console.group('DEBUG');
+                  window.console.log('actionItems', $scope.layout.props.actionItems);
+                  window.console.log('actionType: ', actionType);
+                  window.console.log('actionPromises', actionPromises);
+                  window.console.log('fld: ', fld);
+                  window.console.log('val: ', val);
+                  window.console.groupEnd();
+                }
               }
+
+              window.console.log('actionPromises', actionPromises);
+
+              const seed = qlik.Promise.resolve(null);
+              return actionPromises.reduce(function (a, b) {
+                return a.then(b);
+              }, seed);
+
             }
           };
 
+          // Todo: break out to utils
           // Helper function to be used in the template, defining the button class.
           $scope.getButtonClassesBs = function (props) {
 
@@ -344,8 +363,45 @@ define(
 
           $scope.go = function () {
             if (!$scope.isEditMode()) {
-              $scope.doAction();
-              $scope.doNavigate();
+              $scope.doAction()
+                .then(function () {
+                  $scope.doNavigate();
+                })
+                .catch(function (err) {
+                  window.console.error(err);
+                });
+            }
+          };
+
+          $scope.actions = {
+            applyBookmark: function (bookmarkId) {
+              let cApp = qlik.currApp();
+              cApp.bookmark.apply(bookmarkId);
+            },
+            back: function () {
+              console.log('action:back');
+              let cApp = qlik.currApp();
+              return cApp.back()
+                .then(function () {
+                  return setTimeout(function () {
+                    return qlik.Promise.resolve();
+                  }, 1000);
+                });
+            },
+            clearAll: function () {
+              console.log('action:clearAll');
+              let cApp = qlik.currApp();
+              return cApp.clearAll();
+            },
+            wait: function (ms) {
+              let waitMs = ms || DELAY_ACTIONS;
+              console.log('wait for ', waitMs);
+              return new qlik.Promise(function (resolve) {
+                let wait = setTimeout(() => {
+                  clearTimeout(wait);
+                  resolve();
+                }, waitMs);
+              });
             }
           };
 
