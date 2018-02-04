@@ -248,7 +248,7 @@ define(
                     actionPromises.push($scope.actions.unlockAll().bind(this));
                     break;
                   case 'unlockAllAndClearAll':
-                    $scope.unlockAllAndClearAll();
+                    actionPromises.push($scope.actions.unlockAllAndClearAll().bind(this));
                     break;
                   case 'unlockField':
                     if (!__.isEmpty(fld)) {
@@ -410,11 +410,11 @@ define(
               let cApp = qlik.currApp();
               return cApp.field(field).selectAlternative(softLock);
             },
-            selectExcluded: function(field, softLock) {
+            selectExcluded: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
             },
-            setVariableContent: function(varName, varVal) {
+            setVariableContent: function (varName, varVal) {
               const cApp = qlik.currApp();
               return cApp.variable.setContent(varName, varVal);
             },
@@ -425,6 +425,10 @@ define(
             unlockAll: function () {
               let cApp = qlik.currApp();
               return cApp.unlockAll();
+            },
+            unlockAllAndClearAll: function () {
+              const app = qlik.currApp();
+              return app.unlockAll.then(app.clearAll);
             },
             unlockField: function (field) {
               let cApp = qlik.currApp();
@@ -491,12 +495,6 @@ define(
               return false;
             }
             return true;
-          };
-
-          $scope.unlockAllAndClearAll = function () {
-            const app = qlik.currApp();
-            app.unlockAll();
-            app.clearAll();
           };
 
         }
