@@ -192,11 +192,6 @@ define(
                       actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
-                  case 'replaceBookmark':
-                    if (!__.isEmpty(bookmark)) {
-                      app.bookmark.apply(bookmark);
-                    }
-                    break;
                   case 'selectAll':
                     if (!__.isEmpty(fld)) {
                       actionPromises.push($scope.actions.selectAll.bind(this, fld, softLock));
@@ -209,8 +204,8 @@ define(
                     break;
                   case 'selectAndLockField':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).selectMatch(val, true);
-                      app.field(fld).lock();
+                      actionPromises.push($scope.actions.selectField.bind(this, fld, val));
+                      actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'selectExcluded':
