@@ -236,7 +236,7 @@ define(
                     break;
                   case 'setVariable':
                     if (!__.isEmpty(variable)) {
-                      $scope.setVariableContent(variable, val);
+                      actionPromises.push($scope.actions.setVariableContent.bind(this, variable, val));
                     }
                     break;
                   case 'toggleSelect':
@@ -414,6 +414,10 @@ define(
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
             },
+            setVariableContent: function(varName, varVal) {
+              const cApp = qlik.currApp();
+              return cApp.variable.setContent(varName, varVal);
+            },
             toggleSelect: function (field, value, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).toggleSelect(value, softLock);
@@ -479,18 +483,6 @@ define(
             if ($scope.checkQlikNavigation() && !__.isEmpty(storyId)) {
               qlik.navigation.gotoStory(storyId);
             }
-          };
-
-          // Todo: Use method from sense-extension-utils/variable-utils.js
-          $scope.setVariableContent = function (variableName, variableValue) {
-            const app = qlik.currApp();
-            app.variable.setContent(variableName, variableValue)
-              .then(function (/* reply */) {
-                angular.noop();
-              })
-              .catch(function (err) {
-                window.console.error(err);
-              });
           };
 
           $scope.checkQlikNavigation = function () {
