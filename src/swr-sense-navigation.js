@@ -172,11 +172,10 @@ define(
                     break;
                   case 'clearAll':
                     actionPromises.push($scope.actions.clearAll.bind(this));
-
                     break;
                   case 'clearField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).clear();
+                      actionPromises.push($scope.actions.clearField.bind(this, fld));
                     }
                     break;
                   case 'clearOther':
@@ -392,6 +391,10 @@ define(
               console.log('action:clearAll');
               let cApp = qlik.currApp();
               return cApp.clearAll();
+            },
+            clearField: function (field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).clear();
             },
             wait: function (ms) {
               let waitMs = ms || DELAY_ACTIONS;
