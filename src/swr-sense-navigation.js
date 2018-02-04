@@ -205,6 +205,7 @@ define(
                   case 'selectAndLockField':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
                       actionPromises.push($scope.actions.selectField.bind(this, fld, val));
+                      actionPromises.push($scope.actions.wait.bind(null, 100));
                       actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
