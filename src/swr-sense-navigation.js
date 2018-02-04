@@ -452,6 +452,11 @@ define(
             }
           };
 
+          // Todo: Move all stuff here, this is much cleaner
+          $scope.navigationAction = {
+
+          };
+
           $scope.firstSheet = function () {
             if ($scope.checkQlikNavigation()) {
               extUtils.getFirstSheet().then(function (result) {
