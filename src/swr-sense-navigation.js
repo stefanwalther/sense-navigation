@@ -189,7 +189,7 @@ define(
                     break;
                   case 'lockField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).lock();
+                      actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'replaceBookmark':
@@ -398,15 +398,19 @@ define(
               let cApp = qlik.currApp();
               return cApp.lockAll();
             },
-            toggleSelect: function(field, value, softLock) {
+            lockField: function (field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).lock();
+            },
+            toggleSelect: function (field, value, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).toggleSelect(value, softLock);
             },
-            unlockAll: function() {
+            unlockAll: function () {
               let cApp = qlik.currApp();
               return cApp.unlockAll();
             },
-            unlockField: function(field) {
+            unlockField: function (field) {
               let cApp = qlik.currApp();
               return cApp.field(field).unlock();
             },
