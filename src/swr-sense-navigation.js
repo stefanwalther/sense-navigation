@@ -220,7 +220,7 @@ define(
                     break;
                   case 'selectField':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).selectMatch(val, false);
+                      actionPromises.push($scope.actions.selectField.bind(this, fld, val));
                     }
                     break;
                   case 'selectValues':
@@ -414,6 +414,10 @@ define(
             selectExcluded: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
+            },
+            selectField: function(field, value) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectMatch(value, false);
             },
             selectPossible: function (field, softLock) {
               let cApp = qlik.currApp();
