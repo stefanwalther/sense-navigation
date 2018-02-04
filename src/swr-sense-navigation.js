@@ -252,7 +252,7 @@ define(
                     break;
                   case 'unlockField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).unlock();
+                      actionPromises.push($scope.actions.unlockField.bind(this, fld));
                     }
                     break;
                   default:
@@ -397,6 +397,10 @@ define(
             lockAll: function () {
               let cApp = qlik.currApp();
               return cApp.lockAll();
+            },
+            unlockField: function(field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).unlock();
             },
             wait: function (ms) {
               let waitMs = ms || DELAY_ACTIONS;
