@@ -225,8 +225,7 @@ define(
                     break;
                   case 'selectValues':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      let vals = splitToStringNum(val, ';');
-                      app.field(fld).selectValues(vals, false);
+                      actionPromises.push($scope.actions.selectValues.bind(this, fld, val));
                     }
                     break;
                   case 'selectPossible':
@@ -248,7 +247,9 @@ define(
                     actionPromises.push($scope.actions.unlockAll.bind(this));
                     break;
                   case 'unlockAllAndClearAll':
-                    actionPromises.push($scope.actions.unlockAllAndClearAll.bind(this));
+                    actionPromises.push($scope.actions.unlockAll.bind(this));
+                    actionPromises.push($scope.actions.wait.bind(null, 100));
+                    actionPromises.push($scope.actions.clearAll.bind(this));
                     break;
                   case 'unlockField':
                     if (!__.isEmpty(fld)) {
@@ -372,7 +373,7 @@ define(
           $scope.actions = {
             applyBookmark: function (bookmarkId) {
               let cApp = qlik.currApp();
-              cApp.bookmark.apply(bookmarkId);
+              return cApp.bookmark.apply(bookmarkId);
             },
             back: function () {
               let cApp = qlik.currApp();
@@ -414,9 +415,14 @@ define(
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
             },
-            selectPossible: function(field, softLock) {
+            selectPossible: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectPossible(softLock);
+            },
+            selectValues: function (field, values) {
+              let cApp = qlik.currApp();
+              let valsToSelect = splitToStringNum(values, ';');
+              return cApp.field(field).selectValues(valsToSelect, false);
             },
             setVariableContent: function (varName, varVal) {
               const cApp = qlik.currApp();
@@ -429,10 +435,6 @@ define(
             unlockAll: function () {
               let cApp = qlik.currApp();
               return cApp.unlockAll();
-            },
-            unlockAllAndClearAll: function () {
-              const app = qlik.currApp();
-              return app.unlockAll.then(app.clearAll);
             },
             unlockField: function (field) {
               let cApp = qlik.currApp();
