@@ -185,7 +185,7 @@ define(
                     actionPromises.push($scope.actions.forward.bind(this));
                     break;
                   case 'lockAll':
-                    app.lockAll();
+                    actionPromises.push($scope.actions.lockAll.bind(this));
                     break;
                   case 'lockField':
                     if (!__.isEmpty(fld)) {
@@ -393,6 +393,10 @@ define(
             forward: function () {
               let cApp = qlik.currApp();
               return cApp.forward();
+            },
+            lockAll: function () {
+              let cApp = qlik.currApp();
+              return cApp.lockAll();
             },
             wait: function (ms) {
               let waitMs = ms || DELAY_ACTIONS;
