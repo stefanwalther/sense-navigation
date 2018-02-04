@@ -179,7 +179,7 @@ define(
                     }
                     break;
                   case 'clearOther':
-                    app.field(fld).clearOther(softLock);
+                      actionPromises.push($scope.actions.clearOther.bind(this, fld, softLock));
                     break;
                   case 'forward':
                     app.forward()
@@ -395,6 +395,10 @@ define(
             clearField: function (field) {
               let cApp = qlik.currApp();
               return cApp.field(field).clear();
+            },
+            clearOther: function(field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).clearOther(softLock);
             },
             wait: function (ms) {
               let waitMs = ms || DELAY_ACTIONS;
