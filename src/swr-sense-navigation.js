@@ -179,13 +179,10 @@ define(
                     }
                     break;
                   case 'clearOther':
-                      actionPromises.push($scope.actions.clearOther.bind(this, fld, softLock));
+                    actionPromises.push($scope.actions.clearOther.bind(this, fld, softLock));
                     break;
                   case 'forward':
-                    app.forward()
-                      .catch(function (err) {
-                        window.console.error(err);
-                      });
+                    actionPromises.push($scope.actions.forward.bind(this));
                     break;
                   case 'lockAll':
                     app.lockAll();
@@ -378,17 +375,10 @@ define(
               cApp.bookmark.apply(bookmarkId);
             },
             back: function () {
-              console.log('action:back');
               let cApp = qlik.currApp();
               return cApp.back()
-                .then(function () {
-                  return setTimeout(function () {
-                    return qlik.Promise.resolve();
-                  }, 1000);
-                });
             },
             clearAll: function () {
-              console.log('action:clearAll');
               let cApp = qlik.currApp();
               return cApp.clearAll();
             },
@@ -396,9 +386,13 @@ define(
               let cApp = qlik.currApp();
               return cApp.field(field).clear();
             },
-            clearOther: function(field, softLock) {
+            clearOther: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).clearOther(softLock);
+            },
+            forward: function () {
+              let cApp = qlik.currApp();
+              return cApp.forward();
             },
             wait: function (ms) {
               let waitMs = ms || DELAY_ACTIONS;
