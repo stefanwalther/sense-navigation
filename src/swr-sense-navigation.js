@@ -69,6 +69,8 @@ define(
       controller: [
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
 
+          const DELAY_ACTIONS = 100;
+
           $scope.doNavigate = function () {
 
             if (DEBUG) {
@@ -133,143 +135,153 @@ define(
           $scope.isEditMode = function () {
             return qlik.navigation.getMode() === qlik.navigation.EDIT;
           };
+
+          /**
+           * Executes the actions
+           *
+           * @returns a promise
+           */
           $scope.doAction = function () { // eslint-disable-line complexity
 
             const app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
 
-            let fld;
-            let val;
-            let actionType;
-            let softLock;
-            let bookmark;
-            let variable;
-
             if ($scope.layout.props && $scope.layout.props.actionItems) {
+
+              let actionPromises = [];
+              window.console.log('$scope', $scope);
 
               for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
-                actionType = $scope.layout.props.actionItems[i].actionType;
-                fld = (__.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
-                val = $scope.layout.props.actionItems[i].value;
-                softLock = $scope.layout.props.actionItems[i].softLock;
-                bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
-                variable = $scope.layout.props.actionItems[i].variable;
+                let actionType = $scope.layout.props.actionItems[i].actionType;
+                let fld = (__.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
+                let val = $scope.layout.props.actionItems[i].value;
+                let softLock = $scope.layout.props.actionItems[i].softLock;
+                let bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
+                let variable = $scope.layout.props.actionItems[i].variable;
 
-                if (DEBUG) {
-                  window.console.group('DEBUG');
-                  window.console.log('actionItems', $scope.layout.props.actionItems);
-                  window.console.log('actionType: ', actionType);
-                  window.console.log('fld: ', fld);
-                  window.console.log('val: ', val);
-                  window.console.groupEnd();
-                }
+                let l = actionPromises.length;
 
                 switch (actionType) {
                   case 'applyBookmark':
                     if (!__.isEmpty(bookmark)) {
-                      app.bookmark.apply(bookmark);
+                      actionPromises.push($scope.actions.applyBookmark.bind(this, bookmark));
                     }
                     break;
                   case 'back':
-                    app.back().catch(function (err) {
-                      window.console.error(err);
-                    });
+                    actionPromises.push($scope.actions.back.bind(this));
                     break;
                   case 'clearAll':
-                    app.clearAll();
+                    actionPromises.push($scope.actions.clearAll.bind(this));
                     break;
                   case 'clearField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).clear();
+                      actionPromises.push($scope.actions.clearField.bind(this, fld));
                     }
                     break;
                   case 'clearOther':
-                    app.field(fld).clearOther(softLock);
+                    actionPromises.push($scope.actions.clearOther.bind(this, fld, softLock));
                     break;
                   case 'forward':
-                    app.forward()
-                      .catch(function (err) {
-                        window.console.error(err);
-                      });
+                    actionPromises.push($scope.actions.forward.bind(this));
                     break;
                   case 'lockAll':
-                    app.lockAll();
+                    actionPromises.push($scope.actions.lockAll.bind(this));
                     break;
                   case 'lockField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).lock();
-                    }
-                    break;
-                  case 'replaceBookmark':
-                    if (!__.isEmpty(bookmark)) {
-                      app.bookmark.apply(bookmark);
+                      actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'selectAll':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectAll(softLock);
+                      actionPromises.push($scope.actions.selectAll.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectAlternative':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectAlternative(softLock);
+                      actionPromises.push($scope.actions.selectAlternative.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectAndLockField':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).selectMatch(val, true);
-                      app.field(fld).lock();
+                      actionPromises.push($scope.actions.selectField.bind(this, fld, val));
+                      actionPromises.push($scope.actions.wait.bind(null, 100));
+                      actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'selectExcluded':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectExcluded(softLock);
+                      actionPromises.push($scope.actions.selectExcluded.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectField':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).selectMatch(val, false);
+                      actionPromises.push($scope.actions.selectField.bind(this, fld, val));
                     }
                     break;
                   case 'selectValues':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      let vals = splitToStringNum(val, ';');
-                      app.field(fld).selectValues(vals, false);
+                      actionPromises.push($scope.actions.selectValues.bind(this, fld, val));
                     }
                     break;
                   case 'selectPossible':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectPossible(softLock);
+                      actionPromises.push($scope.actions.selectPossible.bind(this, fld, softLock));
                     }
                     break;
                   case 'setVariable':
                     if (!__.isEmpty(variable)) {
-                      $scope.setVariableContent(variable, val);
+                      actionPromises.push($scope.actions.setVariableContent.bind(this, variable, val));
                     }
                     break;
                   case 'toggleSelect':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).toggleSelect(val, softLock);
+                      actionPromises.push($scope.actions.toggleSelect.bind(this, fld, val, softLock));
                     }
                     break;
                   case 'unlockAll':
-                    app.unlockAll();
+                    actionPromises.push($scope.actions.unlockAll.bind(this));
                     break;
                   case 'unlockAllAndClearAll':
-                    $scope.unlockAllAndClearAll();
+                    actionPromises.push($scope.actions.unlockAll.bind(this));
+                    actionPromises.push($scope.actions.wait.bind(null, 100));
+                    actionPromises.push($scope.actions.clearAll.bind(this));
                     break;
                   case 'unlockField':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).unlock();
+                      actionPromises.push($scope.actions.unlockField.bind(this, fld));
                     }
                     break;
                   default:
                     break;
                 }
+
+                if (l < actionPromises.length) {
+                  actionPromises.push($scope.actions.wait.bind(null, 100));
+                }
+
+                if (DEBUG) {
+                  window.console.group('DEBUG');
+                  window.console.log('actionItems', $scope.layout.props.actionItems);
+                  window.console.log('actionType: ', actionType);
+                  window.console.log('actionPromises', actionPromises);
+                  window.console.log('fld: ', fld);
+                  window.console.log('val: ', val);
+                  window.console.groupEnd();
+                }
               }
+
+              window.console.log('actionPromises', actionPromises);
+
+              const seed = qlik.Promise.resolve(null);
+              return actionPromises.reduce(function (a, b) {
+                return a.then(b);
+              }, seed);
+
             }
           };
 
+          // Todo: break out to utils
           // Helper function to be used in the template, defining the button class.
           $scope.getButtonClassesBs = function (props) {
 
@@ -344,9 +356,105 @@ define(
 
           $scope.go = function () {
             if (!$scope.isEditMode()) {
-              $scope.doAction();
-              $scope.doNavigate();
+              $scope.doAction()
+                .then(function () {
+                  $scope.doNavigate();
+                })
+                .catch(function (err) {
+                  window.console.error(err);
+                });
             }
+          };
+
+          $scope.actions = {
+            applyBookmark: function (bookmarkId) {
+              let cApp = qlik.currApp();
+              return cApp.bookmark.apply(bookmarkId);
+            },
+            back: function () {
+              let cApp = qlik.currApp();
+              return cApp.back();
+            },
+            clearAll: function () {
+              let cApp = qlik.currApp();
+              return cApp.clearAll();
+            },
+            clearField: function (field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).clear();
+            },
+            clearOther: function (field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).clearOther(softLock);
+            },
+            forward: function () {
+              let cApp = qlik.currApp();
+              return cApp.forward();
+            },
+            lockAll: function () {
+              let cApp = qlik.currApp();
+              return cApp.lockAll();
+            },
+            lockField: function (field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).lock();
+            },
+            selectAll: function (field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectAll(softLock);
+            },
+            selectAlternative: function (field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectAlternative(softLock);
+            },
+            selectExcluded: function (field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectExcluded(softLock);
+            },
+            selectField: function(field, value) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectMatch(value, false);
+            },
+            selectPossible: function (field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectPossible(softLock);
+            },
+            selectValues: function (field, values) {
+              let cApp = qlik.currApp();
+              let valsToSelect = splitToStringNum(values, ';');
+              return cApp.field(field).selectValues(valsToSelect, false);
+            },
+            setVariableContent: function (varName, varVal) {
+              const cApp = qlik.currApp();
+              return cApp.variable.setContent(varName, varVal);
+            },
+            toggleSelect: function (field, value, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).toggleSelect(value, softLock);
+            },
+            unlockAll: function () {
+              let cApp = qlik.currApp();
+              return cApp.unlockAll();
+            },
+            unlockField: function (field) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).unlock();
+            },
+            wait: function (ms) {
+              let waitMs = ms || DELAY_ACTIONS;
+              console.log('wait for ', waitMs);
+              return new qlik.Promise(function (resolve) {
+                let wait = setTimeout(() => {
+                  clearTimeout(wait);
+                  resolve();
+                }, waitMs);
+              });
+            }
+          };
+
+          // Todo: Move all stuff here, this is much cleaner
+          $scope.navigationAction = {
+
           };
 
           $scope.firstSheet = function () {
@@ -392,30 +500,12 @@ define(
             }
           };
 
-          // Todo: Use method from sense-extension-utils/variable-utils.js
-          $scope.setVariableContent = function (variableName, variableValue) {
-            const app = qlik.currApp();
-            app.variable.setContent(variableName, variableValue)
-              .then(function (/* reply */) {
-                angular.noop();
-              })
-              .catch(function (err) {
-                window.console.error(err);
-              });
-          };
-
           $scope.checkQlikNavigation = function () {
             if (!qlik.navigation) {
               window.console.error('Capability API qlik.navigation is not supported in the current version of Qlik Sense.');
               return false;
             }
             return true;
-          };
-
-          $scope.unlockAllAndClearAll = function () {
-            const app = qlik.currApp();
-            app.unlockAll();
-            app.clearAll();
           };
 
         }
