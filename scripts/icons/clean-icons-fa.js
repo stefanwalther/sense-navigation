@@ -3,7 +3,7 @@ const path = require('path');
 
 class CleanJsonFa {
   constructor() {
-    this.fileName = 'icons-fa.json';
+    this.fileName = 'icons-fa.json.orig';
   }
 
   run() {
