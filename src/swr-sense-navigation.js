@@ -231,7 +231,7 @@ define(
                     break;
                   case 'selectPossible':
                     if (!__.isEmpty(fld)) {
-                      app.field(fld).selectPossible(softLock);
+                      actionPromises.push($scope.actions.selectPossible.bind(this, fld, softLock));
                     }
                     break;
                   case 'setVariable':
@@ -245,10 +245,10 @@ define(
                     }
                     break;
                   case 'unlockAll':
-                    actionPromises.push($scope.actions.unlockAll().bind(this));
+                    actionPromises.push($scope.actions.unlockAll.bind(this));
                     break;
                   case 'unlockAllAndClearAll':
-                    actionPromises.push($scope.actions.unlockAllAndClearAll().bind(this));
+                    actionPromises.push($scope.actions.unlockAllAndClearAll.bind(this));
                     break;
                   case 'unlockField':
                     if (!__.isEmpty(fld)) {
@@ -413,6 +413,10 @@ define(
             selectExcluded: function (field, softLock) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
+            },
+            selectPossible: function(field, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).selectPossible(softLock);
             },
             setVariableContent: function (varName, varVal) {
               const cApp = qlik.currApp();
