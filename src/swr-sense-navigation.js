@@ -241,11 +241,11 @@ define(
                     break;
                   case 'toggleSelect':
                     if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
-                      app.field(fld).toggleSelect(val, softLock);
+                      actionPromises.push($scope.actions.toggleSelect.bind(this, fld, val, softLock));
                     }
                     break;
                   case 'unlockAll':
-                    app.unlockAll();
+                    actionPromises.push($scope.actions.unlockAll().bind(this));
                     break;
                   case 'unlockAllAndClearAll':
                     $scope.unlockAllAndClearAll();
@@ -397,6 +397,14 @@ define(
             lockAll: function () {
               let cApp = qlik.currApp();
               return cApp.lockAll();
+            },
+            toggleSelect: function(field, value, softLock) {
+              let cApp = qlik.currApp();
+              return cApp.field(field).toggleSelect(value, softLock);
+            },
+            unlockAll: function() {
+              let cApp = qlik.currApp();
+              return cApp.unlockAll();
             },
             unlockField: function(field) {
               let cApp = qlik.currApp();
