@@ -7,7 +7,6 @@ web.*.config
 dist/
 /**/node_modules/
 todos.md
-/build/*_dev.zip
 .tmp/
 .sense-go.local.yml
 /example/Search
