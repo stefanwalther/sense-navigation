@@ -31,6 +31,7 @@
   <div ng-if="layout.props.buttonTheme === 'css'"
        class="btn btn-sm btn-default"
        style="text-align: {{layout.props.buttonTextAlign}}; {{getButtonCustomCss(layout.props)}}"
+       ng-class="getButtonClassesCustom(layout.props)"
        ng-click="go();"
        title="{{layout.props.buttonLabel}}">
     {{layout.props.buttonLabel}}

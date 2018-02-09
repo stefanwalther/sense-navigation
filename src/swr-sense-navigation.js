@@ -143,8 +143,6 @@ define(
            */
           $scope.doAction = function () { // eslint-disable-line complexity
 
-            const app = qlik.currApp(); // ARGHH: Why is this still sync instead of async
-
             if ($scope.layout.props && $scope.layout.props.actionItems) {
 
               let actionPromises = [];
@@ -329,7 +327,6 @@ define(
           };
 
           $scope.getIconClasses = function (props) {
-            console.log('props', props);
             let classes = [];
             switch (props.buttonIconSet) {
               case 'fa':
@@ -352,6 +349,16 @@ define(
               return props.buttonStyleCss;
             }
             return '';
+          };
+
+          $scope.getButtonClassesCustom = function (props) {
+            let classes = [];
+            if (props.fullWidth) {
+              classes.push('full-width');
+            } else {
+              classes.push('auto-width');
+            }
+            return classes.join(' ');
           };
 
           $scope.go = function () {
@@ -411,7 +418,7 @@ define(
               let cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
             },
-            selectField: function(field, value) {
+            selectField: function (field, value) {
               let cApp = qlik.currApp();
               return cApp.field(field).selectMatch(value, false);
             },
