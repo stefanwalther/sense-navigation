@@ -9,10 +9,16 @@
 * Qlik Sense Server
 	* See instructions [how to import an extension on Qlik Sense Server](http://help.qlik.com/sense/2.0/en-US/online/#../Subsystems/ManagementConsole/Content/import-extensions.htm)
 
-### You are already using an ***sense-navigation*** version 0.x?
+If you are running into any troubles, see [here for some FAQ](https://github.com/stefanwalther/sense-extension-install).
 
-* I have unfortunately bad news: Version 0.x of **sense-navigation** does not seamlessly upgrade to version v1.x of **sense-navigation**!
+### You are already using an ***sense-navigation*** version < 1.x?
+
+* I have unfortunately bad news: All versions < 1.x of ***sense-navigation*** do not seamlessly upgrade to version v1.x!
 * If you upgrade to v1.x, you will have to
   * First install new new version of ***sense-navigation***.
   * Delete existing old instances of ***sense-navigation***.
   * Add it again to your sheets and apply the previous configurations.
+  
+### Should I upgrade?
+
+See [here for more information](./docs/why-upgrade.md) what v1.x gives you and whether you should upgrade or not.

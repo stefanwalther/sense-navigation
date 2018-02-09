@@ -31,7 +31,6 @@ v1.x of ***sense-navigation*** offers significantly more functionality than any 
 
 For the full list of all changes introduced and fixes made in v1.x, [please look here](https://github.com/stefanwalther/sense-navigation/pull/58).
 
-
 ## When should you stick to v8.x
 
 If you already have a lot of applications using ***sense-navigation*** in any of the versions < v1.x and you do not want to invest the effort to upgrade each of the objects, stick to v0.8.x.  
