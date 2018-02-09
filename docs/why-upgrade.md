@@ -35,10 +35,10 @@ For the full list of all changes introduced and fixes made in v1.x, [please look
 ## When should you stick to v8.x
 
 If you already have a lot of applications using ***sense-navigation*** in any of the versions < v1.x and you do not want to invest the effort to upgrade each of the objects, stick to v0.8.x.  
-But please be aware that I am not planning to bring any of the v1.x features into the v0.8.x track.
+But please be aware that I am not planning to bring any of the v1.x features into the [v0.8.x branch](https://github.com/stefanwalther/sense-navigation/tree/v0.8.x).
 
 ## How long will v8.x maintained?
 
-For the upcoming months and releases of Qlik Sense Desktop/Server I am still planning to support the v0.8.x track of this extension.  
+For the upcoming months and releases of Qlik Sense Desktop/Server I am still planning to support the [v0.8.x branch](https://github.com/stefanwalther/sense-navigation/tree/v0.8.x) of this extension.  
 But support will definitely limited in time, so please try to upgrade to the v1.x track.
 
