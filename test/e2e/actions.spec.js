@@ -16,13 +16,12 @@ describe('ACTIONS', () => {
     await appOverview.openSheet('test:actions');
   });
 
-  it('do something', async () => {
+  xit('do something', async () => {
 
     const btn = new Button();
     await btn.get('ApplyBookmark');
     await btn.click();
 
-    console.log('-- filterPane');
     const filterPane = new FilterPane();
     await filterPane.get('Dim1');
   });
