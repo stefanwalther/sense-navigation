@@ -16,3 +16,8 @@ You can add as many actions as you want:
 
 As soon as you have defined the first action, you will also be able to define another action.
 Either after the last action or in case no action has been defined, the [Navigation behavior](./config-navigation-behavior.md) will then apply.
+
+## How does it work?
+
+If you have defined multiple actions, the actions will be performed sequentially.  
+After the last action, the [navigation behavior](./config-navigation-behavior.md) runs as defined.
