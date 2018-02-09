@@ -11,9 +11,9 @@
 - [Installation & Download](#installation--download)
 - [Configuration](#configuration)
 - [Compatibility](#compatibility)
-- [Room for improvements / contribution](#room-for-improvements--contribution)
 - [Related projects](#related-projects)
 - [About](#about)
+  * [Room for improvements / contribution](#room-for-improvements--contribution)
   * [Authors & Contributors](#authors--contributors)
   * [Contributors](#contributors)
   * [Contributing](#contributing)
@@ -131,12 +131,6 @@ If you want to use _sense-navigation_ in older versions, install an older versio
 Any usage in a mashup-based solution might work, but there are many features in ***sense-navigation*** which can never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
 So use ***sense-navigation*** in a mashup-based solution only at your own risk!
 
-## Room for improvements / contribution
-Is there **anything else you'd like to see** in this visualization extension?
-
-* Don't hesitate to add the feature and create a pull request!
-* You don't have the time or skills to implement this specific feature? No problem, [drop a note here](https://github.com/stefanwalther/sense-navigation/issues).
-
 ## Related projects
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
 
@@ -151,6 +145,12 @@ Some related projects (Qlik Sense Visualization Extensions) I have recently crea
 - [sense-themable-kpi-tile](https://www.npmjs.com/package/sense-themable-kpi-tile): KPI Tile for Qlik Sense with the ability to use themes or to customize background… [more](https://github.com/stefanwalther/sense-themable-kpi-tile) | [homepage](https://github.com/stefanwalther/sense-themable-kpi-tile "KPI Tile for Qlik Sense with the ability to use themes or to customize background color, comparison indicator, etc.")  
 
 ## About
+
+### Room for improvements / contribution
+Is there **anything else you'd like to see** in this visualization extension?
+
+* Don't hesitate to add the feature and create a pull request!
+* You don't have the time or skills to implement this specific feature? No problem, [drop a note here](https://github.com/stefanwalther/sense-navigation/issues).
 
 ### Authors & Contributors
 **Stefan Walther**
