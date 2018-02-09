@@ -18,3 +18,6 @@ Define the behavior of the button. The following options are available:
 ## How does it work?
 
 If you have defined any [actions](./config-actions.md), they will first performed, then the defined _Navigation Behavior_ will be executed.
+
+
+Back to the main [documentation](./../README.md)
