@@ -33,13 +33,13 @@ Leonardo UI styles:
   - `lui-info`
   - `lui-warning`
     
-> ![](./images/sense_navigation_style_by_expression.png)
+> ![](./images/sense_navigation__style_by_expression.png)
 
 ### Custom CSS
 
 Alternatively you can select "Custom style (CSS)" to provide your custom style definition for the button:
 
-> ![](./images/sense_navigation_style_by_expression.png)
+> ![](./images/sense_navigation__style_by_expression.png)
 
 **Example:**
 
@@ -54,4 +54,4 @@ Alternatively you can select "Custom style (CSS)" to provide your custom style d
 
 results into:
 
-![](./images/custom-css-button.png)
+![](./images/sense_navigation__style_by_css_result.png)
