@@ -55,3 +55,7 @@ Alternatively you can select "Custom style (CSS)" to provide your custom style d
 results into:
 
 ![](./images/sense_navigation__style_by_css_result.png)
+
+---
+
+Back to the main [documentation](./../README.md)

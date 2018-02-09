@@ -21,3 +21,7 @@ Either after the last action or in case no action has been defined, the [Navigat
 
 If you have defined multiple actions, the actions will be performed sequentially.  
 After the last action, the [navigation behavior](./config-navigation-behavior.md) runs as defined.
+
+---
+
+Back to the main [documentation](./../README.md)
