@@ -4,7 +4,7 @@ Define the behavior of the button. The following options are available:
 
 > ![](./images/sense_navigation_behavior.png)
 
-* <None>
+* None
 * Go to first sheet
 * Go to next sheet
 * Go to previous sheet
