@@ -5,14 +5,14 @@ const selectors = {
   qvtSheet: '.qvt-sheet'
 };
 
-describe('Buttons By Css => ', () => {
+describe.only('Buttons By Css => ', () => {
 
   it('should be equal to the taken screenshot', async () => {
 
     const appOverview = new AppOverviewPage();
     await appOverview.get('sense-navigation_v1x');
 
-    await appOverview.openSheet('test:button-theme-by-css');
+    await appOverview.openSheet('test:button-by-css');
 
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
 
