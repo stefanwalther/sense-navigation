@@ -10,7 +10,7 @@ class FilterPane {
   }
 
   async get(label) {
-    // console.log('get filterpane');
+    // Console.log('get filterpane');
     // $('.qv-filterpane').has('h1[title=Dim1]')
     //
   }

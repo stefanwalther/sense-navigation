@@ -358,6 +358,9 @@ define(
             } else {
               classes.push('auto-width');
             }
+            if (props.isButtonMultiLine) {
+              classes.push('multiline');
+            }
             return classes.join(' ');
           };
 
