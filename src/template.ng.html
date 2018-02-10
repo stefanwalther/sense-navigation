@@ -34,7 +34,9 @@
        ng-class="getButtonClassesCustom(layout.props)"
        ng-click="go();"
        title="{{layout.props.buttonLabel}}">
-    {{layout.props.buttonLabel}}
+    <span ng-if="layout.props.buttonShowIcon === true"
+          ng-class="getIconClasses(layout.props)"
+          style="padding-right:5px;"></span><span>{{layout.props.buttonLabel}}</span>
   </div>
   <!-- (Custom CSS Button -->
 </div>
