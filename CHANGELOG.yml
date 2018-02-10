@@ -1,5 +1,10 @@
+version: "1.0.0-beta-06"
+  date: "2018-02-09"
+  changes:
+    - "Add alignment options for buttons with custom CSS"
+    - "Add icons to buttons with custom CSS"
 version: "1.0.0-beta-05"
-  date: "1028-02-05"
+  date: "2018-02-05"
   changes:
     - "Actions are fixed to run sequentially (#103)"
 version: "1.0.0-beta-04"
