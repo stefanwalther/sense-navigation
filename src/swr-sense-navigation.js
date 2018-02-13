@@ -348,11 +348,16 @@ define(
             switch (props.buttonTheme) {
               case 'lui':
                 return 'lui';
-              case 'bootstrap-v3':
-                return 'bootstrap-v3';
+              case 'bs3':
+                return 'bs3';
               case 'by-css':
                 return 'by-css';
               case 'by-expr':
+                console.log('by-expr', props.buttonTheme);
+//                let theme
+                let style = props.substr(props.buttonTheme.indexOf('-')+1);
+                console.log('theme', theme);
+
                 return props.buttonTheme;
               default:
                 return 'lui';

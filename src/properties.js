@@ -56,7 +56,7 @@ define([
     ref: 'props.buttonTheme',
     options: [
       {
-        value: 'bootstrap-v3',
+        value: 'bs3',
         label: 'Bootstrap v3'
       },
       {
@@ -72,7 +72,7 @@ define([
         label: 'Custom (by CSS)'
       }
     ],
-    defaultValue: 'bootstrap-v3'
+    defaultValue: 'lui'
   };
 
   // Todo: Should be renamed to buttonStyleBs3
@@ -113,7 +113,7 @@ define([
       }
     ],
     show: function (data) {
-      return data.props.buttonTheme === 'bootstrap-v3';
+      return data.props.buttonTheme === 'bs3';
     }
   };
 

@@ -5,7 +5,7 @@ const selectors = {
   qvtSheet: '.qvt-sheet'
 };
 
-describe.only('Buttons By Css => ', () => {
+describe('Buttons By Css => ', () => {
 
   it('should be equal to the taken screenshot', async () => {
 
