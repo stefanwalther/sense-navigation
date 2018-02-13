@@ -58,7 +58,8 @@ define([
       {
         value: 'bootstrap-v3',
         label: 'Bootstrap v3'
-      }, {
+      },
+      {
         value: 'lui',
         label: 'Leonardo UI'
       },
@@ -67,7 +68,7 @@ define([
         label: 'Custom (by expression)'
       },
       {
-        value: 'css', // Todo: should probably be rename to by-css
+        value: 'by-css',
         label: 'Custom (by CSS)'
       }
     ],
@@ -154,18 +155,17 @@ define([
     label: 'Expression to define the button style',
     type: 'string',
     expression: 'optional',
-    defaultValue: '=\'default\'',
-    // Todo: either for Lui or for Bs
+    defaultValue: '=\'lui-default\'',
     show: function (data) {
-      return data.props.buttonStyleBs === 'by-expression';
+      return data.props.buttonTheme === 'by-expr';
     }
   };
 
-  const helpButtonStyleExprBs = {
-    text: 'The expression has to return one of the following values: default, primary, success, info, warning, danger or link.',
+  const helpButtonStyleExpression = {
+    text: 'The expression has to return one of the following values: bs3-default, bs3-primary, bs3-success, bs3-info, bs3-warning, bs3-danger, bs3-link, lui-default, lui-toolbar, lui-success, lui-info or lui-warning.',
     component: 'text',
     show: function (data) {
-      return data.props.buttonTheme === 'bootstrap-v3';
+      return data.props.buttonTheme === 'by-expr';
     }
   };
 
@@ -176,7 +176,7 @@ define([
     expression: 'optional',
     defaultValue: '=\'background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)\'',
     show: function (data) {
-      return data.props.buttonTheme === 'css';
+      return data.props.buttonTheme === 'by-css';
     }
   };
 
@@ -735,7 +735,7 @@ define([
           buttonStyleBs: buttonStyleBs,
           buttonStyleLui: buttonStyleLui,
           buttonStyleExpression: buttonStyleExpression,
-          helpButtonStyleExprBs: helpButtonStyleExprBs,
+          helpButtonStyleExprBs: helpButtonStyleExpression,
           buttonStyleCss: buttonStyleCss
         }
       },

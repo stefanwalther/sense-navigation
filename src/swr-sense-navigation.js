@@ -350,8 +350,10 @@ define(
                 return 'lui';
               case 'bootstrap-v3':
                 return 'bootstrap-v3';
-              case 'css':
-                return 'css';
+              case 'by-css':
+                return 'by-css';
+              case 'by-expr':
+                return props.buttonTheme;
               default:
                 return 'lui';
             }
