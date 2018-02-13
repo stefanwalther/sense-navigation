@@ -5,9 +5,9 @@ const selectors = {
   qvtSheet: '.qvt-sheet'
 };
 
-describe.only('Buttons By Css => ', () => {
+describe('Buttons By Expression => ', () => {
 
-  it('should be equal to the taken screenshot', async () => {
+  xit('should be equal to the taken screenshot', async () => {
 
     const appOverview = new AppOverviewPage();
     await appOverview.get('sense-navigation_v1x');
