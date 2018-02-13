@@ -67,7 +67,7 @@ define([
         label: 'Custom (by expression)'
       },
       {
-        value: 'css',
+        value: 'css', // Todo: should probably be rename to by-css
         label: 'Custom (by CSS)'
       }
     ],
