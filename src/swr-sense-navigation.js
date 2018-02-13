@@ -279,19 +279,18 @@ define(
             }
           };
 
-          // Todo: break out to utils
+          // Todo(refactor): break out to utils
           // Helper function to be used in the template, defining the button class.
-          $scope.getButtonClassesBs = function (props) {
+          $scope.getButtonClassesBs3 = function (props) {
 
             let classes = [];
 
-            // Todo: needs to be changed
-            // if (props.buttonStyleBs === 'by-expression') {
-            //   classes.push('btn-' + props.buttonStyleExpression);
-            // }
+            classes.push('btn');
+            classes.push('btn-sm');
 
-            // Todo: We can probably just omit this
-            if (props.buttonStyleBs) {
+            if (props.buttonTheme === 'by-expr') {
+              classes.push('btn-' + props.buttonStyleExpression.substr(props.buttonStyleExpression.indexOf('-') + 1));
+            } else if (props.buttonStyleBs) {
               classes.push('btn-' + props.buttonStyleBs);
             } else {
               classes.push('btn-default');
@@ -314,6 +313,16 @@ define(
 
           $scope.getButtonClassesLui = function (props) {
             let classes = [];
+
+            classes.push('lui-button');
+
+            if(props.buttonTheme === 'by-expr') {
+              classes.push('lui-button--' + props.buttonStyleExpression.substr(props.buttonStyleExpression.indexOf('-') + 1));
+            } else if (props.buttonStyleLui) {
+              classes.push('lui-button--' + props.buttonStyleLui);
+            } else {
+              classes.push('lui-button--default');
+            }
 
             if (props.fullWidth) {
               classes.push('full-width');
@@ -344,7 +353,7 @@ define(
             return classes.join(' ');
           };
 
-          $scope.getButtonTheme = function(props) {
+          $scope.getButtonTheme = function (props) {
             switch (props.buttonTheme) {
               case 'lui':
                 return 'lui';
@@ -353,12 +362,7 @@ define(
               case 'by-css':
                 return 'by-css';
               case 'by-expr':
-                console.log('by-expr', props.buttonTheme);
-//                let theme
-                let style = props.substr(props.buttonTheme.indexOf('-')+1);
-                console.log('theme', theme);
-
-                return props.buttonTheme;
+                return props.buttonStyleExpression.substr(0, props.buttonStyleExpression.indexOf('-'));
               default:
                 return 'lui';
             }
@@ -482,10 +486,8 @@ define(
             }
           };
 
-          // Todo: Move all stuff here, this is much cleaner
-          $scope.navigationAction = {
-
-          };
+          // Todo(refactor): Move all stuff here, this is much cleaner
+          $scope.navigationAction = {};
 
           $scope.firstSheet = function () {
             if ($scope.checkQlikNavigation()) {

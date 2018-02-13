@@ -3,9 +3,8 @@
 
   <!-- Bootstrap v3 buttons -->
   <div ng-if="getButtonTheme(layout.props) === 'bs3'"
-       class="btn btn-sm"
        style="text-align: {{layout.props.buttonTextAlign}};"
-       ng-class="getButtonClassesBs(layout.props)"
+       ng-class="getButtonClassesBs3(layout.props)"
        ng-click="go();"
        title="{{layout.props.buttonLabel}}">
     <span ng-if="layout.props.buttonShowIcon === true"
@@ -16,7 +15,6 @@
 
   <!-- Lui Button -->
   <div ng-if="getButtonTheme(layout.props) === 'lui'"
-       class="lui-button lui-button--{{layout.props.buttonStyleLui}}"
        ng-class="getButtonClassesLui(layout.props)"
        style="text-align: {{layout.props.buttonTextAlign}};"
        ng-click="go();"
