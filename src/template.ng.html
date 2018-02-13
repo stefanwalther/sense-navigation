@@ -2,10 +2,9 @@
      class="container {{layout.props.buttonAlignment}}">
 
   <!-- Bootstrap v3 buttons -->
-  <div ng-if="layout.props.buttonTheme === 'bootstrap-v3'"
-       class="btn btn-sm"
+  <div ng-if="getButtonTheme(layout.props) === 'bs3'"
        style="text-align: {{layout.props.buttonTextAlign}};"
-       ng-class="getButtonClassesBs(layout.props)"
+       ng-class="getButtonClassesBs3(layout.props)"
        ng-click="go();"
        title="{{layout.props.buttonLabel}}">
     <span ng-if="layout.props.buttonShowIcon === true"
@@ -15,8 +14,7 @@
   <!-- (Bootstrap v3 buttons) -->
 
   <!-- Lui Button -->
-  <div ng-if="layout.props.buttonTheme === 'lui'"
-       class="lui-button lui-button--{{layout.props.buttonStyleLui}}"
+  <div ng-if="getButtonTheme(layout.props) === 'lui'"
        ng-class="getButtonClassesLui(layout.props)"
        style="text-align: {{layout.props.buttonTextAlign}};"
        ng-click="go();"
@@ -28,7 +26,7 @@
   <!-- (Lui Button) -->
 
   <!-- Custom CSS Button -->
-  <div ng-if="layout.props.buttonTheme === 'css'"
+  <div ng-if="getButtonTheme(layout.props) === 'by-css'"
        class="btn btn-sm btn-default"
        style="text-align: {{layout.props.buttonTextAlign}}; {{getButtonCustomCss(layout.props)}}"
        ng-class="getButtonClassesCustom(layout.props)"

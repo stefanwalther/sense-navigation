@@ -18,6 +18,7 @@ If you have selected "Defined by expression" you can select one of the predefine
 The expression must result to one of the following values, which represent the available styles:
 
 Bootstrap v3 styles:
+
   - `bs3-default`
   - `bs3-primary`
   - `bs3-success`
@@ -27,6 +28,7 @@ Bootstrap v3 styles:
   - `bs3-link`
     
 Leonardo UI styles:
+
   - `lui-default`
   - `lui-toolbar`
   - `lui-success`
