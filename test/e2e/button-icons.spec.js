@@ -7,7 +7,7 @@ const selectors = {
 
 describe('Button Icons => ', () => {
 
-  describe('using Bs3 theme', () => {
+  describe('using bootstrap-v3 theme', () => {
     it('should be equal to the taken screenshot', async () => {
 
       const appOverview = new AppOverviewPage();

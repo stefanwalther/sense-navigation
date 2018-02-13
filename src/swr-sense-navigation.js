@@ -344,6 +344,19 @@ define(
             return classes.join(' ');
           };
 
+          $scope.getButtonTheme = function(props) {
+            switch (props.buttonTheme) {
+              case 'lui':
+                return 'lui';
+              case 'bootstrap-v3':
+                return 'bootstrap-v3';
+              case 'css':
+                return 'css';
+              default:
+                return 'lui';
+            }
+          };
+
           $scope.getButtonCustomCss = function (props) {
             if (props.buttonStyle === 'by-css') {
               return props.buttonStyleCss;
