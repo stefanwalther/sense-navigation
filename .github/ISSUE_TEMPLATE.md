@@ -49,8 +49,9 @@
 
 ### Versions
 
-* Extension version: 
+* Extension version: [Version of the extension]
 * Browser: 
-* Qlik Sense: 
+* Qlik Sense Desktop: [Version of Qlik Sense Desktop]
+* Qlik Sense Enterprise: [Version of Qlik Sense Enterprise]
 * Operating system: 
 * [Other relevant versions]
