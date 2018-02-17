@@ -8,8 +8,8 @@ help: 								## Call the help
 
 run-dev: build 				## Run the local development environment
 	export ENV=dev && \
-	docker-clean -s && \
-	docker-compose --f=./docker-compose.dev.yml up -d --build && \
+	./down.sh && \
+	./up.sh && \
 	echo "" && \
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
 .PHONY: run-dev
@@ -26,18 +26,27 @@ gen-readme:           ## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
+up:										## Bring the dev environment up
+	npm run up
+.PHONY: up
+
+down:
+	npm run down
+.PHONY: down
+
 test-e2e-dev:					## Test dev build
-	npm run release && \
 	export ENV=dev && \
-	docker-clean -s && \
-	npm run dc-rs && \
+	npm run release && \
+	./scripts/down.sh && \
+	./scripts/up.sh && \
 	npm run test:e2e
-.PHONY: test-e2e-dev∆
+.PHONY: test-e2e-dev
 
 test-e2e-release: 		## Test release build
-	npm run release && \
 	export ENV=release && \
-	docker-clean -s && \
+	npm run release && \
+	./scripts/down.sh && \
+	./scripts/up.sh && \
 	npm run dc-rs && \
 	npm run test:e2e
 .PHONY: test-e2e-release

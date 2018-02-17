@@ -40,8 +40,8 @@
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js --coverage",
-    "dc-up": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose up -d --build",
-    "dc-down": "export COMPOSE_FILE=docker-compose.dev.yml && docker-compose down",
+    "up": "./scripts/up.sh",
+    "down": "./scripts/down.sh",
     "dc-rs": "export ENV=release && npm run dc-up"
   },
   "devDependencies": {
