@@ -34,11 +34,9 @@ define([
         }
       );
     });
-    // Todo: Can be replaced by iconList.sort
     propDef = __.sortBy(propDef, function (item) {
       return item.label;
     });
-    // Todo: Probably not needed anymore
     propDef.unshift({
       value: '',
       label: '>> No icon <<'
