@@ -50,12 +50,16 @@ define( [
 		}
 	}
 
-	function getBasePath () {
-		var prefix = window.location.pathname.substr( 0, window.location.pathname.toLowerCase().lastIndexOf( "/sense" ) + 1 );
-		var url = window.location.href;
-		url = url.split( "/" );
-		return url[0] + "//" + url[2] + ( ( prefix[prefix.length - 1] === "/" ) ? prefix.substr( 0, prefix.length - 1 ) : prefix );
-	}
+  function getBasePath () {
+
+  var appOptions = qlik.currApp().global.session.options;
+  var url = (appOptions.secure ? "https://" : "http://") 
+          + appOptions.host 
+          + (appOptions.port.length > 0 ? ":" + appOptions.port : "") 
+          + appOptions.prefix.substr( 0, appOptions.prefix.length - 1);
+
+  return url;
+  }
 
 	function getExtensionInfo ( extensionUniqueName ) {
 		var defer = $q.defer();
