@@ -1,0 +1,68 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/sense-navigation
+    machine: true
+    environment:
+      DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.02.0-ce.tgz
+      DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64
+    steps:
+      - checkout
+      - run:
+          name: Upgrade Docker
+          command: |
+            set -e
+            curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
+            sudo service docker restart
+      - run:
+          name: Login to Docker
+          command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      - run:
+          name: Pull public docker images in the background
+          background: true
+          command: |
+            docker pull node:8.9.4-alpine
+      - run:
+          name: Upgrade Docker Compose
+          command: |
+            set -e
+            loc=$(which docker-compose)
+            sudo curl -sSLf -z $loc -o $loc $DOCKER_COMPOSE_URL
+            sudo chmod 755 $loc
+      - run:
+          name: Update version
+          command: |
+            set -e
+            VER=$(node -e "console.log(require('./package.json').version.replace(/-[0-9]+/, '-$CIRCLE_BUILD_NUM'))")
+            echo "$VER" > ./version.txt
+            if (echo $VER | egrep -- '-[0-9]+$' 1> /dev/null); then
+              npm version $VER --no-git-tag-version
+            fi
+      - run:
+          name: Build image
+          command: make build
+      - run:
+          name: Build test image
+          command: make build-test
+      - run:
+          name: Setting up test environment
+          command: make up-test
+      - run:
+          name: Lint
+          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run lint
+      - run:
+          name: Unit tests
+          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run test:unit
+      - run:
+          name: Integration tests
+          command: docker-compose --f=docker-compose.integration-tests.yml run auth-service-test npm run test:integration
+      - add_ssh_keys
+      - deploy:
+          name: Push image to Docker Hub
+          command: |
+            VER=$(cat ./version.txt)
+            # Only branch "master" is being pushed to Docker Hub
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker push $DOCKER_REPO
+            fi
+

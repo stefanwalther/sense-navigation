@@ -28,7 +28,6 @@
     "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go 'build'",
     "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'release'",
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src",
     "lint:fix": "npm run lint:src:fix && npm run lint:test:fix",
     "lint:src": "eslint src",
@@ -36,13 +35,13 @@
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --standalone false --gecko false",
-    "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js",
+    "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true",
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
     "test:e2e": "aw protractor -c ./test/e2e/aw.config.js --coverage",
     "up": "./scripts/up.sh",
     "down": "./scripts/down.sh",
-    "dc-rs": "export ENV=release && npm run dc-up"
+    "dc-rs": "export ENV=release && npm run up"
   },
   "devDependencies": {
     "after-work.js": "^4.0.1",
