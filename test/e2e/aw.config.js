@@ -6,7 +6,7 @@ const util = require('util');
 
 module.exports = function initConfig(baseConfig) { // eslint-disable-line func-names
   const config = {
-    baseUrl: 'http://127.0.0.1:4848/sense/app/',
+    baseUrl: 'http://127.0.0.1:9076/sense/app/',
     directConnect: true,
     artifactsPath: 'test/e2e/artifacts',
     capabilities: {
