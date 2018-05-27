@@ -39,7 +39,7 @@ jobs:
               npm version $VER --no-git-tag-version
             fi
       - run:
-          name: Build image
+          name: Make local build
           command: make build
       - run:
           name: Build test image
