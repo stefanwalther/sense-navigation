@@ -38,7 +38,7 @@ build-test:
 	docker build --force-rm -t stefanwalther/sense-navigation-test -f Dockerfile.test .
 .PHONY: build-test
 
-up-test:
+up-test: build-test
 	docker-compose --f=docker-compose.test.yml up --force-recreate
 .PHONY: up-test
 
