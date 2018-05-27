@@ -1,0 +1,36 @@
+version: "3.3"
+
+volumes:
+  sense-client-files:
+
+services:
+
+  qix:
+    image: qlik/engine:${VER_QIX_ENGINE:-12.160.0}
+    restart: always
+    container_name: qix-engine
+    command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /client --MigrationPort -1  -S AcceptEULA=yes
+    volumes:
+      - ./example:/docs
+      - sense-client-files:/client
+      - ./build/${ENV:-dev}:/extensions/sense-navigation
+    ports:
+      - "9076:9076"
+    depends_on:
+      - sense-client
+
+  sense-client:
+    image: qlik/sense-client:${VER_SENSE_CLIENT:-5.1.0}
+    container_name: sense-client
+    volumes:
+      - sense-client-files:/client
+    tty: true
+
+  sense-navigation-test:
+    image: stefanwalther/sense-navigation-test
+    container_name: sense-navigation-test
+    depends_on:
+      - sense-client
+      - qix
+    tty: true
+

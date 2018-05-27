@@ -34,6 +34,18 @@ down:
 	npm run down
 .PHONY: down
 
+build-test:
+	docker build --force-rm -t stefanwalther/sense-navigation-test -f Dockerfile.test .
+.PHONY: build-test
+
+up-test:
+	docker-compose --f=docker-compose.test.yml up --force-recreate
+.PHONY: up-test
+
+down-test:
+	docker-compose --f=docker-compose.test.yml down
+.PHONY: down-test
+
 test-e2e-dev:					## Test dev build
 	export ENV=dev && \
 	export VER_QIX_ENGINE=latest

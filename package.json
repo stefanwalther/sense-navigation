@@ -25,7 +25,7 @@
     "url": "https://github.com/stefanwalther/sense-navigation"
   },
   "scripts": {
-    "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go 'build'",
+    "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'build'",
     "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'release'",
     "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
     "lint": "eslint src",
