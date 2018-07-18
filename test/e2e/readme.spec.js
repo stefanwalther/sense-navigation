@@ -1,9 +1,7 @@
 /* global describe, it */
 const AppOverviewPage = require('./models/app-overview');
 const timeoutTime = 10000;
-const selectors = {
-  qvtSheet: '.qvt-sheet'
-};
+const selectors = require('./lib/selectors');
 
 describe('README => ', () => {
 

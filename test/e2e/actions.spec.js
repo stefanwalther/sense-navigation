@@ -2,12 +2,9 @@ const AppOverviewPage = require('./models/app-overview');
 const Button = require('./models/button');
 const FilterPane = require('./models/filterpane');
 const timeoutTime = 10000;
+const selectors = require('./lib/selectors');
 
-const selectors = {
-  qvtSheet: '.qvt-sheet'
-};
-
-describe('ACTIONS', () => {
+xdescribe('ACTIONS', () => {
 
   beforeEach(async () => {
     const appOverview = new AppOverviewPage();

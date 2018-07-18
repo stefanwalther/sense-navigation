@@ -46,7 +46,7 @@ down-test:
 	docker-compose --f=docker-compose.test.yml down -t 0
 .PHONY: down-test
 
-test-e2e-dev:					## Test dev build
+test-e2e-dev:										## Test dev build
 	export ENV=dev && \
 	export VER_QIX_ENGINE=12.203.0
 	npm run release && \
@@ -55,7 +55,7 @@ test-e2e-dev:					## Test dev build
 	npm run test:e2e
 .PHONY: test-e2e-dev
 
-test-e2e-release: 		## Test release build
+test-e2e-release: 							## Test release build
 	export ENV=release && \
 	npm run release && \
 	./scripts/down.sh && \
@@ -64,14 +64,19 @@ test-e2e-release: 		## Test release build
 	npm run test:e2e
 .PHONY: test-e2e-release
 
-test-e2e: test-e2e-dev test-e2e-release
+test-e2e: clean-test-results test-e2e-dev test-e2e-release
 .PHONY: test-e2e
 
-clean-test-results:
+clean-test-results:							## Clean up all the e2e test results
 	rm -rf ./test/e2e/artifacts/diff
 	rm -rf ./test/e2e/artifacts/regression
 	rm -rf ./test/e2e/artifacts/screenshots
+	rm -rf ./test/e2e/artifacts/chrome-report-**.*
 .PHONY: clean-test-results
+
+webdriver-update:								## Update WebDriver
+	npm run test:setup-webdriver
+.PHONY: webdriver-update
 
 
 
