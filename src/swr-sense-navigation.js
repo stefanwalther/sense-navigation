@@ -316,7 +316,7 @@ define(
 
             classes.push('lui-button');
 
-            if(props.buttonTheme === 'by-expr') {
+            if (props.buttonTheme === 'by-expr') {
               classes.push('lui-button--' + props.buttonStyleExpression.substr(props.buttonStyleExpression.indexOf('-') + 1));
             } else if (props.buttonStyleLui) {
               classes.push('lui-button--' + props.buttonStyleLui);
