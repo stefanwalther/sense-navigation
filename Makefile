@@ -43,12 +43,12 @@ up-test: build-test
 .PHONY: up-test
 
 down-test:
-	docker-compose --f=docker-compose.test.yml down
+	docker-compose --f=docker-compose.test.yml down -t 0
 .PHONY: down-test
 
 test-e2e-dev:					## Test dev build
 	export ENV=dev && \
-	export VER_QIX_ENGINE=latest
+	export VER_QIX_ENGINE=12.203.0
 	npm run release && \
 	./scripts/down.sh && \
 	./scripts/up.sh && \
@@ -66,6 +66,12 @@ test-e2e-release: 		## Test release build
 
 test-e2e: test-e2e-dev test-e2e-release
 .PHONY: test-e2e
+
+clean-test-results:
+	rm -rf ./test/e2e/artifacts/diff
+	rm -rf ./test/e2e/artifacts/regression
+	rm -rf ./test/e2e/artifacts/screenshots
+.PHONY: clean-test-results
 
 
 

@@ -6,7 +6,7 @@ volumes:
 services:
 
   qix:
-    image: qlik/engine:${VER_QIX_ENGINE:-12.160.0}
+    image: qlik-docker-qsefe.bintray.io/engine:${VER_QIX_ENGINE:-12.203.0}
     restart: always
     container_name: qix-engine
     command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /client --MigrationPort -1  -S AcceptEULA=yes
@@ -20,10 +20,10 @@ services:
       - sense-client
 
   sense-client:
-    image: qlik/sense-client:${VER_SENSE_CLIENT:-5.1.0}
+    image: qlik-docker-qsefe.bintray.io/sense-client:${VER_SENSE_CLIENT:-5.25.0}
     container_name: sense-client
     volumes:
-      - sense-client-files:/client
+      - sense-client-files:/srv
     tty: true
 
   sense-navigation-test:
