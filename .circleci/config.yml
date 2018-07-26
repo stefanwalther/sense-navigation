@@ -15,14 +15,16 @@ jobs:
             set -e
             curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
             sudo service docker restart
+      ## Todo: As we do not pull/push anything, this can also probably omitted
       - run:
           name: Login to Docker
           command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
+      ## Todo: Don't think this is necessary anymore
       - run:
           name: Pull public docker images in the background
           background: true
           command: |
-            docker pull node:8.9.4-alpine
+            docker pull node:v9.3.0-alpine
       - run:
           name: Upgrade Docker Compose
           command: |
@@ -43,10 +45,10 @@ jobs:
           name: Npm install
           command: npm install --quiet
       - run:
-          name: Lint src
+          name: Lint ./src
           command: npm run lint:src
       - run:
-          name: Lint test
+          name: Lint ./test
           command: npm run lint:test
       - run:
           name: Make local build (of the extension)
@@ -54,6 +56,9 @@ jobs:
       - run:
           name: Build test image (docker image sense-navigation-test)
           command: make build-test
+      - run:
+          name: Run the integration tests
+          command: make tid
 #      - run:
 #          name: Setting up test environment
 #          command: make up-test
