@@ -1,13 +1,14 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/sense-navigation
     machine: true
+    working_directory: ~/sense-navigation
     environment:
       DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.02.0-ce.tgz
       DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64
     steps:
       - checkout
+      - add_ssh_keys
       - run:
           name: Upgrade Docker
           command: |
@@ -44,25 +45,16 @@ jobs:
       - run:
           name: Build test image
           command: make build-test
-      - run:
-          name: Setting up test environment
-          command: make up-test
-      - run:
-          name: Lint
-          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run lint
-      - run:
-          name: Unit tests
-          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run test:unit
-      - run:
-          name: Integration tests
-          command: docker-compose --f=docker-compose.integration-tests.yml run auth-service-test npm run test:integration
-      - add_ssh_keys
-      - deploy:
-          name: Push image to Docker Hub
-          command: |
-            VER=$(cat ./version.txt)
-            # Only branch "master" is being pushed to Docker Hub
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker push $DOCKER_REPO
-            fi
+#      - run:
+#          name: Setting up test environment
+#          command: make up-test
+#      - run:
+#          name: Lint
+#          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run lint
+#      - run:
+#          name: Unit tests
+#          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run test:unit
+#      - run:
+#          name: Integration tests
+#          command: docker-compose --f=docker-compose.integration-tests.yml run sense-navigation-test npm run test:integration
 
