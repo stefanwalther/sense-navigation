@@ -3,24 +3,22 @@
 node_modules
 .circleci
 .github
-build
 coverage
 docker
 docs
 media
+build/*.zip
 Resources
 scripts
 .DS_Store
 
-example
-!example/sense-navigation_v1x.qvf
+#example
+#!example/sense-navigation_v1x.qvf
 
 .babelrc
 .editorconfig
-.eslintrc.json
 .gitattributes
 .gitignore
-.npmrc
 .nvmrc
 .sense-go.local.yml
 .sense-go.yml
