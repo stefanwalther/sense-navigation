@@ -15,7 +15,7 @@ run-dev: build 								## Run the local development environment
 .PHONY: run-dev
 
 build:                				## Build the extension (dev build)
-	npm run build
+	npm run build --d
 .PHONY: build
 
 release:              				## Build the extensions (release build)
@@ -68,12 +68,16 @@ test-e2e-release: 							## Test release build (locally)
 test-e2e: clean-test-results test-e2e-dev test-e2e-release
 .PHONY: test-e2e
 
-clean-test-results:							## Clean up all the e2e test results
-	rm -rf ./test/e2e/artifacts/diff
-	rm -rf ./test/e2e/artifacts/regression
-	rm -rf ./test/e2e/artifacts/screenshots
-	rm -rf ./test/e2e/artifacts/chrome-report-**.*
-.PHONY: clean-test-results
+clean-e2e-test-results:							## Clean up all the e2e test results
+	rm -rf ./test/e2e/__artifacts__/diff
+	rm -rf ./test/e2e/__artifacts__/regression
+	rm -rf ./test/e2e/__artifacts__/screenshots
+	rm -rf ./test/e2e/__artifacts__/chrome-report-**.*
+.PHONY: clean-e2e-test-results
+
+clean-e2e-baseline:
+	rm -rf ./test/e2e/artifacts/baseline
+.PHONY: clean-e2e-baseline
 
 webdriver-update:								## Update WebDriver
 	npm run test:setup-webdriver
@@ -84,9 +88,30 @@ test-dockerignore:
   docker run --rm -it stefanwalther/build-context
 .PHONY: test-dockerignore
 
-run-integration-tests:					## Run the integration tests
+run-integration-tests: build-test					## Run the integration tests
 	docker-compose --f=docker-compose.integration-tests.yml run sense-navigation-test npm run test:integration
 .PHONY: run-integration-tests
 
+td: clean-e2e-test-results
+	npm run release
+	docker-compose -f docker-compose.integration-tests.yml up -d --build
+	npx aw protractor -c ./test/e2e/aw.config.js --baseUrl  http://localhost:9076/sense/app/ --directConnect true --headLess false
+	docker-compose -f docker-compose.integration-tests.yml down -t 0
+.PHONY: td
 
+t:
+	docker-compose -f docker-compose.integration-tests.yml -f docker-compose.selenium.yml up -d --build
+	npx webdriver-manager update --gecko false --versions.chrome 2.38
+	npx aw protractor -c ./test/e2e/aw.config.js --baseUrl  http://localhost:9076/sense/app/ --seleniumAddress http://localhost:4444/wd/hub
+	docker-compose -f docker-compose.integration-tests.yml -f docker-compose.selenium.yml down -t 0
+.PHONY: t
 
+tid: clean-e2e-test-results
+	docker-compose -f docker-compose.integration-tests.yml up -d --build
+	docker exec -it sense-navigation-test npm run t
+	docker-compose -f docker-compose.integration-tests.yml down -t 0
+.PHONY: tid
+
+circleci-build:
+	circleci build --repo-url="/fake-remote" --volume="/projects/test":"/fake-remote"
+.PHONY: circleci-build

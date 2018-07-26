@@ -1,4 +1,4 @@
-FROM qlik/chrome-headless
+FROM node
 
 ARG HOME_DIR="opt/sense-navigation-test"
 ENV HOME_DIR $HOME_DIR
@@ -10,5 +10,3 @@ COPY . ./
 
 RUN npm install --quiet
 RUN npm run test:setup-webdriver
-
-ENTRYPOINT []
