@@ -2,7 +2,7 @@ const AppOverviewPage = require('./models/app-overview');
 const timeoutTime = 10000;
 const selectors = require('./lib/selectors');
 
-describe.only('Button Alignment => ', () => {
+describe.only('Button Alignment => ', () => { // eslint-disable-line mocha/no-exclusive-tests
 
   it('should be equal to the taken screenshots (Bootstrap v3)', async () => {
 
