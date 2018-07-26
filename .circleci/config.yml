@@ -15,10 +15,6 @@ jobs:
             set -e
             curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
             sudo service docker restart
-      ## Todo: As we do not pull/push anything, this can also probably omitted
-      - run:
-          name: Login to Docker
-          command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
       - run:
           name: Upgrade Docker Compose
           command: |
