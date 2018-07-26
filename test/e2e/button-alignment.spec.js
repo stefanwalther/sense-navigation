@@ -2,7 +2,7 @@ const AppOverviewPage = require('./models/app-overview');
 const timeoutTime = 10000;
 const selectors = require('./lib/selectors');
 
-describe('Button Alignment => ', () => {
+describe.only('Button Alignment => ', () => {
 
   it('should be equal to the taken screenshots (Bootstrap v3)', async () => {
 
@@ -30,6 +30,11 @@ describe('Button Alignment => ', () => {
     await browser.sleep(200);
 
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
+    await browser.actions()
+      .mouseMove(element(by.css(selectors.qvClient), {x: 0, y: 0}))
+      .mouseDown()
+      .perform();
+    await browser.sleep(200);
 
     return expect(await browser.takeImageOf({selector: selectors.qvtSheet})).to.matchImageOf('button_alignment_leonardo_ui', 'button_alignment');
   });
