@@ -40,6 +40,9 @@ jobs:
               npm version $VER --no-git-tag-version
             fi
       - run:
+          name: Npm install
+          command: npm install --quiet
+      - run:
           name: Lint src
           command: npm run lint:src
       - run:
