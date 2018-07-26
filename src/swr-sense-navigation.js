@@ -95,9 +95,9 @@ define(
               case 'nextSheet':
                 $scope.nextSheet();
                 break;
-              case 'openWebsite': // eslint-disable-line no-case-declarations
-                let url = $scope.layout.props.websiteUrl;
-                const same = $scope.layout.props.sameWindow;
+              case 'openWebsite':
+                let url = $scope.layout.props.websiteUrl; // eslint-disable-line no-case-declarations
+                const same = $scope.layout.props.sameWindow; // eslint-disable-line no-case-declarations
                 if (!__.isEmpty(url)) {
                   const isIframe = inIframe();
                   let target = '';
@@ -121,8 +121,8 @@ define(
               // 	qlik.openApp( $scope.layout.props.selectedApp );
               // 	break;
               // eslint-enable capitalized-comments
-              case 'switchToEdit': // eslint-disable-line no-case-declarations
-                const result = qlik.navigation.setMode(qlik.navigation.EDIT);
+              case 'switchToEdit':
+                const result = qlik.navigation.setMode(qlik.navigation.EDIT); // eslint-disable-line no-case-declarations
                 if (!result.success) {
                   window.console.error(result.errorMsg);
                 }

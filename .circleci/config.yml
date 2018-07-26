@@ -40,10 +40,16 @@ jobs:
               npm version $VER --no-git-tag-version
             fi
       - run:
-          name: Make local build
+          name: Lint src
+          command: npm run lint:src
+      - run:
+          name: Lint test
+          command: npm run lint:test
+      - run:
+          name: Make local build (of the extension)
           command: make build
       - run:
-          name: Build test image
+          name: Build test image (docker image sense-navigation-test)
           command: make build-test
 #      - run:
 #          name: Setting up test environment
