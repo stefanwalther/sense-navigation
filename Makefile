@@ -6,6 +6,7 @@ help: 												## Call the help
 	@echo ''
 .PHONY: help
 
+## Todo: probably obsolete
 run-dev: build 								## Run the local development environment
 	export ENV=dev && \
 	./down.sh && \
@@ -14,14 +15,17 @@ run-dev: build 								## Run the local development environment
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
 .PHONY: run-dev
 
-build:                				## Build the extension (dev build)
+# Todo: OK
+build-dev:                		## Build the extension (dev build)
 	npm run build --d
-.PHONY: build
+.PHONY: build-dev
 
-release:              				## Build the extensions (release build)
+# Todo: OK
+build-release:              	## Build the extensions (release build)
 	npm run release
-.PHONY: release
+.PHONY: build-release
 
+# Todo: OK
 gen-readme:           				## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
@@ -115,3 +119,10 @@ tid: clean-e2e-test-results
 circleci-build:
 	circleci build --repo-url="/fake-remote" --volume="/projects/test":"/fake-remote"
 .PHONY: circleci-build
+
+# This basically runs the same tests as on CircleCI, except the linting.
+test-integration: build-test clean-e2e-test-results
+	docker-compose -f docker-compose.integration-tests.yml up -d --build
+	docker exec -it sense-navigation-test npm run t
+	docker-compose -f docker-compose.integration-tests.yml down -t 0
+.PHONY: test-integration

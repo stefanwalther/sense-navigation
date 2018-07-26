@@ -41,8 +41,11 @@ jobs:
           name: Lint ./test
           command: npm run lint:test
       - run:
-          name: Make local build (of the extension)
-          command: make build
+          name: Make local dev-build (of the extension)
+          command: make build-dev
+      - run:
+          name: Make local release-build (of the extension)
+          command: make build-release
       - run:
           name: Build test image (docker image sense-navigation-test)
           command: make build-test
