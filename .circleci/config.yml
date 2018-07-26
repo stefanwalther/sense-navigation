@@ -19,12 +19,6 @@ jobs:
       - run:
           name: Login to Docker
           command: docker login -u "$DOCKER_USER" -p "$DOCKER_PASS"
-      ## Todo: Don't think this is necessary anymore
-      - run:
-          name: Pull public docker images in the background
-          background: true
-          command: |
-            docker pull node:v9.3.0-alpine
       - run:
           name: Upgrade Docker Compose
           command: |
