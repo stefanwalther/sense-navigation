@@ -1,0 +1,54 @@
+version: 2
+jobs:
+  build:
+    machine: true
+    working_directory: ~/sense-navigation
+    environment:
+      DOCKER_URL: https://download.docker.com/linux/static/edge/x86_64/docker-18.02.0-ce.tgz
+      DOCKER_COMPOSE_URL: https://github.com/docker/compose/releases/download/1.19.0/docker-compose-Linux-x86_64
+    steps:
+      - checkout
+      - add_ssh_keys
+      - run:
+          name: Upgrade Docker
+          command: |
+            set -e
+            curl -sSL $DOCKER_URL | sudo tar -xz --strip-components=1 -C /usr/bin/
+            sudo service docker restart
+      - run:
+          name: Upgrade Docker Compose
+          command: |
+            set -e
+            loc=$(which docker-compose)
+            sudo curl -sSLf -z $loc -o $loc $DOCKER_COMPOSE_URL
+            sudo chmod 755 $loc
+      - run:
+          name: Update version
+          command: |
+            set -e
+            VER=$(node -e "console.log(require('./package.json').version.replace(/-[0-9]+/, '-$CIRCLE_BUILD_NUM'))")
+            echo "$VER" > ./version.txt
+            if (echo $VER | egrep -- '-[0-9]+$' 1> /dev/null); then
+              npm version $VER --no-git-tag-version
+            fi
+      - run:
+          name: Npm install
+          command: npm install --quiet
+      - run:
+          name: Lint ./src
+          command: npm run lint:src
+      - run:
+          name: Lint ./test
+          command: npm run lint:test
+      - run:
+          name: Make local dev-build (of the extension)
+          command: make build-dev
+      - run:
+          name: Make local release-build (of the extension)
+          command: make build-release
+      - run:
+          name: Build test image (docker image sense-navigation-test)
+          command: make build-test
+      - run:
+          name: Run the integration tests
+          command: make test-integration

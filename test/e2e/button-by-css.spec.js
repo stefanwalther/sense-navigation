@@ -1,9 +1,7 @@
 /* global describe, it */
 const AppOverviewPage = require('./models/app-overview');
 const timeoutTime = 10000;
-const selectors = {
-  qvtSheet: '.qvt-sheet'
-};
+const selectors = require('./lib/selectors');
 
 describe('Buttons By Css => ', () => {
 
@@ -15,6 +13,7 @@ describe('Buttons By Css => ', () => {
     await appOverview.openSheet('test:button-by-css');
 
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
+    await browser.sleep(200);
 
     return expect(await browser.takeImageOf({selector: selectors.qvtSheet})).to.matchImageOf('button_by_css_samples', 'button_by_css');
   });

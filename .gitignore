@@ -1,11 +1,7 @@
 # =========================
 # Project specific files
 # =========================
-Resources/
-Tests/
-web.*.config
-dist/
-/**/node_modules/
+node_modules
 todos.md
 .tmp/
 .sense-go.local.yml
@@ -14,11 +10,17 @@ build/dev/
 build/release/
 coverage/
 
+test/e2e/__artifacts__/chrome*.*
+test/e2e/__artifacts__/diff
+test/e2e/__artifacts__/regression
+test/e2e/__artifacts__/screenshots
+
+
+
 # local debugging
-docker-compose.yml
 docker-compose.dev.yml
 
-/docker
+docker
 
 # =========================
 # IDEs
@@ -28,7 +30,7 @@ docker-compose.dev.yml
 .vscode
 
 # IntelliJ/Webstorm
-.idea/
+.idea
 
 
 # =========================
