@@ -13,17 +13,19 @@ const appOverview = {
 };
 
 class AppOverviewPage {
+
   constructor(...params) {
     if (params.length) {
       this.get(...params);
     }
   }
+
   async get(appId) {
     await browser.get(`${appId}.qvf`, timeoutTime);
     await browser.wait(EC.presenceOf($(selectors.sheetContainer)), timeoutTime, 'sheetContainer element did not appear');
     return browser.wait(EC.stalenessOf($(selectors.loader)), timeoutTime, 'qv-loader did not disappear').then(() => {});
-
   }
+
   async openSheet(sheetName) {
 
     await $$(appOverview.sheet)

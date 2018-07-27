@@ -4,8 +4,8 @@ define(['angular'], function (angular) {
 
     load: function (name, req, onload, config) {
 
-      var injector = angular.injector(['ng']);
-      var service = injector.get(name);
+      const injector = angular.injector(['ng']);
+      const service = injector.get(name);
 
       onload(service);
 

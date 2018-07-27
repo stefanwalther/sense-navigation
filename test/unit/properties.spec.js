@@ -2,7 +2,7 @@
 'use strict';
 
 define(['chai', './properties'], function (chai, properties) {
-  var expect = chai.expect;
+  const expect = chai.expect;
   describe('properties', function () {
     it('should return', function () {
       expect(properties).to.have.a.property('type').to.be.equal('items');
