@@ -51,4 +51,4 @@ jobs:
           command: make build-test
       - run:
           name: Run the integration tests
-          command: make integration-test
+          command: make test-integration
