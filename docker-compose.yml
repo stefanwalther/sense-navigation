@@ -1,0 +1,27 @@
+version: "3.3"
+
+volumes:
+  sense-client-files:
+
+services:
+
+  qix:
+    image: qlik-docker-qsefe.bintray.io/engine:${VER_QIX_ENGINE:-12.203.0}
+    restart: always
+    container_name: qix-engine
+    command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /srv --MigrationPort -1  -S AcceptEULA=yes
+    volumes:
+      - ./example:/docs
+      - sense-client-files:/srv
+      - ./build/${ENV:-dev}:/extensions/sense-navigation
+    ports:
+      - "9076:9076"
+    depends_on:
+      - sense-client
+
+  sense-client:
+    image: qlik-docker-qsefe.bintray.io/sense-client:${VER_SENSE_CLIENT:-5.25.0}
+    container_name: sense-client
+    volumes:
+      - sense-client-files:/srv
+    tty: true

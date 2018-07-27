@@ -67,7 +67,6 @@ webdriver-update:																					## Update WebDriver
 	npm run test:setup-webdriver
 .PHONY: webdriver-update
 
-
 test-dockerignore:																				## Helper to make sure that dockerignore is working properly
 	docker build -f Dockerfile.build-context -t stefanwalther/build-context . && \
   docker run --rm -it stefanwalther/build-context
@@ -83,7 +82,7 @@ test-integration-local:																		## Run the integration tests (locally)
 # This basically runs the same tests as on CircleCI, except the linting.
 test-integration: build-test clean-e2e-test-results				## Run the integration tests (in docker containers)
 	docker-compose -f docker-compose.integration-tests.yml up -d --build
-	docker exec -it sense-navigation-test npm run test:integration
+	docker exec -it sense-navigation-test npm run test:integration:container
 	docker-compose -f docker-compose.integration-tests.yml down -t 0
 .PHONY: test-integration
 

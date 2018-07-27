@@ -33,6 +33,7 @@ services:
       - ./test/e2e/aw.config.js:/opt/sense-navigation-test/test/e2e/aw.config.js
       - ./package.json:/opt/sense-navigation-test/package.json
       - ./test/e2e/__artifacts__:/opt/sense-navigation-test/test/e2e/__artifacts__
+      - ./coverage:/opt/sense-navigation-test/coverage
     depends_on:
       - sense-client
       - qix
