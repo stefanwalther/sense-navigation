@@ -51,17 +51,4 @@ jobs:
           command: make build-test
       - run:
           name: Run the integration tests
-          command: make tid
-#      - run:
-#          name: Setting up test environment
-#          command: make up-test
-#      - run:
-#          name: Lint
-#          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run lint
-#      - run:
-#          name: Unit tests
-#          command: docker-compose --f=docker-compose.unit-tests.yml run auth-service-test npm run test:unit
-#      - run:
-#          name: Integration tests
-#          command: docker-compose --f=docker-compose.integration-tests.yml run sense-navigation-test npm run test:integration
-
+          command: make integration-test
