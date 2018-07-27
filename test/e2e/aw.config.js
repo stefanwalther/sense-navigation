@@ -35,7 +35,7 @@ const argv = yargs
 
 module.exports = function initConfig(baseConfig) { // eslint-disable-line func-names
 
-  console.log('argv: ', argv);
+  console.log('aw arguments: ', argv);
 
   const config = {
     baseUrl: argv.baseUrl,
@@ -74,6 +74,9 @@ module.exports = function initConfig(baseConfig) { // eslint-disable-line func-n
       }
     ],
     mochaOpts: {
+      reporterOptions: {
+        xunit: true
+      },
       bail: false
     },
     multiCapabilities: [],
@@ -86,6 +89,8 @@ module.exports = function initConfig(baseConfig) { // eslint-disable-line func-n
       browser.manage().logs().get('browser').then(browserLog => {
         console.log(`browser log: ${util.inspect(browserLog)}`); //eslint-disable-line
       });
+    },
+    afterLaunch() {
     }
   };
 
