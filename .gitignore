@@ -10,14 +10,14 @@ build/dev/
 build/release/
 coverage/
 
-test/e2e/chrome*.*
+test/e2e/__artifacts__/chrome*.*
 test/e2e/__artifacts__/diff
 test/e2e/__artifacts__/regression
 test/e2e/__artifacts__/screenshots
 
 
+
 # local debugging
-docker-compose.yml
 docker-compose.dev.yml
 
 docker
