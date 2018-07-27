@@ -25,9 +25,6 @@
   },
   "scripts": {
     "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'build'",
-    "dc-rs": "export ENV=release && npm run up",
-    "docs": "docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb",
-    "down": "./scripts/down.sh",
     "lint": "eslint src",
     "lint:fix": "npm run lint:src:fix && npm run lint:test:fix",
     "lint:src": "eslint src",
@@ -35,14 +32,11 @@
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
     "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'release'",
-    "test:e2e": "aw protractor -c ./test/e2e/aw.config.js --coverage",
-    "test:integration": "npm run test:e2e",
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --versions.chrome 2.37 --standalone false --gecko false",
     "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true",
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
-    "up": "./scripts/up.sh",
-    "t": "npx aw protractor -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
+    "test:integration:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
   },
   "dependencies": {
     "sense-extension-utils": "^0.5.6"
@@ -59,6 +53,7 @@
     "cross-env": "^5.2.0",
     "eslint": "^5.2.0",
     "eslint-config-space-single": "^0.3.3",
+    "eslint-plugin-mocha": "^5.1.0",
     "extend": "^3.0.2",
     "font-awesome": "^4.7.0",
     "istanbul": "^0.4.5",
