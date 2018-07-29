@@ -32,20 +32,30 @@ gen-readme:           				## Generate the README.md (using docker-verb)
 .PHONY: gen-readme
 
 up: build-dev									## Bring the dev environment up
+	ENV=dev
 	docker-compose up -d
 	@echo ""
+	@echo "DEV BUILD::"
 	@echo "Open the app at http://localhost:9076/sense/app/sense-navigation_v1x.qvf"
 	@echo ""
 .PHONY: up
 
 down:													## Tear down the dev environment
-
 	docker-compose down -t 0
 .PHONY: down
 
-up-relase: build-release
+up-release: build-release			## Bring up the release environment
+	ENV=release
+	docker-compose up -d
+	@echo ""
+	@echo "RELEASE BUILD:"
+	@echo "Open the app at http://localhost:9076/sense/app/sense-navigation_v1x.qvf"
+	@echo ""
+.PHONY: up-release
 
-.PHONY: up-relase
+down-release:								## Tear down the relase environment
+	docker-compose down -t 0
+.PHONY: down-release
 
 build-test:										## Build the test image.
 	# --force-rm
