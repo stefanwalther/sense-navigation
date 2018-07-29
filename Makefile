@@ -32,11 +32,14 @@ gen-readme:           				## Generate the README.md (using docker-verb)
 .PHONY: gen-readme
 
 up:														## Bring the dev environment up
-	npm run up
+	docker-compose up -d
+	@echo ""
+	@echo "Open the app at http://localhost:9076/sense/app/sense-navigation_v1x.qvf"
+	@echo ""
 .PHONY: up
 
 down:													## Tear down the dev environment
-	npm run down -t 0
+	docker-compose down -t 0
 .PHONY: down
 
 build-test:										## Build the test image.
@@ -51,6 +54,18 @@ up-test: build-test
 down-test:
 	docker-compose --f=docker-compose.test.yml down -t 0
 .PHONY: down-test
+
+up-github:
+	docker-compose -f docker-compose.github.yml up -d
+	@echo ""
+	@echo "Open the app at http://localhost:9076/sense/app/empty.qvf"
+	@echo ""
+
+.PHONY: up-github
+
+down-github:
+	docker-compose -f docker-compose.github.yml down -t 0
+.PHONY: down-github
 
 clean-e2e-test-results:																		## Clean up all the e2e test results
 	rm -rf ./test/e2e/__artifacts__/diff
