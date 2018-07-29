@@ -1,0 +1,12 @@
+{
+	"name" : "Navigation & Actions",
+	"description" : "Enhance your app with custom buttons and actions. (Version 0.0)",
+	"icon" : "extension",
+	"type" : "visualization",
+	"version": "0.0",
+	"preview" : "swr-sense-navigation.png",
+	"author": "Stefan Walther",
+	"homepage": "http://github.com/stefanwalther/sense-navigation",
+	"license" : "MIT",
+  "repository" : "https://github.com/stefanwalther/sense-navigation"
+}

@@ -1,0 +1,44 @@
+
+## Many users don't read the README ;-)
+## Then it happens that they download the entire GitHub repository of this extension
+##  and then weird things happen as I created several builds for the extension in the
+##  ./build directory, see also here: https://github.com/stefanwalther/sense-extension-install#i-am-getting-error-xyz
+## This all results in frustration:
+##  - On the user side: Because it does not work out of the box
+##  - On my side: Because I get the same "issues" again an again
+##
+## The solution:
+##  - I am providing a "default version" of this extension if somebody downloads and imports the entire repo
+##  - Showing a default helping message, what went wrong ...
+##
+## This is the docker-compose file to test this scenario ...
+
+version: '3.3'
+
+volumes:
+  sense-client-files:
+
+services:
+
+  qix:
+    image: qlik-docker-qsefe.bintray.io/engine:${VER_QIX_ENGINE:-12.203.0}
+    restart: always
+    container_name: qix-engine
+    command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /srv --MigrationPort -1  -S AcceptEULA=yes
+    volumes:
+      - ./example/empty.qvf:/docs/empty.qvf
+      - sense-client-files:/srv
+      - ./swr-sense-navigation.js:/extensions/sense-navigation/swr-sense-navigation.js
+      - ./swr-sense-navigation.png:/extensions/sense-navigation/swr-sense-navigation.png
+      - ./swr-sense-navigation.qext:/extensions/sense-navigation/swr-sense-navigation.qext
+    ports:
+      - "9076:9076"
+    depends_on:
+      - sense-client
+
+  sense-client:
+    image: qlik-docker-qsefe.bintray.io/sense-client:${VER_SENSE_CLIENT:-5.25.0}
+    container_name: sense-client
+    volumes:
+      - sense-client-files:/srv
+    tty: true
