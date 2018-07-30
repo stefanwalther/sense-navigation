@@ -37,7 +37,7 @@ define(
     }
 
     // Todo: Break out to lib/js/helpers
-    /**
+    /*
      * Check if running in an iframe.
      *
      * Catching the error is necessary as browsers could block access to window.top due to the same-origin-policy.
@@ -136,7 +136,7 @@ define(
             return qlik.navigation.getMode() === qlik.navigation.EDIT;
           };
 
-          /**
+          /*
            * Executes the actions
            *
            * @returns a promise
