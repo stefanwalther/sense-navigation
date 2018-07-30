@@ -31,7 +31,7 @@ gen-readme:           				## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-up: build-dev									## Bring the dev environment up
+up: down build-dev									## Bring the dev environment up
 	ENV=dev
 	docker-compose up -d
 	@echo ""
