@@ -16,9 +16,12 @@ run-dev: build 								## Run the local development environment
 	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
 .PHONY: run-dev
 
+build: build-dev build-release
+.PHONY: build
+
 # Todo: OK
 build-dev:                		## Build the extension (dev build)
-	npm run build --d
+	npm run build
 .PHONY: build-dev
 
 # Todo: OK
