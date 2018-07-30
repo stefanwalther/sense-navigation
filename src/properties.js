@@ -799,6 +799,36 @@ define([
     }
   };
 
+  const sectionAbout = {
+    type: 'items',
+    component: 'expandable-items',
+    label: 'About',
+    items: {
+      about: {
+        label: 'About this extension',
+        items: {
+          one: {
+            label: 'sense-navigation brings the support to extend your Qlik Sense app with various navigation options (including actions).',
+            component: 'text'
+          },
+          two: {
+            label: 'For further information go here:',
+            component: 'text'
+          },
+          three: {
+            url: 'https://github.com/stefanwalther/sense-navigation',
+            label: 'Documentation & Source',
+            component: 'link'
+          },
+          four: {
+            label: 'Current version: @@pkg.version',
+            component: 'text'
+          }
+        }
+      }
+    }
+  };
+
   // ****************************************************************************************
   // Return Values
   // ****************************************************************************************
@@ -809,7 +839,8 @@ define([
       sectionAppearance: sectionAppearance,
       sectionButtonLayout: sectionButtonLayout,
       sectionNavigationAndActions: sectionNavigationAndActions,
-      sectionAddOns: sectionAddOns
+      sectionAddOns: sectionAddOns,
+      sectionAbout: sectionAbout
     },
     __test_only__: {
       getIcons: getIcons
