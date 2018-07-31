@@ -6,7 +6,7 @@ define([
   './lib/external/sense-extension-utils/index',
   'text!./lib/data/icons-fa.json',
   'text!./lib/data/icons-lui.json'
-], function (angular, __, qlik, extHelper, iconListFa, iconListLui) { // eslint-disable-line max-params
+], function (angular, __, qlik, extUtils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
   // Todo: clean up & remove - if not needed anywhere
   // const $injector = angular.injector(['ng']);
@@ -423,7 +423,7 @@ define([
     component: 'dropdown',
     label: 'Select app',
     ref: 'props.selectedApp',
-    options: extHelper.getAppList(),
+    options: extUtils.getAppList(),
     show: function (data) {
       return data.props.navigationAction === 'openApp';
     }
@@ -434,7 +434,7 @@ define([
     component: 'dropdown',
     label: 'Select sheet',
     ref: 'props.selectedSheet',
-    options: extHelper.getSheetList(),
+    options: extUtils.getSheetList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoSheet';
     }
@@ -445,7 +445,7 @@ define([
     component: 'dropdown',
     label: 'Select story',
     ref: 'props.selectedStory',
-    options: extHelper.getStoryList(),
+    options: extUtils.getStoryList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoStory';
     }
@@ -614,7 +614,7 @@ define([
         component: 'dropdown',
         label: 'Select bookmark',
         expression: 'optional',
-        options: extHelper.getBookmarkList(),
+        options: extUtils.getBookmarkList(),
         show: function (data, defs) {
           const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
@@ -627,7 +627,7 @@ define([
         label: 'Select field',
         defaultValue: '',
         options: function () {
-          return extHelper.getFieldList().then(function (fieldList) {
+          return extUtils.getFieldList().then(function (fieldList) {
             fieldList.splice(0, 0, {
               value: 'by-expr',
               label: '>> Define field by expression <<'

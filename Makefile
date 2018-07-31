@@ -73,7 +73,7 @@ down-test:
 	docker-compose --f=docker-compose.test.yml down -t 0
 .PHONY: down-test
 
-up-github:
+up-github:										## Bring up the dummy evironment (GitHub downloads)
 	docker-compose -f docker-compose.github.yml up -d
 	@echo ""
 	@echo "Open the app at http://localhost:9076/sense/app/empty.qvf"
@@ -81,7 +81,7 @@ up-github:
 
 .PHONY: up-github
 
-down-github:
+down-github:									## Tear down the dummy environment (GitHub downloads)
 	docker-compose -f docker-compose.github.yml down -t 0
 .PHONY: down-github
 

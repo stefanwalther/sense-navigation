@@ -30,8 +30,9 @@ define(
       snapshot: {canTakeSnapshot: false},
       paint: function ($element, layout) {
         var msg = $(document.createElement('div'));
+        msg.attr('style', 'padding: 10px; background-image: linear-gradient(135deg, #ffdbe6 7.14%, #ffffff 7.14%, #ffffff 50%, #ffdbe6 50%, #ffdbe6 57.14%, #ffffff 57.14%, #ffffff 100%);background-size: 7.00px 7.00px;');
 
-        let html = '<strong>Thanks for using <i>sense-navigation</i></strong>';
+        var html = '<strong>Thanks for using <i>sense-navigation</i></strong>';
         html += '<br/><br/>';
         html += '<div style="color:red;">Unfortunately something went wrong ...</div>';
         html += '<br/>';
