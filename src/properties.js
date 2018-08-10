@@ -9,10 +9,6 @@ define([
   'text!./lib/data/icons-lui.json'
 ], function (angular, __, qlik, extUtils, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
-  // Todo: clean up & remove - if not needed anywhere
-  // const $injector = angular.injector(['ng']);
-  // const $timeout = $injector.get('$timeout');
-
   // ****************************************************************************************
   // Helper Promises
   // ****************************************************************************************
@@ -419,23 +415,23 @@ define([
     }
   };
 
-  // Const appList = {
-  //   type: 'string',
-  //   component: 'dropdown',
-  //   label: 'Select app',
-  //   ref: 'props.selectedApp',
-  //   options: utils.getAppList(),
-  //   show: function (data) {
-  //     return data.props.navigationAction === 'openApp';
-  //   }
-  // };
+  const appList = {
+    type: 'string',
+    component: 'dropdown',
+    label: 'Select app',
+    ref: 'props.selectedApp',
+    options: utils.getAppList(),
+    show: function (data) {
+      return data.props.navigationAction === 'openApp';
+    }
+  };
 
   const sheetList = {
     type: 'string',
     component: 'dropdown',
     label: 'Select sheet',
     ref: 'props.selectedSheet',
-    options: extUtils.getSheetList(),
+    options: utils.getSheetList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoSheet';
     }
@@ -772,8 +768,8 @@ define([
           sheetList: sheetList,
           storyList: storyList,
           websiteUrl: websiteUrl,
-          sameWindow: sameWindow
-          // ,appList: appList
+          sameWindow: sameWindow,
+          appList: appList
         }
       }
     }
@@ -837,7 +833,7 @@ define([
       sectionButtonLayout: sectionButtonLayout,
       sectionNavigationAndActions: sectionNavigationAndActions,
       sectionAddOns: sectionAddOns,
-      sectionAbout: sectionAbout
+      // sectionAbout: sectionAbout
     },
     __test_only__: {
       getIcons: getIcons

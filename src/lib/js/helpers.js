@@ -22,7 +22,7 @@ define(['qlik'], function (qlik) {
 
     isEmpty: function (obj) {
       for (let key in obj) {
-        if (obj.hasOwnProperty(key)) {
+        if (obj.hasOwnProperty(key)) { // eslint-disable-line no-prototype-builtins
           return false;
         }
       }
@@ -35,11 +35,11 @@ define(['qlik'], function (qlik) {
 
       qlik.getGlobal().getAppList(function (items) {
         promise.resolve(items.map(function (item) {
-            return {
-              value: item.qDocId,
-              label: item.qTitle
-            };
-          })
+          return {
+            value: item.qDocId,
+            label: item.qTitle
+          };
+        })
         );
       });
       return promise;
@@ -65,7 +65,7 @@ define(['qlik'], function (qlik) {
       });
       return promise;
     },
-    getLastSheet: function (qlik, app) {
+    getLastSheet: function (app) {
       const promise = qlik.Promise;
       if (!app) {
         app = qlik.currApp();
@@ -84,6 +84,52 @@ define(['qlik'], function (qlik) {
         }
       });
       return promise;
+    },
+
+    getSheetList: function (app) {
+      const defer = qlik.Promise.defer();
+      if (!app) {
+        app = qlik.currApp();
+      }
+
+      app.getList('sheet', function (data) {
+        let sheets = [];
+        let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
+          return a.qData.rank > b.qData.rank;
+        });
+        sortedData.forEach(function (item) {
+          sheets.push({
+            value: item.qInfo.qId,
+            label: item.qMeta.title
+          });
+        });
+        return defer.resolve(sheets);
+      });
+      return defer.promise;
+    },
+
+    getStoryList: function (app) {
+      const promise = qlik.Promise;
+      if (!app) {
+        app = qlik.currApp();
+      }
+
+      app.getList('story', function (data) {
+        let stories = [];
+        if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
+          data.qAppObjectList.qItems.forEach(function (item) {
+            stories.push({
+              value: item.qInfo.qId,
+              label: item.qMeta.title
+            });
+          });
+        }
+        return promise.resolve(stories.sort(function (a, b) {
+          return a.item.label > b.item.label;
+        }));
+      });
+      return promise;
+
     }
   };
 
