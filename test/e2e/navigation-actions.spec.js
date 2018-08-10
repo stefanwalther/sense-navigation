@@ -1,3 +1,4 @@
+/* global describe,beforeEach,afterEach,it */
 const AppOverviewPage = require('./models/app-overview');
 const Button = require('./models/button');
 const timeoutTime = 10000;
@@ -51,11 +52,12 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains(`${targetSheetId}/state/edit`), timeoutTime);
   });
 
-  it('should be possible to use button to navigate to the FIRST sheet', async () => {
+  it.only('should be possible to use button to navigate to the FIRST sheet', async () => {
     const targetSheetId = '392462be-a70b-4f14-a4cd-05a7aab19ed8';
     const buttonTitle = 'GotoFirstSheet';
 
     await appOverview.openSheet('test:navigation-actions');
+
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
     await browser.wait(EC.visibilityOf($(`div[title="${buttonTitle}"]`), timeoutTime, `Button "${buttonTitle}" was not visible`));
 
@@ -66,11 +68,12 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
   });
 
-  it('should be possible to use button to navigate to the LAST sheet', async () => {
+  it.only('should be possible to use button to navigate to the LAST sheet', async () => {
     const targetSheetId = 'e9f4240b-2185-4b56-af7f-8e9a25253db0';
     const buttonTitle = 'GotoLastSheet';
 
     await appOverview.openSheet('test:navigation-actions');
+
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
     await browser.wait(EC.visibilityOf($(`div[title="${buttonTitle}"]`), timeoutTime, `Button "${buttonTitle}" was not visible`));
 

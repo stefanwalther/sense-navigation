@@ -1,42 +1,18 @@
 /* global define,window */
 define(
   [
-    './lib/external/lodash/lodash.min',
     'qlik',
-    'angular',
-    './lib/external/sense-extension-utils/index',
-    './properties',
     './lib/js/helpers',
+    './properties',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
     'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
-  function (__, qlik, angular, extUtils, props, helpers, ngTemplate) { // eslint-disable-line max-params
+  function (qlik, utils, props, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
 
-    // Todo: Break out to lib/js/helpers
-    // Helper function to split numbers.
-    function splitToStringNum(str, sep) {
-      let a = str.split(sep);
-      for (let i = 0; i < a.length; i++) {
-        if (!isNaN(a[i])) {
-          a[i] = Number(a[i]);
-        }
-      }
-      return a;
-    }
-
-    // Todo: Break out to lib/js/helpers
-    function fixUrl(url) {
-      if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
-        return url;
-      }
-      return 'http://' + url;
-    }
-
-    // Todo: Break out to lib/js/helpers
     /*
      * Check if running in an iframe.
      *
@@ -98,7 +74,7 @@ define(
               case 'openWebsite':
                 let url = $scope.layout.props.websiteUrl; // eslint-disable-line no-case-declarations
                 const same = $scope.layout.props.sameWindow; // eslint-disable-line no-case-declarations
-                if (!__.isEmpty(url)) {
+                if (!utils.isEmpty(url)) {
                   const isIframe = inIframe();
                   let target = '';
                   if (same && isIframe) {
@@ -106,7 +82,7 @@ define(
                   } else if (same) {
                     target = '_self';
                   }
-                  window.open(fixUrl(url), target);
+                  window.open(utils.fixUrl(url), target);
                 }
                 break;
               case 'prevSheet':
@@ -151,7 +127,7 @@ define(
               for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
                 let actionType = $scope.layout.props.actionItems[i].actionType;
-                let fld = (__.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
+                let fld = (utils.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
                 let val = $scope.layout.props.actionItems[i].value;
                 let softLock = $scope.layout.props.actionItems[i].softLock;
                 let bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
@@ -161,7 +137,7 @@ define(
 
                 switch (actionType) {
                   case 'applyBookmark':
-                    if (!__.isEmpty(bookmark)) {
+                    if (!utils.isEmpty(bookmark)) {
                       actionPromises.push($scope.actions.applyBookmark.bind(this, bookmark));
                     }
                     break;
@@ -172,7 +148,7 @@ define(
                     actionPromises.push($scope.actions.clearAll.bind(this));
                     break;
                   case 'clearField':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.clearField.bind(this, fld));
                     }
                     break;
@@ -186,54 +162,54 @@ define(
                     actionPromises.push($scope.actions.lockAll.bind(this));
                     break;
                   case 'lockField':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'selectAll':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.selectAll.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectAlternative':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.selectAlternative.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectAndLockField':
-                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
+                    if (!utils.isEmpty(fld) && (!utils.isEmpty(val))) {
                       actionPromises.push($scope.actions.selectField.bind(this, fld, val));
                       actionPromises.push($scope.actions.wait.bind(null, 100));
                       actionPromises.push($scope.actions.lockField.bind(this, fld));
                     }
                     break;
                   case 'selectExcluded':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.selectExcluded.bind(this, fld, softLock));
                     }
                     break;
                   case 'selectField':
-                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
+                    if (!utils.isEmpty(fld) && (!utils.isEmpty(val))) {
                       actionPromises.push($scope.actions.selectField.bind(this, fld, val));
                     }
                     break;
                   case 'selectValues':
-                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
+                    if (!utils.isEmpty(fld) && (!utils.isEmpty(val))) {
                       actionPromises.push($scope.actions.selectValues.bind(this, fld, val));
                     }
                     break;
                   case 'selectPossible':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.selectPossible.bind(this, fld, softLock));
                     }
                     break;
                   case 'setVariable':
-                    if (!__.isEmpty(variable)) {
+                    if (!utils.isEmpty(variable)) {
                       actionPromises.push($scope.actions.setVariableContent.bind(this, variable, val));
                     }
                     break;
                   case 'toggleSelect':
-                    if (!__.isEmpty(fld) && (!__.isEmpty(val))) {
+                    if (!utils.isEmpty(fld) && (!utils.isEmpty(val))) {
                       actionPromises.push($scope.actions.toggleSelect.bind(this, fld, val, softLock));
                     }
                     break;
@@ -246,7 +222,7 @@ define(
                     actionPromises.push($scope.actions.clearAll.bind(this));
                     break;
                   case 'unlockField':
-                    if (!__.isEmpty(fld)) {
+                    if (!utils.isEmpty(fld)) {
                       actionPromises.push($scope.actions.unlockField.bind(this, fld));
                     }
                     break;
@@ -455,7 +431,7 @@ define(
             },
             selectValues: function (field, values) {
               let cApp = qlik.currApp();
-              let valsToSelect = splitToStringNum(values, ';');
+              let valsToSelect = utils.splitToStringNum(values, ';');
               return cApp.field(field).selectValues(valsToSelect, false);
             },
             setVariableContent: function (varName, varVal) {
@@ -491,7 +467,7 @@ define(
 
           $scope.firstSheet = function () {
             if ($scope.checkQlikNavigation()) {
-              extUtils.getFirstSheet().then(function (result) {
+              utils.getFirstSheet(qlik.currApp()).then(function (result) {
                 qlik.navigation.gotoSheet(result.id);
               });
             }
@@ -511,14 +487,14 @@ define(
 
           $scope.lastSheet = function () {
             if ($scope.checkQlikNavigation()) {
-              extUtils.getLastSheet().then(function (result) {
+              utils.getLastSheet(qlik.currApp()).then(function (result) {
                 qlik.navigation.gotoSheet(result.id);
               });
             }
           };
 
           $scope.gotoSheet = function (sheetId) {
-            if ($scope.checkQlikNavigation() && !__.isEmpty(sheetId)) {
+            if ($scope.checkQlikNavigation() && !utils.isEmpty(sheetId)) {
               let r = qlik.navigation.gotoSheet(sheetId);
               if (!r.success) {
                 window.console.error(r.errorMsg);
@@ -527,7 +503,7 @@ define(
           };
 
           $scope.gotoStory = function (storyId) {
-            if ($scope.checkQlikNavigation() && !__.isEmpty(storyId)) {
+            if ($scope.checkQlikNavigation() && !utils.isEmpty(storyId)) {
               qlik.navigation.gotoStory(storyId);
             }
           };

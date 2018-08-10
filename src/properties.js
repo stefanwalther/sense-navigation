@@ -4,9 +4,10 @@ define([
   './lib/external/lodash/lodash.min',
   'qlik',
   './lib/external/sense-extension-utils/index',
+  './lib/js/helpers',
   'text!./lib/data/icons-fa.json',
   'text!./lib/data/icons-lui.json'
-], function (angular, __, qlik, extUtils, iconListFa, iconListLui) { // eslint-disable-line max-params
+], function (angular, __, qlik, extUtils, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
   // Todo: clean up & remove - if not needed anywhere
   // const $injector = angular.injector(['ng']);
@@ -418,16 +419,16 @@ define([
     }
   };
 
-  const appList = {
-    type: 'string',
-    component: 'dropdown',
-    label: 'Select app',
-    ref: 'props.selectedApp',
-    options: extUtils.getAppList(),
-    show: function (data) {
-      return data.props.navigationAction === 'openApp';
-    }
-  };
+  // Const appList = {
+  //   type: 'string',
+  //   component: 'dropdown',
+  //   label: 'Select app',
+  //   ref: 'props.selectedApp',
+  //   options: utils.getAppList(),
+  //   show: function (data) {
+  //     return data.props.navigationAction === 'openApp';
+  //   }
+  // };
 
   const sheetList = {
     type: 'string',
@@ -771,8 +772,8 @@ define([
           sheetList: sheetList,
           storyList: storyList,
           websiteUrl: websiteUrl,
-          sameWindow: sameWindow,
-          appList: appList
+          sameWindow: sameWindow
+          // ,appList: appList
         }
       }
     }

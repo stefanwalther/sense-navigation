@@ -36,6 +36,7 @@
     "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true",
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
+    "test:integration": "",
     "test:integration:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
   },
   "dependencies": {

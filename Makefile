@@ -1,3 +1,4 @@
+QIX_ENGINE_VER := "12.207.0"
 
 ## Todo: OK
 help: 												## Call the help
@@ -35,7 +36,8 @@ gen-readme:           				## Generate the README.md (using docker-verb)
 .PHONY: gen-readme
 
 up: down build-dev									## Bring the dev environment up
-	ENV=dev
+	ENV=dev \
+	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	docker-compose up -d
 	@echo ""
 	@echo "DEV BUILD::"
@@ -48,7 +50,8 @@ down:													## Tear down the dev environment
 .PHONY: down
 
 up-release: build-release			## Bring up the release environment
-	ENV=release
+	ENV=release \
+	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	docker-compose up -d
 	@echo ""
 	@echo "RELEASE BUILD:"
@@ -74,7 +77,7 @@ down-test:
 .PHONY: down-test
 
 up-github:										## Bring up the dummy evironment (GitHub downloads)
-	docker-compose -f docker-compose.github.yml up -d
+	QIX_ENGINE_VER=$(QIX_ENGINE_VER) && docker-compose -f docker-compose.github.yml up -d
 	@echo ""
 	@echo "Open the app at http://localhost:9076/sense/app/empty.qvf"
 	@echo ""
@@ -106,6 +109,7 @@ test-dockerignore:																				## Helper to make sure that dockerignore i
 .PHONY: test-dockerignore
 
 test-integration-local:																		## Run the integration tests (locally)
+	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	docker-compose -f docker-compose.integration-tests.yml up -d --build
 	npx webdriver-manager update --gecko false --versions.chrome 2.38
 	npx aw protractor -c ./test/e2e/aw.config.js --baseUrl  http://localhost:9076/sense/app/ --seleniumAddress http://localhost:4444/wd/hub
@@ -114,6 +118,7 @@ test-integration-local:																		## Run the integration tests (locally)
 
 # This basically runs the same tests as on CircleCI, except the linting.
 test-integration: build-test clean-e2e-test-results				## Run the integration tests (in docker containers)
+	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	docker-compose -f docker-compose.integration-tests.yml up -d --build
 	docker exec -it sense-navigation-test npm run test:integration:container
 	docker-compose -f docker-compose.integration-tests.yml down -t 0
@@ -121,3 +126,13 @@ test-integration: build-test clean-e2e-test-results				## Run the integration te
 
 test: build-test clean-e2e-test-results test-integration	## Run all tests
 .PHONY: test
+
+test-integration-interactive: clean-e2e-test-results build-dev
+	ENV=dev \
+  QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
+  docker-compose down -t 0 && \
+	ENV=dev \
+  QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
+	docker-compose -f docker-compose.yml up -d
+	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts__ --directConnect true --headLess false
+.PHONY: test-integration-interactive

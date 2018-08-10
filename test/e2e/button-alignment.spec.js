@@ -1,3 +1,4 @@
+/* global describe,beforeEach,afterEach,it */
 const AppOverviewPage = require('./models/app-overview');
 const timeoutTime = 10000;
 const selectors = require('./lib/selectors');
@@ -10,6 +11,7 @@ describe('Button Alignment => ', () => {
     await appOverview.get('sense-navigation_v1x');
 
     await appOverview.openSheet('Button Alignment - Bootstrap v3');
+    await browser.sleep(200);
 
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
     await browser.actions()
