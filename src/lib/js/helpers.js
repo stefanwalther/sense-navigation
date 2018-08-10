@@ -109,7 +109,7 @@ define(['qlik'], function (qlik) {
     },
 
     getStoryList: function (app) {
-      const promise = qlik.Promise;
+      const defer = qlik.Promise.defer();
       if (!app) {
         app = qlik.currApp();
       }
@@ -124,11 +124,11 @@ define(['qlik'], function (qlik) {
             });
           });
         }
-        return promise.resolve(stories.sort(function (a, b) {
+        return defer.resolve(stories.sort(function (a, b) {
           return a.item.label > b.item.label;
         }));
       });
-      return promise;
+      return defer.promise;
 
     }
   };

@@ -442,7 +442,7 @@ define([
     component: 'dropdown',
     label: 'Select story',
     ref: 'props.selectedStory',
-    options: extUtils.getStoryList(),
+    options: utils.getStoryList(),
     show: function (data) {
       return data.props.navigationAction === 'gotoStory';
     }
