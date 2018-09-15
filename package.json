@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.0-beta-10",
+  "version": "1.0.0-beta-11",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -37,11 +37,9 @@
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
     "test:integration": "",
-    "test:integration:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
+    "test:e2e:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
   },
-  "dependencies": {
-    "sense-extension-utils": "^0.5.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "after-work.js": "^4.3.2",
     "angular": "1.7.2",
