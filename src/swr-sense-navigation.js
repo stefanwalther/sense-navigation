@@ -2,13 +2,13 @@
 define(
   [
     'qlik',
-    './lib/js/helpers',
     './properties',
+    './lib/js/helpers',
     'text!./template.ng.html',
     'css!./lib/css/main.min.css',
     'css!./lib/external/font-awesome/css/font-awesome.min.css'
   ],
-  function (qlik, utils, props, ngTemplate) { // eslint-disable-line max-params
+  function (qlik, props, utils, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
     const DEBUG = true;
