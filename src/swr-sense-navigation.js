@@ -467,7 +467,7 @@ define(
 
           $scope.firstSheet = function () {
             if ($scope.checkQlikNavigation()) {
-              utils.getFirstSheet(qlik.currApp()).then(function (result) {
+              utils.getFirstSheet().then(function (result) {
                 qlik.navigation.gotoSheet(result.id);
               });
             }
@@ -487,7 +487,7 @@ define(
 
           $scope.lastSheet = function () {
             if ($scope.checkQlikNavigation()) {
-              utils.getLastSheet(qlik.currApp()).then(function (result) {
+              utils.getLastSheet().then(function (result) {
                 qlik.navigation.gotoSheet(result.id);
               });
             }
