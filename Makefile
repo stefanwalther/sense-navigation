@@ -1,4 +1,5 @@
-QIX_ENGINE_VER := "12.207.0"
+QIX_ENGINE_VER := "12.225.0"
+SENSE_CLIENT_VER := "5.39.0"
 
 ## Todo: OK
 help: 												## Call the help
@@ -7,15 +8,6 @@ help: 												## Call the help
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 	@echo ''
 .PHONY: help
-
-## Todo: probably obsolete
-run-dev: build 								## Run the local development environment
-	export ENV=dev && \
-	./down.sh && \
-	./up.sh && \
-	echo "" && \
-	echo "Open http://localhost:4848/sense/app/sense-navigation_v1x.qvf"
-.PHONY: run-dev
 
 build: build-dev build-release
 .PHONY: build
@@ -38,6 +30,7 @@ gen-readme:           				## Generate the README.md (using docker-verb)
 up: down build-dev									## Bring the dev environment up
 	ENV=dev \
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
+	SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
 	docker-compose up -d
 	@echo ""
 	@echo "DEV BUILD::"
@@ -108,31 +101,33 @@ test-dockerignore:																				## Helper to make sure that dockerignore i
   docker run --rm -it stefanwalther/build-context
 .PHONY: test-dockerignore
 
-test-integration-local:																		## Run the integration tests (locally)
+test-e2e-local:																						## Run the integration tests (locally)
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
-	docker-compose -f docker-compose.integration-tests.yml up -d --build
+	docker-compose -f docker-compose.e2e-tests.yml up -d --build
 	npx webdriver-manager update --gecko false --versions.chrome 2.38
 	npx aw protractor -c ./test/e2e/aw.config.js --baseUrl  http://localhost:9076/sense/app/ --seleniumAddress http://localhost:4444/wd/hub
-	docker-compose -f docker-compose.integration-tests.yml  down -t 0
-.PHONY: t
+	docker-compose -f docker-compose.e2e-tests.yml  down -t 0
+.PHONY: test-e2e-local
 
 # This basically runs the same tests as on CircleCI, except the linting.
-test-integration: build-test clean-e2e-test-results				## Run the integration tests (in docker containers)
+test-e2e: build-test clean-e2e-test-results								## Run the integration tests (in docker containers)
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
-	docker-compose -f docker-compose.integration-tests.yml up -d --build
-	docker exec -it sense-navigation-test npm run test:integration:container
-	docker-compose -f docker-compose.integration-tests.yml down -t 0
-.PHONY: test-integration
+	docker-compose -f docker-compose.e2e-tests.yml up -d --build
+	docker exec -it sense-navigation-test npm run test:e2e:container
+	docker-compose -f docker-compose.e2e-tests.yml down -t 0
+.PHONY: test-e2e
 
-test: build-test clean-e2e-test-results test-integration	## Run all tests
+test: build-test clean-e2e-test-results test-e2e	## Run all tests
 .PHONY: test
 
-test-integration-interactive: clean-e2e-test-results build-dev
+test-e2e-interactive: clean-e2e-test-results build-dev build-test
 	ENV=dev \
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
+  SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
   docker-compose down -t 0 && \
 	ENV=dev \
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
+  SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
 	docker-compose -f docker-compose.yml up -d
 	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts__ --directConnect true --headLess false
-.PHONY: test-integration-interactive
+.PHONY: test-e2e-interactive

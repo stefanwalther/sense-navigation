@@ -20,7 +20,7 @@ services:
       - sense-client
 
   sense-client:
-    image: qlik-docker-qsefe.bintray.io/sense-client:${VER_SENSE_CLIENT:-5.25.0}
+    image: qlik/sense-client:${SENSE_CLIENT_VER:-latest}
     container_name: sense-client
     volumes:
       - sense-client-files:/srv
