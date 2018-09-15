@@ -24,12 +24,14 @@
     "url": "https://github.com/stefanwalther/sense-navigation"
   },
   "scripts": {
+    "build": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'build'",
     "lint": "eslint src",
     "lint:fix": "npm run lint:src:fix && npm run lint:test:fix",
     "lint:src": "eslint src",
     "lint:src:fix": "eslint src --fix",
     "lint:test": "eslint test",
     "lint:test:fix": "eslint test --fix",
+    "release": "docker run --rm -v ${PWD}:/opt/sense-go stefanwalther/sense-go:latest 'release'",
     "test:setup-webdriver": "node_modules/.bin/webdriver-manager update --versions.chrome 2.37 --standalone false --gecko false",
     "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true",
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
