@@ -1,12 +1,11 @@
 /* global define */
 define([
-  'angular',
   './lib/external/lodash/lodash.min',
   'qlik',
   './lib/js/helpers',
   'text!./lib/data/icons-fa.json',
   'text!./lib/data/icons-lui.json'
-], function (angular, __, qlik, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
+], function (__, qlik, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
   // ****************************************************************************************
   // Helper Promises
