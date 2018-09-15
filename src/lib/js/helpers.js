@@ -66,22 +66,9 @@ define(['qlik'], function (qlik) {
 
       app.getAppObjectList(function (data) {
 
-        console.group('FirstSheet - unsorted');
-        data.qAppObjectList.qItems.forEach(function (item) {
-          console.log(item.qMeta.title + '(' + item.qData.rank + ')');
-        });
-        console.groupEnd();
-
         let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
           return a.qData.rank - b.qData.rank;
         });
-
-        console.group('getFirstSheet - sorted');
-        sortedData.forEach(function (item) {
-          console.log(item.qMeta.title + '(' + item.qData.rank + ')');
-        });
-        console.groupEnd();
-
         if (sortedData.length > 0) {
           defer.resolve({
             id: sortedData[0].qInfo.qId,
@@ -100,7 +87,7 @@ define(['qlik'], function (qlik) {
 
       app.getAppObjectList(function (data) {
         let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
-          return a.qData.rank - b.qData.rank;
+          return b.qData.rank - a.qData.rank;
         });
 
         if (sortedData.length > 0) {
@@ -156,14 +143,14 @@ define(['qlik'], function (qlik) {
      */
     getPPList: function (opts) {
       const defer = qlik.Promise.defer();
-      let app = opts.app;
+      let app = Utils.get(['app'], opts);
       if (!app) {
         app = qlik.currApp();
       }
 
-      app.getList(opts.listType, function (data) {
+      app.getList(Utils.get(['listType'], opts), function (data) {
         let sheets = [];
-        let sortBy = (opts.sortBy || 'rank');
+        let sortBy = (Utils.get(['sortBy'], opts) || 'rank');
         if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
           let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
             return a.qData[sortBy] - b.qData[sortBy];
@@ -176,7 +163,7 @@ define(['qlik'], function (qlik) {
           });
           return defer.resolve(sheets);
         }
-        return defer.reject('qItems is undefined (listType: ' + opts.listType + ')');
+        return defer.reject('qItems is undefined (listType: ' + Utils.get(['listType'], opts) + ')');
       });
       return defer.promise;
     }
