@@ -1,0 +1,10 @@
+{
+  "logLevel": "debug",
+  "port": 8000,
+  "server": {
+    "baseDir": "./test/integration/fixtures/",
+    "routes": {
+      "/main": "./test/integration/fixtures/main.html"
+    }
+  }
+}
