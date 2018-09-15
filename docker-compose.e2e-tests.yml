@@ -1,0 +1,51 @@
+version: "3.3"
+
+volumes:
+  sense-client-files:
+
+services:
+
+  qix:
+    image: qlikcore/engine:${QIX_ENGINE_VER:-latest}
+    restart: always
+    container_name: qix
+    command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /client --MigrationPort -1  -S AcceptEULA=yes
+    volumes:
+      - ./example:/docs
+      - sense-client-files:/client
+      - ./build/${ENV:-dev}:/extensions/sense-navigation
+    ports:
+      - "9076:9076"
+    depends_on:
+      - sense-client
+
+  sense-client:
+    image: qlik-docker-qsefe.bintray.io/sense-client:${VER_SENSE_CLIENT:-5.25.0}
+    container_name: sense-client
+    volumes:
+      - sense-client-files:/srv
+    tty: true
+
+  sense-navigation-test:
+    image: stefanwalther/sense-navigation-test
+    container_name: sense-navigation-test
+    volumes:
+      - ./test/e2e/aw.config.js:/opt/sense-navigation-test/test/e2e/aw.config.js
+      - ./package.json:/opt/sense-navigation-test/package.json
+      - ./test/e2e/__artifacts__:/opt/sense-navigation-test/test/e2e/__artifacts__
+      - ./coverage:/opt/sense-navigation-test/coverage
+    depends_on:
+      - sense-client
+      - qix
+      - selenium
+    tty: true
+
+  selenium:
+    image: selenium/standalone-chrome:3.13.0
+    container_name: selenium
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - 4444:4444
+      - 5900:5900 #Debugging port
+

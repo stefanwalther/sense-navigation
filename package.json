@@ -1,6 +1,6 @@
 {
   "name": "sense-navigation",
-  "version": "1.0.0-beta-10",
+  "version": "1.0.0-beta-12",
   "description": "Sense Sheet Navigation + Actions visualization extension for Qlik Sense.",
   "keywords": [
     "actions",
@@ -36,11 +36,9 @@
     "test:unit": "npm run build && npx ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true",
     "test:unit:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --coverage",
     "test:unit:debug": "npm run build && ./node_modules/.bin/aw chrome --url test/unit/index.html --glob test/unit/*.spec.js --chrome.devtools=true --auto-open-devtools-for-tabs",
-    "test:integration:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
+    "test:e2e:container": "npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://qix:9076/sense/app/ --seleniumAddress http://selenium:4444/wd/hub --artifactsPath test/e2e/__artifacts__ --headLess true"
   },
-  "dependencies": {
-    "sense-extension-utils": "^0.5.6"
-  },
+  "dependencies": {},
   "devDependencies": {
     "after-work.js": "^4.3.2",
     "angular": "1.7.2",
@@ -48,28 +46,27 @@
     "babel-plugin-istanbul": "^4.1.6",
     "babel-preset-es2015": "^6.24.1",
     "babel-register": "^6.26.0",
-    "bootstrap": "^4.1.2",
+    "bootstrap": "^4.1.3",
     "cheerio": "^1.0.0-rc.2",
     "cross-env": "^5.2.0",
-    "eslint": "^5.2.0",
+    "eslint": "^5.6.0",
     "eslint-config-space-single": "^0.3.5",
-    "eslint-plugin-mocha": "^5.1.0",
+    "eslint-plugin-mocha": "^5.2.0",
     "extend": "^3.0.2",
     "font-awesome": "^4.7.0",
     "istanbul": "^0.4.5",
     "jquery": "^3.3.1",
     "leonardo-ui": "^1.6.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "nyc": "^12.0.2",
-    "protractor": "^5.4.0",
+    "protractor": "^5.4.1",
     "protractor-console": "^3.0.0",
     "protractor-console-plugin": "^0.1.1",
-    "request": "^2.87.0",
-    "requirejs": "^2.3.5",
+    "request": "^2.88.0",
+    "requirejs": "^2.3.6",
     "requirejs-text": "^2.0.15",
-    "underscore": "^1.9.1",
     "webdriver-manager": "^12.1.0",
-    "yargs": "^12.0.1"
+    "yargs": "^12.0.2"
   },
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",

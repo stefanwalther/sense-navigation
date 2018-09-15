@@ -21,7 +21,7 @@ volumes:
 services:
 
   qix:
-    image: qlik-docker-qsefe.bintray.io/engine:${VER_QIX_ENGINE:-12.203.0}
+    image: qlikcore/engine:${QIX_ENGINE_VER:-latest}
     restart: always
     container_name: qix-engine
     command: -S LockD=65522 -S DocumentDirectory=/docs -S ExtensionsDirectory=/extensions -S --WsPath /srv --MigrationPort -1  -S AcceptEULA=yes

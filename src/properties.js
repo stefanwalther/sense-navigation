@@ -1,16 +1,11 @@
 /* global define */
 define([
-  'angular',
   './lib/external/lodash/lodash.min',
   'qlik',
-  './lib/external/sense-extension-utils/index',
+  './lib/js/helpers',
   'text!./lib/data/icons-fa.json',
   'text!./lib/data/icons-lui.json'
-], function (angular, __, qlik, extUtils, iconListFa, iconListLui) { // eslint-disable-line max-params
-
-  // Todo: clean up & remove - if not needed anywhere
-  // const $injector = angular.injector(['ng']);
-  // const $timeout = $injector.get('$timeout');
+], function (__, qlik, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
   // ****************************************************************************************
   // Helper Promises
@@ -423,7 +418,7 @@ define([
     component: 'dropdown',
     label: 'Select app',
     ref: 'props.selectedApp',
-    options: extUtils.getAppList(),
+    options: utils.getAppList(),
     show: function (data) {
       return data.props.navigationAction === 'openApp';
     }
@@ -434,7 +429,7 @@ define([
     component: 'dropdown',
     label: 'Select sheet',
     ref: 'props.selectedSheet',
-    options: extUtils.getSheetList(),
+    options: utils.getPPList({listType: 'sheet', sortBy: 'title'}),
     show: function (data) {
       return data.props.navigationAction === 'gotoSheet';
     }
@@ -445,7 +440,7 @@ define([
     component: 'dropdown',
     label: 'Select story',
     ref: 'props.selectedStory',
-    options: extUtils.getStoryList(),
+    options: utils.getPPList({listType: 'story', sortBy: 'title'}),
     show: function (data) {
       return data.props.navigationAction === 'gotoStory';
     }
@@ -614,7 +609,7 @@ define([
         component: 'dropdown',
         label: 'Select bookmark',
         expression: 'optional',
-        options: extUtils.getBookmarkList(),
+        options: utils.getBookmarkList({}),
         show: function (data, defs) {
           const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
@@ -627,7 +622,7 @@ define([
         label: 'Select field',
         defaultValue: '',
         options: function () {
-          return extUtils.getFieldList().then(function (fieldList) {
+          return utils.getFieldList().then(function (fieldList) {
             fieldList.splice(0, 0, {
               value: 'by-expr',
               label: '>> Define field by expression <<'
@@ -795,35 +790,35 @@ define([
     }
   };
 
-  const sectionAbout = {
-    type: 'items',
-    component: 'expandable-items',
-    label: 'About',
-    items: {
-      about: {
-        label: 'About this extension',
-        items: {
-          one: {
-            label: 'sense-navigation brings the support to extend your Qlik Sense app with various navigation options (including actions).',
-            component: 'text'
-          },
-          two: {
-            label: 'For further information go here:',
-            component: 'text'
-          },
-          three: {
-            url: 'https://github.com/stefanwalther/sense-navigation',
-            label: 'Documentation & Source',
-            component: 'link'
-          },
-          four: {
-            label: 'Current version: @@pkg.version',
-            component: 'text'
-          }
-        }
-      }
-    }
-  };
+  // Const sectionAbout = {
+  //   type: 'items',
+  //   component: 'expandable-items',
+  //   label: 'About',
+  //   items: {
+  //     about: {
+  //       label: 'About this extension',
+  //       items: {
+  //         one: {
+  //           label: 'sense-navigation brings the support to extend your Qlik Sense app with various navigation options (including actions).',
+  //           component: 'text'
+  //         },
+  //         two: {
+  //           label: 'For further information go here:',
+  //           component: 'text'
+  //         },
+  //         three: {
+  //           url: 'https://github.com/stefanwalther/sense-navigation',
+  //           label: 'Documentation & Source',
+  //           component: 'link'
+  //         },
+  //         four: {
+  //           label: 'Current version: @@pkg.version',
+  //           component: 'text'
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
   // ****************************************************************************************
   // Return Values
@@ -835,8 +830,8 @@ define([
       sectionAppearance: sectionAppearance,
       sectionButtonLayout: sectionButtonLayout,
       sectionNavigationAndActions: sectionNavigationAndActions,
-      sectionAddOns: sectionAddOns,
-      sectionAbout: sectionAbout
+      sectionAddOns: sectionAddOns
+      // SectionAbout: sectionAbout
     },
     __test_only__: {
       getIcons: getIcons

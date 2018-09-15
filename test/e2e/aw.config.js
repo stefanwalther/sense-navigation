@@ -94,7 +94,8 @@ module.exports = function initConfig(baseConfig) { // eslint-disable-line func-n
     }
   };
 
-  if (argv.headLess) {
+  if (argv.headLess === true) {
+    console.log('Set the --headless flag');
     config.capabilities.chromeOptions.args.push('--headless');
   }
 

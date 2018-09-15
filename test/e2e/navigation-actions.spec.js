@@ -1,3 +1,4 @@
+/* global describe,beforeEach,afterEach,it */
 const AppOverviewPage = require('./models/app-overview');
 const Button = require('./models/button');
 const timeoutTime = 10000;
@@ -14,7 +15,7 @@ describe('Navigation Actions => ', () => {
   afterEach(async () => {
     await browser.executeScript('window.sessionStorage.clear();');
     await browser.executeScript('window.localStorage.clear();');
-    // Await browser.sleep(1000);
+    await browser.sleep(1000);
   });
 
   it('should be possible to use a button to do NOTHING', async () => {
@@ -56,6 +57,7 @@ describe('Navigation Actions => ', () => {
     const buttonTitle = 'GotoFirstSheet';
 
     await appOverview.openSheet('test:navigation-actions');
+
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
     await browser.wait(EC.visibilityOf($(`div[title="${buttonTitle}"]`), timeoutTime, `Button "${buttonTitle}" was not visible`));
 
@@ -71,6 +73,7 @@ describe('Navigation Actions => ', () => {
     const buttonTitle = 'GotoLastSheet';
 
     await appOverview.openSheet('test:navigation-actions');
+
     await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
     await browser.wait(EC.visibilityOf($(`div[title="${buttonTitle}"]`), timeoutTime, `Button "${buttonTitle}" was not visible`));
 

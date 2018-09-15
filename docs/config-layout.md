@@ -48,9 +48,9 @@ Alternatively you can select "Custom style (CSS)" to provide your custom style d
 ```
 ='background-image: 
     linear-gradient(to right, 
-									#f6d365 0%, 
-                  #fda085 51%, 
-                  #f6d365 100%); 
+        #f6d365 0%, 
+        #fda085 51%, 
+        #f6d365 100%); 
   color: white; font-weight:bold'
 ```
 
