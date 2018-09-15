@@ -9,6 +9,7 @@
 - [Functionality](#functionality)
 - [Layout](#layout)
 - [Installation & Download](#installation--download)
+- [Examples](#examples)
 - [Configuration](#configuration)
 - [Compatibility](#compatibility)
 - [Related projects](#related-projects)
@@ -38,7 +39,8 @@ The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to 
 The button can be easily styled nicely by selecting some of the predefined designs ([Leonardo UI](https://qlik-oss.github.io/leonardo-ui/) or [Bootstrap](https://getbootstrap.com/)) or modified with custom CSS.
 
 Furthermore ***sense-navigation*** offers the option to define a **chain of 1-n actions** which will be executed **before** the navigation happens.  
-This could for example be:
+
+For example be:
 
 * Apply a bookmark
 * Clear selections
@@ -116,6 +118,27 @@ If you are running into any troubles, see [here for some FAQ](https://github.com
 ### Should I upgrade?
 
 See [here for more information](./docs/why-upgrade.md) what v1.x gives you and whether you should upgrade or not.
+
+### Where do I find the 0.8x version of sense-navigation
+
+Please go [https://github.com/stefanwalther/sense-navigation/tree/v0.8.x](here).
+
+## Examples
+### Example Application
+
+If you want to try the various options of this extension, download the [sample application](https://github.com/stefanwalther/sense-navigation/tree/master/example)
+
+<details>
+<summary>Some screenshots of the sample application</summary>
+
+![](./docs/images/example_bootstrap.png)
+![](./docs/images/example_bootstrap_icons.png)
+![](./docs/images/example_lui.png)
+![](./docs/images/example_lui_icons.png)
+![](./docs/images/example_button_by_css.png)
+![](./docs/images/example_button_by_expression.png)
+
+</details>
 
 ## Configuration
 Drag & drop the object onto a sheet (as you would do it with any other native object or visualization extension).

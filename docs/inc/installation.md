@@ -22,3 +22,7 @@ If you are running into any troubles, see [here for some FAQ](https://github.com
 ### Should I upgrade?
 
 See [here for more information](./docs/why-upgrade.md) what v1.x gives you and whether you should upgrade or not.
+
+### Where do I find the 0.8x version of sense-navigation
+
+Please go [https://github.com/stefanwalther/sense-navigation/tree/v0.8.x](here).
