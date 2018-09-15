@@ -81,6 +81,9 @@ down-github:									## Tear down the dummy environment (GitHub downloads)
 	docker-compose -f docker-compose.github.yml down -t 0
 .PHONY: down-github
 
+clean: clean-e2e-test-results
+.PHONY: clean
+
 clean-e2e-test-results:																		## Clean up all the e2e test results
 	rm -rf ./test/e2e/__artifacts__/diff
 	rm -rf ./test/e2e/__artifacts__/regression
