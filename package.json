@@ -73,7 +73,7 @@
     "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/",
     "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip",
     "run": true,
-    "toc": true,
+    "toc": "collapsible",
     "label": "empty",
     "tasks": [
       "readme"
