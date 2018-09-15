@@ -15,7 +15,7 @@ describe('Navigation Actions => ', () => {
   afterEach(async () => {
     await browser.executeScript('window.sessionStorage.clear();');
     await browser.executeScript('window.localStorage.clear();');
-    // Await browser.sleep(1000);
+    await browser.sleep(1000);
   });
 
   it('should be possible to use a button to do NOTHING', async () => {
@@ -52,7 +52,7 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains(`${targetSheetId}/state/edit`), timeoutTime);
   });
 
-  it.only('should be possible to use button to navigate to the FIRST sheet', async () => {
+  it('should be possible to use button to navigate to the FIRST sheet', async () => {
     const targetSheetId = '392462be-a70b-4f14-a4cd-05a7aab19ed8';
     const buttonTitle = 'GotoFirstSheet';
 
@@ -68,7 +68,7 @@ describe('Navigation Actions => ', () => {
     await browser.wait(EC.urlContains(targetSheetId), timeoutTime);
   });
 
-  it.only('should be possible to use button to navigate to the LAST sheet', async () => {
+  it('should be possible to use button to navigate to the LAST sheet', async () => {
     const targetSheetId = 'e9f4240b-2185-4b56-af7f-8e9a25253db0';
     const buttonTitle = 'GotoLastSheet';
 
