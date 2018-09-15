@@ -51,4 +51,4 @@ jobs:
           command: make build-test
       - run:
           name: Run the integration tests
-          command: make test-integration
+          command: make test-e2e
