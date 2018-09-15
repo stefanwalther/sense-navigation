@@ -48,11 +48,11 @@ define(['qlik'], function (qlik) {
 
       qlik.getGlobal().getAppList(function (items) {
         promise.resolve(items.map(function (item) {
-            return {
-              value: item.qDocId,
-              label: item.qTitle
-            };
-          })
+          return {
+            value: item.qDocId,
+            label: item.qTitle
+          };
+        })
         );
       });
       return promise;
