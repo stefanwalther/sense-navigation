@@ -1,11 +1,11 @@
 /* global define */
 define([
-  './lib/external/lodash/lodash.min',
   'qlik',
+  './lib/external/lodash/lodash.min',
   './lib/js/helpers',
   'text!./lib/data/icons-fa.json',
   'text!./lib/data/icons-lui.json'
-], function (__, qlik, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
+], function (qlik, __, utils, iconListFa, iconListLui) { // eslint-disable-line max-params
 
   // ****************************************************************************************
   // Helper Promises
@@ -64,7 +64,6 @@ define([
     defaultValue: 'lui'
   };
 
-  // Todo: Should be renamed to buttonStyleBs3
   const buttonStyleBs = {
     type: 'string',
     component: 'dropdown',
@@ -790,35 +789,35 @@ define([
     }
   };
 
-  // Const sectionAbout = {
-  //   type: 'items',
-  //   component: 'expandable-items',
-  //   label: 'About',
-  //   items: {
-  //     about: {
-  //       label: 'About this extension',
-  //       items: {
-  //         one: {
-  //           label: 'sense-navigation brings the support to extend your Qlik Sense app with various navigation options (including actions).',
-  //           component: 'text'
-  //         },
-  //         two: {
-  //           label: 'For further information go here:',
-  //           component: 'text'
-  //         },
-  //         three: {
-  //           url: 'https://github.com/stefanwalther/sense-navigation',
-  //           label: 'Documentation & Source',
-  //           component: 'link'
-  //         },
-  //         four: {
-  //           label: 'Current version: @@pkg.version',
-  //           component: 'text'
-  //         }
-  //       }
-  //     }
-  //   }
-  // };
+  const sectionAbout = {
+    type: 'items',
+    component: 'expandable-items',
+    label: 'About',
+    items: {
+      about: {
+        label: 'About this extension',
+        items: {
+          one: {
+            label: 'sense-navigation brings the support to extend your Qlik Sense app with various navigation options (including actions).',
+            component: 'text'
+          },
+          two: {
+            label: 'For further information go here:',
+            component: 'text'
+          },
+          three: {
+            url: 'https://github.com/stefanwalther/sense-navigation',
+            label: 'Documentation & Source',
+            component: 'link'
+          },
+          four: {
+            label: 'Current version: @@pkg.version',
+            component: 'text'
+          }
+        }
+      }
+    }
+  };
 
   // ****************************************************************************************
   // Return Values
@@ -830,8 +829,8 @@ define([
       sectionAppearance: sectionAppearance,
       sectionButtonLayout: sectionButtonLayout,
       sectionNavigationAndActions: sectionNavigationAndActions,
-      sectionAddOns: sectionAddOns
-      // SectionAbout: sectionAbout
+      sectionAddOns: sectionAddOns,
+      sectionAbout: sectionAbout
     },
     __test_only__: {
       getIcons: getIcons
