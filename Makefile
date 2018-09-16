@@ -27,6 +27,7 @@ gen-readme:           																		## Generate the README.md (using docker-
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
+# Todo: OK
 up: down build-dev																				## Bring the dev environment up
 	ENV=dev \
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
@@ -38,6 +39,7 @@ up: down build-dev																				## Bring the dev environment up
 	@echo ""
 .PHONY: up
 
+# Todo: OK
 down:																											## Tear down the dev environment
 	docker-compose down -t 0
 .PHONY: down
@@ -119,10 +121,11 @@ test-e2e: build-test clean-e2e-test-results								## Run the integration tests 
 	docker-compose -f docker-compose.e2e-tests.yml down -t 0
 .PHONY: test-e2e
 
-test: build-test clean-e2e-test-results test-e2e	## Run all tests
+test: build-test clean-e2e-test-results test-e2e					## Run all tests
 .PHONY: test
 
-test-e2e-interactive: clean-e2e-test-results build-dev build-test
+test-e2e-interactive: clean-e2e-test-results build-dev build-test	## Run all tests in interactive mode
+	npm run test:setup-webdriver && \
 	ENV=dev \
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
   SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
@@ -131,5 +134,5 @@ test-e2e-interactive: clean-e2e-test-results build-dev build-test
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
   SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
 	docker-compose -f docker-compose.yml up -d
-	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts__ --directConnect true --headLess false
+	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts_local__ --directConnect true --headLess false
 .PHONY: test-e2e-interactive
