@@ -1,5 +1,7 @@
 ## Possible Actions
 
+The following actions are available:
+
 * Apply a bookmark
 * Clear all selections
 * Clear selections in other fields

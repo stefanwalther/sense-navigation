@@ -27,6 +27,11 @@ gen-readme:           																		## Generate the README.md (using docker-
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
+gen-readme-watch:
+	# This requires a global install of nodemon (npm install -g nodemon)
+	nodemon --config ./nodemon-readme.json --exec make gen-readme
+.PHONY: gen-readme-watch
+
 # Todo: OK
 up: down build-dev																				## Bring the dev environment up
 	ENV=dev \
