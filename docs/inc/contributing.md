@@ -4,6 +4,7 @@ I cannot guarantee that I will merge all PRs but I will evaluate them all.
 
 #### Some Contribution Instructions
 
+* [Get a list of all build actions](./docs/contrib-general.md)
 * [Running/Validating the extension locally](./docs/contrib-run.md) (without having Qlik Sense Enterprise or Qlik Sense Desktop installed)
 * [Building the project/extension](./docs/contrib-building.md)
 * [Running tests](./docs/contrib-tests.md)

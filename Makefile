@@ -1,5 +1,5 @@
 QIX_ENGINE_VER := "12.225.0"
-SENSE_CLIENT_VER := "5.39.0"
+SENSE_CLIENT_VER := "5.43.0"
 
 ## Todo: OK
 help: 																										## Call the help
@@ -12,17 +12,14 @@ help: 																										## Call the help
 build: build-dev build-release
 .PHONY: build
 
-# Todo: OK
 build-dev:                																## Build the extension (dev build)
 	npm run build
 .PHONY: build-dev
 
-# Todo: OK
 build-release:              															## Build the extensions (release build)
 	npm run release
 .PHONY: build-release
 
-# Todo: OK
 gen-readme:           																		## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme

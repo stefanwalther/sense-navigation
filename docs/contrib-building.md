@@ -12,7 +12,7 @@ There are two different configurations to build the project:
 Run 
 
 ```
-$ make build
+$ make build-dev
 # or 
 # npm run build
 ```
@@ -25,7 +25,7 @@ The following artifacts will have been updated/created:
 
 Run 
 ```
-$ make build
+$ make build-release
 # or 
 # npm run build
 ```
