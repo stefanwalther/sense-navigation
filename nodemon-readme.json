@@ -1,0 +1,11 @@
+{
+  "ext": "md",
+  "verbose": false,
+  "ignore": [
+    "README.md"
+  ],
+  "watch": [
+    ".verb.md",
+    "docs"
+  ]
+}

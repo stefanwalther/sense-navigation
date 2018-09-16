@@ -7,10 +7,10 @@
 ## Table of Contents
 
 - [Functionality](#functionality)
-- [Layout](#layout)
 - [Installation & Download](#installation--download)
-- [Examples](#examples)
+- [Layout](#layout)
 - [Configuration](#configuration)
+- [Examples](#examples)
 - [Compatibility](#compatibility)
 - [Related projects](#related-projects)
 - [About](#about)
@@ -36,11 +36,11 @@ The Visualization Extension ***sense-navigation*** for Qlik Sense allows you to 
 * Open a website / eMail
 * Switch to the Edit mode
 
-The button can be easily styled nicely by selecting some of the predefined designs ([Leonardo UI](https://qlik-oss.github.io/leonardo-ui/) or [Bootstrap](https://getbootstrap.com/)) or modified with custom CSS.
+The button can be easily styled nicely by selecting some of the predefined designs ([Leonardo UI](https://qlik-oss.github.io/leonardo-ui/) or [Bootstrap](https://getbootstrap.com/)) or modified with your custom CSS.
 
 Furthermore ***sense-navigation*** offers the option to define a **chain of 1-n actions** which will be executed **before** the navigation happens.  
 
-For example be:
+For example:
 
 * Apply a bookmark
 * Clear selections
@@ -51,47 +51,9 @@ For example be:
 * Select possible values in a field
 * Set a variable value
 
-See [here](./docs/actions.md) for a complete list of all available 20 actions.
+See [here](./docs/actions.md) for a complete list of all available **20 actions**.
 
-Note: The main difference between version 0.x and 1.x of sense-navigation is that with v1.x you can define a chain of unlimited actions instead of just two.
-
-## Layout
-### Button Themes
-
-There are several predefined styles available, you can choose from:
-
-> ![](docs/images/sense_navigation__button_themes.png)
-### Button icons
-
-Every button can also include an icon:
-
-> ![](docs/images/sense_navigation__button_icons.png)
-
-***sense-navigation*** offers in total 851 icons to use:
- 
-- Icon library [Fontawesome icons](http://fontawesome.io/): 675 icons
-- Icon library [Leonardo UI icons](https://qlik-oss.github.io/leonardo-ui/icons.html): 176 icons
-
-<!-- Todo: Has to be removed, is a duplicate ... -->
-<!-- See here: https://github.com/stefanwalther/sense-navigation/blob/v1.0/docs/config-layout.md#predefined-styles-by-expression -->
-### Button Style by Qlik Expression
-
-Buttons can also be [styled based on a custom expression](docs/config-layout.md#advanced-styling):
-
-> ![](docs/images/sense_navigation__style_by_expression.png)
-
-The expression has to result into on of the following values:
-
-- `bs3-
-### Custom Styles (Custom CSS)
-
-If you want to have full freedom over designing your button, just use CSS:
-
-> ![](docs/images/sense_navigation__style_by_css.png)
-
-Result:
-
-> ![](docs/images/sense_navigation__style_by_css_result.png)
+_Note: The main difference between version 0.x and 1.x of sense-navigation is that with v1.x you can define a chain of unlimited actions instead of just two._
 
 ## Installation & Download
 ### Fresh Installation
@@ -103,16 +65,17 @@ Result:
 * Qlik Sense Desktop
 	* To install, unzip all files and copy the content to the folder folder `"C:\Users\%USERNAME%\Documents\Qlik\Sense\Extensions\sense-navigation"`
 * Qlik Sense Server
-	* See instructions [how to import an extension on Qlik Sense Server](http://help.qlik.com/sense/2.0/en-US/online/#../Subsystems/ManagementConsole/Content/import-extensions.htm)
+	* See instructions [how to import an extension on Qlik Sense Server](https://help.qlik.com/en-US/sense/September2018/Subsystems/ManagementConsole/Content/Sense_QMC/import-extensions.htm)
 
-If you are running into any troubles, see [here for some FAQ](https://github.com/stefanwalther/sense-extension-install).
+If you are running into any troubles, see [here for some FAQs](https://github.com/stefanwalther/sense-extension-install).
 
 ### You are already using an ***sense-navigation*** version < 1.x?
 
-* I have unfortunately bad news: All versions < 1.x of ***sense-navigation*** do not seamlessly upgrade to version v1.x!
+* I have unfortunately bad news: All versions < 1.x of ***sense-navigation*** are completely incompatible with version v1.x!
 * If you upgrade to v1.x, you will have to
-  * First install new new version of ***sense-navigation***.
-  * Delete existing old instances of ***sense-navigation***.
+  * First uninstall the old ***sense-navigation*** extension (delete the folder in Qlik Sense Desktop or use QMC in Qlik Sense Server to remove the extension)
+  * First install the new version of ***sense-navigation***.
+  * Delete existing old instances of ***sense-navigation*** object in your apps.
   * Add it again to your sheets and apply the previous configurations.
   
 ### Should I upgrade?
@@ -122,6 +85,48 @@ See [here for more information](./docs/why-upgrade.md) what v1.x gives you and w
 ### Where do I find the 0.8x version of sense-navigation
 
 Please go [https://github.com/stefanwalther/sense-navigation/tree/v0.8.x](here).
+
+## Layout
+***sense-navigation*** offers various options to define the layout of a button:
+
+### Button Themes
+
+There are several predefined styles available, you can choose from:
+
+> ![](docs/images/sense_navigation__button_themes.png)
+
+### Button icons
+
+Every button can also include an icon. You can chose from a list of 851 available icons:
+ 
+- Icon library [Fontawesome icons](http://fontawesome.io/): 675 icons
+- Icon library [Leonardo UI icons](https://qlik-oss.github.io/leonardo-ui/icons.html): 176 icons
+
+> ![](docs/images/sense_navigation__button_icons.png)
+
+### Button Style by Qlik Expression
+
+Buttons can also [chose a predefined style/theme based based on a custom expression](docs/config-layout.md#advanced-styling):
+
+> ![](docs/images/sense_navigation__style_by_expression.png)
+
+### Custom Styles (Custom CSS)
+
+If you want to have full freedom over designing your button, just [use your custom CSS](docs/config-layout.md#custom-css):
+
+> ![](docs/images/sense_navigation__style_by_css.png)
+
+Result:
+
+> ![](docs/images/sense_navigation__style_by_css_result.png)
+
+## Configuration
+Drag & drop the object onto a sheet (as you would do it with any other native object or visualization extension).
+Then define how the ***sense-navigation*** should behave:
+
+- [Layout Options](./docs/config-layout.md)
+- [Actions](./docs/config-actions.md)
+- [Navigation Behavior](./docs/config-navigation-behavior.md)
 
 ## Examples
 ### Example Application
@@ -140,30 +145,29 @@ If you want to try the various options of this extension, download the [sample a
 
 </details>
 
-## Configuration
-Drag & drop the object onto a sheet (as you would do it with any other native object or visualization extension).
-Then define how the ***sense-navigation*** should behave:
-
-- [Layout Options](./docs/config-layout.md)
-- [Actions](./docs/config-actions.md)
-- [Navigation Behavior](./docs/config-navigation-behavior.md)
-
 ## Compatibility
 **sense-navigation** is designed to work with Qlik Sense *September 2017* or higher.
+
+This extension has been extensively tested with the following versions:
+
+- Qlik Sense Desktop June 2018
+- Qlik Sense Enterprise June 2018
+- Qlik Sense Desktop September 2018
+- Qlik Sense Enterprise June 2018
+
 If you want to use _sense-navigation_ in older versions, install an older version than v1.0.
 
 ### ***sense-navigation*** & Mashups
 
 ***sense-navigation*** it built to be used within the Qlik Sense Client.
-Any usage in a mashup-based solution might work, but there are many features in ***sense-navigation*** which can never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
+Any usage in a mashup-based solution ***might work***, but there are many features in ***sense-navigation*** which can just never work in a mashup-based solution (e.g. "Go to next sheet", "Go to edit mode", etc.).
 So use ***sense-navigation*** in a mashup-based solution only at your own risk!
 
 ### ***sense-navigation*** & DevHub
 
-If you want use & modify the extension in DevHub, then you have two options:
+If you want use & modify the extension in DevHub, do the following:
 
 - Use the file `./build/*_dev.zip`, this always represents the latest development build (so no minimized/uglified files, etc.)
-- Fork the entire repository and follow the [instructions how to build the extensions](https://github.com/stefanwalther/sense-extension-contrib)
 
 ## Related projects
 Some related projects (Qlik Sense Visualization Extensions) I have recently created:
@@ -201,17 +205,15 @@ Is there **anything else you'd like to see** in this visualization extension?
 
 ### Contributing
 Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/stefanwalther/sense-navigation/issues).
-The process for contributing is outlined below:
-
-1. Create a fork of the project
-2. Work on whatever bug or feature you wish
-3. Create a pull request (PR)
 
 I cannot guarantee that I will merge all PRs but I will evaluate them all.
 
-### Building the project
+#### Some Contribution Instructions
 
-See [https://github.com/stefanwalther/sense-extension-contrib](https://github.com/stefanwalther/sense-extension-contrib)
+* [Running/Validating the extension locally](./docs/contrib-run.md) (without having Qlik Sense Enterprise or Qlik Sense Desktop installed)
+* [Building the project/extension](./docs/contrib-building.md)
+* [Running tests](./docs/contrib-tests.md)
+* [Updating/Building the documentation](./docs/contrib-docs.md)
 
 ### License
 MIT
@@ -221,5 +223,5 @@ See [CHANGELOG.yml](https://github.com/stefanwalther/sense-navigation/blob/maste
 
 ***
 
-_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on September 15, 2018._
+_This file was generated by [verb-generate-readme](https://github.com/verbose/verb-generate-readme), v0.6.0, on September 16, 2018._
 

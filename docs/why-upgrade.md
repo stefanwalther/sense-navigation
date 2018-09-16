@@ -8,7 +8,7 @@ I have actually tried to make v1.x backwards-compatible, but finally decided to 
 
 v1.x of ***sense-navigation*** offers significantly more functionality than any other version before:
 
-- Unlimited actions
+- Unlimited actions, actions are truly chained.
 - 8 new actions
   - Move forwards (in your selections) 
   - Move backwards (in your selections)
@@ -40,4 +40,3 @@ But please be aware that I am not planning to bring any of the v1.x features int
 
 For the upcoming months and releases of Qlik Sense Desktop/Server I am still planning to support the [v0.8.x branch](https://github.com/stefanwalther/sense-navigation/tree/v0.8.x) of this extension.  
 But support will definitely limited in time, so please try to upgrade to the v1.x track.
-
