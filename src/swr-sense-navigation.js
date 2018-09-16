@@ -470,15 +470,11 @@ define(
           };
 
           $scope.nextSheet = function () {
-            if ($scope.checkQlikNavigation()) {
-              qlik.navigation.nextSheet();
-            }
+            qlik.navigation.nextSheet();
           };
 
           $scope.prevSheet = function () {
-            if ($scope.checkQlikNavigation()) {
-              qlik.navigation.prevSheet();
-            }
+            qlik.navigation.prevSheet();
           };
 
           $scope.lastSheet = function () {
