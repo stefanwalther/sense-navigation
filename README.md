@@ -59,7 +59,7 @@ _Note: The main difference between version 0.x and 1.x of sense-navigation is th
 ### Fresh Installation
 
 0. ⚠️ **Do not download the entire Github repository, this will not work!**
-1. Download the [latest version](https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip) or [any other version](https://github.com/stefanwalther/sense-navigation/tree/master/build) you want to install.
+1. Download the [latest version](https://github.com/stefanwalther/sense-navigation/raw/v1.0/build/sense-navigation_latest.zip) version (or [any other version](https://github.com/stefanwalther/sense-navigation/tree/master/build) you want to install).
 2. Then install on either *Qlik Sense Desktop* or *Qlik Sense Server*:
 
 * Qlik Sense Desktop
@@ -210,6 +210,7 @@ I cannot guarantee that I will merge all PRs but I will evaluate them all.
 
 #### Some Contribution Instructions
 
+* [Get a list of all build actions](./docs/contrib-general.md)
 * [Running/Validating the extension locally](./docs/contrib-run.md) (without having Qlik Sense Enterprise or Qlik Sense Desktop installed)
 * [Building the project/extension](./docs/contrib-building.md)
 * [Running tests](./docs/contrib-tests.md)
