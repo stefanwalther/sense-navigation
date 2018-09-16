@@ -13,7 +13,7 @@ services:
       "-S", "LockD=65522",
       "-S", "DocumentDirectory=/docs",
       "-S", "ExtensionsDirectory=/extensions",
-      "-S", "--WsPath", "/client", "--MigrationPort" "-1",
+      "-S", "--WsPath", "/client", "--MigrationPort", "-1",
       "-S", "AcceptEULA=yes"
       ]
     volumes:
