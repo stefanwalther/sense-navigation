@@ -2,7 +2,7 @@ QIX_ENGINE_VER := "12.225.0"
 SENSE_CLIENT_VER := "5.39.0"
 
 ## Todo: OK
-help: 												## Call the help
+help: 																										## Call the help
 	@echo ''
 	@echo 'Available commands:'
 	@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -13,21 +13,22 @@ build: build-dev build-release
 .PHONY: build
 
 # Todo: OK
-build-dev:                		## Build the extension (dev build)
+build-dev:                																## Build the extension (dev build)
 	npm run build
 .PHONY: build-dev
 
 # Todo: OK
-build-release:              	## Build the extensions (release build)
+build-release:              															## Build the extensions (release build)
 	npm run release
 .PHONY: build-release
 
 # Todo: OK
-gen-readme:           				## Generate the README.md (using docker-verb)
+gen-readme:           																		## Generate the README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-up: down build-dev									## Bring the dev environment up
+# Todo: OK
+up: down build-dev																				## Bring the dev environment up
 	ENV=dev \
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
@@ -38,11 +39,12 @@ up: down build-dev									## Bring the dev environment up
 	@echo ""
 .PHONY: up
 
-down:													## Tear down the dev environment
+# Todo: OK
+down:																											## Tear down the dev environment
 	docker-compose down -t 0
 .PHONY: down
 
-up-release: build-release			## Bring up the release environment
+up-release: build-release																	## Bring up the release environment
 	ENV=release \
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
 	docker-compose up -d
@@ -52,12 +54,11 @@ up-release: build-release			## Bring up the release environment
 	@echo ""
 .PHONY: up-release
 
-down-release:								## Tear down the relase environment
+down-release:																							## Tear down the relase environment
 	docker-compose down -t 0
 .PHONY: down-release
 
-build-test:										## Build the test image.
-	# --force-rm
+build-test:																								## Build the test image.
 	docker build -t stefanwalther/sense-navigation-test -f Dockerfile.test .
 .PHONY: build-test
 
@@ -69,7 +70,7 @@ down-test:
 	docker-compose --f=docker-compose.test.yml down -t 0
 .PHONY: down-test
 
-up-github:										## Bring up the dummy evironment (GitHub downloads)
+up-github:																								## Bring up the dummy evironment (GitHub downloads)
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) && docker-compose -f docker-compose.github.yml up -d
 	@echo ""
 	@echo "Open the app at http://localhost:9076/sense/app/empty.qvf"
@@ -77,7 +78,7 @@ up-github:										## Bring up the dummy evironment (GitHub downloads)
 
 .PHONY: up-github
 
-down-github:									## Tear down the dummy environment (GitHub downloads)
+down-github:																							## Tear down the dummy environment (GitHub downloads)
 	docker-compose -f docker-compose.github.yml down -t 0
 .PHONY: down-github
 
@@ -85,10 +86,19 @@ clean: clean-e2e-test-results
 .PHONY: clean
 
 clean-e2e-test-results:																		## Clean up all the e2e test results
+
+	# Non-UI tests
 	rm -rf ./test/e2e/__artifacts__/diff
 	rm -rf ./test/e2e/__artifacts__/regression
 	rm -rf ./test/e2e/__artifacts__/screenshots
 	rm -rf ./test/e2e/__artifacts__/chrome-report-**.*
+
+	# Interactive tests
+	rm -rf ./test/e2e/__artifacts_interactive__/diff
+	rm -rf ./test/e2e/__artifacts_interactive__/regression
+	rm -rf ./test/e2e/__artifacts_interactive__/screenshots
+	rm -rf ./test/e2e/__artifacts_interactive__/chrome-report-**.*
+
 .PHONY: clean-e2e-test-results
 
 clean-e2e-baseline:																				## Delete the baseline of e2e results, atttion, this might break things ...
@@ -120,10 +130,11 @@ test-e2e: build-test clean-e2e-test-results								## Run the integration tests 
 	docker-compose -f docker-compose.e2e-tests.yml down -t 0
 .PHONY: test-e2e
 
-test: build-test clean-e2e-test-results test-e2e	## Run all tests
+test: build-test clean-e2e-test-results test-e2e					## Run all tests
 .PHONY: test
 
-test-e2e-interactive: clean-e2e-test-results build-dev build-test
+test-e2e-interactive: clean-e2e-test-results build-dev build-test	## Run all tests in interactive mode
+	npm run test:setup-webdriver && \
 	ENV=dev \
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
   SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
@@ -132,5 +143,5 @@ test-e2e-interactive: clean-e2e-test-results build-dev build-test
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
   SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
 	docker-compose -f docker-compose.yml up -d
-	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts__ --directConnect true --headLess false
+	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts_interactive__ --directConnect true --headLess false
 .PHONY: test-e2e-interactive

@@ -14,7 +14,7 @@ describe('Button Icons => ', () => {
       await appOverview.openSheet('Icon-Buttons - Bootstrap v3');
 
       await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
-      await browser.sleep(500);
+      await browser.sleep(200);
 
       return expect(await browser.takeImageOf({selector: selectors.qvtSheet})).to.matchImageOf('button_icons_bootstrap_v3', 'button_icons');
     });
@@ -29,7 +29,7 @@ describe('Button Icons => ', () => {
       await appOverview.openSheet('Icon-Buttons - Leonardo UI');
 
       await browser.wait(EC.visibilityOf($(selectors.qvtSheet)), timeoutTime, 'Sheet was not visible');
-      await browser.sleep(500);
+      await browser.sleep(200);
 
       return expect(await browser.takeImageOf({selector: selectors.qvtSheet})).to.matchImageOf('button_icons_leonardo-ui', 'button_icons');
     });

@@ -3,6 +3,12 @@ define(['qlik'], function (qlik) {
 
   const Utils = {
 
+    /**
+     * Split a string with a list of number, delimited by a separator and return and array of numbers.
+     * @param {string} str - The string to parse.
+     * @param {char} sep - The separator.
+     * @returns {Array|*|string[]} - Returns an array of numbers.
+     */
     splitToStringNum: function (str, sep) {
       let a = str.split(sep);
       for (let i = 0; i < a.length; i++) {
@@ -13,6 +19,11 @@ define(['qlik'], function (qlik) {
       return a;
     },
 
+    /**
+     * Ensures that the given Url starts with a proper protocol.
+     * @param {stirng} url - The url to fix.
+     * @returns {string} - The fixed url.
+     */
     fixUrl: function (url) {
       if (url.startsWith('http://') || url.startsWith('https://') || (url.startsWith('mailto://'))) {
         return url;
@@ -20,6 +31,11 @@ define(['qlik'], function (qlik) {
       return 'http://' + url;
     },
 
+    /**
+     * Checks whether an object is empty or not.
+     * @param {object} obj - The object to check.
+     * @returns {boolean} - Whether the object is empty or not.
+     */
     isEmpty: function (obj) {
       for (let key in obj) {
         if (obj.hasOwnProperty(key)) { // eslint-disable-line no-prototype-builtins
@@ -33,8 +49,9 @@ define(['qlik'], function (qlik) {
      * Safely get a nested object.
      *
      * @see https://medium.com/javascript-inside/safely-accessing-deeply-nested-values-in-javascript-99bf72a0855a
-     * @param p - Object
-     * @returns {function(*=): *}
+     * @param {string[]} p  - An array of the names of the desired objects.
+     * @param {object} o - The object to fetch items from.
+     * @returns {object} - The resulting object or null.
      */
     get: function (p, o) {
       return p.reduce(function (xs, x) {
@@ -42,6 +59,11 @@ define(['qlik'], function (qlik) {
       }, o);
     },
 
+    /**
+     * Get a list of apps.
+     *
+     * @returns {promise.Promise} - Returns a promise to a list of apps.
+     */
     getAppList: function () {
 
       const promise = qlik.Promise;
@@ -58,6 +80,12 @@ define(['qlik'], function (qlik) {
       return promise;
     },
 
+    /**
+     * Get the first sheet.
+     *
+     * @param {object} app - The app to use. If none is passed, `qlik.currApp()` will be used.
+     * @returns {promise.Promise} - Returns a promise of a sheet.
+     */
     getFirstSheet: function (app) {
       const defer = qlik.Promise.defer();
       if (!app) {
@@ -79,6 +107,12 @@ define(['qlik'], function (qlik) {
       return defer.promise;
     },
 
+    /**
+     * Get the last sheet.
+     *
+     * @param {object} app - The app to use. If none is passed, `qlik.currApp()` will be used.
+     * @returns {promise.Promise} - Returns a promise of a sheet.
+     */
     getLastSheet: function (app) {
       const defer = qlik.Promise.defer();
       if (!app) {
@@ -100,6 +134,13 @@ define(['qlik'], function (qlik) {
       return defer.promise;
     },
 
+    /**
+     * Get the list of bookmarks.
+     *
+     * @param {object} opts - The options to use.
+     * @param {object} opts.app - The app to use. If none is passed, `qlik.currApp()` will be used.
+     * @returns {promise.Promise} - Returns a promise, being resolved with an array of bookmarks.
+     */
     getBookmarkList: function (opts) {
       const defer = qlik.Promise.defer();
       let app = Utils.get(['app'], opts);
@@ -118,6 +159,13 @@ define(['qlik'], function (qlik) {
       return defer.promise;
     },
 
+    /**
+     * Get the list of fields in the given app.
+     *
+     * @param {object} opts - The options to use.
+     * @param {object} opts.app - The app to use. If none is passed, `qlik.currApp()` will be used.
+     * @returns {promise.Promise} - Returns a promise, being resolved with an array of apps.
+     */
     getFieldList: function (opts) {
       const defer = qlik.Promise.defer();
       let app = Utils.get(['app'], opts);
@@ -138,8 +186,10 @@ define(['qlik'], function (qlik) {
       return defer.promise;
     },
 
-    /*
-     * Return a list of values for the property panel.
+    /**
+     * Get a list of type X to be used in the property panel.
+     * @param {object} opts - The options to use.
+     * @returns {promise.Promise} - Returns a promise, being resolved with an array of type X.
      */
     getPPList: function (opts) {
       const defer = qlik.Promise.defer();
