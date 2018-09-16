@@ -255,7 +255,6 @@ define(
             }
           };
 
-          // Todo(refactor): break out to utils
           // Helper function to be used in the template, defining the button class.
           $scope.getButtonClassesBs3 = function (props) {
 
@@ -462,15 +461,12 @@ define(
             }
           };
 
-          // Todo(refactor): Move all stuff here, this is much cleaner
           $scope.navigationAction = {};
 
           $scope.firstSheet = function () {
-            if ($scope.checkQlikNavigation()) {
-              utils.getFirstSheet().then(function (result) {
-                qlik.navigation.gotoSheet(result.id);
-              });
-            }
+            utils.getFirstSheet().then(function (result) {
+              qlik.navigation.gotoSheet(result.id);
+            });
           };
 
           $scope.nextSheet = function () {
@@ -486,36 +482,23 @@ define(
           };
 
           $scope.lastSheet = function () {
-            if ($scope.checkQlikNavigation()) {
-              utils.getLastSheet().then(function (result) {
-                qlik.navigation.gotoSheet(result.id);
-              });
-            }
+            utils.getLastSheet().then(function (result) {
+              qlik.navigation.gotoSheet(result.id);
+            });
           };
 
           $scope.gotoSheet = function (sheetId) {
-            if ($scope.checkQlikNavigation() && !utils.isEmpty(sheetId)) {
-              let r = qlik.navigation.gotoSheet(sheetId);
-              if (!r.success) {
-                window.console.error(r.errorMsg);
-              }
+            let r = qlik.navigation.gotoSheet(sheetId);
+            if (!r.success) {
+              window.console.error(r.errorMsg);
             }
           };
 
           $scope.gotoStory = function (storyId) {
-            if ($scope.checkQlikNavigation() && !utils.isEmpty(storyId)) {
+            if (!utils.isEmpty(storyId)) {
               qlik.navigation.gotoStory(storyId);
             }
           };
-
-          $scope.checkQlikNavigation = function () {
-            if (!qlik.navigation) {
-              window.console.error('Capability API qlik.navigation is not supported in the current version of Qlik Sense.');
-              return false;
-            }
-            return true;
-          };
-
         }
       ]
     };
