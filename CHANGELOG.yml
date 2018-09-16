@@ -1,3 +1,11 @@
+- version: "1.0.0-rc-02"
+  date: "1028-09-17"
+  changes:
+    - "Remove qlik.navigation check"
+    - "Remove sense-extension-utils dependency"
+    - "Remove underscore dependency"
+    - "Clean up deps"
+    - "Remove unnecessary deps"
 - version: "1.0.0-beta-09"
   date: "2018-07-26"
   changes:
