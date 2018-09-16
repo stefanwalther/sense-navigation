@@ -86,10 +86,19 @@ clean: clean-e2e-test-results
 .PHONY: clean
 
 clean-e2e-test-results:																		## Clean up all the e2e test results
+
+	# Non-UI tests
 	rm -rf ./test/e2e/__artifacts__/diff
 	rm -rf ./test/e2e/__artifacts__/regression
 	rm -rf ./test/e2e/__artifacts__/screenshots
 	rm -rf ./test/e2e/__artifacts__/chrome-report-**.*
+
+	# Interactive tests
+	rm -rf ./test/e2e/__artifacts_interactive__/diff
+	rm -rf ./test/e2e/__artifacts_interactive__/regression
+	rm -rf ./test/e2e/__artifacts_interactive__/screenshots
+	rm -rf ./test/e2e/__artifacts_interactive__/chrome-report-**.*
+
 .PHONY: clean-e2e-test-results
 
 clean-e2e-baseline:																				## Delete the baseline of e2e results, atttion, this might break things ...
@@ -134,5 +143,5 @@ test-e2e-interactive: clean-e2e-test-results build-dev build-test	## Run all tes
   QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
   SENSE_CLIENT_VER=$(SENSE_CLIENT_VER) \
 	docker-compose -f docker-compose.yml up -d
-	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts_local__ --directConnect true --headLess false
+	npx aw protractor --coverage -c ./test/e2e/aw.config.js --baseUrl http://localhost:9076/sense/app/ --artifactsPath test/e2e/__artifacts_interactive__ --directConnect true --headLess false
 .PHONY: test-e2e-interactive
