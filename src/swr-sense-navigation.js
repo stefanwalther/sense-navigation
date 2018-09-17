@@ -11,7 +11,7 @@ define(
   function (qlik, props, utils, ngTemplate) { // eslint-disable-line max-params
     'use strict';
 
-    const DEBUG = true;
+    var DEBUG = true;
 
     /*
      * Check if running in an iframe.
@@ -45,7 +45,7 @@ define(
       controller: [
         '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
 
-          const DELAY_ACTIONS = 100;
+          var DELAY_ACTIONS = 100;
 
           $scope.doNavigate = function () {
 
@@ -72,11 +72,11 @@ define(
                 $scope.nextSheet();
                 break;
               case 'openWebsite':
-                let url = $scope.layout.props.websiteUrl; // eslint-disable-line no-case-declarations
-                const same = $scope.layout.props.sameWindow; // eslint-disable-line no-case-declarations
+                var url = $scope.layout.props.websiteUrl; // eslint-disable-line no-case-declarations
+                var same = $scope.layout.props.sameWindow; // eslint-disable-line no-case-declarations
                 if (!utils.isEmpty(url)) {
-                  const isIframe = inIframe();
-                  let target = '';
+                  var isIframe = inIframe();
+                  var target = '';
                   if (same && isIframe) {
                     target = '_parent';
                   } else if (same) {
@@ -98,7 +98,7 @@ define(
               // 	break;
               // eslint-enable capitalized-comments
               case 'switchToEdit':
-                const result = qlik.navigation.setMode(qlik.navigation.EDIT); // eslint-disable-line no-case-declarations
+                var result = qlik.navigation.setMode(qlik.navigation.EDIT); // eslint-disable-line no-case-declarations
                 if (!result.success) {
                   window.console.error(result.errorMsg);
                 }
@@ -121,19 +121,19 @@ define(
 
             if ($scope.layout.props && $scope.layout.props.actionItems) {
 
-              let actionPromises = [];
+              var actionPromises = [];
               window.console.log('$scope', $scope);
 
-              for (let i = 0; i < $scope.layout.props.actionItems.length; i++) {
+              for (var i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
-                let actionType = $scope.layout.props.actionItems[i].actionType;
-                let fld = (utils.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
-                let val = $scope.layout.props.actionItems[i].value;
-                let softLock = $scope.layout.props.actionItems[i].softLock;
-                let bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
-                let variable = $scope.layout.props.actionItems[i].variable;
+                var actionType = $scope.layout.props.actionItems[i].actionType;
+                var fld = (utils.isEmpty($scope.layout.props.actionItems[i].selectedField) || $scope.layout.props.actionItems[i].selectedField === 'by-expr') ? $scope.layout.props.actionItems[i].field : $scope.layout.props.actionItems[i].selectedField;
+                var val = $scope.layout.props.actionItems[i].value;
+                var softLock = $scope.layout.props.actionItems[i].softLock;
+                var bookmark = $scope.layout.props.actionItems[i].selectedBookmark;
+                var variable = $scope.layout.props.actionItems[i].variable;
 
-                let l = actionPromises.length;
+                var l = actionPromises.length;
 
                 switch (actionType) {
                   case 'applyBookmark':
@@ -247,7 +247,7 @@ define(
 
               window.console.log('actionPromises', actionPromises);
 
-              const seed = qlik.Promise.resolve(null);
+              var seed = qlik.Promise.resolve(null);
               return actionPromises.reduce(function (a, b) {
                 return a.then(b);
               }, seed);
@@ -258,7 +258,7 @@ define(
           // Helper function to be used in the template, defining the button class.
           $scope.getButtonClassesBs3 = function (props) {
 
-            let classes = [];
+            var classes = [];
 
             classes.push('btn');
             classes.push('btn-sm');
@@ -287,7 +287,7 @@ define(
           };
 
           $scope.getButtonClassesLui = function (props) {
-            let classes = [];
+            var classes = [];
 
             classes.push('lui-button');
 
@@ -311,7 +311,7 @@ define(
           };
 
           $scope.getIconClasses = function (props) {
-            let classes = [];
+            var classes = [];
             switch (props.buttonIconSet) {
               case 'fa':
                 classes.push('fa');
@@ -351,7 +351,7 @@ define(
           };
 
           $scope.getButtonClassesCustom = function (props) {
-            let classes = [];
+            var classes = [];
             if (props.fullWidth) {
               classes.push('full-width');
             } else {
@@ -377,83 +377,83 @@ define(
 
           $scope.actions = {
             applyBookmark: function (bookmarkId) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.bookmark.apply(bookmarkId);
             },
             back: function () {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.back();
             },
             clearAll: function () {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.clearAll();
             },
             clearField: function (field) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).clear();
             },
             clearOther: function (field, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).clearOther(softLock);
             },
             forward: function () {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.forward();
             },
             lockAll: function () {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.lockAll();
             },
             lockField: function (field) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).lock();
             },
             selectAll: function (field, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).selectAll(softLock);
             },
             selectAlternative: function (field, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).selectAlternative(softLock);
             },
             selectExcluded: function (field, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).selectExcluded(softLock);
             },
             selectField: function (field, value) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).selectMatch(value, false);
             },
             selectPossible: function (field, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).selectPossible(softLock);
             },
             selectValues: function (field, values) {
-              let cApp = qlik.currApp();
-              let valsToSelect = utils.splitToStringNum(values, ';');
+              var cApp = qlik.currApp();
+              var valsToSelect = utils.splitToStringNum(values, ';');
               return cApp.field(field).selectValues(valsToSelect, false);
             },
             setVariableContent: function (varName, varVal) {
-              const cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.variable.setContent(varName, varVal);
             },
             toggleSelect: function (field, value, softLock) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).toggleSelect(value, softLock);
             },
             unlockAll: function () {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.unlockAll();
             },
             unlockField: function (field) {
-              let cApp = qlik.currApp();
+              var cApp = qlik.currApp();
               return cApp.field(field).unlock();
             },
             wait: function (ms) {
-              let waitMs = ms || DELAY_ACTIONS;
+              var waitMs = ms || DELAY_ACTIONS;
               console.log('wait for ', waitMs);
               return new qlik.Promise(function (resolve) {
-                let wait = setTimeout(() => {
+                var wait = setTimeout(() => {
                   clearTimeout(wait);
                   resolve();
                 }, waitMs);
@@ -484,7 +484,7 @@ define(
           };
 
           $scope.gotoSheet = function (sheetId) {
-            let r = qlik.navigation.gotoSheet(sheetId);
+            var r = qlik.navigation.gotoSheet(sheetId);
             if (!r.success) {
               window.console.error(r.errorMsg);
             }

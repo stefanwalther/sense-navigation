@@ -1,7 +1,7 @@
 /* global define */
 define(['qlik'], function (qlik) {
 
-  const Utils = {
+  var Utils = {
 
     /**
      * Split a string with a list of number, delimited by a separator and return and array of numbers.
@@ -10,8 +10,8 @@ define(['qlik'], function (qlik) {
      * @returns {Array|*|string[]} - Returns an array of numbers.
      */
     splitToStringNum: function (str, sep) {
-      let a = str.split(sep);
-      for (let i = 0; i < a.length; i++) {
+      var a = str.split(sep);
+      for (var i = 0; i < a.length; i++) {
         if (!isNaN(a[i])) {
           a[i] = Number(a[i]);
         }
@@ -21,7 +21,7 @@ define(['qlik'], function (qlik) {
 
     /**
      * Ensures that the given Url starts with a proper protocol.
-     * @param {stirng} url - The url to fix.
+     * @param {string} url - The url to fix.
      * @returns {string} - The fixed url.
      */
     fixUrl: function (url) {
@@ -37,7 +37,7 @@ define(['qlik'], function (qlik) {
      * @returns {boolean} - Whether the object is empty or not.
      */
     isEmpty: function (obj) {
-      for (let key in obj) {
+      for (var key in obj) {
         if (obj.hasOwnProperty(key)) { // eslint-disable-line no-prototype-builtins
           return false;
         }
@@ -66,7 +66,7 @@ define(['qlik'], function (qlik) {
      */
     getAppList: function () {
 
-      const promise = qlik.Promise;
+      var promise = qlik.Promise;
 
       qlik.getGlobal().getAppList(function (items) {
         promise.resolve(items.map(function (item) {
@@ -87,14 +87,14 @@ define(['qlik'], function (qlik) {
      * @returns {promise.Promise} - Returns a promise of a sheet.
      */
     getFirstSheet: function (app) {
-      const defer = qlik.Promise.defer();
+      var defer = qlik.Promise.defer();
       if (!app) {
         app = qlik.currApp();
       }
 
       app.getAppObjectList(function (data) {
 
-        let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
+        var sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
           return a.qData.rank - b.qData.rank;
         });
         if (sortedData.length > 0) {
@@ -114,13 +114,13 @@ define(['qlik'], function (qlik) {
      * @returns {promise.Promise} - Returns a promise of a sheet.
      */
     getLastSheet: function (app) {
-      const defer = qlik.Promise.defer();
+      var defer = qlik.Promise.defer();
       if (!app) {
         app = qlik.currApp();
       }
 
       app.getAppObjectList(function (data) {
-        let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
+        var sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
           return b.qData.rank - a.qData.rank;
         });
 
@@ -142,8 +142,8 @@ define(['qlik'], function (qlik) {
      * @returns {promise.Promise} - Returns a promise, being resolved with an array of bookmarks.
      */
     getBookmarkList: function (opts) {
-      const defer = qlik.Promise.defer();
-      let app = Utils.get(['app'], opts);
+      var defer = qlik.Promise.defer();
+      var app = Utils.get(['app'], opts);
       if (!app) {
         app = qlik.currApp();
       }
@@ -167,8 +167,8 @@ define(['qlik'], function (qlik) {
      * @returns {promise.Promise} - Returns a promise, being resolved with an array of apps.
      */
     getFieldList: function (opts) {
-      const defer = qlik.Promise.defer();
-      let app = Utils.get(['app'], opts);
+      var defer = qlik.Promise.defer();
+      var app = Utils.get(['app'], opts);
       if (!app) {
         app = qlik.currApp();
       }
@@ -192,17 +192,17 @@ define(['qlik'], function (qlik) {
      * @returns {promise.Promise} - Returns a promise, being resolved with an array of type X.
      */
     getPPList: function (opts) {
-      const defer = qlik.Promise.defer();
-      let app = Utils.get(['app'], opts);
+      var defer = qlik.Promise.defer();
+      var app = Utils.get(['app'], opts);
       if (!app) {
         app = qlik.currApp();
       }
 
       app.getList(Utils.get(['listType'], opts), function (data) {
-        let sheets = [];
-        let sortBy = (Utils.get(['sortBy'], opts) || 'rank');
+        var sheets = [];
+        var sortBy = (Utils.get(['sortBy'], opts) || 'rank');
         if (data && data.qAppObjectList && data.qAppObjectList.qItems) {
-          let sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
+          var sortedData = data.qAppObjectList.qItems.sort(function (a, b) {
             return a.qData[sortBy] - b.qData[sortBy];
           });
           sortedData.forEach(function (item) {
