@@ -1,6 +1,6 @@
 **sense-navigation** is designed to work with Qlik Sense *September 2017* or higher.
 
-This extension has been extensively tested with the following versions:
+This extension has been extensively tested with the following versions of Qlik Sense:
 
 - Qlik Sense Desktop June 2018
 - Qlik Sense Enterprise June 2018
@@ -8,6 +8,13 @@ This extension has been extensively tested with the following versions:
 - Qlik Sense Enterprise June 2018
 
 If you want to use _sense-navigation_ in older versions, install an older version than v1.0.
+
+The following browsers have been tested:
+
+- Internet Explorer 11
+- Firefox
+- Edge
+- Chrome
 
 ### ***sense-navigation*** & Mashups
 
