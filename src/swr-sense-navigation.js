@@ -43,7 +43,7 @@ define(
       snapshot: {canTakeSnapshot: false},
       template: ngTemplate,
       controller: [
-        '$scope', '$element', function ($scope, $element) { // eslint-disable-line no-unused-vars
+        '$scope', '$element', function ($scope /* , $element */) { // eslint-disable-line no-unused-vars
 
           var DELAY_ACTIONS = 100;
 
@@ -122,7 +122,6 @@ define(
             if ($scope.layout.props && $scope.layout.props.actionItems) {
 
               var actionPromises = [];
-              window.console.log('$scope', $scope);
 
               for (var i = 0; i < $scope.layout.props.actionItems.length; i++) {
 
@@ -244,8 +243,6 @@ define(
                   window.console.groupEnd();
                 }
               }
-
-              window.console.log('actionPromises', actionPromises);
 
               var seed = qlik.Promise.resolve(null);
               return actionPromises.reduce(function (a, b) {
@@ -451,7 +448,6 @@ define(
             },
             wait: function (ms) {
               var waitMs = ms || DELAY_ACTIONS;
-              console.log('wait for ', waitMs);
               return new qlik.Promise(function (resolve) {
                 var wait = setTimeout(() => {
                   clearTimeout(wait);
