@@ -1,5 +1,9 @@
+- version: "1.0.0-rc-03"
+  date: "2018-09-17"
+  changes:
+    - "Remove all let & const to fix issues in IE11 and Qlik Sense Desktop"
 - version: "1.0.0-rc-02"
-  date: "1028-09-17"
+  date: "2018-09-17"
   changes:
     - "Remove qlik.navigation check"
     - "Remove sense-extension-utils dependency"

@@ -14,8 +14,8 @@ define([
   // Helper method to return a list of icons in a format that can be used by the
   // dropdown component.
   function getIcons(iconListRaw) {
-    const iconList = JSON.parse(iconListRaw).icons;
-    let propDef = [];
+    var iconList = JSON.parse(iconListRaw).icons;
+    var propDef = [];
 
     iconList.forEach(function (icon) {
       propDef.push(
@@ -38,7 +38,7 @@ define([
   // ****************************************************************************************
   // Layout
   // ****************************************************************************************
-  const buttonTheme = {
+  var buttonTheme = {
     type: 'string',
     component: 'dropdown',
     label: 'Button theme',
@@ -64,7 +64,7 @@ define([
     defaultValue: 'lui'
   };
 
-  const buttonStyleBs = {
+  var buttonStyleBs = {
     type: 'string',
     component: 'dropdown',
     ref: 'props.buttonStyleBs',
@@ -105,7 +105,7 @@ define([
     }
   };
 
-  const buttonStyleLui = {
+  var buttonStyleLui = {
     type: 'string',
     component: 'dropdown',
     ref: 'props.buttonStyleLui',
@@ -138,7 +138,7 @@ define([
     }
   };
 
-  const buttonStyleExpression = {
+  var buttonStyleExpression = {
     ref: 'props.buttonStyleExpression',
     label: 'Expression to define the button style',
     type: 'string',
@@ -149,7 +149,7 @@ define([
     }
   };
 
-  const helpButtonStyleExpression = {
+  var helpButtonStyleExpression = {
     text: 'The expression has to return one of the following values: bs3-default, bs3-primary, bs3-success, bs3-info, bs3-warning, bs3-danger, bs3-link, lui-default, lui-toolbar, lui-success, lui-info or lui-warning.',
     component: 'text',
     show: function (data) {
@@ -157,7 +157,7 @@ define([
     }
   };
 
-  const buttonStyleCss = {
+  var buttonStyleCss = {
     ref: 'props.buttonStyleCss',
     label: 'Expression to define button\'s CSS',
     type: 'string',
@@ -168,7 +168,7 @@ define([
     }
   };
 
-  const buttonWidth = {
+  var buttonWidth = {
     type: 'boolean',
     component: 'buttongroup',
     label: 'Button width',
@@ -192,7 +192,7 @@ define([
   // Icons
   // ****************************************************************************************
 
-  const buttonShowIcon = {
+  var buttonShowIcon = {
     type: 'boolean',
     component: 'switch',
     label: 'Show icon',
@@ -209,7 +209,7 @@ define([
     defaultValue: false
   };
 
-  const buttonIconSet = {
+  var buttonIconSet = {
     type: 'string',
     component: 'dropdown',
     label: 'Icon set',
@@ -229,7 +229,7 @@ define([
     }
   };
 
-  const buttonIconsFa = {
+  var buttonIconsFa = {
     type: 'string',
     component: 'dropdown',
     label: 'Icon (Fontawesome icon-set)',
@@ -242,7 +242,7 @@ define([
     }
   };
 
-  const buttonIconsLui = {
+  var buttonIconsLui = {
     type: 'string',
     component: 'dropdown',
     label: 'Icon (Leonardo UI icon-set)',
@@ -255,7 +255,7 @@ define([
     }
   };
 
-  const buttonTextAlign = {
+  var buttonTextAlign = {
     ref: 'props.buttonTextAlign',
     label: 'Label alignment',
     type: 'string',
@@ -284,7 +284,7 @@ define([
   // Position, size & alignment
   // ****************************************************************************************
 
-  const buttonAlignment = {
+  var buttonAlignment = {
     ref: 'props.buttonAlignment',
     type: 'string',
     component: 'dropdown',
@@ -330,14 +330,14 @@ define([
     ]
   };
 
-  const buttonMultiLine = {
+  var buttonMultiLine = {
     ref: 'props.isButtonMultiLine',
     label: 'Multiline label',
     type: 'boolean',
     defaultValue: false
   };
 
-  const buttonLabel = {
+  var buttonLabel = {
     ref: 'props.buttonLabel',
     label: 'Label',
     type: 'string',
@@ -352,7 +352,7 @@ define([
   // Navigation Action
   // ****************************************************************************************
 
-  const navigationAction = {
+  var navigationAction = {
     ref: 'props.navigationAction',
     label: 'Navigation action',
     type: 'string',
@@ -402,7 +402,7 @@ define([
     ]
   };
 
-  const sheetId = {
+  var sheetId = {
     ref: 'props.sheetId',
     label: 'Sheet Id',
     type: 'string',
@@ -412,7 +412,7 @@ define([
     }
   };
 
-  const appList = {
+  var appList = {
     type: 'string',
     component: 'dropdown',
     label: 'Select app',
@@ -423,7 +423,7 @@ define([
     }
   };
 
-  const sheetList = {
+  var sheetList = {
     type: 'string',
     component: 'dropdown',
     label: 'Select sheet',
@@ -434,7 +434,7 @@ define([
     }
   };
 
-  const storyList = {
+  var storyList = {
     type: 'string',
     component: 'dropdown',
     label: 'Select story',
@@ -445,7 +445,7 @@ define([
     }
   };
 
-  const websiteUrl = {
+  var websiteUrl = {
     ref: 'props.websiteUrl',
     label: 'Website Url:',
     type: 'string',
@@ -455,7 +455,7 @@ define([
     }
   };
 
-  const sameWindow = {
+  var sameWindow = {
     ref: 'props.sameWindow',
     label: 'Open in same window',
     type: 'boolean',
@@ -469,7 +469,7 @@ define([
   // Action Options
   // ****************************************************************************************
 
-  const actionOptions = [
+  var actionOptions = [
     {
       value: 'applyBookmark',
       label: 'Apply a bookmark',
@@ -575,19 +575,19 @@ define([
   // ****************************************************************************************
   // n-actions
   // ****************************************************************************************
-  const bookmarkEnabler = ['applyBookmark'];
-  const fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
-  const valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
-  const valueDescEnabler = ['selectValues'];
-  const variableEnabler = ['setVariable'];
-  const overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
+  var bookmarkEnabler = ['applyBookmark'];
+  var fieldEnabler = ['clearField', 'clearOther', 'lockField', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectField', 'selectPossible', 'selectValues', 'selectAndLockField', 'toggleSelect', 'unlockField'];
+  var valueEnabler = ['selectField', 'selectValues', 'setVariable', 'selectAndLockField', 'toggleSelect'];
+  var valueDescEnabler = ['selectValues'];
+  var variableEnabler = ['setVariable'];
+  var overwriteLockedEnabler = ['clearOther', 'selectAll', 'selectAlternative', 'selectExcluded', 'selectPossible', 'toggleSelect'];
 
-  const actionsList = {
+  var actionsList = {
     type: 'array',
     ref: 'props.actionItems',
     label: 'Actions',
     itemTitleRef: function (data) {
-      let v = __.filter(actionOptions, {value: data.actionType});
+      var v = __.filter(actionOptions, {value: data.actionType});
       return (v && v.length > 0) ? v[0].label : data.actionType;
     },
     allowAdd: true,
@@ -610,7 +610,7 @@ define([
         expression: 'optional',
         options: utils.getBookmarkList({}),
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && bookmarkEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -630,7 +630,7 @@ define([
           });
         },
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -640,7 +640,7 @@ define([
         label: 'Field',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && fieldEnabler.indexOf(def.actionType) > -1 && def.selectedField === 'by-expr';
         }
       },
@@ -650,7 +650,7 @@ define([
         label: 'Variable name',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && variableEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -660,7 +660,7 @@ define([
         label: 'Value',
         expression: 'optional',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -670,7 +670,7 @@ define([
         ref: 'valueDesc',
         label: 'Define multiple values separated with a semi-colon (;).',
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && valueDescEnabler.indexOf(def.actionType) > -1;
         }
       },
@@ -680,7 +680,7 @@ define([
         label: 'Overwrite locked selections',
         defaultValue: false,
         show: function (data, defs) {
-          const def = __.find(defs.layout.props.actionItems, {cId: data.cId});
+          var def = __.find(defs.layout.props.actionItems, {cId: data.cId});
           return def && overwriteLockedEnabler.indexOf(def.actionType) > -1;
         }
       }
@@ -690,7 +690,7 @@ define([
   // ****************************************************************************************
   // Setup
   // ****************************************************************************************
-  const sectionAppearance = {
+  var sectionAppearance = {
     uses: 'settings',
     items: {
       general: {
@@ -703,7 +703,7 @@ define([
     }
   };
 
-  const sectionButtonLayout = {
+  var sectionButtonLayout = {
     type: 'items',
     component: 'expandable-items',
     label: 'Button layout',
@@ -750,7 +750,7 @@ define([
     }
   };
 
-  const sectionNavigationAndActions = {
+  var sectionNavigationAndActions = {
     type: 'items',
     component: 'expandable-items',
     label: 'Navigation & actions',
@@ -775,7 +775,7 @@ define([
   // Note for the extension certification process:
   //   Using the calculation condition is not officially supported!
   //   But seems to work well and using it is of low risk.
-  const sectionAddOns = {
+  var sectionAddOns = {
     type: 'items',
     component: 'expandable-items',
     translation: 'properties.addons',
@@ -789,7 +789,7 @@ define([
     }
   };
 
-  const sectionAbout = {
+  var sectionAbout = {
     type: 'items',
     component: 'expandable-items',
     label: 'About',
