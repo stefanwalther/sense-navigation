@@ -84,7 +84,7 @@ See [here for more information](./docs/why-upgrade.md) what v1.x gives you and w
 
 ### Where do I find the 0.8x version of sense-navigation
 
-Please go [https://github.com/stefanwalther/sense-navigation/tree/v0.8.x](here).
+Version v8.x of sense-navigation is available [here](https://github.com/stefanwalther/sense-navigation/tree/v0.8.x).
 
 ## Layout
 ***sense-navigation*** offers various options to define the layout of a button:
