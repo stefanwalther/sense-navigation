@@ -1,7 +1,6 @@
 QIX_ENGINE_VER := "12.248.0"
 SENSE_CLIENT_VER := "5.43.0"
 
-## Todo: OK
 help: 																										## Call the help
 	@echo ''
 	@echo 'Available commands:'
@@ -29,7 +28,6 @@ gen-readme-watch:
 	nodemon --config ./nodemon-readme.json --exec make gen-readme
 .PHONY: gen-readme-watch
 
-# Todo: OK
 up: down build-dev																				## Bring the dev environment up
 	ENV=dev \
 	QIX_ENGINE_VER=$(QIX_ENGINE_VER) \
@@ -41,7 +39,6 @@ up: down build-dev																				## Bring the dev environment up
 	@echo ""
 .PHONY: up
 
-# Todo: OK
 down:																											## Tear down the dev environment
 	docker-compose down -t 0
 .PHONY: down
