@@ -70,7 +70,7 @@
   "verb": {
     "baseUrl": "https://github.com/stefanwalther/sense-navigation/blob/master/",
     "baseImgUrl": "https://raw.githubusercontent.com/stefanwalther/sense-navigation/master/",
-    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/v1.0/build/sense-navigation_latest.zip",
+    "buildLatest": "https://github.com/stefanwalther/sense-navigation/raw/master/build/sense-navigation_latest.zip",
     "run": true,
     "toc": "collapsible",
     "label": "empty",
