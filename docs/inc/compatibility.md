@@ -5,7 +5,7 @@ This extension has been extensively tested with the following versions of Qlik S
 - Qlik Sense Desktop June 2018
 - Qlik Sense Enterprise June 2018
 - Qlik Sense Desktop September 2018
-- Qlik Sense Enterprise June 2018
+- Qlik Sense Enterprise September 2018
 
 If you want to use _sense-navigation_ in older versions, install an older version than v1.0.
 
