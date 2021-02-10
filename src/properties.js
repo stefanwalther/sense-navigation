@@ -465,6 +465,17 @@ define([
     }
   };
 
+
+  var sameQSServer = {
+    ref: 'props.sameQSServer',
+    label: 'Open in same Qlik Sense Server',
+    type: 'boolean',
+    defaultValue: false,
+    show: function (data) {
+      return data.props.navigationAction === 'openWebsite';
+    }
+  };  
+
   // ****************************************************************************************
   // Action Options
   // ****************************************************************************************
@@ -766,6 +777,7 @@ define([
           storyList: storyList,
           websiteUrl: websiteUrl,
           sameWindow: sameWindow,
+          sameQSServer: sameQSServer,
           appList: appList
         }
       }

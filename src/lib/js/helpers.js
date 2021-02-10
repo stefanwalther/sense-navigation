@@ -216,7 +216,20 @@ define(['qlik'], function (qlik) {
         return defer.reject('qItems is undefined (listType: ' + Utils.get(['listType'], opts) + ')');
       });
       return defer.promise;
-    }
+    },
+
+    /**
+     * Rturn the VirtualProxy giving the url Path
+     */
+
+    getVP: function (path) {
+      let vPath = path.split("/");
+      if(vPath[3] !== "sense")
+        return (vPath[3]);
+      else
+        return('')
+     }
+
   };
 
   return Utils;

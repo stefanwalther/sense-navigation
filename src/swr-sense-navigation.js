@@ -43,7 +43,7 @@ define(
       snapshot: {canTakeSnapshot: false},
       template: ngTemplate,
       controller: [
-        '$scope', '$element', function ($scope /* , $element */) { // eslint-disable-line no-unused-vars
+        '$scope','$location', '$element', function ($scope ,  $location /* , $element */) { // eslint-disable-line no-unused-vars
 
           var DELAY_ACTIONS = 100;
 
@@ -72,8 +72,16 @@ define(
                 $scope.nextSheet();
                 break;
               case 'openWebsite':
-                var url = $scope.layout.props.websiteUrl; // eslint-disable-line no-case-declarations
+                var url; // eslint-disable-line no-case-declarations
                 var same = $scope.layout.props.sameWindow; // eslint-disable-line no-case-declarations
+                var qs = $scope.layout.props.sameQSServer;
+
+                if(qs)
+                  url =$location.protocol()+"://"+$location.host()+"/"+utils.getVP($location.absUrl())+$scope.layout.props.websiteUrl;
+                else
+                  url = $scope.layout.props.websiteUrl;
+
+
                 if (!utils.isEmpty(url)) {
                   var isIframe = inIframe();
                   var target = '';
