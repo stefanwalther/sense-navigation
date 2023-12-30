@@ -182,9 +182,6 @@ Is there **anything else you'd like to see** in this visualization extension?
 ### Authors & Contributors
 **Stefan Walther**
 
-* [qliksite.io](http://qliksite.io) - Qlik Sense / QAP related blog
-* [qlikblog.at](http://qlikblog.at) - QlikView related blog
-* [stefanwalther.io](http://stefanwalther.io) - Private blog
 * [twitter/waltherstefan](http://twitter.com/waltherstefan)  
 * [github.com/stefanwalther](http://github.com/stefanwalther)  
 
